@@ -1,0 +1,7 @@
+# Local Netlify folder
+.netlify
+.DS_Store
+*.bkp
+.vercel
+.vercel_bak_*/
+.deleted/
