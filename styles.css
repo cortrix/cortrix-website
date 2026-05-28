@@ -305,7 +305,10 @@ img { max-width: 100%; display: block; }
   color: #fff; font-weight: 700; font-size: 16px;
   border-radius: 50%;
 }
-.step-content { flex: 1; }
+.step-content {
+  flex: 1;
+  min-width: 0;
+}
 .step-content h3 {
   font-size: 18px; font-weight: 600; margin-bottom: 12px;
 }
@@ -313,6 +316,7 @@ img { max-width: 100%; display: block; }
   background: var(--c-code-bg);
   border: 1px solid var(--c-border);
   border-radius: var(--radius);
+  max-width: 100%;
   overflow: hidden;
 }
 .code-header {
@@ -330,6 +334,7 @@ img { max-width: 100%; display: block; }
 }
 .copy-btn:hover { border-color: var(--c-primary); color: var(--c-primary-h); }
 .code-block pre {
+  max-width: 100%;
   padding: 16px; overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 13px; line-height: 1.6;
@@ -505,7 +510,10 @@ img { max-width: 100%; display: block; }
     flex-direction: column;
     gap: 32px;
   }
-  .step { flex-direction: column; }
+  .step {
+    flex-direction: column;
+    align-items: stretch;
+  }
   .step-num { margin-bottom: 8px; }
 }
 
