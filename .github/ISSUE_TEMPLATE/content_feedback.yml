@@ -1,0 +1,18 @@
+name: Website content feedback
+description: Suggest a website wording, documentation, or clarity improvement.
+title: "[Content feedback]: "
+labels: ["website", "content"]
+body:
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Feedback
+      description: What should be clearer or corrected?
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Related URL
+    validations:
+      required: false

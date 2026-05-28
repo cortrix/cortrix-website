@@ -1,0 +1,25 @@
+name: Claim correction
+description: Flag a website claim that may be inaccurate or unsupported.
+title: "[Claim correction]: "
+labels: ["website", "claim-review"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Related URL
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: Claim or wording to review
+      description: Quote or describe the website text that may need correction.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence
+      description: Provide evidence, reproduction notes, or context.
+    validations:
+      required: true

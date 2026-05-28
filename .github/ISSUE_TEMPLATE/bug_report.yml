@@ -1,0 +1,25 @@
+name: Website bug
+description: Report a layout, accessibility, or website behavior issue.
+title: "[Website bug]: "
+labels: ["website", "bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the website issue.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Affected URL
+      description: Paste the public URL if available.
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: false

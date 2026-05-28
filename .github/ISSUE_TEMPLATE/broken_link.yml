@@ -1,0 +1,26 @@
+name: Broken link
+description: Report a broken or incorrect website link.
+title: "[Broken link]: "
+labels: ["website", "broken-link"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page URL
+      description: Where did you find the broken link?
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Broken link
+      description: Paste the link that is broken or incorrect.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Add any context that helps us fix it.
+    validations:
+      required: false
