@@ -1,0 +1,12 @@
+# Repository governance and release-sensitive files
+/.github/ @cortrix/community-maintainers
+/COPYRIGHT.md @cortrix/community-maintainers
+/NOTICE.md @cortrix/community-maintainers
+/BRAND_USAGE.md @cortrix/community-maintainers
+/SECURITY.md @cortrix/community-maintainers
+/CONTRIBUTING.md @cortrix/community-maintainers
+/CODE_OF_CONDUCT.md @cortrix/community-maintainers
+/README.md @cortrix/community-maintainers
+/index.html @cortrix/community-maintainers
+/robots.txt @cortrix/community-maintainers
+/sitemap.xml @cortrix/community-maintainers
