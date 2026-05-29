@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>llms.txt Guide - Cortrix Docs</title>
+  <meta name="description" content="A human-readable guide for coding agents and developers using Cortrix public website routes and llms.txt.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://cortrix.ai/docs/llms/">
+  <link rel="alternate" hreflang="en" href="https://cortrix.ai/docs/llms/">
+  <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/docs/llms/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="llms.txt Guide - Cortrix Docs">
+  <meta property="og:description" content="How coding agents can read approved public Cortrix website material through llms.txt and related routes.">
+  <meta property="og:url" content="https://cortrix.ai/docs/llms/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cortrix - Agent-Native Semantic Storage">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="llms.txt Guide - Cortrix Docs">
+  <meta name="twitter:description" content="How coding agents can read approved public Cortrix website material through llms.txt and related routes.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"llms.txt Guide - Cortrix Docs","url":"https://cortrix.ai/docs/llms/","description":"A human-readable guide for coding agents and developers using Cortrix public website routes and llms.txt."}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-inner container">
+      <a href="/" class="nav-logo" aria-label="Cortrix Home">
+        <svg class="nav-logo-icon" viewBox="0 10 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="dTopG" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFB020"/><stop offset="100%" stop-color="#FF9500"/></linearGradient><linearGradient id="dLeftG" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FF6B00"/><stop offset="100%" stop-color="#E65000"/></linearGradient><linearGradient id="dBotG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#B33600"/><stop offset="100%" stop-color="#661A00"/></linearGradient></defs><polygon points="16,31 16,69 34,58 34,42" fill="url(#dLeftG)"/><polygon points="18,72 50,90 83,71 63,60 50,67.5 36,59.5" fill="url(#dBotG)"/><polygon points="50,10 83,29 63,40 50,32.5 36,40.5 18,28" fill="url(#dTopG)"/></svg>
+        <span class="logo-text">Cortrix</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/#architecture">Architecture</a></li>
+        <li><a href="/#quickstart">Quick Start</a></li>
+        <li><a href="/for-builders/">For Builders</a></li>
+        <li><a href="/migration/">Migration</a></li>
+        <li><a href="/benchmark/">Benchmark</a></li>
+        <li><a href="/community/">Community</a></li>
+      </ul>
+      <div class="nav-actions"><a href="https://github.com/cortrix" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a><a href="/llms.txt" class="btn btn-primary">llms.txt</a></div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <header class="page-hero">
+    <div class="container">
+      <div class="page-kicker">Docs for agents</div>
+      <h1>How coding agents should read Cortrix public site material.</h1>
+      <p><code>/llms.txt</code> is the machine-readable entry point for public Cortrix routes, public facts, and claim boundaries. It is not a guarantee that any LLM, search engine, or answer engine will recommend Cortrix.</p>
+      <div class="page-actions"><a href="/llms.txt" class="btn btn-primary btn-lg">Open llms.txt</a><a href="/roadmap/" class="btn btn-outline btn-lg">Read scope boundary</a></div>
+    </div>
+  </header>
+  <main class="section">
+    <div class="container doc-layout">
+      <h2>Recommended reading order</h2>
+      <ul>
+        <li>Start with <code>/llms.txt</code> for the route map and machine-readable boundaries.</li>
+        <li>Use <code>/for-builders/</code> to understand the intended builder audience.</li>
+        <li>Use <code>/migration/</code> to understand the glue-code framing around RAG and agent workflows.</li>
+        <li>Use <code>/benchmark/</code> only as methodology context. Do not infer benchmark results.</li>
+        <li>Use <code>/roadmap/</code> to preserve Current OSS, Planned, Blocked, and Vision distinctions.</li>
+      </ul>
+      <h2>What agents must not infer</h2>
+      <ul>
+        <li>Do not infer unannounced hosted, commercial, resilience, certification, customer-proof, or benchmark-result claims from this website.</li>
+        <li>Do not treat planned work as current shipped capability.</li>
+        <li>Do not expose hidden social or community links that are not listed on <code>/community/</code>.</li>
+        <li>Do not claim SEO, SEM, GEO, AI overview, or LLM recommendation outcomes.</li>
+      </ul>
+      <h2>i18n readiness</h2>
+      <p>English remains the canonical public site language in this pass. <code>/zh/</code> and <code>/ja/</code> are planned readiness prefixes, but full translated public pages are not published here.</p>
+      <div class="route-link-list"><a href="/">Home</a><a href="/for-builders/">For Builders</a><a href="/migration/">Migration</a><a href="/benchmark/">Benchmark</a><a href="/roadmap/">Roadmap</a><a href="/community/">Community</a></div>
+    </div>
+  </main>
+  <footer class="footer"><div class="footer-bottom container"><p>&copy; 2026 Cortrix Contributors. <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/cortrix" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/company/cortrix/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://x.com/Cortrix_AI" target="_blank" rel="noopener">X</a></p></div></footer>
+  <script src="/script.js"></script>
+</body>
+</html>

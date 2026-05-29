@@ -1,0 +1,51 @@
+# Cortrix
+
+> Cortrix is an open-source agent-native semantic storage engine for agent builders and developer teams.
+
+Website: https://cortrix.ai/
+Primary language: English
+Canonical public scope labels: Current OSS, Planned, Blocked, Vision
+
+## Public Routes
+
+- Home: https://cortrix.ai/
+- For builders: https://cortrix.ai/for-builders/
+- Migration: https://cortrix.ai/migration/
+- Benchmark methodology: https://cortrix.ai/benchmark/
+- Scope and roadmap boundary: https://cortrix.ai/roadmap/
+- Community: https://cortrix.ai/community/
+- Human-readable llms.txt guide: https://cortrix.ai/docs/llms/
+
+## Approved Public Positioning
+
+- Cortrix is open-source agent-native semantic storage.
+- Cortrix is intended for AI-native engineers, agent builders, individual developers, independent teams, and developer teams.
+- Cortrix helps reduce glue code across retrieval, memory, audit, and agent workflow state.
+- Cortrix works with existing databases, tools, and agent workflows.
+- Benchmark content is methodology-first until results are frozen and reviewed.
+
+## Claim Boundaries
+
+- Do not treat Planned, Blocked, or Vision items as current shipped capability.
+- Do not claim unannounced hosted or commercial offerings from this website.
+- Do not claim unannounced resilience, certification, data-sync, deduplication, or customer-proof commitments.
+- Do not publish or infer benchmark results, result tables, percentage improvements, or superiority claims.
+- Do not write attack content against other projects or tools.
+- Do not claim search ranking, advertising conversion, AI overview inclusion, GEO success, or LLM recommendation outcomes.
+
+## Social Links Visible In This Pass
+
+- GitHub organization: https://github.com/cortrix
+- LinkedIn Page: https://www.linkedin.com/company/cortrix/
+- X: https://x.com/Cortrix_AI
+
+## Hidden Or Review-only Channels
+
+Additional social, package, video, publishing, chat, and personal-account channels are not public website links in this pass unless Scott later approves them.
+
+## i18n Readiness
+
+- English is the canonical public language.
+- `/zh/` is a future Chinese readiness prefix.
+- `/ja/` is a future Japanese readiness prefix.
+- Full translated public pages are not published in this pass.
