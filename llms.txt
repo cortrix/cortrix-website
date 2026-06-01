@@ -15,6 +15,13 @@ Canonical public scope labels: Current OSS, Planned, Blocked, Vision
 - Scope and roadmap boundary: https://cortrix.ai/roadmap/
 - Community: https://cortrix.ai/community/
 - Human-readable llms.txt guide: https://cortrix.ai/docs/llms/
+- Chinese homepage: https://cortrix.ai/zh/
+- Chinese builders page: https://cortrix.ai/zh/for-builders/
+- Chinese integration reference: https://cortrix.ai/zh/migration/
+- Chinese benchmark methodology: https://cortrix.ai/zh/benchmark/
+- Chinese scope and roadmap boundary: https://cortrix.ai/zh/roadmap/
+- Chinese community page: https://cortrix.ai/zh/community/
+- Chinese llms.txt guide: https://cortrix.ai/zh/docs/llms/
 
 ## Approved Public Positioning
 
@@ -46,6 +53,7 @@ Additional social, package, video, publishing, chat, and personal-account channe
 ## i18n Readiness
 
 - English is the canonical public language.
-- `/zh/` is a future Chinese readiness prefix.
-- `/ja/` is a future Japanese readiness prefix.
-- Full translated public pages are not published in this pass.
+- Chinese public pages are available under `/zh/`.
+- English remains the canonical source for machine-readable public boundaries.
+- `/ja/` is a future Japanese readiness prefix and is not published in this pass.
+- Do not infer Japanese pages or `hreflang ja` from this file.
