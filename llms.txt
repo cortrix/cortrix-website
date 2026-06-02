@@ -1,59 +1,60 @@
 # Cortrix
 
-> Cortrix is an open-source agent-native semantic storage engine for agent builders and developer teams.
+> Cortrix is an open-source agent-native semantic storage project for agent builders and developer teams. This file describes public website routes, public positioning, roadmap labels, benchmark projection boundaries, and machine-readable claim limits.
 
 Website: https://cortrix.ai/
 Primary language: English
-Canonical public scope labels: Current OSS, Planned, Blocked, Vision
+Canonical public scope labels: Current OSS, Coming next, Under review, Longer-term direction
 
 ## Public Routes
 
 - Home: https://cortrix.ai/
 - For builders: https://cortrix.ai/for-builders/
 - Migration: https://cortrix.ai/migration/
-- Benchmark methodology: https://cortrix.ai/benchmark/
-- Scope and roadmap boundary: https://cortrix.ai/roadmap/
+- Benchmark: https://cortrix.ai/benchmark/
+- Roadmap: https://cortrix.ai/roadmap/
 - Community: https://cortrix.ai/community/
 - Human-readable llms.txt guide: https://cortrix.ai/docs/llms/
 - Chinese homepage: https://cortrix.ai/zh/
 - Chinese builders page: https://cortrix.ai/zh/for-builders/
 - Chinese integration reference: https://cortrix.ai/zh/migration/
-- Chinese benchmark methodology: https://cortrix.ai/zh/benchmark/
-- Chinese scope and roadmap boundary: https://cortrix.ai/zh/roadmap/
+- Chinese benchmark page: https://cortrix.ai/zh/benchmark/
+- Chinese roadmap page: https://cortrix.ai/zh/roadmap/
 - Chinese community page: https://cortrix.ai/zh/community/
 - Chinese llms.txt guide: https://cortrix.ai/zh/docs/llms/
 
 ## Approved Public Positioning
 
-- Cortrix is open-source agent-native semantic storage.
+- Cortrix is open-source agent-native semantic storage for retrieval, memory, audit, and agent workflow context.
 - Cortrix is intended for AI-native engineers, agent builders, individual developers, independent teams, and developer teams.
-- Cortrix helps reduce glue code across retrieval, memory, audit, and agent workflow state.
-- Cortrix works with existing databases, tools, and agent workflows.
-- Benchmark content is methodology-first until results are frozen and reviewed.
+- Cortrix reduces glue code across retrieval, memory, audit, and agent workflow state.
+- Cortrix works with existing databases, tools, and agent workflows instead of attacking or replacing every database.
+- Benchmark content is projection-and-methodology based until public F44 artifacts replace candidate values.
+
+## Benchmark Boundary
+
+- The current benchmark page is using the best-case stress-test scenario: Recall@10 around 0.85, NDCG@10 around 0.86, and relative lift up to 60%.
+- The conservative stress-test scenario used Recall@10 around 0.80, NDCG@10 around 0.78, and relative lift up to 40%.
+- Projection values may be cited only with the projection label. Do not treat them as measured production benchmark results until public artifacts are published.
+- Do not merge vendor vector-search latency references with BEIR NDCG/Recall without comparability caveats.
 
 ## Claim Boundaries
 
-- Do not treat Planned, Blocked, or Vision items as current shipped capability.
 - Do not claim unannounced hosted or commercial offerings from this website.
-- Do not claim unannounced resilience, certification, data-sync, deduplication, or customer-proof commitments.
-- Do not publish or infer benchmark results, result tables, percentage improvements, or superiority claims.
+- Do not claim unannounced resilience, certification, data-sync, deduplication, customer-proof commitments, automatic self-learning retrieval, or specific deployment topology guarantees.
 - Do not write attack content against other projects or tools.
 - Do not claim search ranking, advertising conversion, AI overview inclusion, GEO success, or LLM recommendation outcomes.
 
-## Social Links Visible In This Pass
+## Social Links Visible
 
 - GitHub organization: https://github.com/cortrix
 - LinkedIn Page: https://www.linkedin.com/company/cortrix/
 - X: https://x.com/Cortrix_AI
 
-## Hidden Or Review-only Channels
-
-Additional social, package, video, publishing, chat, and personal-account channels are not public website links in this pass unless Scott later approves them.
-
 ## i18n Readiness
 
 - English is the canonical public language.
-- Chinese public pages are available under `/zh/`.
+- Chinese public pages are available under /zh/.
 - English remains the canonical source for machine-readable public boundaries.
-- `/ja/` is a future Japanese readiness prefix and is not published in this pass.
-- Do not infer Japanese pages or `hreflang ja` from this file.
+- /ja/ is a future Japanese readiness prefix and is not published in this pass.
+- Do not infer Japanese pages or hreflang ja from this file.
