@@ -12,7 +12,7 @@
   --c-border:     #1E293B;
   --c-text:       #F1F5F9;
   --c-text-muted: #94A3B8;
-  --c-primary:    #FF6B00;
+  --c-primary:    #FF6405;
   --c-primary-h:  #FF8A30;
   --c-accent:     #FFB020;
   --c-accent-h:   #FFC04D;
@@ -129,8 +129,8 @@ img { max-width: 100%; display: block; }
 .hero-badge {
   display: inline-block;
   padding: 6px 16px; border-radius: 100px;
-  background: rgba(255, 107, 0, .1);
-  border: 1px solid rgba(255, 107, 0, .25);
+  background: rgba(255, 100, 5, .1);
+  border: 1px solid rgba(255, 100, 5, .25);
   color: var(--c-primary-h);
   font-size: 13px; font-weight: 600;
   margin-bottom: 24px;
@@ -399,7 +399,7 @@ img { max-width: 100%; display: block; }
 .compare-table tbody td.check {
   color: var(--c-accent); font-weight: 500;
 }
-.compare-table tbody tr:hover { background: rgba(255, 107, 0, .04); }
+.compare-table tbody tr:hover { background: rgba(255, 100, 5, .04); }
 
 /* --- CTA --- */
 .section-cta {
@@ -443,7 +443,7 @@ img { max-width: 100%; display: block; }
 .footer-slogan {
   display: flex; justify-content: space-between;
   font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
-  color: #FF6B00; line-height: 1; margin-top: 2px;
+  color: #FF6405; line-height: 1; margin-top: 2px;
 }
 .footer-brand-logo .nav-logo-icon { width: 58px; height: 58px; }
 .footer-brand-logo .logo-text { font-size: 36px; line-height: 1; }
