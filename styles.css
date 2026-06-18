@@ -630,6 +630,416 @@ code {
   background: rgba(148, 163, 184, .08);
 }
 
+/* --- Benchmark Page --- */
+.benchmark-page-hero {
+  padding: calc(var(--nav-h) + 72px) 0 76px;
+  background:
+    linear-gradient(135deg, rgba(255, 107, 0, .11) 0%, transparent 34%),
+    linear-gradient(225deg, rgba(20, 184, 166, .11) 0%, transparent 30%),
+    linear-gradient(180deg, #0b0f19 0%, #0e1221 100%);
+  border-bottom: 1px solid rgba(30, 41, 59, .62);
+  overflow: hidden;
+}
+.benchmark-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .92fr);
+  gap: 44px;
+  align-items: center;
+}
+.benchmark-hero-copy h1 {
+  max-width: 760px;
+  margin-bottom: 22px;
+  color: #fff;
+  font-size: clamp(38px, 5.4vw, 68px);
+  line-height: 1.03;
+  letter-spacing: 0;
+}
+.benchmark-hero-copy p {
+  max-width: 720px;
+  color: var(--c-text-muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+.benchmark-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 30px;
+}
+.benchmark-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 34px;
+}
+.benchmark-kpi {
+  min-height: 112px;
+  padding: 18px;
+  border: 1px solid rgba(148, 163, 184, .2);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .025);
+}
+.benchmark-kpi strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1;
+}
+.benchmark-kpi span {
+  display: block;
+  margin-top: 10px;
+  color: var(--c-text-muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+.benchmark-assembly {
+  position: relative;
+  padding: 26px;
+  border: 1px solid rgba(255, 107, 0, .26);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(19, 27, 42, .96), rgba(14, 18, 33, .96)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .05) 0 1px, transparent 1px 42px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .28);
+}
+.assembly-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  color: var(--c-text-muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.assembly-title strong {
+  color: var(--c-accent);
+  text-align: right;
+}
+.assembly-flow {
+  display: grid;
+  gap: 14px;
+}
+.assembly-node,
+.assembly-profile {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(148, 163, 184, .22);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .032);
+}
+.assembly-node strong,
+.assembly-profile strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--c-text);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.assembly-label,
+.assembly-profile span {
+  display: block;
+  color: var(--c-text-muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+.assembly-source {
+  border-color: rgba(20, 184, 166, .32);
+}
+.assembly-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+.assembly-chip-grid span,
+.assembly-score-row strong {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 8px;
+  border-radius: 7px;
+  background: rgba(20, 184, 166, .1);
+  color: #b8fff4;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+.assembly-rail {
+  width: 2px;
+  height: 20px;
+  margin: -2px auto;
+  background: linear-gradient(180deg, rgba(255, 176, 32, .2), rgba(255, 107, 0, .75));
+}
+.assembly-split {
+  width: min(70%, 320px);
+  height: 26px;
+  margin: -2px auto -4px;
+  border-top: 2px solid rgba(255, 176, 32, .4);
+  border-left: 2px solid rgba(255, 176, 32, .4);
+  border-right: 2px solid rgba(255, 176, 32, .4);
+  border-radius: 10px 10px 0 0;
+}
+.assembly-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.assembly-profile.is-full {
+  border-color: rgba(255, 107, 0, .44);
+  background: linear-gradient(135deg, rgba(255, 107, 0, .2), rgba(255, 176, 32, .08));
+}
+.assembly-profile.is-vector {
+  border-color: rgba(20, 184, 166, .36);
+  background: linear-gradient(135deg, rgba(20, 184, 166, .14), rgba(14, 165, 233, .06));
+}
+.assembly-output {
+  border-color: rgba(255, 176, 32, .4);
+}
+.assembly-score-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.assembly-score-row strong {
+  background: rgba(255, 176, 32, .1);
+  color: var(--c-accent);
+}
+.benchmark-result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.benchmark-result-card,
+.benchmark-average-card {
+  min-width: 0;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+  padding: 24px;
+}
+.benchmark-result-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.result-card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+}
+.result-card-head span {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+.result-card-head strong {
+  padding: 4px 8px;
+  border: 1px solid rgba(20, 184, 166, .28);
+  border-radius: 999px;
+  color: #b8fff4;
+  background: rgba(20, 184, 166, .08);
+  font-size: 11px;
+  white-space: nowrap;
+}
+.benchmark-result-card p,
+.dataset-rationale p {
+  color: var(--c-text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.metric-bars {
+  display: grid;
+  gap: 16px;
+  margin-top: auto;
+}
+.metric-block {
+  display: grid;
+  gap: 8px;
+}
+.metric-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--c-text-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+.metric-title strong {
+  color: var(--c-text);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+.dual-bars {
+  display: grid;
+  gap: 6px;
+}
+.dual-bars .bar {
+  width: var(--w);
+  height: 10px;
+  border-radius: 999px;
+}
+.dual-bars .bar.full {
+  background: linear-gradient(90deg, #ff6b00, #ffb020);
+  box-shadow: 0 0 20px rgba(255, 107, 0, .22);
+}
+.dual-bars .bar.vector {
+  background: linear-gradient(90deg, #0f766e, #38bdf8);
+}
+.benchmark-average-card {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  background:
+    linear-gradient(135deg, rgba(255, 107, 0, .18), rgba(20, 184, 166, .08)),
+    var(--c-surface);
+}
+.benchmark-average-card h3 {
+  font-size: 23px;
+  line-height: 1.25;
+}
+.average-metric {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 16px;
+  align-items: end;
+  padding: 16px 0;
+  border-top: 1px solid rgba(148, 163, 184, .18);
+}
+.average-metric span {
+  color: var(--c-text-muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.average-metric strong {
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 42px;
+  line-height: .95;
+  text-align: right;
+}
+.average-metric em,
+.average-metric small {
+  color: var(--c-accent);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+.average-metric small {
+  color: #7dd3fc;
+  text-align: right;
+}
+.benchmark-legend {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+  color: var(--c-text-muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+.benchmark-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.benchmark-legend i {
+  display: inline-block;
+  width: 28px;
+  height: 8px;
+  border-radius: 999px;
+}
+.legend-full {
+  background: linear-gradient(90deg, #ff6b00, #ffb020);
+}
+.legend-vector {
+  background: linear-gradient(90deg, #0f766e, #38bdf8);
+}
+.benchmark-dataset-panel {
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(520px, 1.08fr);
+  gap: 28px;
+  align-items: stretch;
+  padding: 28px;
+  border: 1px solid rgba(148, 163, 184, .2);
+  border-radius: var(--radius-lg);
+  background: var(--c-surface);
+}
+.dataset-rationale {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+.dataset-rationale .eyebrow-tag {
+  align-self: flex-start;
+}
+.dataset-rationale h3 {
+  margin-bottom: 14px;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.25;
+}
+.dataset-rationale p + p {
+  margin-top: 12px;
+}
+.dataset-table-wrapper {
+  min-width: 0;
+  overflow-x: auto;
+  border: 1px solid rgba(148, 163, 184, .16);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .025);
+}
+.dataset-scope-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.dataset-scope-table th,
+.dataset-scope-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, .16);
+  text-align: right;
+}
+.dataset-scope-table th:first-child,
+.dataset-scope-table td:first-child {
+  text-align: left;
+}
+.dataset-scope-table th {
+  color: var(--c-text-muted);
+  background: rgba(255, 255, 255, .035);
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.dataset-scope-table td {
+  color: var(--c-text);
+  font-family: var(--font-mono);
+  font-weight: 800;
+}
+.dataset-scope-table td:first-child {
+  color: var(--c-accent);
+  font-family: var(--font-sans);
+}
+.dataset-scope-table tr:last-child td {
+  border-bottom: 0;
+}
+.benchmark-method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
 /* --- CTA --- */
 .section-cta {
   background: linear-gradient(180deg, var(--c-bg) 0%, var(--c-bg-alt) 100%);
@@ -786,6 +1196,65 @@ code {
     align-items: stretch;
   }
   .step-num { margin-bottom: 8px; }
+  .benchmark-page-hero {
+    padding: calc(var(--nav-h) + 48px) 0 56px;
+  }
+  .benchmark-hero-grid,
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+  .benchmark-hero-copy h1 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: clamp(32px, 9vw, 40px);
+    line-height: 1.08;
+  }
+  .benchmark-hero-copy p {
+    max-width: 100%;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .benchmark-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .benchmark-hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .benchmark-result-grid,
+  .benchmark-dataset-panel,
+  .benchmark-method-grid {
+    grid-template-columns: 1fr;
+  }
+  .benchmark-kpi-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .benchmark-kpi {
+    min-height: auto;
+    padding: 12px;
+  }
+  .benchmark-kpi span {
+    font-size: 10px;
+  }
+  .assembly-profile-grid,
+  .assembly-score-row {
+    grid-template-columns: 1fr;
+  }
+  .assembly-chip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .result-card-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .result-card-head strong {
+    white-space: normal;
+  }
+  .benchmark-average-card h3 {
+    font-size: 21px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -813,4 +1282,54 @@ code {
   .hero-stats { flex-direction: column; gap: 16px; }
   .footer-links { flex-wrap: wrap; gap: 24px; }
   .features-grid { grid-template-columns: 1fr; }
+  .benchmark-assembly,
+  .benchmark-result-card,
+  .benchmark-average-card,
+  .benchmark-dataset-panel {
+    padding: 20px;
+  }
+  .benchmark-page-hero {
+    padding: calc(var(--nav-h) + 32px) 0 42px;
+  }
+  .benchmark-hero-grid {
+    gap: 28px;
+  }
+  .benchmark-hero-copy p {
+    display: none;
+  }
+  .benchmark-hero-actions {
+    margin-top: 24px;
+  }
+  .benchmark-kpi-strip {
+    margin-top: 24px;
+  }
+  .assembly-title {
+    flex-direction: column;
+  }
+  .assembly-title strong {
+    text-align: left;
+  }
+  .metric-title,
+  .average-metric {
+    grid-template-columns: 1fr;
+  }
+  .metric-title {
+    display: grid;
+  }
+  .metric-title strong,
+  .average-metric strong,
+  .average-metric small {
+    text-align: left;
+  }
+  .benchmark-legend {
+    flex-direction: column;
+    align-items: center;
+  }
+  .dataset-rationale h3 {
+    font-size: 21px;
+  }
+  .dataset-scope-table th,
+  .dataset-scope-table td {
+    padding: 13px 14px;
+  }
 }

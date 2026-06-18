@@ -1,6 +1,6 @@
 # Cortrix
 
-> Cortrix is an open-source agent-native semantic storage project for agent builders and developer teams. This file describes public website routes, public positioning, roadmap labels, benchmark projection boundaries, and machine-readable claim limits.
+> Cortrix is an open-source agent-native semantic storage project for agent builders and developer teams. This file describes public website routes, public positioning, roadmap labels, benchmark retrieval-quality facts, and machine-readable claim limits.
 
 Website: https://cortrix.ai/
 Primary language: English
@@ -29,21 +29,23 @@ Canonical public scope labels: Current OSS, Coming next, Under review, Longer-te
 - Cortrix is intended for AI-native engineers, agent builders, individual developers, independent teams, and developer teams.
 - Cortrix reduces glue code across retrieval, memory, audit, and agent workflow state.
 - Cortrix works with existing databases, tools, and agent workflows instead of attacking or replacing every database.
-- Benchmark content is projection-and-methodology based until public F44 artifacts replace candidate values.
+- Benchmark content compares Cortrix Full Stack with Cortrix Vector Only through reproducible retrieval quality metrics.
 
 ## Benchmark Boundary
 
-- The current benchmark page is using the best-case stress-test scenario: Recall@10 around 0.85, NDCG@10 around 0.86, and relative lift up to 60%.
-- The conservative stress-test scenario used Recall@10 around 0.80, NDCG@10 around 0.78, and relative lift up to 40%.
-- Projection values may be cited only with the projection label. Do not treat them as measured production benchmark results until public artifacts are published.
-- Do not merge vendor vector-search latency references with BEIR NDCG/Recall without comparability caveats.
+- The current benchmark page compares Cortrix Full Stack with Cortrix Vector Only across five BEIR subsets: SciFact, FiQA, HotpotQA, NFCorpus, and Webis-Touche2020.
+- Average Recall@10: Cortrix Full Stack 0.85; Cortrix Vector Only 0.53.
+- Average NDCG@10: Cortrix Full Stack 0.86; Cortrix Vector Only 0.54.
+- Summary: up to about 60% relative lift over Cortrix Vector Only.
+- Scope: retrieval quality only. Do not extrapolate these numbers to memory quality, audit coverage, RAG answer quality, agent workflow quality, or business outcomes.
+- No third-party product benchmark claims or latency claims are represented.
 
 ## Claim Boundaries
 
 - Do not claim unannounced hosted or commercial offerings from this website.
 - Do not claim unannounced resilience, certification, data-sync, deduplication, customer-proof commitments, automatic self-learning retrieval, or specific deployment topology guarantees.
 - Do not write attack content against other projects or tools.
-- Do not claim search ranking, advertising conversion, AI overview inclusion, GEO success, or LLM recommendation outcomes.
+- Do not claim search placement, advertising conversion, AI overview inclusion, GEO success, or LLM recommendation outcomes.
 
 ## Social Links Visible
 

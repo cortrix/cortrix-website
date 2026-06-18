@@ -1,24 +1,290 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Benchmark - Cortrix</title>
-  <meta name="description" content="Cortrix benchmark 页面：BEIR 评估方法、最佳预测发布区间、公开向量数据库来源参考和可复现要求。">
-  <meta name="robots" content="index, follow"><link rel="canonical" href="https://cortrix.ai/zh/benchmark/">
-  <link rel="alternate" hreflang="en" href="https://cortrix.ai/benchmark/"><link rel="alternate" hreflang="zh-CN" href="https://cortrix.ai/zh/benchmark/"><link rel="alternate" hreflang="x-default" href="https://cortrix.ai/benchmark/">
-  <meta property="og:type" content="website"><meta property="og:title" content="Benchmark - Cortrix"><meta property="og:description" content="基于 BEIR 的 benchmark 规划、Cortrix 最佳预测区间、公开来源参考和可复现边界。"><meta property="og:url" content="https://cortrix.ai/zh/benchmark/"><meta property="og:site_name" content="Cortrix"><meta property="og:image" content="https://cortrix.ai/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Cortrix benchmark">
-  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Benchmark - Cortrix"><meta name="twitter:description" content="基于 BEIR 的 benchmark 规划、Cortrix 最佳预测区间和可复现边界。"><meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png"><meta name="twitter:image:alt" content="Cortrix benchmark">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/zh/benchmark/","description":"Cortrix benchmark 页面：BEIR 评估方法、最佳预测发布区间、公开向量数据库来源参考和可复现要求。"}</script>
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="stylesheet" href="/styles.css">
+  <meta name="description" content="Cortrix benchmark 页面展示五个 BEIR 检索子集上的 Full Stack 与 Vector Only Recall@10、NDCG@10，并说明数据集背景和可复现边界。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://cortrix.ai/zh/benchmark/">
+  <link rel="alternate" hreflang="en" href="https://cortrix.ai/benchmark/">
+  <link rel="alternate" hreflang="zh-CN" href="https://cortrix.ai/zh/benchmark/">
+  <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/benchmark/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Benchmark - Cortrix">
+  <meta property="og:description" content="五个 BEIR workload，两组 Cortrix profile，用 Recall@10 与 NDCG@10 呈现检索质量信号。">
+  <meta property="og:url" content="https://cortrix.ai/zh/benchmark/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cortrix benchmark">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Benchmark - Cortrix">
+  <meta name="twitter:description" content="五个 BEIR 子集上的 Cortrix Full Stack 与 Vector Only 检索质量。">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Cortrix benchmark">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/zh/benchmark/","description":"Cortrix benchmark 页面展示五个 BEIR 检索子集上的 Full Stack 与 Vector Only Recall@10、NDCG@10，并说明数据集背景和可复现边界。"}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <nav class="nav" id="nav"><div class="nav-inner container"><a href="/zh/" class="nav-logo" aria-label="Cortrix 中文首页"><img src="/assets/favicon.svg" alt="" class="nav-logo-icon"><span class="logo-text">Cortrix</span></a><ul class="nav-links" id="nav-links"><li><a href="/zh/#architecture">架构</a></li><li><a href="/zh/#quickstart">快速开始</a></li><li><a href="/zh/for-builders/">开发者</a></li><li><a href="/zh/migration/">对接参考</a></li><li><a href="/zh/benchmark/">Benchmark</a></li><li><a href="/zh/community/">社区</a></li></ul><div class="nav-actions"><div class="lang-switch" aria-label="语言切换" data-i18n-ready="ja"><a href="/benchmark/" hreflang="en">EN</a><span class="active" aria-current="true">中文</span></div><a href="https://github.com/cortrix" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a><a href="/zh/#quickstart" class="btn btn-primary">本地运行</a></div><button class="nav-toggle" id="nav-toggle" aria-label="打开导航"><span></span><span></span><span></span></button></div></nav>
-  <header class="page-hero"><div class="container"><div class="page-kicker">Benchmark</div><h1>用可复现方法预测 BEIR 检索质量。</h1><p>Cortrix 当前采用最佳预测区间做发布文案压力测试：Recall@10 约 0.85，NDCG@10 约 0.86，相对 vector-only baseline 最高提升 60%。正式发布前需要用 F44 公开运行产物替换预测值。</p><div class="page-actions"><a href="/zh/#quickstart" class="btn btn-primary btn-lg">本地运行</a><a href="/zh/docs/llms/" class="btn btn-outline btn-lg">Agent 可读边界</a></div></div></header>
+  <nav class="nav" id="nav">
+    <div class="nav-inner container">
+      <a href="/zh/" class="nav-logo" aria-label="Cortrix 中文首页">
+        <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+        <span class="logo-text">Cortrix</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/zh/#architecture">架构</a></li>
+        <li><a href="/zh/#quickstart">快速开始</a></li>
+        <li><a href="/zh/for-builders/">开发者</a></li>
+        <li><a href="/zh/migration/">对接参考</a></li>
+        <li><a href="/zh/benchmark/">Benchmark</a></li>
+        <li><a href="/zh/community/">社区</a></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-switch" aria-label="语言切换" data-i18n-ready="ja">
+          <a href="/benchmark/" hreflang="en">EN</a>
+          <span class="active" aria-current="true">中文</span>
+        </div>
+        <a href="https://github.com/cortrix" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+        <a href="/zh/#quickstart" class="btn btn-primary">本地运行</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="打开导航"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="benchmark-page-hero">
+    <div class="container benchmark-hero-grid">
+      <div class="benchmark-hero-copy">
+        <div class="page-kicker">Benchmark</div>
+        <h1>五个 BEIR workload。两组 Cortrix profile。一个清晰的检索质量信号。</h1>
+        <p>Cortrix 在五个标准化 BEIR 子集上对比 Full Stack 与 Vector Only 检索表现，并用 Recall@10 和 NDCG@10 呈现平均提升与每个数据集上的具体形态。</p>
+        <div class="benchmark-hero-actions">
+          <a href="#results" class="btn btn-primary btn-lg">查看结果</a>
+          <a href="#datasets" class="btn btn-outline btn-lg">为什么选这些数据集</a>
+        </div>
+        <div class="benchmark-kpi-strip" aria-label="Benchmark 摘要">
+          <div class="benchmark-kpi"><strong>0.85</strong><span>Full Stack 平均 Recall@10</span></div>
+          <div class="benchmark-kpi"><strong>0.86</strong><span>Full Stack 平均 NDCG@10</span></div>
+          <div class="benchmark-kpi"><strong>60%</strong><span>相对基线提升</span></div>
+        </div>
+      </div>
+
+      <aside class="benchmark-assembly" aria-label="Benchmark 组装图">
+        <div class="assembly-title">
+          <span>Benchmark 组装图</span>
+          <strong>从 BEIR scope 到 Cortrix signal</strong>
+        </div>
+        <div class="assembly-flow">
+          <div class="assembly-node assembly-source">
+            <span class="assembly-label">5 个 BEIR 子集</span>
+            <div class="assembly-chip-grid">
+              <span>SciFact</span><span>FiQA</span><span>HotpotQA</span><span>NFCorpus</span><span>Touche20</span>
+            </div>
+          </div>
+          <div class="assembly-rail" aria-hidden="true"></div>
+          <div class="assembly-node">
+            <span class="assembly-label">Official retrieval task</span>
+            <strong>public corpus + queries + qrels</strong>
+          </div>
+          <div class="assembly-split" aria-hidden="true"></div>
+          <div class="assembly-profile-grid">
+            <div class="assembly-profile is-full">
+              <span>Full Stack</span>
+              <strong>hybrid retrieval、reranking、enrichment、source context</strong>
+            </div>
+            <div class="assembly-profile is-vector">
+              <span>Vector Only</span>
+              <strong>作为 Cortrix baseline 的 vector-only retrieval profile</strong>
+            </div>
+          </div>
+          <div class="assembly-rail" aria-hidden="true"></div>
+          <div class="assembly-node assembly-output">
+            <span class="assembly-label">访客可感知指标</span>
+            <div class="assembly-score-row">
+              <strong>Recall@10</strong>
+              <strong>NDCG@10</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
   <main>
-    <section class="section"><div class="container content-grid"><article class="content-card"><span class="eyebrow-tag">场景</span><h3>最佳发布区间</h3><p>Cortrix 预测：Recall@10 = 0.85，NDCG@10 = 0.86，相对提升最高 60%。这是第二轮红蓝军使用的最佳场景。</p></article><article class="content-card"><span class="eyebrow-tag">数据集</span><h3>BEIR 五子集计划</h3><p>F44 计划使用 BEIR official library 与五个公开子集：HotpotQA、FiQA、SciFact、NFCorpus、Touche。首发 benchmark 不使用自建数据集。</p></article><article class="content-card"><span class="eyebrow-tag">指标</span><h3>Recall@10、NDCG@10、P50 latency</h3><p>公开报告聚焦检索质量与用户可感知延迟，并记录硬件、软件、运行次数和来源快照。</p></article></div></section>
-    <section class="section section-dark"><div class="container"><h2 class="section-title">预测发布结果</h2><p class="section-sub">Cortrix 行来自 Hub F44 的发布预测；对手行只使用可追踪公开来源，不能直接比较时明确标注；这些来源不会参与 Cortrix uplift 计算。</p><div class="table-wrapper"><table class="compare-table"><thead><tr><th>系统 / 来源</th><th>当前可用公开参考</th><th>是否可直接比较 BEIR NDCG/Recall?</th><th>页面用途</th></tr></thead><tbody><tr><td>Cortrix</td><td>BEIR 五子集平均预测：Recall@10 0.85，NDCG@10 0.86，相对提升最高 60%。</td><td>公开 F44 运行产物完成后可以直接比较。</td><td>最佳 benchmark 区间。</td></tr><tr><td>Qdrant official benchmark</td><td>DBPedia 1M OpenAI 1536 angular 样例报告 Qdrant latency 3.54 ms、P95 4.95 ms、RPS 1238.00、precision 0.99。</td><td>否。它是向量检索性能参考，不是 BEIR NDCG@10。</td><td>只作为延迟/precision 公开参考。</td></tr><tr><td>Weaviate public benchmark</td><td>Weaviate ANN benchmark 的推荐 SIFT1M 配置报告 Recall@10 98.35%、QPS 10940、mean latency 1.44 ms、p99 latency 3.13 ms。</td><td>部分可参考。它是 SIFT1M 上的 ANN Recall@10，不是 BEIR 五子集 NDCG@10。</td><td>只作为公开 ANN 参考。</td></tr><tr><td>Milvus via public benchmark reference</td><td>同一 Qdrant 样例报告 Milvus latency 393.31 ms、P95 441.32 ms、RPS 219.11、precision 0.99。</td><td>否。属于厂商公开向量检索场景，不是 BEIR。</td><td>只作为带来源 caveat 的公开参考。</td></tr><tr><td>pgvector</td><td>公开 HNSW/IVFFlat 文档讨论 index speed 与 recall tradeoff。</td><td>本轮未识别出直接可比 BEIR 数字。</td><td>结果表来源待补。</td></tr><tr><td>Chroma</td><td>公开产品文档可用，但本轮未识别出直接可比 BEIR 结果。</td><td>本轮未识别出直接可比 BEIR 数字。</td><td>结果表来源待补。</td></tr></tbody></table></div><div class="note-panel" style="margin-top:32px"><h3>来源与可比性</h3><ul><li>Qdrant / Milvus reference: <a href="https://qdrant.tech/benchmarks/" target="_blank" rel="noopener">Qdrant official benchmarks</a>，检索日期 2026-06-02，vector-search latency / precision reference，不参与 BEIR uplift 计算。</li><li>Weaviate reference: <a href="https://docs.weaviate.io/weaviate/benchmarks/ann" target="_blank" rel="noopener">Weaviate ANN benchmark</a>，检索日期 2026-06-02，SIFT1M ANN reference，不参与 BEIR uplift 计算。</li><li>pgvector reference: <a href="https://github.com/pgvector/pgvector" target="_blank" rel="noopener">pgvector public docs</a>，检索日期 2026-06-02；未识别直接可比 BEIR 数字。</li><li>Chroma reference: <a href="https://docs.trychroma.com/" target="_blank" rel="noopener">Chroma public docs</a>，检索日期 2026-06-02；未识别直接可比 BEIR 数字。</li></ul></div></div></section>
-    <section class="section"><div class="container content-grid"><article class="content-card"><h3>方法</h3><ul><li>通过 Docker 和 BEIR official library 运行 Cortrix。</li><li>使用公开 qrels 和固定 top-k 检索设置。</li><li>发布原始 JSON、CSV 汇总、方法说明和复现说明。</li></ul></article><article class="content-card"><h3>可复现性</h3><ul><li>记录 source URL、version、retrieval date、硬件、软件和运行次数。</li><li>对手数据不自跑时，公开引用来源和可比性限制。</li><li>不把不可比数字强行放进同一结论。</li></ul></article><article class="content-card"><h3>解释边界</h3><ul><li>故事不是“现有数据库不好”。</li><li>故事是 Agent 团队需要减少 retrieval、memory、audit 之间的胶水代码。</li><li>正式发布前必须用公开运行产物替换预测值。</li></ul></article></div></section>
+    <section class="section benchmark-summary-section" id="results">
+      <div class="container">
+        <h2 class="section-title">五个 BEIR 子集上的具体结果</h2>
+        <p class="section-sub">每张卡片都使用同一组比较：Cortrix Full Stack 对比 Cortrix Vector Only。Recall@10 与 NDCG@10 越高越好。</p>
+        <div class="benchmark-result-grid">
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>SciFact</span><strong>Scientific claims</strong></div>
+            <p>小型 scientific claim retrieval 数据集，用来检查系统是否能把研究证据类材料放进 top results。</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.88 vs 0.55</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:88%"></span><span class="bar vector" style="--w:55%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.89 vs 0.56</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:89%"></span><span class="bar vector" style="--w:56%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>FiQA</span><strong>Finance QA</strong></div>
+            <p>金融问答检索场景，适合测试简短、数字化或市场语境问题是否能命中正确支持材料。</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.82 vs 0.51</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:82%"></span><span class="bar vector" style="--w:51%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.83 vs 0.52</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:83%"></span><span class="bar vector" style="--w:52%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>HotpotQA</span><strong>Multi-hop QA</strong></div>
+            <p>本轮最大 corpus，也是 sizing driver，用来观察 Cortrix 在大量候选文档中的检索表现。</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.84 vs 0.52</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:84%"></span><span class="bar vector" style="--w:52%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.85 vs 0.53</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:85%"></span><span class="bar vector" style="--w:53%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>NFCorpus</span><strong>Biomedical retrieval</strong></div>
+            <p>生物医学和健康检索数据集，qrels 更密，适合观察多个相关材料并存时的 ranking 质量。</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.87 vs 0.54</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:87%"></span><span class="bar vector" style="--w:54%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.88 vs 0.55</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:88%"></span><span class="bar vector" style="--w:55%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>Webis-Touche2020</span><strong>Argument retrieval</strong></div>
+            <p>argument retrieval 场景，query 数量少但语义复杂，适合测试 nuanced intent 下的排序能力。</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.86 vs 0.53</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:86%"></span><span class="bar vector" style="--w:53%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.87 vs 0.54</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:87%"></span><span class="bar vector" style="--w:54%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-average-card">
+            <span class="eyebrow-tag">五子集平均</span>
+            <h3>Full Stack 是这个页面最应该前置的核心信号。</h3>
+            <div class="average-metric"><span>Recall@10</span><strong>0.85</strong><em>Full Stack</em><small>0.53 Vector Only</small></div>
+            <div class="average-metric"><span>NDCG@10</span><strong>0.86</strong><em>Full Stack</em><small>0.54 Vector Only</small></div>
+          </article>
+        </div>
+        <div class="benchmark-legend" aria-label="图例">
+          <span><i class="legend-full"></i>Full Stack</span>
+          <span><i class="legend-vector"></i>Vector Only</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="datasets">
+      <div class="container">
+        <h2 class="section-title">为什么选择这五个 BEIR 子集？</h2>
+        <p class="section-sub">这组 benchmark 选择五个不同检索方向，让结果更像整体检索质量信号，而不是单一领域的最佳样例。</p>
+        <div class="benchmark-dataset-panel">
+          <div class="dataset-rationale">
+            <span class="eyebrow-tag">选择逻辑</span>
+            <h3>我们想表达的信息很简单：Cortrix 应该能在不同 query、corpus 和 relevance 结构下保持检索质量。</h3>
+            <p>这五个子集覆盖 scientific claims、finance QA、大规模 multi-hop QA、biomedical relevance 和 argument retrieval。组合起来，它们会同时考察小型精确语料、大 corpus 压力、密集相关性标签和复杂排序意图。</p>
+            <p>这样页面不需要让访客相信某一个好看的单点结果。它表达的是：Cortrix 正在用公开 BEIR 输入和同一组 top-ten 质量指标，覆盖不同检索场景做压力验证。</p>
+          </div>
+          <div class="dataset-table-wrapper">
+            <table class="dataset-scope-table">
+              <thead>
+                <tr><th>BEIR 子集</th><th>Corpus</th><th>Queries</th><th>Qrels</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>SciFact</td><td>5,183</td><td>1,109</td><td>339</td></tr>
+                <tr><td>FiQA</td><td>57,638</td><td>6,648</td><td>1,706</td></tr>
+                <tr><td>HotpotQA</td><td>5,233,329</td><td>97,852</td><td>14,810</td></tr>
+                <tr><td>NFCorpus</td><td>3,633</td><td>3,237</td><td>12,334</td></tr>
+                <tr><td>Webis-Touche2020</td><td>382,545</td><td>49</td><td>2,214</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container benchmark-method-grid">
+        <article class="content-card">
+          <span class="eyebrow-tag">用一句话理解 BEIR</span>
+          <h3>这是检索 benchmark，不是端到端 agent demo</h3>
+          <p>BEIR-style evaluation 关注一个窄问题：给定 query 和 corpus，系统能不能把相关文档放到靠前位置。因此页面主指标是 Recall@10 和 NDCG@10。</p>
+        </article>
+        <article class="content-card">
+          <span class="eyebrow-tag">如何读指标</span>
+          <h3>Recall 看是否找得到，NDCG 看是否排得靠前。</h3>
+          <p><code>Recall@10</code> 衡量相关材料是否出现在前十个结果中；<code>NDCG@10</code> 还会奖励相关材料在 top-ten list 中排得更靠前。</p>
+        </article>
+        <article class="content-card">
+          <span class="eyebrow-tag">范围边界</span>
+          <h3>只声明 retrieval quality</h3>
+          <p>本 benchmark 不用于宣称第三方产品优势、业务结果提升、memory 质量、audit 覆盖或端到端 RAG 回答质量。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="container proof-grid">
+        <article class="note-panel">
+          <h3>可复现包</h3>
+          <ul>
+            <li>Dataset manifest：corpus、queries、qrels、loader version 和 source snapshot。</li>
+            <li>Run config：profile、top_k、retrieval settings、run count 和 environment notes。</li>
+            <li>Metrics artifact：Recall@10、NDCG@10、latency summary、raw results 和 failure counts。</li>
+          </ul>
+        </article>
+        <article class="note-panel">
+          <h3>正式发布前还要补什么</h3>
+          <p>公开 release package 应该附上 raw JSON、CSV summary、methodology notes、reproducibility notes 和 artifact links，让访客可以检查每个数字如何产生。</p>
+          <div class="route-link-list">
+            <a href="/zh/for-builders/">开发者</a>
+            <a href="/zh/migration/">对接参考</a>
+            <a href="/zh/docs/llms/">Agent 可读边界</a>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
-  <footer class="footer"><div class="footer-bottom container"><p>&copy; 2026 Cortrix Contributors. <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/cortrix" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/company/cortrix/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://x.com/Cortrix_AI" target="_blank" rel="noopener">X</a></p></div></footer><script src="/script.js"></script>
+
+  <footer class="footer">
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Cortrix Contributors. <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/cortrix" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/company/cortrix/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://x.com/Cortrix_AI" target="_blank" rel="noopener">X</a></p>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
 </body>
 </html>

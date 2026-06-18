@@ -147,7 +147,7 @@
   }
 
   // --- Scroll Reveal ---
-  const reveals = document.querySelectorAll('.feature-card, .problem-card, .usecase-card, .step, .arch-item, .content-card, .note-panel, .path-item');
+  const reveals = document.querySelectorAll('.feature-card, .problem-card, .usecase-card, .step, .arch-item, .content-card, .note-panel, .path-item, .benchmark-result-card, .benchmark-average-card, .benchmark-dataset-panel, .benchmark-assembly');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
