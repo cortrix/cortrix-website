@@ -17,19 +17,92 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg"><link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <nav class="nav" id="nav"><div class="nav-inner container"><a href="/" class="nav-logo" aria-label="Cortrix Home"><svg class="nav-logo-icon" viewBox="0 10 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="rTopG" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFB020"/><stop offset="100%" stop-color="#FF9500"/></linearGradient><linearGradient id="rLeftG" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#FF6B00"/><stop offset="100%" stop-color="#E65000"/></linearGradient><linearGradient id="rBotG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#B33600"/><stop offset="100%" stop-color="#661A00"/></linearGradient></defs><polygon points="16,31 16,69 34,58 34,42" fill="url(#rLeftG)"/><polygon points="18,72 50,90 83,71 63,60 50,67.5 36,59.5" fill="url(#rBotG)"/><polygon points="50,10 83,29 63,40 50,32.5 36,40.5 18,28" fill="url(#rTopG)"/></svg><span class="logo-text">Cortrix</span></a><ul class="nav-links" id="nav-links">
+  <nav class="nav" id="nav">
+    <div class="nav-inner container">
+      <a href="/" class="nav-logo" aria-label="Cortrix Home">
+        <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+        <span class="logo-text">Cortrix</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
         <li><a href="/#architecture">Architecture</a></li>
+        <li><a href="/compare/">Compare</a></li>
         <li><a href="/#quickstart">Quick Start</a></li>
         <li><a href="/for-builders/">For Builders</a></li>
         <li><a href="/migration/">Migration</a></li>
         <li><a href="/benchmark/">Benchmark</a></li>
-        <li><a href="/community/">Community</a></li>
-      </ul><div class="nav-actions"><a href="https://github.com/cortrix" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a><a href="/#quickstart" class="btn btn-primary">Run Cortrix Locally</a></div><button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button></div></nav>
-  <header class="page-hero"><div class="container"><div class="page-kicker">Roadmap</div><h1>Clear boundaries build trust.</h1><p>Cortrix uses four public labels so builders can tell what is in the current open-source release, what is planned, what is blocked, and what remains vision-level thinking.</p></div></header>
+        <li><a href="/roadmap/">Roadmap</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <header class="page-hero"><div class="container"><div class="page-kicker">Roadmap</div><h1>Cortrix proves before it promises.</h1><p>Cortrix ships the proven scope and labels what comes next, so builders can adopt the current open-source surface without confusing roadmap direction for a shipped capability.</p></div></header>
   <main>
-    <section class="section"><div class="container"><div class="table-wrapper"><table class="compare-table scope-table"><tbody><tr><td>Current OSS</td><td>Open-source semantic storage foundations for ingestion, retrieval, memory, source traceability, local workflows, and agent-readable documentation.</td></tr><tr><td>Planned</td><td>Work that has a credible implementation direction but should not be described as already shipped.</td></tr><tr><td>Under review</td><td>Work that depends on missing design, legal, infrastructure, benchmark, invite, or release decisions.</td></tr><tr><td>Longer-term direction</td><td>Longer-term possibilities that should not become current-product promises or CTA copy.</td></tr></tbody></table></div></div></section>
-    <section class="section section-dark"><div class="container content-grid"><article class="content-card"><h3>Not current offerings</h3><p>This page does not promote unannounced hosted, commercial, resilience, certification, or customer-proof commitments as current capabilities.</p></article><article class="content-card"><h3>Launch-day gate</h3><p>SEO, SEM, and GEO checks are quality and information-architecture constraints, not promises of ranking, conversion, or LLM recommendation.</p></article><article class="content-card"><h3>Future <code>/llms/</code> topic</h3><p>A public <code>/llms/</code> topic page remains planned. This pass implements <code>/llms.txt</code> and <code>/docs/llms/</code> only.</p></article></div></section>
+    <section class="section"><div class="container"><div class="table-wrapper"><table class="compare-table scope-table"><tbody><tr><td>Current OSS</td><td>Semantic storage foundations for ingestion, hybrid retrieval, reranking, memory, source traceability, REST access, Python SDK, MCP server, framework toolkit, pgCortrix, and benchmark runner artifacts.</td></tr><tr><td>Coming next</td><td>Work with a credible implementation direction that is tracked separately from the shipped surface.</td></tr><tr><td>Under review</td><td>Work that depends on additional design, legal, infrastructure, benchmark, invite, or release decisions.</td></tr><tr><td>Longer-term direction</td><td>Longer-term possibilities that should not become current-product promises or CTA copy.</td></tr></tbody></table></div></div></section>
+    <section class="section section-dark"><div class="container content-grid"><article class="content-card"><h3>Evidence first</h3><p>Public benchmark pages point to result fields, methodology, manifest, and artifact slots so claims can be checked rather than guessed.</p></article><article class="content-card"><h3>No ranking guarantee</h3><p>SEO, SEM, and GEO checks are quality and information-architecture constraints, not promises of search placement, conversion, AI overview inclusion, or LLM recommendation.</p></article><article class="content-card"><h3>Open-source adoption path</h3><p>Run Cortrix locally, inspect the source-backed access paths, and keep roadmap labels separate from the current release surface.</p></article></div></section>
   </main>
-  <footer class="footer"><div class="footer-bottom container"><p>&copy; 2026 Cortrix Contributors. <a href="/llms.txt">llms.txt</a> · <a href="https://github.com/cortrix" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/company/cortrix/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://x.com/Cortrix_AI" target="_blank" rel="noopener">X</a></p></div></footer><script src="/script.js"></script>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+          <div>
+            <span class="logo-text">Cortrix</span>
+            <div class="footer-slogan">Activate Data Brain</div>
+          </div>
+        </div>
+        <p>Open-source semantic storage built for AI agents.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/compare/">Compare</a></li>
+            <li><a href="/for-builders/">For Builders</a></li>
+            <li><a href="/migration/">Migration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <ul>
+            <li><a href="/#quickstart">Quick Start</a></li>
+            <li><a href="/docs/llms/">Agent-readable Docs</a></li>
+            <li><a href="/llms.txt">llms.txt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/community/">Community page</a></li>
+            <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Project</h4>
+          <ul>
+            <li><a href="/benchmark/">Benchmark</a></li>
+            <li><a href="/roadmap/">Roadmap</a></li>
+            <li><a href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">Source code</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Social</h4>
+          <ul>
+            <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="social-link" href="https://www.linkedin.com/company/cortrix/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="social-link" href="https://x.com/Cortrix_AI" target="_blank" rel="noopener">X</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Cortrix Contributors. Released under the AGPL-3.0 License.</p>
+    </div>
+  </footer><script src="/script.js"></script>
 </body>
 </html>

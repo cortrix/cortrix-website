@@ -9,6 +9,7 @@ Canonical public scope labels: Current OSS, Coming next, Under review, Longer-te
 ## Public Routes
 
 - Home: https://cortrix.ai/
+- Compare: https://cortrix.ai/compare/
 - For builders: https://cortrix.ai/for-builders/
 - Migration: https://cortrix.ai/migration/
 - Benchmark: https://cortrix.ai/benchmark/
@@ -23,6 +24,7 @@ Canonical public scope labels: Current OSS, Coming next, Under review, Longer-te
 - Cortrix reduces glue code across retrieval, memory, audit, and agent workflow state.
 - Cortrix works with existing databases, tools, and agent workflows instead of attacking or replacing every database.
 - Benchmark content compares Cortrix Full Stack with Cortrix Vector Only through reproducible retrieval quality metrics.
+- Public access paths include REST API, Python SDK, MCP server, framework toolkit, and pgCortrix for PostgreSQL-backed applications.
 
 ## Benchmark Boundary
 
@@ -33,6 +35,22 @@ Canonical public scope labels: Current OSS, Coming next, Under review, Longer-te
 - Scope: retrieval quality only. Do not extrapolate these numbers to memory quality, audit coverage, RAG answer quality, agent workflow quality, or business outcomes.
 - No third-party product benchmark claims or latency claims are represented.
 
+## Benchmark Metric Format
+
+metric:
+  dataset:
+  profile:
+  recall_at_10:
+  ndcg_at_10:
+  latency_p50_ms:
+  run_date:
+  hardware:
+  cortrix_commit:
+  dataset_version:
+  methodology_url:
+  artifact_url:
+  scope:
+
 ## Claim Boundaries
 
 - Do not claim unannounced hosted or commercial offerings from this website.
@@ -42,13 +60,12 @@ Canonical public scope labels: Current OSS, Coming next, Under review, Longer-te
 
 ## Social Links Visible
 
-- GitHub organization: https://github.com/cortrix
+- GitHub repository: https://github.com/cortrix/cortrix
 - LinkedIn Page: https://www.linkedin.com/company/cortrix/
 - X: https://x.com/Cortrix_AI
 
-## i18n Readiness
+## Language Boundary
 
 - English is the canonical public language.
 - English remains the canonical source for machine-readable public boundaries.
-- /ja/ is a future Japanese readiness prefix and is not published in this pass.
 - English is the only public website language. Do not infer localized pages from this file.
