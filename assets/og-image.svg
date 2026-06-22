@@ -1,6 +1,6 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="630" fill="#0B0F19"/>
-  <circle cx="240" cy="170" r="260" fill="#FF6B00" opacity="0.16"/>
+  <circle cx="240" cy="170" r="260" fill="#FF6405" opacity="0.16"/>
   <circle cx="1000" cy="40" r="240" fill="#FFB020" opacity="0.12"/>
   <path d="M0 520C188 450 332 446 532 502C750 563 946 548 1200 432V630H0V520Z" fill="#0E1221"/>
   <g transform="translate(90 120) scale(2.2)">
@@ -10,7 +10,7 @@
         <stop offset="100%" stop-color="#FF9500"/>
       </linearGradient>
       <linearGradient id="ogLeftG" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#FF6B00"/>
+        <stop offset="0%" stop-color="#FF6405"/>
         <stop offset="100%" stop-color="#E65000"/>
       </linearGradient>
       <linearGradient id="ogBotG" x1="0%" y1="0%" x2="100%" y2="100%">

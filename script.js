@@ -86,7 +86,7 @@
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < CONNECTION_DIST) {
             const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
-            ctx.strokeStyle = `rgba(255, 107, 0, ${alpha})`;
+            ctx.strokeStyle = `rgba(255, 100, 5, ${alpha})`;
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -106,7 +106,7 @@
           alpha = 0.4 + (1 - dist / MOUSE_DIST) * 0.6;
         }
 
-        ctx.fillStyle = `rgba(255, 107, 0, ${alpha})`;
+        ctx.fillStyle = `rgba(255, 100, 5, ${alpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
