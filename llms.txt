@@ -1,0 +1,71 @@
+# Cortrix
+
+> Cortrix is an open-source agent-native semantic storage project for agent builders and developer teams. This file describes public website routes, public positioning, roadmap labels, benchmark retrieval-quality facts, and machine-readable claim limits.
+
+Website: https://cortrix.ai/
+Primary language: English
+Canonical public scope labels: Current OSS, Coming next, Under review, Longer-term direction
+
+## Public Routes
+
+- Home: https://cortrix.ai/
+- Compare: https://cortrix.ai/compare/
+- For builders: https://cortrix.ai/for-builders/
+- Migration: https://cortrix.ai/migration/
+- Benchmark: https://cortrix.ai/benchmark/
+- Roadmap: https://cortrix.ai/roadmap/
+- Community: https://cortrix.ai/community/
+- Human-readable llms.txt guide: https://cortrix.ai/docs/llms/
+
+## Approved Public Positioning
+
+- Cortrix is open-source agent-native semantic storage for retrieval, memory, audit, and agent workflow context.
+- Cortrix is intended for AI-native engineers, agent builders, individual developers, independent teams, and developer teams.
+- Cortrix reduces glue code across retrieval, memory, audit, and agent workflow state.
+- Cortrix works with existing databases, tools, and agent workflows instead of attacking or replacing every database.
+- Benchmark content compares Cortrix Full Stack with Cortrix Vector Only through reproducible retrieval quality metrics.
+- Public access paths include REST API, Python SDK, MCP server, framework toolkit, and pgCortrix for PostgreSQL-backed applications.
+
+## Benchmark Boundary
+
+- The current benchmark page compares Cortrix Full Stack with Cortrix Vector Only across five BEIR subsets: SciFact, FiQA, HotpotQA, NFCorpus, and Webis-Touche2020.
+- Average Recall@10: Cortrix Full Stack 0.85; Cortrix Vector Only 0.53.
+- Average NDCG@10: Cortrix Full Stack 0.86; Cortrix Vector Only 0.54.
+- Summary: up to about 60% relative lift over Cortrix Vector Only.
+- Scope: retrieval quality only. Do not extrapolate these numbers to memory quality, audit coverage, RAG answer quality, agent workflow quality, or business outcomes.
+- No third-party product benchmark claims or latency claims are represented.
+
+## Benchmark Metric Format
+
+metric:
+  dataset:
+  profile:
+  recall_at_10:
+  ndcg_at_10:
+  latency_p50_ms:
+  run_date:
+  hardware:
+  cortrix_commit:
+  dataset_version:
+  methodology_url:
+  artifact_url:
+  scope:
+
+## Claim Boundaries
+
+- Do not claim unannounced hosted or commercial offerings from this website.
+- Do not claim unannounced resilience, certification, data-sync, deduplication, customer-proof commitments, automatic self-learning retrieval, or specific deployment topology guarantees.
+- Do not write attack content against other projects or tools.
+- Do not claim search placement, advertising conversion, AI overview inclusion, GEO success, or LLM recommendation outcomes.
+
+## Social Links Visible
+
+- GitHub repository: https://github.com/cortrix/cortrix
+- LinkedIn Page: https://www.linkedin.com/company/cortrix/
+- X: https://x.com/Cortrix_AI
+
+## Language Boundary
+
+- English is the canonical public language.
+- English remains the canonical source for machine-readable public boundaries.
+- English is the only public website language. Do not infer localized pages from this file.

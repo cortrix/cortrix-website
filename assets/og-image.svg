@@ -1,0 +1,30 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0B0F19"/>
+  <circle cx="240" cy="170" r="260" fill="#FF6405" opacity="0.16"/>
+  <circle cx="1000" cy="40" r="240" fill="#FFB020" opacity="0.12"/>
+  <path d="M0 520C188 450 332 446 532 502C750 563 946 548 1200 432V630H0V520Z" fill="#0E1221"/>
+  <g transform="translate(90 120) scale(2.2)">
+    <defs>
+      <linearGradient id="ogTopG" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#FFB020"/>
+        <stop offset="100%" stop-color="#FF9500"/>
+      </linearGradient>
+      <linearGradient id="ogLeftG" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FF6405"/>
+        <stop offset="100%" stop-color="#E65000"/>
+      </linearGradient>
+      <linearGradient id="ogBotG" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#B33600"/>
+        <stop offset="100%" stop-color="#661A00"/>
+      </linearGradient>
+    </defs>
+    <polygon points="16,31 16,69 34,58 34,42" fill="url(#ogLeftG)"/>
+    <polygon points="18,72 50,90 83,71 63,60 50,67.5 36,59.5" fill="url(#ogBotG)"/>
+    <polygon points="50,10 83,29 63,40 50,32.5 36,40.5 18,28" fill="url(#ogTopG)"/>
+  </g>
+  <text x="310" y="205" fill="#F1F5F9" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="88" font-weight="800">Cortrix</text>
+  <text x="98" y="328" fill="#FFB020" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="34" font-weight="700">Agent-Native Semantic Storage</text>
+  <text x="98" y="392" fill="#94A3B8" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="30">Retrieval, memory, workflow state, and auditability for AI agents.</text>
+  <text x="98" y="494" fill="#FF8A30" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="28" font-weight="700">cortrix.ai</text>
+  <rect x="74" y="74" width="1052" height="482" rx="28" stroke="#1E293B" stroke-width="2"/>
+</svg>

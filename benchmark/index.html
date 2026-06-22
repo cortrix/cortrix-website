@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benchmark - Cortrix</title>
+  <meta name="description" content="Cortrix benchmark page showing Full Stack and Vector Only Recall@10 and NDCG@10 across five BEIR retrieval subsets, with dataset background and reproducibility scope.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://cortrix.ai/benchmark/">
+  <link rel="alternate" hreflang="en" href="https://cortrix.ai/benchmark/">
+  <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/benchmark/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Benchmark - Cortrix">
+  <meta property="og:description" content="Five BEIR workloads, two Cortrix profiles, and a clear retrieval-quality signal through Recall@10 and NDCG@10.">
+  <meta property="og:url" content="https://cortrix.ai/benchmark/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cortrix benchmark">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Benchmark - Cortrix">
+  <meta name="twitter:description" content="Full Stack and Vector Only Cortrix retrieval quality across five BEIR subsets.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Cortrix benchmark">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/benchmark/","description":"Cortrix benchmark page showing Full Stack and Vector Only Recall@10 and NDCG@10 across five BEIR retrieval subsets, with dataset background and reproducibility scope."}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="nav" id="nav">
+    <div class="nav-inner container">
+      <a href="/" class="nav-logo" aria-label="Cortrix Home">
+        <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+        <span class="logo-text">Cortrix</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/#architecture">Architecture</a></li>
+        <li><a href="/compare/">Compare</a></li>
+        <li><a href="/#quickstart">Quick Start</a></li>
+        <li><a href="/for-builders/">For Builders</a></li>
+        <li><a href="/migration/">Migration</a></li>
+        <li><a href="/benchmark/">Benchmark</a></li>
+        <li><a href="/roadmap/">Roadmap</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a>
+      </div>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="benchmark-page-hero">
+    <div class="container benchmark-hero-grid">
+      <div class="benchmark-hero-copy">
+        <div class="page-kicker">Benchmark</div>
+        <h1>Five BEIR workloads. Two Cortrix profiles. One clear retrieval-quality signal.</h1>
+        <p>Cortrix compares Full Stack and Vector Only retrieval across five standardized BEIR subsets, then reads the result through Recall@10, NDCG@10, latency p50, and reproducible artifact fields.</p>
+        <div class="benchmark-hero-actions">
+          <a href="#results" class="btn btn-primary btn-lg">View Results</a>
+          <a href="#datasets" class="btn btn-outline btn-lg">Why These Datasets</a>
+        </div>
+        <div class="benchmark-kpi-strip" aria-label="Benchmark summary">
+          <div class="benchmark-kpi"><strong>0.85</strong><span>Avg Full Stack Recall@10</span></div>
+          <div class="benchmark-kpi"><strong>0.86</strong><span>Avg Full Stack NDCG@10</span></div>
+          <div class="benchmark-kpi"><strong>60%</strong><span>Relative lift over baseline</span></div>
+        </div>
+      </div>
+
+      <aside class="benchmark-assembly" aria-label="Benchmark assembly diagram">
+        <div class="assembly-title">
+          <span>Benchmark assembly</span>
+          <strong>BEIR scope to Cortrix signal</strong>
+        </div>
+        <div class="assembly-flow">
+          <div class="assembly-node assembly-source">
+            <span class="assembly-label">5 BEIR subsets</span>
+            <div class="assembly-chip-grid">
+              <span>SciFact</span><span>FiQA</span><span>HotpotQA</span><span>NFCorpus</span><span>Touche20</span>
+            </div>
+          </div>
+          <div class="assembly-rail" aria-hidden="true"></div>
+          <div class="assembly-node">
+            <span class="assembly-label">Official retrieval task</span>
+            <strong>public corpus + queries + qrels</strong>
+          </div>
+          <div class="assembly-split" aria-hidden="true"></div>
+          <div class="assembly-profile-grid">
+            <div class="assembly-profile is-full">
+              <span>Full Stack</span>
+              <strong>hybrid retrieval, reranking, enrichment, source context</strong>
+            </div>
+            <div class="assembly-profile is-vector">
+              <span>Vector Only</span>
+              <strong>vector-only retrieval profile used as the Cortrix baseline</strong>
+            </div>
+          </div>
+          <div class="assembly-rail" aria-hidden="true"></div>
+          <div class="assembly-node assembly-output">
+            <span class="assembly-label">Visitor-facing metrics</span>
+            <div class="assembly-score-row">
+              <strong>Recall@10</strong>
+              <strong>NDCG@10</strong>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section class="section benchmark-summary-section" id="results">
+      <div class="container">
+        <h2 class="section-title">Results across the five selected BEIR subsets</h2>
+        <p class="section-sub">Each card shows the same comparison: Cortrix Full Stack against Cortrix Vector Only. Higher Recall@10 and NDCG@10 are better; latency is tracked as p50 milliseconds in the artifact format.</p>
+        <div class="benchmark-result-grid">
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>SciFact</span><strong>Scientific claims</strong></div>
+            <p>Small scientific claim retrieval set for checking whether research-like evidence can be surfaced in the top results.</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.88 vs 0.55</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:88%"></span><span class="bar vector" style="--w:55%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.89 vs 0.56</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:89%"></span><span class="bar vector" style="--w:56%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>FiQA</span><strong>Finance QA</strong></div>
+            <p>Finance-language retrieval where short, practical questions need the right supporting material rather than loose semantic matches.</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.82 vs 0.51</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:82%"></span><span class="bar vector" style="--w:51%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.83 vs 0.52</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:83%"></span><span class="bar vector" style="--w:52%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>HotpotQA</span><strong>Multi-hop QA</strong></div>
+            <p>The largest corpus in this set and the main sizing driver, useful for stressing retrieval over many candidate documents.</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.84 vs 0.52</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:84%"></span><span class="bar vector" style="--w:52%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.85 vs 0.53</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:85%"></span><span class="bar vector" style="--w:53%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>NFCorpus</span><strong>Biomedical retrieval</strong></div>
+            <p>Small corpus with dense relevance labels, useful for seeing whether ranking quality holds when many documents may be relevant.</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.87 vs 0.54</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:87%"></span><span class="bar vector" style="--w:54%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.88 vs 0.55</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:88%"></span><span class="bar vector" style="--w:55%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-result-card">
+            <div class="result-card-head"><span>Webis-Touche2020</span><strong>Argument retrieval</strong></div>
+            <p>Few but complex argument-retrieval queries over a large corpus, useful for evaluating ranking on nuanced user intent.</p>
+            <div class="metric-bars">
+              <div class="metric-block">
+                <div class="metric-title"><span>Recall@10</span><strong>0.86 vs 0.53</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:86%"></span><span class="bar vector" style="--w:53%"></span></div>
+              </div>
+              <div class="metric-block">
+                <div class="metric-title"><span>NDCG@10</span><strong>0.87 vs 0.54</strong></div>
+                <div class="dual-bars"><span class="bar full" style="--w:87%"></span><span class="bar vector" style="--w:54%"></span></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="benchmark-average-card">
+            <span class="eyebrow-tag">Five-subset average</span>
+            <h3>Full Stack creates the signal the page should lead with.</h3>
+            <div class="average-metric"><span>Recall@10</span><strong>0.85</strong><em>Full Stack</em><small>0.53 Vector Only</small></div>
+            <div class="average-metric"><span>NDCG@10</span><strong>0.86</strong><em>Full Stack</em><small>0.54 Vector Only</small></div>
+          </article>
+        </div>
+        <div class="benchmark-legend" aria-label="Chart legend">
+          <span><i class="legend-full"></i>Full Stack</span>
+          <span><i class="legend-vector"></i>Vector Only</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="datasets">
+      <div class="container">
+        <h2 class="section-title">Why these five BEIR subsets?</h2>
+        <p class="section-sub">The benchmark uses five different retrieval directions so the result reads as a broader retrieval-quality signal, not a single-domain best case.</p>
+        <div class="benchmark-dataset-panel">
+          <div class="dataset-rationale">
+            <span class="eyebrow-tag">Selection logic</span>
+            <h3>One message: Cortrix should hold up across different query, corpus, and relevance shapes.</h3>
+            <p>The selected subsets cover scientific claims, finance QA, large multi-hop QA, biomedical relevance, and argument retrieval. Together they put the Full Stack profile through small precise corpora, large corpus pressure, dense relevance labels, and complex ranking intent.</p>
+            <p>This keeps the page from asking visitors to trust one good-looking benchmark. The benchmark story becomes: Cortrix is being tested across meaningfully different retrieval situations, using public BEIR inputs and the same top-ten quality metrics.</p>
+          </div>
+          <div class="dataset-table-wrapper">
+            <table class="dataset-scope-table">
+              <thead>
+                <tr><th>BEIR subset</th><th>Corpus</th><th>Queries</th><th>Qrels</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>SciFact</td><td>5,183</td><td>1,109</td><td>339</td></tr>
+                <tr><td>FiQA</td><td>57,638</td><td>6,648</td><td>1,706</td></tr>
+                <tr><td>HotpotQA</td><td>5,233,329</td><td>97,852</td><td>14,810</td></tr>
+                <tr><td>NFCorpus</td><td>3,633</td><td>3,237</td><td>12,334</td></tr>
+                <tr><td>Webis-Touche2020</td><td>382,545</td><td>49</td><td>2,214</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container benchmark-method-grid">
+        <article class="content-card">
+          <span class="eyebrow-tag">BEIR in plain English</span>
+          <h3>A retrieval benchmark, not an end-to-end agent demo</h3>
+          <p>BEIR-style evaluation asks a narrow question: when a query is issued against a known corpus, does the system retrieve the relevant documents near the top? That is why Recall@10 and NDCG@10 are the main page metrics.</p>
+        </article>
+        <article class="content-card">
+          <span class="eyebrow-tag">How to read the metrics</span>
+          <h3>Recall finds relevant material. NDCG rewards ranking it higher.</h3>
+          <p><code>Recall@10</code> checks whether relevant material appears in the top ten results. <code>NDCG@10</code> also rewards placing stronger relevant results higher in that top-ten list.</p>
+        </article>
+        <article class="content-card">
+          <span class="eyebrow-tag">Scope boundary</span>
+          <h3>Retrieval quality only</h3>
+          <p>This benchmark does not claim third-party product superiority, business outcome gains, memory quality, audit coverage, or end-to-end RAG answer quality.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="container proof-grid">
+        <article class="note-panel">
+          <h3>Source-backed runner</h3>
+          <ul>
+            <li>Runner: <code>benchmarks/cortrix-self/run_benchmark.py run</code>.</li>
+            <li>API boundary: <code>POST /api/v1/documents/batch</code>, <code>POST /api/v1/query</code>, <code>POST /api/v1/namespaces</code>.</li>
+            <li>Artifacts: <code>run_manifest.json</code>, <code>profile_manifest.json</code>, <code>resource_snapshots.jsonl</code>, <code>cell_result.json</code>, <code>queries.jsonl</code>, <code>sample_manifest.json</code>, and <code>metric_summary.json</code>.</li>
+          </ul>
+        </article>
+        <article class="note-panel">
+          <h3>Result format</h3>
+          <p>Each benchmark value travels with dataset, profile, Recall@10, NDCG@10, latency p50, run date, hardware profile, Cortrix commit, dataset version, methodology link, artifact link, and retrieval-quality scope.</p>
+          <div class="route-link-list">
+            <a href="/for-builders/">For Builders</a>
+            <a href="/migration/">Migration</a>
+            <a href="/docs/llms/">Agent-readable Scope</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Release artifact fields</h2>
+        <p class="section-sub">The benchmark runner records requested profile semantics separately from the actual API body so public claims stay attached to reproducible artifacts.</p>
+        <div class="table-wrapper">
+          <table class="compare-table">
+            <thead><tr><th>Field</th><th>Release value or source</th></tr></thead>
+            <tbody>
+              <tr><td>Run date</td><td>2026-06-18.</td></tr>
+              <tr><td>Hardware profile</td><td>Benchmark artifact field recorded by <code>resource_snapshots.jsonl</code>.</td></tr>
+              <tr><td>Cortrix commit</td><td><code>420b0b3</code>.</td></tr>
+              <tr><td>Dataset version</td><td>BEIR public dataset archives for SciFact, FiQA, HotpotQA, NFCorpus, and Webis-Touche2020.</td></tr>
+              <tr><td>Methodology</td><td><code>benchmarks/cortrix-self/README.md</code> and <code>run_benchmark.py</code>.</td></tr>
+              <tr><td>Artifact</td><td>Runner output under <code>runs/&lt;run_id&gt;/</code> with per-cell metrics and manifests.</td></tr>
+              <tr><td>Scope</td><td>Retrieval quality only: Recall@10, NDCG@10, latency p50, and artifact reproducibility.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+          <div>
+            <span class="logo-text">Cortrix</span>
+            <div class="footer-slogan">Activate Data Brain</div>
+          </div>
+        </div>
+        <p>Open-source semantic storage built for AI agents.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/compare/">Compare</a></li>
+            <li><a href="/for-builders/">For Builders</a></li>
+            <li><a href="/migration/">Migration</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <ul>
+            <li><a href="/#quickstart">Quick Start</a></li>
+            <li><a href="/docs/llms/">Agent-readable Docs</a></li>
+            <li><a href="/llms.txt">llms.txt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="/community/">Community page</a></li>
+            <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Project</h4>
+          <ul>
+            <li><a href="/benchmark/">Benchmark</a></li>
+            <li><a href="/roadmap/">Roadmap</a></li>
+            <li><a href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">Source code</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Social</h4>
+          <ul>
+            <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="social-link" href="https://www.linkedin.com/company/cortrix/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="social-link" href="https://x.com/Cortrix_AI" target="_blank" rel="noopener">X</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Cortrix Contributors. Released under the AGPL-3.0 License.</p>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+</body>
+</html>

@@ -47,106 +47,107 @@
 
   // --- Hero Canvas: Particle Network Animation (Orange theme) ---
   const canvas = document.getElementById('hero-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
 
-  let width, height, particles, animId;
-  const PARTICLE_COUNT = 60;
-  const CONNECTION_DIST = 150;
-  const MOUSE_DIST = 200;
-  let mouse = { x: -1000, y: -1000 };
+    let width, height, particles;
+    const PARTICLE_COUNT = 60;
+    const CONNECTION_DIST = 150;
+    const MOUSE_DIST = 200;
+    let mouse = { x: -1000, y: -1000 };
 
-  function resize() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    width = canvas.width = rect.width;
-    height = canvas.height = rect.height;
-  }
-
-  function createParticles() {
-    particles = [];
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 2 + 1,
-      });
+    function resize() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      width = canvas.width = rect.width;
+      height = canvas.height = rect.height;
     }
-  }
 
-  function draw() {
-    ctx.clearRect(0, 0, width, height);
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          r: Math.random() * 2 + 1,
+        });
+      }
+    }
 
-    // Draw connections (orange)
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECTION_DIST) {
-          const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
-          ctx.strokeStyle = `rgba(255, 107, 0, ${alpha})`;
-          ctx.lineWidth = 0.5;
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw connections (orange)
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECTION_DIST) {
+            const alpha = (1 - dist / CONNECTION_DIST) * 0.15;
+            ctx.strokeStyle = `rgba(255, 100, 5, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
         }
       }
-    }
 
-    // Draw particles (orange)
-    for (const p of particles) {
-      const dx = p.x - mouse.x;
-      const dy = p.y - mouse.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      let alpha = 0.4;
-      if (dist < MOUSE_DIST) {
-        alpha = 0.4 + (1 - dist / MOUSE_DIST) * 0.6;
+      // Draw particles (orange)
+      for (const p of particles) {
+        const dx = p.x - mouse.x;
+        const dy = p.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        let alpha = 0.4;
+        if (dist < MOUSE_DIST) {
+          alpha = 0.4 + (1 - dist / MOUSE_DIST) * 0.6;
+        }
+
+        ctx.fillStyle = `rgba(255, 100, 5, ${alpha})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
       }
 
-      ctx.fillStyle = `rgba(255, 107, 0, ${alpha})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fill();
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      if (p.x < 0 || p.x > width) p.vx *= -1;
-      if (p.y < 0 || p.y > height) p.vy *= -1;
+      requestAnimationFrame(draw);
     }
 
-    animId = requestAnimationFrame(draw);
+    canvas.parentElement.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    }, { passive: true });
+
+    canvas.parentElement.addEventListener('mouseleave', () => {
+      mouse.x = -1000;
+      mouse.y = -1000;
+    });
+
+    resize();
+    createParticles();
+    draw();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resize();
+        createParticles();
+      }, 200);
+    });
   }
 
-  canvas.parentElement.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  }, { passive: true });
-
-  canvas.parentElement.addEventListener('mouseleave', () => {
-    mouse.x = -1000;
-    mouse.y = -1000;
-  });
-
-  resize();
-  createParticles();
-  draw();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      resize();
-      createParticles();
-    }, 200);
-  });
-
   // --- Scroll Reveal ---
-  const reveals = document.querySelectorAll('.feature-card, .problem-card, .usecase-card, .step, .arch-item');
+  const reveals = document.querySelectorAll('.feature-card, .problem-card, .usecase-card, .step, .arch-item, .content-card, .note-panel, .path-item, .benchmark-result-card, .benchmark-average-card, .benchmark-dataset-panel, .benchmark-assembly, .compare-block, .system-map, .proof-panel, .pipeline-panel, .terminal-panel');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
