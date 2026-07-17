@@ -20,7 +20,7 @@
   <meta property="og:image:alt" content="Cortrix benchmark">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Benchmark - Cortrix">
-  <meta name="twitter:description" content="Full Stack and Embedding + Reranking retrieval quality across three complete BEIR corpora, with methods and self-build responsibilities.">
+  <meta name="twitter:description" content="Full Stack and Embedding + Reranking retrieval quality across three complete BEIR corpora, with methods, scope, and reproducibility.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix benchmark">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/benchmark/","description":"Cortrix full-corpus benchmark results for Full Stack and Embedding + Reranking across SciFact, FiQA, and NFCorpus, with methods, trade-offs, and reproducibility scope."}</script>
@@ -111,39 +111,6 @@
   </header>
 
   <main>
-    <section class="section section-dark" aria-labelledby="benchmark-uplift-title">
-      <div class="container">
-        <span class="eyebrow-tag">Separate FiQA 5K ablation</span>
-        <h2 class="section-title" id="benchmark-uplift-title">What changes in the Full Stack—and what you would have to build yourself.</h2>
-        <p class="section-sub">A separate 5,000-document FiQA 2×2 ablation tests ingestion-time contextual retrieval, HyPE, and document summaries alongside query-time RAG Fusion and deep listwise reranking. It provides configuration evidence beside the full-corpus results; it is not a component-level decomposition of those three runs.</p>
-        <div class="table-wrapper">
-          <table class="compare-table">
-            <thead>
-              <tr><th>Measured stage</th><th>Cortrix benchmark profile</th><th>If you build it yourself</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Ingestion-time LLM enrichment</td>
-                <td>Hypothetical questions, contextualized content, and document summaries create more semantic entry points before indexing.<br><strong>648-query raw arms:</strong> Config 1 Recall@10 0.6193 / NDCG@10 0.4310; Config 3 Recall@10 0.6818 / NDCG@10 0.5714.</td>
-                <td>Own prompt and version control, worker concurrency, timeouts, retries, backlog recovery, generated-block indexing, source-ID mapping, and coverage audits.</td>
-              </tr>
-              <tr>
-                <td>Query-time deep reranking</td>
-                <td>RAG Fusion widens the candidate pool before a listwise LLM orders the final evidence window.<br><strong>200-query Config 2 raw arm:</strong> Recall@10 0.8017 / NDCG@10 0.7205.</td>
-                <td>Own candidate windows, prompt packing, timeout and failure fallbacks, latency and token budgets, and ranking-regression tests.</td>
-              </tr>
-              <tr>
-                <td>Both stages together</td>
-                <td>Ingestion creates richer retrieval material; query-time fusion and ranking decide which evidence deserves the top positions.<br><strong>200-query Config 4 raw arm:</strong> Recall@10 0.8316 / NDCG@10 0.7610.</td>
-                <td>Also own namespace isolation, database freezing, exact query denominators, four-arm ablations, run artifacts, observability, and revalidation after model changes.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="section-sub">The ablation arm counts differ: the ingestion comparison uses 648 queries, while the query-time and combined configurations report 200-query arms. These are configuration scores, not full-corpus component attribution. Recreating the same path means operating two production pipelines and keeping generated index material, candidate ranking, retries, fallbacks, latency, cost, and evaluation aligned as data and models change. This is a responsibility inventory, not an estimate of engineering hours, cost, or third-party product performance.</p>
-      </div>
-    </section>
-
     <section class="section benchmark-summary-section" id="results">
       <div class="container">
         <h2 class="section-title">Full-corpus measured results across three BEIR datasets</h2>
@@ -211,7 +178,7 @@
     <section class="section section-dark" id="datasets">
       <div class="container">
         <h2 class="section-title">Why these three BEIR datasets?</h2>
-        <p class="section-sub">SciFact, FiQA, and NFCorpus cover scientific claims, finance questions, and biomedical retrieval. They show three different public BEIR shapes under one paired full-corpus protocol, not a global ranking of dataset difficulty.</p>
+        <p class="section-sub">SciFact, FiQA, and NFCorpus cover scientific claims, finance questions, and biomedical retrieval. They show three different public BEIR shapes under one paired full-corpus protocol, not every domain and not a global ranking of dataset difficulty.</p>
         <div class="benchmark-dataset-panel">
           <div class="dataset-rationale">
             <span class="eyebrow-tag">Selection logic</span>
@@ -267,16 +234,16 @@
             <li>Freeze database state and send one cold end-to-end request for every official test-qrels query through the <a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/runner/run_benchmark.py" target="_blank" rel="noopener">benchmark runner</a>; require zero query failures.</li>
             <li>Map returned source-document IDs to qrels, calculate Recall@10/50 and NDCG@10/50, and record within-pair latency p50/p95.</li>
             <li>Judge the scientific scorecard separately from strict persistent-feature completeness using the published <a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/docs/methodology.md" target="_blank" rel="noopener">methodology</a>.</li>
-            <li>Save run, sample, and profile manifests; per-cell results and scorecards; query and latency records; resource snapshots; paired deltas; and the source lock before public-claim review.</li>
+            <li>Save run, sample, and profile manifests; per-cell results and scorecards; query and latency records; resource snapshots; paired deltas; and the source lock so another evaluator can audit the comparison.</li>
           </ul>
         </article>
         <article class="note-panel">
-          <h3>Result format</h3>
-          <p>Each benchmark value travels with dataset, profile, Recall@10/50, NDCG@10/50, latency p50/p95, run date, hardware profile, Cortrix commit, dataset version, methodology link, artifact status, and retrieval-quality scope.</p>
+          <h3>Start with quick validation</h3>
+          <p>Want to check your setup before a full run? Use the deterministic <code>fiqa-mini-120</code> or <code>fiqa-mini-600</code> fixtures, or cap a sampled run with <code>--max-queries</code> and <code>--max-corpus-docs</code>. These paths validate installation, pipeline behavior, and configuration. Their scores are not comparable to the full-corpus measurements shown here.</p>
           <div class="route-link-list">
+            <a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/datasets/fiqa-mini/README.md" target="_blank" rel="noopener">Quick validation fixtures</a>
+            <a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/README.md" target="_blank" rel="noopener">Full benchmark method</a>
             <a href="/for-builders/">For Builders</a>
-            <a href="/migration/">Migration</a>
-            <a href="/docs/llms/">Agent-readable Scope</a>
           </div>
         </article>
       </div>
@@ -284,18 +251,18 @@
 
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Release artifact fields</h2>
-        <p class="section-sub">The benchmark runner records requested profile semantics separately from the actual API body so public claims stay attached to reproducible artifacts.</p>
+        <h2 class="section-title">Reproduction details</h2>
+        <p class="section-sub">Each result carries its profile, source lock, hardware, dataset boundary, and reproduction method.</p>
         <div class="table-wrapper">
           <table class="compare-table">
-            <thead><tr><th>Field</th><th>Release value or source</th></tr></thead>
+            <thead><tr><th>Evidence field</th><th>Recorded value or source</th></tr></thead>
             <tbody>
               <tr><td>Run date</td><td>2026-07-14 to 2026-07-16.</td></tr>
               <tr><td>Hardware profile</td><td>NFCorpus and SciFact: AWS g5.2xlarge; FiQA: AWS c7i.8xlarge. Compare latency only within each paired dataset.</td></tr>
-              <tr><td>Source lock</td><td>Cortrix <code>4a6299c</code>; cortrix-benchmarks <code>6defa0a</code>. Dataset-pair manifests also lock the Hub runtime source.</td></tr>
+              <tr><td>Source lock</td><td>Cortrix <code>4a6299c</code>; cortrix-benchmarks <code>6defa0a</code>. Dataset-pair manifests also lock the orchestration source.</td></tr>
               <tr><td>Dataset version</td><td>Full public BEIR SciFact, FiQA, and NFCorpus corpora with all official test-qrels queries: 300, 648, and 323 respectively.</td></tr>
               <tr><td>Methodology</td><td><a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/README.md" target="_blank" rel="noopener">README</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/runner/run_benchmark.py" target="_blank" rel="noopener">runner</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/docs/methodology.md" target="_blank" rel="noopener">methodology</a>, and <a href="https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/docs/local-reproduction.md" target="_blank" rel="noopener">local reproduction</a>.</td></tr>
-              <tr><td>Artifact</td><td>Machine-readable result bundle: local release candidate prepared; remote publication pending. It includes a manifest, six scorecards, profiles, summaries, checksums, and exact reproduction steps.</td></tr>
+              <tr><td>Result bundle</td><td>The machine-readable bundle contains a manifest, six full-corpus scorecards, profile records, summaries, checksums, and exact reproduction steps. Cite the bundle from an immutable release tag or commit.</td></tr>
               <tr><td>Scope</td><td>Retrieval quality only: Recall@10/50, NDCG@10/50, paired-run latency, and artifact reproducibility.</td></tr>
             </tbody>
           </table>

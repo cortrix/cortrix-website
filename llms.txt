@@ -41,29 +41,17 @@ Canonical public scope labels: Current OSS, Coming next, Under review, Longer-te
 - Full Stack uses DeepSeek-V4-Flash with contextual retrieval, HyPE, document summaries, RAG Fusion, and listwise reranking.
 - All official test queries completed with zero query failures. The NFCorpus and SciFact Full Stack runs had partial coverage in LLM-dependent feature verification; the scores shown are the complete measured retrieval results.
 - Latency must be compared only within each paired dataset because NFCorpus and SciFact ran on AWS g5.2xlarge while FiQA ran on AWS c7i.8xlarge. No cross-dataset latency aggregate or hardware ranking is claimed.
-- A separate 5,000-document FiQA 2x2 ablation provides configuration context, not a component decomposition of the three full-corpus results. Config 1 used 648 queries and scored 0.6193 Recall@10 and 0.4310 NDCG@10; Config 3 used 648 queries and scored 0.6818 and 0.5714. Config 2 used 200 queries and scored 0.8017 and 0.7205; Config 4 used 200 queries and scored 0.8316 and 0.7610.
-- Self-build boundary: the page lists concrete responsibilities across enrichment workers, retries, indexing, source-ID mapping, candidate windows, listwise ranking, fallbacks, cost/latency control, ablation, artifacts, and revalidation. It does not estimate engineering hours or claim third-party product performance.
-- Reproduction method: pin Cortrix commit 4a6299c, cortrix-benchmarks commit 6defa0a, profile configurations, and BEIR archive checksums; download the public archive and verify corpus/query/qrels counts; create paired isolated namespaces with identical corpus, qrels, seed, retrieval depth, and top-k; ingest the complete corpus and drain required tasks; freeze database state; send one cold end-to-end request for every official test-qrels query with zero failures; map source-document IDs to qrels; calculate Recall@10/50 and NDCG@10/50; record within-pair latency p50/p95; judge scientific validity separately from strict feature completeness; and preserve manifests, per-cell scorecards, query/latency records, resource snapshots, paired deltas, and source locks for public-claim review.
+- Reproduction method: pin Cortrix commit 4a6299c, cortrix-benchmarks commit 6defa0a, profile configurations, and BEIR archive checksums; download the public archive and verify corpus/query/qrels counts; create paired isolated namespaces with identical corpus, qrels, seed, retrieval depth, and top-k; ingest the complete corpus and drain required tasks; freeze database state; send one cold end-to-end request for every official test-qrels query with zero failures; map source-document IDs to qrels; calculate Recall@10/50 and NDCG@10/50; record within-pair latency p50/p95; judge scientific validity separately from strict feature completeness; and preserve manifests, per-cell scorecards, query/latency records, resource snapshots, paired deltas, and source locks so another evaluator can audit the comparison.
 - Public method sources: https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/README.md ; https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/runner/run_benchmark.py ; https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/docs/methodology.md ; https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/docs/local-reproduction.md
-- A machine-readable full-corpus result bundle is prepared as a local release candidate; remote publication is pending. Do not infer a public artifact URL until it is released.
+- The machine-readable full-corpus result bundle contains a manifest, six scorecards, profile records, summaries, checksums, and exact reproduction steps. Cite the bundle from an immutable release tag or commit.
+- Quick validation is available through the deterministic `fiqa-mini-120` and `fiqa-mini-600` fixtures and through sampled runs capped with `--max-queries` and `--max-corpus-docs`: https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/datasets/fiqa-mini/README.md . These paths help verify installation, pipeline behavior, and configuration at lower cost; they do not produce a published full-corpus benchmark claim.
 - Scope: retrieval quality only. Do not extrapolate these numbers to memory quality, audit coverage, RAG answer quality, agent workflow quality, or business outcomes.
 - No third-party product benchmark claims, cross-dataset latency claims, or business-outcome claims are represented.
 
-## Benchmark Metric Format
+## Benchmark Evidence Format
 
-metric:
-  dataset:
-  profile:
-  recall_at_10:
-  ndcg_at_10:
-  latency_p50_ms:
-  run_date:
-  hardware:
-  cortrix_commit:
-  dataset_version:
-  methodology_url:
-  artifact_url:
-  scope:
+- Each full-corpus cell records the dataset, profile, Recall@10/50, NDCG@10/50, within-pair latency p50/p95, run date, hardware, Cortrix commit, dataset version, methodology, checksums, and retrieval-quality scope.
+- Mini and capped sampled runs use separate fixtures, manifests, and status boundaries from the full-corpus result bundle.
 
 ## Claim Boundaries
 
