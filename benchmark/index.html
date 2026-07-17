@@ -172,6 +172,7 @@
           <span><i class="legend-full"></i>Full Stack</span>
           <span><i class="legend-vector"></i>Embedding + Reranking</span>
         </div>
+        <p class="section-sub">Quality came with higher measured query time in every paired run. Full Stack versus Embedding + Reranking p50 latency was 34,232 versus 7,311 ms on SciFact, 106,172 versus 26,521 ms on FiQA, and 29,504 versus 5,905 ms on NFCorpus. Compare only within each dataset and hardware pair.</p>
       </div>
     </section>
 
@@ -184,7 +185,7 @@
             <span class="eyebrow-tag">Selection logic</span>
             <h3>Three domains, one paired full-corpus protocol.</h3>
             <p>The public BEIR inputs vary from a 3,633-document biomedical corpus to a 57,638-document finance corpus. Each dataset uses the same Cortrix source lock within its Full Stack and Embedding + Reranking pair, and every official test-qrels query is evaluated.</p>
-            <p>All official test queries completed with zero query failures. The NFCorpus and SciFact Full Stack runs had partial coverage in LLM-dependent feature verification; the scores shown are the complete measured retrieval results.</p>
+            <p>All official test queries completed with zero query failures. The NFCorpus and SciFact Full Stack runs had partial coverage in LLM-dependent feature verification. The retained FiQA cells predate the strict feature-completeness contract, so their run-specific feature completeness was not formally evaluated. These statuses limit feature attribution; the scores shown are the complete measured retrieval results.</p>
           </div>
           <div class="dataset-table-wrapper">
             <table class="dataset-scope-table">
