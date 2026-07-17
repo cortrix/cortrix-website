@@ -23,17 +23,31 @@ Canonical public scope labels: Current OSS, Coming next, Under review, Longer-te
 - Cortrix is intended for AI-native engineers, agent builders, individual developers, independent teams, and developer teams.
 - Cortrix reduces glue code across retrieval, memory, audit, and agent workflow state.
 - Cortrix works with existing databases, tools, and agent workflows instead of attacking or replacing every database.
-- Benchmark content compares Cortrix Full Stack with Cortrix Vector Only through reproducible retrieval quality metrics.
+- Benchmark content compares Cortrix Full Stack with Cortrix Embedding + Reranking through reproducible retrieval quality metrics.
 - Public access paths include REST API, Python SDK, MCP server, framework toolkit, and pgCortrix for PostgreSQL-backed applications.
 
 ## Benchmark Boundary
 
-- The current benchmark page compares Cortrix Full Stack with Cortrix Vector Only across five BEIR subsets: SciFact, FiQA, HotpotQA, NFCorpus, and Webis-Touche2020.
-- Average Recall@10: Cortrix Full Stack 0.85; Cortrix Vector Only 0.53.
-- Average NDCG@10: Cortrix Full Stack 0.86; Cortrix Vector Only 0.54.
-- Summary: up to about 60% relative lift over Cortrix Vector Only.
+- The current benchmark page compares Cortrix Full Stack with Cortrix Embedding + Reranking across three complete public BEIR corpora: SciFact, FiQA, and NFCorpus.
+- Up to 84.6% higher NDCG@10. Full Stack vs Embedding + Reranking on FiQA.
+- Up to 43.2% higher Recall@10. Full Stack vs Embedding + Reranking on FiQA.
+- Every official test-qrels query is evaluated: SciFact 300, FiQA 648, and NFCorpus 323. All six profile cells completed with zero query failures and valid scientific scorecards.
+- SciFact Recall@10: Full Stack 0.8698; Embedding + Reranking 0.7794. SciFact NDCG@10: Full Stack 0.7716; Embedding + Reranking 0.6009.
+- FiQA Recall@10: Full Stack 0.5205; Embedding + Reranking 0.3635. FiQA NDCG@10: Full Stack 0.4663; Embedding + Reranking 0.2526.
+- NFCorpus Recall@10: Full Stack 0.1717; Embedding + Reranking 0.1482. NFCorpus NDCG@10: Full Stack 0.3721; Embedding + Reranking 0.2982.
+- Unweighted three-dataset macro average Recall@10: Full Stack 0.5207; Embedding + Reranking 0.4304.
+- Unweighted three-dataset macro average NDCG@10: Full Stack 0.5366; Embedding + Reranking 0.3839.
+- Embedding + Reranking uses BGE-M3 retrieval and bge-reranker-v2-m3 with ingestion-time and query-time LLM stages disabled; it is not a vector-only profile.
+- Full Stack uses DeepSeek-V4-Flash with contextual retrieval, HyPE, document summaries, RAG Fusion, and listwise reranking.
+- All official test queries completed with zero query failures. The NFCorpus and SciFact Full Stack runs had partial coverage in LLM-dependent feature verification; the scores shown are the complete measured retrieval results.
+- Latency must be compared only within each paired dataset because NFCorpus and SciFact ran on AWS g5.2xlarge while FiQA ran on AWS c7i.8xlarge. No cross-dataset latency aggregate or hardware ranking is claimed.
+- A separate 5,000-document FiQA 2x2 ablation provides configuration context, not a component decomposition of the three full-corpus results. Config 1 used 648 queries and scored 0.6193 Recall@10 and 0.4310 NDCG@10; Config 3 used 648 queries and scored 0.6818 and 0.5714. Config 2 used 200 queries and scored 0.8017 and 0.7205; Config 4 used 200 queries and scored 0.8316 and 0.7610.
+- Self-build boundary: the page lists concrete responsibilities across enrichment workers, retries, indexing, source-ID mapping, candidate windows, listwise ranking, fallbacks, cost/latency control, ablation, artifacts, and revalidation. It does not estimate engineering hours or claim third-party product performance.
+- Reproduction method: pin Cortrix commit 4a6299c, cortrix-benchmarks commit 6defa0a, profile configurations, and BEIR archive checksums; download the public archive and verify corpus/query/qrels counts; create paired isolated namespaces with identical corpus, qrels, seed, retrieval depth, and top-k; ingest the complete corpus and drain required tasks; freeze database state; send one cold end-to-end request for every official test-qrels query with zero failures; map source-document IDs to qrels; calculate Recall@10/50 and NDCG@10/50; record within-pair latency p50/p95; judge scientific validity separately from strict feature completeness; and preserve manifests, per-cell scorecards, query/latency records, resource snapshots, paired deltas, and source locks for public-claim review.
+- Public method sources: https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/README.md ; https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/runner/run_benchmark.py ; https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/docs/methodology.md ; https://github.com/cortrix/cortrix-benchmarks/blob/main/benchmarks/beir-retrieval-quality/docs/local-reproduction.md
+- A machine-readable full-corpus result bundle is prepared as a local release candidate; remote publication is pending. Do not infer a public artifact URL until it is released.
 - Scope: retrieval quality only. Do not extrapolate these numbers to memory quality, audit coverage, RAG answer quality, agent workflow quality, or business outcomes.
-- No third-party product benchmark claims or latency claims are represented.
+- No third-party product benchmark claims, cross-dataset latency claims, or business-outcome claims are represented.
 
 ## Benchmark Metric Format
 
