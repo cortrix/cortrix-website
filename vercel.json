@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
+    {
+      "src": "/migration(?:/.*)?",
+      "status": 410
+    },
+    {
+      "handle": "filesystem"
+    }
+  ]
+}

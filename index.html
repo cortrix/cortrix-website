@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cortrix - Agent-Native Semantic Storage Engine</title>
-  <meta name="description" content="Cortrix is an open-source agent-native semantic storage engine for retrieval, memory, workflow context, and source-level traceability with less glue code.">
+  <meta name="description" content="Evaluate Cortrix, an active pre-release local-first semantic storage project for retrieval, reviewable records, and source traceability.">
   <meta name="keywords" content="Cortrix, agent-native semantic storage, AI agent data, retrieval, memory, traceability, open source, AGPL, MCP">
   <meta name="author" content="Cortrix">
   <meta name="robots" content="index, follow">
@@ -14,7 +14,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Cortrix - Agent-Native Semantic Storage Engine">
-  <meta property="og:description" content="Open-source semantic storage for agent builders, combining retrieval, memory, workflow context, and source-level traceability.">
+  <meta property="og:description" content="Evaluate a local-first semantic storage path for retrieval, reviewable records, and source traceability.">
   <meta property="og:url" content="https://cortrix.ai/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
@@ -25,7 +25,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cortrix - Agent-Native Semantic Storage Engine">
-  <meta name="twitter:description" content="Open-source semantic storage for agent builders, with current open-source paths for retrieval, memory, workflow context, and source-level traceability.">
+  <meta name="twitter:description" content="Active pre-release semantic storage with a local Docker Quick Start.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
 
@@ -37,9 +37,9 @@
     "name": "Cortrix",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Linux, macOS",
-    "description": "Open-source agent-native semantic storage for retrieval, memory, workflow context, and source-level traceability in agent data workflows.",
+    "description": "Active pre-release local-first semantic storage for retrieval, reviewable records, and source traceability.",
     "url": "https://cortrix.ai",
-    "license": "https://opensource.org/licenses/AGPL-3.0",
+    "license": "https://spdx.org/licenses/AGPL-3.0-only.html",
     "author": {
       "@type": "Organization",
       "name": "Cortrix",
@@ -62,17 +62,16 @@
       </a>
       <ul class="nav-links" id="nav-links">
         <li><a href="/#architecture">Architecture</a></li>
-        <li><a href="/compare/">Compare</a></li>
+
         <li><a href="/#quickstart">Quick Start</a></li>
         <li><a href="/for-builders/">For Builders</a></li>
-        <li><a href="/migration/">Migration</a></li>
         <li><a href="/benchmark/">Benchmark</a></li>
-        <li><a href="/roadmap/">Roadmap</a></li>
+
       </ul>
       <div class="nav-actions">
         <a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a>
       </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -88,28 +87,28 @@
         <div class="hero-copy">
           <p class="hero-slogan">Activate Data Brain</p>
           <p class="hero-positioning">Agent-Native Semantic Storage</p>
-          <h1><span>Semantic Storage</span><span>Built for AI Agents</span></h1>
-          <p class="hero-sub">Move beyond loose chunks and prompt-time glue with a semantic context layer agents can retrieve, review, trace, and reuse across real workflows.</p>
+          <h1><span>Semantic Storage </span><span>Built for AI Agents</span></h1>
+          <p class="hero-sub">Evaluate a local-first semantic context layer for retrieval, reviewable records, and source traceability. Cortrix is active pre-release; interface and feature maturity is reported separately.</p>
           <div class="hero-badges" aria-label="Project status">
             <span class="hero-badge">Open Source</span>
-            <span class="hero-badge">AGPL-3.0</span>
-            <span class="hero-badge">Agent Data Stack</span>
+            <span class="hero-badge">AGPL-3.0-only</span>
+            <span class="hero-badge">Active Pre-release</span>
           </div>
           <div class="hero-actions">
-            <a href="#quickstart" class="btn btn-primary btn-lg">Run Cortrix Locally</a>
+            <a href="#quickstart" class="btn btn-primary btn-lg">Run Cortrix with Docker</a>
             <a href="https://github.com/cortrix/cortrix" class="btn btn-outline btn-lg social-link" target="_blank" rel="noopener">Star on GitHub</a>
           </div>
         </div>
         <aside class="hero-proof-card" aria-label="Quickstart proof">
           <div class="proof-card-header">
-            <span>Quickstart proof</span>
-            <strong>From repo to inspectable context</strong>
+            <span>Docker Quick Start</span>
+            <strong>From repository to a reranked query</strong>
           </div>
           <ol class="proof-steps">
             <li><span>01</span>Clone the repo</li>
-            <li><span>02</span>Run the local stack</li>
-            <li><span>03</span>Load a small corpus</li>
-            <li><span>04</span>Inspect retrieval evidence</li>
+            <li><span>02</span>Start with Docker</li>
+            <li><span>03</span>Check readiness</li>
+            <li><span>04</span>Run a reranked query</li>
           </ol>
           <div class="proof-flow-card" aria-label="Inputs to Cortrix to agents">
             <div>
@@ -118,11 +117,11 @@
             </div>
             <div>
               <strong>Cortrix</strong>
-              <span>Semantic records, retrieval evidence, traceable context</span>
+              <span>Pre-release semantic records and retrieval paths</span>
             </div>
             <div>
               <strong>Agents</strong>
-              <span>Retrieve, review, reuse, cite source</span>
+              <span>Evaluate retrieval and source context</span>
             </div>
           </div>
         </aside>
@@ -136,21 +135,21 @@
       <h2 class="section-title">From Source Material to Semantic Records</h2>
       <p class="section-sub">Cortrix turns documents, code, workflow events, and retrieval evidence into semantic records built for agentic systems.</p>
       <div class="arch-diagram">
-        <img src="assets/architecture.svg" alt="Cortrix Architecture — Agent-native semantic storage engine with SPC pipeline, hybrid query engine with reranker, memory, storage layer, and connector paths" width="900" height="620" loading="lazy">
+        <img src="assets/architecture.svg" alt="Cortrix architecture overview with source-processing, retrieval, record, storage, and integration paths labeled by evidence boundary" width="900" height="620" loading="lazy">
       </div>
-      <p class="arch-note">The diagram is a system overview of the semantic storage layer: ingestion, hybrid retrieval, memory, source context, and agent-facing connector paths.</p>
+      <p class="arch-note">The diagram is a source overview, not a production-readiness or scale claim. Interface, memory, and integration paths retain their published evidence boundaries.</p>
       <div class="arch-highlights">
         <div class="arch-item">
-          <h4>Docker or PG Extension Path</h4>
-          <p>Choose docker-compose, standalone server, or pgcortrix PostgreSQL extension paths based on the stack you already operate.</p>
+          <h4>Source-First and Database Paths</h4>
+          <p>Use the documented loopback-only Docker path for a local first-value evaluation. The pgCortrix path is present in source; compatibility and migration guidance still require review.</p>
         </div>
         <div class="arch-item">
           <h4>Feedback Signals for Review</h4>
-          <p>Observability and feedback signals help teams inspect what supported an agent answer. Automatic learning from those signals is a coming roadmap topic.</p>
+          <p>Observability and feedback signals help teams inspect what supported an agent answer. Automatic learning from those signals is not a current capability.</p>
         </div>
         <div class="arch-item">
           <h4>Scoped Connector Paths</h4>
-          <p>Designed to connect with MCP, CLI workflows, HTTP upload, filesystem watchers, and framework adapters as each public integration matures.</p>
+          <p>MCP, HTTP, SDK, and other connector surfaces are present in source with different review states. Check the pinned status before adopting a path.</p>
         </div>
       </div>
     </div>
@@ -191,7 +190,7 @@
   <section class="section" id="features">
     <div class="container">
       <h2 class="section-title">One Engine. Agent Data Foundations.</h2>
-      <p class="section-sub">Cortrix organizes semantic ingestion, hybrid retrieval with reranking, interaction memory, and source-level context into a shared engine design for REST, MCP, SDK, and PostgreSQL-backed workflows.</p>
+      <p class="section-sub">Cortrix organizes semantic ingestion, hybrid retrieval, memory records, and source context in one pre-release design. The cited commit contains <code>api/openapi.yaml</code>; file presence and identity do not establish runtime, production, or security readiness.</p>
       <div class="features-grid">
 
         <div class="feature-card">
@@ -199,8 +198,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
           </div>
           <h3>Semantic Processing Chain (SPC)</h3>
-          <p>Prepare common document types such as PDF, Word, and Markdown through the v1.0 SPC path: Docling parsing with OCR fallback, parent-child chunking, NER + summary enrichment, embedding, and indexing under launch verification.</p>
-          <span class="feature-tag">Core</span>
+          <p>Parsing, OCR fallback, chunking, enrichment, embedding, and indexing paths are present in source. Parser and production readiness require review at the pinned source.</p>
+          <span class="feature-tag">Review required</span>
         </div>
 
         <div class="feature-card">
@@ -208,8 +207,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
           </div>
           <h3>Hybrid Query + Reranker</h3>
-          <p>Vector similarity (P-HNSW with WAL persistence) and BM25 keyword search are fused via RRF, then precision-reranked with bge-reranker-v2-m3 for agent-facing retrieval.</p>
-          <span class="feature-tag">Core</span>
+          <p>Vector, BM25, RRF fusion, and reranking paths are present in source for retrieval evaluation. Treat runtime behavior as review required at the pinned commit.</p>
+          <span class="feature-tag">Review required</span>
         </div>
 
         <div class="feature-card">
@@ -217,8 +216,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           </div>
           <h3>AI Interaction Memory</h3>
-          <p>Persistent conversation memory gives agent workflows session management, LLM-based fact extraction, typed memory, decay, per-user isolation, transparency APIs, and inspectable audit context.</p>
-          <span class="feature-tag">Core</span>
+          <p>Memory APIs and typed records are present in source. MEM02 fact extraction and security isolation are Blocked; user fields are logical scope, not authorization.</p>
+          <span class="feature-tag">Mixed status</span>
         </div>
 
         <div class="feature-card">
@@ -226,8 +225,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           </div>
           <h3>Agent Observability</h3>
-          <p>Session, trace, and agent headers help teams inspect what happened inside an agent workflow. Retrieval feedback learning remains a coming roadmap area rather than an automatic self-learning claim.</p>
-          <span class="feature-tag">Core</span>
+          <p>Session, trace, and agent-header surfaces are present for inspection and remain under review. Automatic retrieval learning is a future direction, not a current claim.</p>
+          <span class="feature-tag">Review required</span>
         </div>
 
         <div class="feature-card">
@@ -235,8 +234,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/><path d="M4 4v16"/><path d="M20 4v16"/></svg>
           </div>
           <h3>Source-Level Traceability</h3>
-          <p>Cortrix targets inspectable provenance beyond call indexes. Answers can link back to contributing chunks, documents, and conversation turns through citation tracing and retrieval attribution.</p>
-          <span class="feature-tag">Core</span>
+          <p>Cortrix is designed for inspectable source context across chunks, documents, and turns. Treat end-to-end citation and attribution behavior as review required.</p>
+          <span class="feature-tag">Review required</span>
         </div>
 
         <div class="feature-card">
@@ -244,8 +243,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
           </div>
           <h3>Namespaces + Cross-NS Query</h3>
-          <p>Use namespaces to isolate data by project, team, or tenant. Cross-namespace query keeps scatter-gather and unified ranking semantics explicit across agent workflows.</p>
-          <span class="feature-tag">Core</span>
+          <p>Namespaces provide logical query scope for projects and workflows. They are not authentication, authorization, ACL, or tenant-security boundaries.</p>
+          <span class="feature-tag">Logical scope</span>
         </div>
 
         <div class="feature-card">
@@ -253,8 +252,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
           </div>
           <h3>Retrieval Quality Foundations</h3>
-          <p>Parent-child chunking is part of the release quality foundation. Contextual retrieval, multi-query patterns, retrieval grading, and hypothetical-question indexing remain coming evaluation paths.</p>
-          <span class="feature-tag">Core</span>
+          <p>Published evidence covers retrieval quality only. Parent-child and broader retrieval patterns remain subject to their pinned source and review status.</p>
+          <span class="feature-tag">Evidence bounded</span>
         </div>
 
         <div class="feature-card">
@@ -262,8 +261,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </div>
           <h3>pgCortrix Extension</h3>
-          <p>For PostgreSQL-backed applications, pgCortrix is the path for bringing semantic storage closer to existing PostgreSQL infrastructure while preserving the option to run Cortrix as a separate service.</p>
-          <span class="feature-tag">Integration</span>
+          <p>pgCortrix is present as a PostgreSQL integration path. A reviewed compatibility matrix and migration guide are not published.</p>
+          <span class="feature-tag">Review required</span>
         </div>
 
         <div class="feature-card">
@@ -271,8 +270,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
           </div>
           <h3>MCP Server</h3>
-          <p>The Cortrix MCP server exposes 29 core tools plus 2 admin tools over stdio, so IDE agents can search, upload, manage memory, check task status, and trigger controlled admin imports.</p>
-          <span class="feature-tag">Integration</span>
+          <p>The MCP server surface is present in source for agent-tool evaluation. Its current compatibility and production readiness require review at the pinned source.</p>
+          <span class="feature-tag">Review required</span>
         </div>
 
         <div class="feature-card">
@@ -280,8 +279,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h3>Local Embedding Path (bge-m3)</h3>
-          <p>ONNX Runtime integration with bge-m3 is the local embedding path for teams that want semantic search without making every query depend on an external embedding service.</p>
-          <span class="feature-tag">Local</span>
+          <p>ONNX Runtime and BGE-M3 are present as a local embedding path. Verify the pinned configuration and review status before adoption.</p>
+          <span class="feature-tag">Review required</span>
         </div>
 
         <div class="feature-card">
@@ -289,8 +288,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
           </div>
           <h3>Connector Paths</h3>
-          <p>Cortrix meets agent tools through MCP, REST, Python SDK, framework adapters, HTTP upload, directory watch, DB import, and PostgreSQL extension paths.</p>
-          <span class="feature-tag">Paths</span>
+          <p>HTTP, MCP, Python SDK, adapter, import, and PostgreSQL paths are represented in source with different maturity states; no security enforcement is implied.</p>
+          <span class="feature-tag">Mixed status</span>
         </div>
 
         <div class="feature-card">
@@ -298,8 +297,8 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
           </div>
           <h3>Python SDK + REST + Web UI</h3>
-          <p><code>pip install cortrix</code> is the Python client path, alongside HTTP APIs and a local dashboard for document management, search, and AI chat.</p>
-          <span class="feature-tag">Interface</span>
+          <p>The cited commit contains the declared <code>api/openapi.yaml</code> specification file. The Python SDK, local server, built-in Agent, and dashboard paths are present in source and remain under review.</p>
+          <span class="feature-tag">File identity + review</span>
         </div>
 
       </div>
@@ -309,21 +308,22 @@
   <!-- Quick Start -->
   <section class="section" id="quickstart">
     <div class="container">
-      <h2 class="section-title">Run the Local Path</h2>
-      <p class="section-sub">Start the server, verify readiness, then query the demo namespace through HTTP or the Python SDK.</p>
+      <h2 class="section-title">Run Cortrix Locally with Docker</h2>
+      <p class="section-sub">You need Git, Docker, Docker Compose, and curl. No <code>.env</code> file, LLM key, host-side model tools, manual model download, model conversion, or separate bootstrap step is required. The first start downloads about 1.17 GB of pinned model assets and can take several minutes; later starts reuse the cached volume.</p>
       <div class="quickstart-steps">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-content">
-            <h3>Start Cortrix</h3>
+            <h3>Clone and start Cortrix</h3>
             <div class="code-block">
               <div class="code-header">
                 <span>Terminal</span>
                 <button class="copy-btn" data-target="code-1" aria-label="Copy to clipboard">Copy</button>
               </div>
-              <pre id="code-1"><code>docker run -d -p 8420:8420 \
-  -v cortrix-data:/data \
-  cortrix/cortrix-demo:v1.0</code></pre>
+              <pre id="code-1"><code>git clone https://github.com/cortrix/cortrix.git
+cd cortrix
+CORTRIX_SOURCE_REVISION="$(git rev-parse HEAD)" \
+  docker compose -f deploy/docker-compose.yml up --build --wait</code></pre>
             </div>
           </div>
         </div>
@@ -336,39 +336,40 @@
                 <span>Terminal</span>
                 <button class="copy-btn" data-target="code-2" aria-label="Copy to clipboard">Copy</button>
               </div>
-              <pre id="code-2"><code>curl http://localhost:8420/api/v1/system/health/ready</code></pre>
+              <pre id="code-2"><code>curl -fsS http://127.0.0.1:8420/api/v1/system/health/ready</code></pre>
             </div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-content">
-            <h3>Semantic search</h3>
+            <h3>Run a reranked query</h3>
             <div class="code-block">
               <div class="code-header">
                 <span>Terminal</span>
                 <button class="copy-btn" data-target="code-3" aria-label="Copy to clipboard">Copy</button>
               </div>
-              <pre id="code-3"><code>curl -X POST http://localhost:8420/api/v1/query \
-  -H "Content-Type: application/json" \
-  -d '{"namespaces": ["demo"], "query": "What is Cortrix?", "top_k": 10}'</code></pre>
+              <pre id="code-3"><code>curl -fsS -H 'Content-Type: application/json' \
+  -d '{
+    "namespaces": ["demo"],
+    "query": "What does semantic storage keep close to the agents that need it?",
+    "top_k": 5,
+    "rerank": true
+  }' \
+  http://127.0.0.1:8420/api/v1/query</code></pre>
             </div>
           </div>
         </div>
       </div>
       <div class="quickstart-more">
-        <p>Or use the Python SDK:</p>
+        <p>This loopback-only path uses real BGE-M3 embedding and bge-reranker-v2-m3 reranking on CPU. It leaves external LLM roles and the built-in Agent disabled, publishes neither the metrics port nor the Agent port, and does not establish parser coverage, authentication, internet-facing deployment, benchmark quality, or production readiness. A successful query returns source-backed demo content with numeric <code>rerank_score</code> values.</p>
         <div class="code-block">
           <div class="code-header">
-            <span>Python</span>
+            <span>Terminal</span>
             <button class="copy-btn" data-target="code-sdk" aria-label="Copy to clipboard">Copy</button>
           </div>
-          <pre id="code-sdk"><code>pip install cortrix
-
-from cortrix import Cortrix
-
-client = Cortrix(base_url="http://localhost:8420")
-results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
+          <pre id="code-sdk"><code># Stop the service; add --volumes to remove cached models and data.
+docker compose -f deploy/docker-compose.yml down</code></pre>
         </div>
       </div>
     </div>
@@ -382,7 +383,7 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
       <div class="usecases-grid">
         <div class="usecase-card">
           <h3>Agent Workflow Storage</h3>
-          <p>Agent workflows need persistent semantic memory and inspectable source context. Cortrix gives builders a shared storage foundation to evaluate those public release paths.</p>
+          <p>Agent workflows need persistent semantic memory and inspectable source context. Cortrix gives builders a shared storage foundation for evaluating those capabilities.</p>
         </div>
         <div class="usecase-card">
           <h3>Reviewable Agent Context</h3>
@@ -403,7 +404,7 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
   <!-- Comparison -->
   <section class="section" id="comparison">
     <div class="container">
-      <h2 class="section-title">How Cortrix Compares</h2>
+      <h2 class="section-title">How Cortrix Fits</h2>
       <p class="section-sub">A scope-aware view of a shared semantic storage layer versus maintaining many glue-code paths.</p>
       <div class="table-wrapper">
         <table class="compare-table">
@@ -416,88 +417,88 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
           </thead>
           <tbody>
             <tr>
-              <td><a class="capability-link" href="/compare/#semantic-lifecycle">Document Ingestion</a></td>
-              <td><span class="scope-pill current">Current OSS</span> SPC pipeline foundation</td>
+              <td><span class="capability-link">Document Ingestion</span></td>
+              <td><span class="scope-pill current">Review required</span> parser and ingestion paths present in source</td>
               <td>Often handled through separate parser and chunker components</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#semantic-lifecycle">Embedding</a></td>
-              <td><span class="scope-pill current">Current OSS</span> local embedding path (bge-m3, ONNX)</td>
+              <td><span class="capability-link">Embedding</span></td>
+              <td><span class="scope-pill current">Review required</span> local embedding path present in source</td>
               <td>Often handled through an external model or service</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#hybrid-retrieval">Vector Search</a></td>
-              <td><span class="scope-pill current">Current OSS</span> P-HNSW in-process path</td>
+              <td><span class="capability-link">Vector Search</span></td>
+              <td><span class="scope-pill current">Review required</span> vector path present in source</td>
               <td>Often delegated to a separate vector database</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#hybrid-retrieval">Keyword Search</a></td>
-              <td><span class="scope-pill current">Current OSS</span> FTS5 + BM25 path</td>
+              <td><span class="capability-link">Keyword Search</span></td>
+              <td><span class="scope-pill current">Review required</span> keyword path present in source</td>
               <td>May require a separate search component</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#hybrid-retrieval">Hybrid Fusion</a></td>
-              <td><span class="scope-pill current">Current OSS</span> RRF fusion path</td>
+              <td><span class="capability-link">Hybrid Fusion</span></td>
+              <td><span class="scope-pill current">Review required</span> fusion path present in source</td>
               <td>Often implemented as custom orchestration code</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#hybrid-retrieval">Reranker</a></td>
-              <td><span class="scope-pill current">Current OSS</span> bge-reranker-v2-m3 path</td>
+              <td><span class="capability-link">Reranker</span></td>
+              <td><span class="scope-pill current">Review required</span> reranker path present in source</td>
               <td>May require an external service or custom step</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#hybrid-retrieval">Cross-Namespace Query</a></td>
-              <td><span class="scope-pill current">Current OSS</span> scatter-gather + unified ranking path</td>
+              <td><span class="capability-link">Cross-Namespace Query</span></td>
+              <td><span class="scope-pill current">Review required</span> logical cross-namespace query path</td>
               <td>Often handled in client-side orchestration</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#hybrid-retrieval">Advanced RAG</a></td>
-              <td><span class="scope-pill planned">Coming next</span> retrieval-quality patterns by published scope</td>
+              <td><span class="capability-link">Advanced RAG</span></td>
+              <td><span class="scope-pill planned">Future direction</span> no release commitment</td>
               <td>Often handled by framework plugins or custom pipelines</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#agent-memory">AI Memory</a></td>
-              <td><span class="scope-pill current">Current OSS</span> typed memory and extraction path</td>
+              <td><span class="capability-link">AI Memory</span></td>
+              <td><span class="scope-pill current">Mixed status</span> typed records present; MEM02 extraction Blocked</td>
               <td>Often handled as a separate memory service or custom store</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#traceability-governance">Source-Level Traceability</a></td>
-              <td><span class="scope-pill current">Current OSS</span> content-level citation and attribution context</td>
+              <td><span class="capability-link">Source-Level Traceability</span></td>
+              <td><span class="scope-pill current">Review required</span> source-context paths present in source</td>
               <td>Scope varies by stack and tracing implementation</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#traceability-governance">Agent Observability</a></td>
-              <td><span class="scope-pill current">Current OSS</span> session, trace, and feedback signals</td>
+              <td><span class="capability-link">Agent Observability</span></td>
+              <td><span class="scope-pill current">Review required</span> session and trace surfaces present</td>
               <td>Often requires separate instrumentation</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#traceability-governance">Retrieval Feedback Learning</a></td>
-              <td><span class="scope-pill planned">Roadmap</span> automatic learning from feedback signals</td>
+              <td><span class="capability-link">Retrieval Feedback Learning</span></td>
+              <td><span class="scope-pill planned">Future direction</span> automatic learning is not current</td>
               <td>Usually implemented as a custom feedback loop</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#deployment-and-database-paths">PostgreSQL Integration</a></td>
-              <td><span class="scope-pill current">Current OSS</span> pgCortrix extension path</td>
+              <td><span class="capability-link">PostgreSQL Integration</span></td>
+              <td><span class="scope-pill current">Review required</span> pgCortrix source path</td>
               <td>Often runs as a separate service</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#controlled-access">Workflow Connectors</a></td>
-              <td><span class="scope-pill current">Current OSS</span> MCP, REST, Python SDK, and framework adapter paths</td>
+              <td><span class="capability-link">Workflow Connectors</span></td>
+              <td><span class="scope-pill current">Mixed status</span> exact OpenAPI file present; interfaces under review</td>
               <td>Usually framework-specific</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#controlled-access">MCP Server</a></td>
-              <td><span class="scope-pill current">Current OSS</span> MCP server path</td>
+              <td><span class="capability-link">MCP Server</span></td>
+              <td><span class="scope-pill current">Review required</span> MCP server present in source</td>
               <td>Availability depends on the chosen stack</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#traceability-governance">Scope Boundary</a></td>
-              <td><span class="scope-pill current">Current OSS</span> Current OSS / Coming next / Roadmap labels</td>
+              <td><span class="capability-link">Scope Boundary</span></td>
+              <td><span class="scope-pill current">Evidence states</span> Verified / review required / Blocked / future</td>
               <td>Usually spread across separate docs</td>
             </tr>
             <tr>
-              <td><a class="capability-link" href="/compare/#deployment-and-database-paths">Deployment</a></td>
-              <td class="check">Docker / server / PG extension paths</td>
+              <td><span class="capability-link">Deployment</span></td>
+              <td class="check">Loopback-only Docker Quick Start; other deployment paths require review</td>
               <td>Often multiple services</td>
             </tr>
           </tbody>
@@ -509,8 +510,8 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
   <!-- Community / CTA -->
   <section class="section section-cta" id="community">
     <div class="container">
-      <h2 class="section-title">Join the Community</h2>
-      <p class="section-sub">Cortrix is open source and community-driven. We welcome feedback, docs fixes, implementation discussion, and reproducibility work from builders.</p>
+      <h2 class="section-title">Contribute and Follow Cortrix</h2>
+      <p class="section-sub">Use the published issue, contribution, security, and benchmark-challenge routes on the project page, and follow the official update channels.</p>
       <div class="cta-actions">
         <a href="https://github.com/cortrix/cortrix" class="btn btn-primary btn-lg social-link" target="_blank" rel="noopener">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
@@ -520,7 +521,7 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
         <a href="https://x.com/Cortrix_AI" class="btn btn-outline btn-lg social-link" target="_blank" rel="noopener">X</a>
       </div>
       <div class="cta-links">
-        <a href="/for-builders/">For Builders</a>
+        <a href="/community/">Project participation</a>
         <a href="/benchmark/">Benchmark Methodology</a>
         <a href="/docs/llms/">Agent-readable Docs</a>
       </div>
@@ -545,9 +546,8 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
           <h4>Product</h4>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/compare/">Compare</a></li>
+
             <li><a href="/for-builders/">For Builders</a></li>
-            <li><a href="/migration/">Migration</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -559,9 +559,9 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Community</h4>
+          <h4>Updates</h4>
           <ul>
-            <li><a href="/community/">Community page</a></li>
+            <li><a href="/community/">Project updates</a></li>
             <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
           </ul>
         </div>
@@ -569,7 +569,7 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
           <h4>Project</h4>
           <ul>
             <li><a href="/benchmark/">Benchmark</a></li>
-            <li><a href="/roadmap/">Roadmap</a></li>
+
             <li><a href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">Source code</a></li>
           </ul>
         </div>
@@ -584,7 +584,7 @@ results = client.search("demo", "What is Cortrix?", top_k=10)</code></pre>
       </div>
     </div>
     <div class="footer-bottom container">
-      <p>&copy; 2026 Cortrix Contributors. Released under the AGPL-3.0 License.</p>
+      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under AGPL-3.0-only.</p>
     </div>
   </footer>
 
