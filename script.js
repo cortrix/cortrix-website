@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Cortrix.ai - Script (v3 - Magma Orange VI)
+   cortrix.ai script
    ========================================================================== */
 
 (function () {
@@ -8,13 +8,32 @@
   // --- Mobile Nav Toggle ---
   const nav = document.getElementById('nav');
   const toggle = document.getElementById('nav-toggle');
-  if (toggle) {
+  if (toggle && nav) {
+    const links = document.getElementById('nav-links');
+    const syncMobileNavigationHeight = () => {
+      if (!links || !nav.classList.contains('open')) return;
+      nav.style.setProperty('--mobile-nav-links-height', `${links.getBoundingClientRect().height}px`);
+    };
+    const setNavigationOpen = (open, returnFocus = false) => {
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      if (open) syncMobileNavigationHeight();
+      else nav.style.removeProperty('--mobile-nav-links-height');
+      if (!open && returnFocus) toggle.focus();
+    };
+
     toggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
+      setNavigationOpen(!nav.classList.contains('open'));
     });
     document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => nav.classList.remove('open'));
+      link.addEventListener('click', () => setNavigationOpen(false));
     });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && nav.classList.contains('open')) {
+        setNavigationOpen(false, true);
+      }
+    });
+    window.addEventListener('resize', syncMobileNavigationHeight, { passive: true });
   }
 
   // --- Sticky Nav Background ---

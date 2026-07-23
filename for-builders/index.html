@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>For Builders - Cortrix</title>
-  <meta name="description" content="Cortrix for agent builders and developer teams evaluating a current open-source semantic layer for retrieval, memory, workflow context, and source-level traceability.">
+  <meta name="description" content="Cortrix for builders evaluating an active pre-release semantic layer through a local Docker Quick Start and explicit evidence states.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://cortrix.ai/for-builders/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/for-builders/">
   <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/for-builders/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="For Builders - Cortrix">
-  <meta property="og:description" content="Open-source agent-native semantic storage for builders evaluating a shared semantic layer across retrieval, memory, workflow context, and source-level traceability.">
+  <meta property="og:description" content="A local Docker evaluation path for builders exploring pre-release semantic storage.">
   <meta property="og:url" content="https://cortrix.ai/for-builders/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
@@ -20,10 +20,10 @@
   <meta property="og:image:alt" content="Cortrix - Agent-Native Semantic Storage">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="For Builders - Cortrix">
-  <meta name="twitter:description" content="Open-source agent-native semantic storage for builders evaluating a shared semantic layer across retrieval, memory, workflow context, and source-level traceability.">
+  <meta name="twitter:description" content="A local Docker evaluation path for builders exploring pre-release semantic storage.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"For Builders - Cortrix","url":"https://cortrix.ai/for-builders/","description":"Cortrix for agent builders and developer teams evaluating a current open-source semantic layer for retrieval, memory, workflow context, and source-level traceability."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"For Builders - Cortrix","url":"https://cortrix.ai/for-builders/","description":"Cortrix for builders evaluating an active pre-release semantic layer through a local Docker Quick Start and explicit evidence states."}</script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -36,17 +36,16 @@
       </a>
       <ul class="nav-links" id="nav-links">
         <li><a href="/#architecture">Architecture</a></li>
-        <li><a href="/compare/">Compare</a></li>
+
         <li><a href="/#quickstart">Quick Start</a></li>
         <li><a href="/for-builders/">For Builders</a></li>
-        <li><a href="/migration/">Migration</a></li>
         <li><a href="/benchmark/">Benchmark</a></li>
-        <li><a href="/roadmap/">Roadmap</a></li>
+
       </ul>
       <div class="nav-actions">
         <a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a>
       </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -54,27 +53,27 @@
   <header class="page-hero">
     <div class="container">
       <div class="page-kicker">For builders</div>
-      <h1>Start with one repository, one docs folder, or one internal agent workflow.</h1>
-      <p>Keep your database and agent framework. Use Cortrix to evaluate the paths that usually become glue code: ingestion scripts, memory stores, retrieval feedback, audit context, and workflow state.</p>
-      <div class="page-actions"><a href="/#quickstart" class="btn btn-primary btn-lg">Run locally</a><a href="/migration/" class="btn btn-outline btn-lg">See migration path</a></div>
+      <h1>Start with the local Docker path.</h1>
+      <p>Keep your database and agent framework. Clone Cortrix, start the loopback-only Docker profile, check readiness, and run a source-backed reranked query. No <code>.env</code> file or LLM provider key is required.</p>
+      <div class="page-actions"><a href="/#quickstart" class="btn btn-primary btn-lg">Open Quick Start</a><a href="https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/docs/QUICKSTART.md" class="btn btn-outline btn-lg" target="_blank" rel="noopener">Read Docker Quick Start</a></div>
     </div>
   </header>
   <main>
     <section class="section">
       <div class="container content-grid">
-        <article class="content-card"><span class="eyebrow-tag">Retrieval</span><h3>Stop rebuilding the same pipeline</h3><p>Use Cortrix to evaluate ingestion, semantic search, reranking, and agent-facing query paths in one open-source storage layer without treating it as a full replacement for every existing system.</p></article>
-        <article class="content-card"><span class="eyebrow-tag">Memory</span><h3>Keep useful context available</h3><p>Agent workflows need more than one-off retrieval calls. Cortrix gives builders a path to persist, search, inspect, and invalidate interaction memory.</p></article>
-        <article class="content-card"><span class="eyebrow-tag">Audit</span><h3>Trace decisions back to sources</h3><p>For debugging and review, Cortrix focuses on source-level provenance: which documents, chunks, and turns contributed to an answer.</p></article>
+        <article class="content-card"><span class="eyebrow-tag">Retrieval · review required</span><h3>Evaluate one retrieval path</h3><p>Vector, keyword, fusion, and reranking paths are present in source. Use the full-corpus evidence for retrieval quality and verify runtime behavior at the pinned commit.</p></article>
+        <article class="content-card"><span class="eyebrow-tag">Memory · mixed status</span><h3>Inspect records without assuming isolation</h3><p>Memory APIs and typed-record paths are present in source. Fact extraction and security isolation are not currently verified capabilities.</p></article>
+        <article class="content-card"><span class="eyebrow-tag">Source context · review required</span><h3>Inspect links back to sources</h3><p>Source-context and trace surfaces are present for evaluation. Treat end-to-end attribution and production readiness as review required.</p></article>
       </div>
     </section>
     <section class="section section-dark">
       <div class="container">
         <h2 class="section-title">Builder paths</h2>
-        <p class="section-sub">The first public routes are organized around the practical questions builders ask before adopting a new agent data layer.</p>
+        <p class="section-sub">The current routes separate a documented evaluation path from interfaces that remain under review or Blocked.</p>
         <div class="path-list">
-          <div class="path-item"><strong>New project</strong><p>Run Cortrix locally, query the demo namespace, then connect through the HTTP API, Python SDK, MCP server, or framework toolkit.</p></div>
-          <div class="path-item"><strong>Existing stack</strong><p>Use <code>/migration/</code> to evaluate where Cortrix can reduce glue code without forcing a replacement of your operational database or agent framework.</p></div>
-          <div class="path-item"><strong>Evaluation</strong><p>Use <code>/benchmark/</code> for retrieval-quality results, runner methodology, artifact format, and claim boundaries.</p></div>
+          <div class="path-item"><strong>Docker Quick Start</strong><p>Follow Quick Start to build the checked-out source, download pinned BGE-M3 embedding and bge-reranker-v2-m3 reranking assets, wait for source-backed readiness, and send a query with <code>rerank=true</code>. The path publishes only <code>127.0.0.1:8420</code>; external LLM roles and the built-in Agent remain disabled. It is not a production-readiness, parser-coverage, or retrieval-quality benchmark.</p></div>
+          <div class="path-item"><strong>Existing stack</strong><p>Keep operational systems in place and review the <a href="https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/docs/adoption/stack-fit.md" target="_blank" rel="noopener">commit-pinned stack-fit decision cards</a> for data movement, sync ownership, failure domains, security responsibility, and rollback boundaries. They do not claim universal compatibility or replacement.</p></div>
+          <div class="path-item"><strong>Retrieval evidence</strong><p>Open <code>/benchmark/</code> from the site navigation for commit-pinned full-corpus scores, latency, strict status, method, and retrieval-only boundaries.</p></div>
         </div>
       </div>
     </section>
@@ -96,9 +95,8 @@
           <h4>Product</h4>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/compare/">Compare</a></li>
+
             <li><a href="/for-builders/">For Builders</a></li>
-            <li><a href="/migration/">Migration</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -110,9 +108,9 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>Community</h4>
+          <h4>Updates</h4>
           <ul>
-            <li><a href="/community/">Community page</a></li>
+            <li><a href="/community/">Project updates</a></li>
             <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
           </ul>
         </div>
@@ -120,7 +118,7 @@
           <h4>Project</h4>
           <ul>
             <li><a href="/benchmark/">Benchmark</a></li>
-            <li><a href="/roadmap/">Roadmap</a></li>
+
             <li><a href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">Source code</a></li>
           </ul>
         </div>
@@ -135,7 +133,7 @@
       </div>
     </div>
     <div class="footer-bottom container">
-      <p>&copy; 2026 Cortrix Contributors. Released under the AGPL-3.0 License.</p>
+      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under AGPL-3.0-only.</p>
     </div>
   </footer>
   <script src="/script.js"></script>

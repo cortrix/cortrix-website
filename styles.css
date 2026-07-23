@@ -1,10 +1,10 @@
 /* ==========================================================================
-   Cortrix.ai - Styles (v3 - Magma Orange VI)
+   cortrix.ai styles
    ========================================================================== */
 
 /* --- Design Tokens --- */
 :root {
-  /* Colors - Magma Orange VI System */
+  /* Colors */
   --c-bg:         #0B0F19;
   --c-bg-alt:     #0E1221;
   --c-surface:    #131B2A;
@@ -547,7 +547,7 @@ code {
   color: var(--c-primary-h);
 }
 
-/* --- Compare Page + Local Homepage Variants --- */
+/* --- Compare Page + Homepage Variants --- */
 .compare-hero {
   padding: calc(var(--nav-h) + 84px) 0 86px;
   background:
@@ -1161,9 +1161,9 @@ code {
 }
 .benchmark-kpi-strip {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 34px;
+  margin-top: 30px;
 }
 .benchmark-kpi {
   min-height: 112px;
@@ -1176,8 +1176,9 @@ code {
   display: block;
   color: #fff;
   font-family: var(--font-mono);
-  font-size: clamp(26px, 3vw, 38px);
+  font-size: clamp(28px, 2vw, 34px);
   line-height: 1;
+  white-space: nowrap;
 }
 .benchmark-kpi span {
   display: block;
@@ -1628,7 +1629,9 @@ code {
     padding: 16px 24px; gap: 16px;
   }
   .nav.open .nav-actions {
-    position: absolute; top: calc(var(--nav-h) + 300px); left: 0; right: 0;
+    position: absolute;
+    top: calc(var(--nav-h) + var(--mobile-nav-links-height, 184px));
+    left: 0; right: 0;
     justify-content: center;
     flex-wrap: wrap;
     background: var(--c-bg);
@@ -1828,7 +1831,7 @@ code {
     grid-template-columns: 1fr;
   }
   .benchmark-kpi-strip {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
   }
   .benchmark-kpi {
@@ -1912,6 +1915,7 @@ code {
     margin-top: 24px;
   }
   .benchmark-kpi-strip {
+    grid-template-columns: 1fr;
     margin-top: 24px;
   }
   .assembly-title {
@@ -1949,7 +1953,7 @@ code {
   }
 }
 
-/* --- Compare Rich Page Goal 20260619 --- */
+/* --- Compare Rich Page --- */
 .capability-link {
   color: var(--c-text);
   font-weight: 800;
@@ -2166,7 +2170,7 @@ code {
 }
 
 
-/* --- Compare Mobile QA Fix 20260619 --- */
+/* --- Compare Responsive Layout --- */
 .compare-hero-rich,
 .compare-anchor-band,
 .compare-feature-section,
@@ -2208,7 +2212,7 @@ code {
   }
 }
 
-/* --- Compare Mobile Overflow Hardening 20260619 --- */
+/* --- Compare Mobile Overflow Handling --- */
 @media (max-width: 480px) {
   .compare-hero-grid,
   .compare-module,
@@ -2246,7 +2250,7 @@ code {
   }
 }
 
-/* --- Compare Page Width Guard 20260619 --- */
+/* --- Compare Page Width Guard --- */
 .compare-page {
   overflow-x: hidden;
 }
@@ -2279,7 +2283,7 @@ code {
   }
 }
 
-/* --- Compare Mobile Final Width Lock 20260619 --- */
+/* --- Compare Mobile Width --- */
 @media (max-width: 480px) {
   .compare-page,
   .compare-page main,
@@ -2314,7 +2318,7 @@ code {
   }
 }
 
-/* --- Compare Tablet Mobile Width Lock 20260619 --- */
+/* --- Compare Tablet and Mobile Width --- */
 @media (max-width: 900px) {
   .compare-page,
   .compare-page main,
@@ -2346,7 +2350,7 @@ code {
   }
 }
 
-/* --- Compare Mobile Container Correction 20260619 --- */
+/* --- Compare Mobile Container Sizing --- */
 @media (max-width: 480px) {
   .compare-page .container {
     box-sizing: border-box;

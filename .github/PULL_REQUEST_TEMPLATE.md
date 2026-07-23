@@ -14,7 +14,7 @@
 
 ## Safety checklist
 
-- [ ] This PR does not include private GTM, Product Facts, strategy, credentials, tokens, or private URLs.
+- [ ] This PR does not include confidential planning materials, credentials, tokens, or private URLs.
 - [ ] This PR does not add advertising, spam, promotional links, phishing links, or misleading third-party endorsement.
 - [ ] This PR does not make unapproved product, benchmark, pricing, enterprise, roadmap, or availability claims.
 - [ ] This PR does not grant or change any license, security, or brand usage policy.
