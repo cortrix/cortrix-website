@@ -6,7 +6,7 @@ Website: https://cortrix.ai/
 Primary language: English
 Document version: 2026-07-22
 Generated from public website content and commit-pinned source evidence
-Current Core source commit: https://github.com/cortrix/cortrix/tree/533b4533f4cb920c001defb40cc9cde4f5281320
+Current Core release tag: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.1
 Benchmark Core evaluation snapshot: https://github.com/cortrix/cortrix/tree/4a6299ca86c7bec21ed7b8989a729a198fe5a42a
 Benchmark public runner snapshot: https://github.com/cortrix/cortrix-benchmarks/tree/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/runner
 Benchmark source-equivalence record: https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/provenance/source-equivalence.json
@@ -27,10 +27,10 @@ Canonical evidence states: Verified, Present in source - review required, Blocke
 - Project updates: https://cortrix.ai/community/
 - Human-readable llms.txt guide: https://cortrix.ai/docs/llms/
 - Machine-readable scope: https://cortrix.ai/llms.txt
-- Current Core source: https://github.com/cortrix/cortrix/tree/533b4533f4cb920c001defb40cc9cde4f5281320
-- Docker Quick Start: https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/docs/QUICKSTART.md
-- Maintainer source-build evidence workflow: https://github.com/cortrix/cortrix/tree/533b4533f4cb920c001defb40cc9cde4f5281320/examples/first-value-supportops
-- Stack-fit and adoption boundaries: https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/docs/adoption/stack-fit.md
+- Current Core source: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.1
+- Docker Quick Start: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/QUICKSTART.md
+- Maintainer source-build evidence workflow: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.1/examples/first-value-supportops
+- Stack-fit and adoption boundaries: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/adoption/stack-fit.md
 
 ## Approved Public Positioning
 
@@ -89,12 +89,12 @@ Canonical evidence states: Verified, Present in source - review required, Blocke
 ## Project Participation
 
 - Core issues: https://github.com/cortrix/cortrix/issues
-- Core contribution guide: https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/CONTRIBUTING.md
-- Core security policy: https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/SECURITY.md
-- Core Code of Conduct: https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/CODE_OF_CONDUCT.md
-- Core maintainers and acknowledgment targets: https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/MAINTAINERS.md
-- Core DCO policy: https://github.com/cortrix/cortrix/blob/533b4533f4cb920c001defb40cc9cde4f5281320/DCO
-- Published benchmark challenges: https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/CONTRIBUTING.md#challenge-a-published-result
+- Core contribution guide: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/CONTRIBUTING.md
+- Core security policy: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/SECURITY.md
+- Core Code of Conduct: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/CODE_OF_CONDUCT.md
+- Core maintainers and acknowledgment targets: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/MAINTAINERS.md
+- Core DCO policy: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/DCO
+- Published benchmark challenges: https://github.com/cortrix/cortrix-benchmarks/blob/main/CONTRIBUTING.md#challenge-a-published-result
 - Cortrix does not require a CLA. New commits require a DCO 1.1 Signed-off-by line; follow the applicable contribution guide before opening a pull request.
 
 ## Language Boundary
