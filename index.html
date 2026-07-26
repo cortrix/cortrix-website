@@ -326,8 +326,50 @@
   <!-- Quick Start -->
   <section class="section" id="quickstart">
     <div class="container">
-      <h2 class="section-title">Run Cortrix Locally with Docker</h2>
+      <h2 class="section-title">Start Cortrix locally</h2>
       <p class="section-sub">You need Git, Docker, Docker Compose, and curl. No <code>.env</code> file, LLM key, host-side model tools, manual model download, model conversion, or separate bootstrap step is required. The first start downloads about 1.17 GB of pinned model assets and can take several minutes; later starts reuse the cached volume.</p>
+      <div class="agent-quickstart-card">
+        <div class="agent-quickstart-copy">
+          <span class="eyebrow-tag">Agent-assisted local setup</span>
+          <h3>Install Cortrix with your AI Agent</h3>
+          <p>Copy one version-pinned setup brief. Your agent checks the local prerequisites, starts the loopback-only Docker stack, runs a real reranked query, and returns a verification report.</p>
+          <div class="agent-quickstart-badges" aria-label="Agent-assisted setup boundaries">
+            <span>Local only</span>
+            <span>No LLM key required</span>
+            <span>Real embedding + reranking</span>
+            <span>Docker required</span>
+          </div>
+          <div class="agent-quickstart-actions">
+            <button class="btn btn-primary copy-btn" data-target="agent-setup-prompt" aria-label="Copy Agent Setup Prompt">Copy Agent Setup Prompt</button>
+            <a class="btn btn-outline" href="/agent-quickstart.txt">Inspect the Setup Contract</a>
+          </div>
+          <p class="agent-quickstart-boundary">For AI Agents with local filesystem and terminal access. The contract does not authorize <code>sudo</code>, system dependency installation, non-loopback exposure, secrets, destructive cleanup, or production deployment.</p>
+        </div>
+        <details class="agent-prompt-details">
+          <summary>Read the full prompt before copying</summary>
+          <div class="code-block">
+            <div class="code-header">
+              <span>Agent task</span>
+              <button class="copy-btn" data-target="agent-setup-prompt" aria-label="Copy Agent Setup Prompt">Copy</button>
+            </div>
+            <pre id="agent-setup-prompt"><code>Install Cortrix locally under the cortrix-agent-quickstart/v1 contract at:
+https://cortrix.ai/agent-quickstart.txt
+
+Use only https://github.com/cortrix/cortrix.git at release v1.0.0-rc.1 and expected commit e159974f936bd987d5718195d54cd70ff3acc2e5.
+
+Work only in a new local directory. Before changing state, verify Git, Docker, Docker Compose, curl, available disk, required network access, and that 127.0.0.1:8420 is available. Stop and report if preflight fails or the target directory already exists.
+
+Do not use sudo, install system dependencies, request secrets, change firewall or network settings, expose a non-loopback port, disable ONNX, embedding, reranking, readiness or integrity checks, or delete existing Docker resources.
+
+Follow the contract's exact clone, identity, Compose, readiness and reranked-query steps. Leave the verified service running. Return the required PASS or FAIL report, and mark PASS only when every contract assertion succeeds.</code></pre>
+          </div>
+        </details>
+      </div>
+      <div class="quickstart-manual-heading">
+        <span class="eyebrow-tag">Manual path</span>
+        <h3>Run it yourself</h3>
+        <p>Use the same loopback-only Docker path directly in your terminal.</p>
+      </div>
       <div class="quickstart-steps">
         <div class="step">
           <div class="step-num">1</div>

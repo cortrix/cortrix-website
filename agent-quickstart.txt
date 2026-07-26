@@ -1,0 +1,192 @@
+# Cortrix Agent-assisted local setup
+
+Contract: cortrix-agent-quickstart/v1
+Repository: https://github.com/cortrix/cortrix.git
+Release: v1.0.0-rc.1
+Expected commit: e159974f936bd987d5718195d54cd70ff3acc2e5
+API bind: 127.0.0.1:8420
+
+This contract is for a terminal-capable AI Agent with access to a local
+filesystem, Git, Docker, Docker Compose, curl, and the public internet.
+
+The AI Agent can be a coding assistant or a broader agent runtime, such as
+OpenClaw or Hermes. Eligibility is determined by the capabilities above, not
+the product name. These examples do not claim that every version or
+configuration has been validated.
+
+It installs the current Cortrix release candidate through the verified
+loopback-only Docker first-value path. It is not an internet-facing, cloud,
+security, or production deployment procedure.
+
+## Task
+
+Install Cortrix locally under the cortrix-agent-quickstart/v1 contract.
+
+Use only this repository and installation target:
+
+- Repository: https://github.com/cortrix/cortrix.git
+- Release: v1.0.0-rc.1
+- Expected commit: e159974f936bd987d5718195d54cd70ff3acc2e5
+
+Work in a new local directory. Do not modify, reset, delete, or reuse an
+existing Cortrix checkout.
+
+Before changing local state:
+
+1. Verify that Git, Docker, Docker Compose, and curl are available.
+2. Report available disk space.
+3. Confirm that the required public network access is available.
+4. Check that 127.0.0.1:8420 is not already reserved by another service.
+5. Confirm that the target cortrix directory does not already exist.
+
+If a prerequisite is missing or the target directory already exists, stop and
+report the blocker. Do not use sudo or install system-level dependencies
+without separate human approval.
+
+Clone the exact release, verify the origin URL, verify the exact tag, and verify
+that HEAD equals the expected commit. Start only the documented loopback Docker
+Compose path with CORTRIX_SOURCE_REVISION set to the checked-out commit.
+
+Do not:
+
+- request, read, store, or invent any LLM, cloud, GitHub, or provider key;
+- change firewall, DNS, proxy, VPN, or system security settings;
+- expose Cortrix on 0.0.0.0 or any non-loopback interface;
+- disable ONNX, embedding, reranking, readiness, source checks, or model
+  integrity checks;
+- modify or delete existing Docker images, containers, caches, or volumes;
+- run destructive cleanup without separate human approval;
+- describe this run as production deployment or production readiness.
+
+Wait until Docker Compose reports the service ready. Call the readiness
+endpoint, then run the documented demo query with rerank=true. Verify that the
+response contains source-backed quickstart-demo.txt content and numeric
+rerank_score values.
+
+Leave the verified service running. Do not delete volumes. Finish with the
+required report schema and mark the overall result PASS only when every required
+assertion passes.
+
+## Required execution path
+
+Run these commands only after preflight passes and from a human-approved parent
+directory where cortrix does not already exist:
+
+```bash
+git clone --branch v1.0.0-rc.1 --depth 1 \
+  https://github.com/cortrix/cortrix.git cortrix
+cd cortrix
+test "$(git remote get-url origin)" = "https://github.com/cortrix/cortrix.git"
+test "$(git describe --tags --exact-match)" = "v1.0.0-rc.1"
+test "$(git rev-parse HEAD)" = "e159974f936bd987d5718195d54cd70ff3acc2e5"
+CORTRIX_SOURCE_REVISION="$(git rev-parse HEAD)" \
+  docker compose -f deploy/docker-compose.yml up --build --wait
+```
+
+The first start downloads about 1.17 GB of pinned model assets and can take
+several minutes. No .env file, provider key, host-side model tooling, manual
+model download, model conversion, or separate bootstrap command is required.
+
+## Required verification
+
+Readiness:
+
+```bash
+curl -fsS http://127.0.0.1:8420/api/v1/system/health/ready
+```
+
+Source-backed reranked query:
+
+```bash
+curl -fsS -H 'Content-Type: application/json' \
+  -d '{
+    "namespaces": ["demo"],
+    "query": "What does semantic storage keep close to the agents that need it?",
+    "top_k": 5,
+    "rerank": true
+  }' \
+  http://127.0.0.1:8420/api/v1/query
+```
+
+The result must contain content from quickstart-demo.txt and numeric
+rerank_score values. A successful process exit without those assertions is a
+failed contract.
+
+## Required final report
+
+```text
+CORTRIX_AGENT_QUICKSTART=PASS|FAIL
+contract=cortrix-agent-quickstart/v1
+repository=https://github.com/cortrix/cortrix.git
+release=v1.0.0-rc.1
+commit=e159974f936bd987d5718195d54cd70ff3acc2e5
+installation_directory=<absolute path>
+platform=<os and architecture>
+docker_version=<observed version>
+docker_compose_version=<observed version>
+available_disk=<observed value>
+bind_address=127.0.0.1:8420
+readiness=PASS|FAIL
+source_content=PASS|FAIL
+numeric_rerank_score=PASS|FAIL
+external_llm_enabled=false
+service_state=RUNNING|NOT_RUNNING
+created_resources=<summary>
+stop_command=docker compose -f deploy/docker-compose.yml down
+destructive_cleanup_command=docker compose -f deploy/docker-compose.yml down --volumes
+warnings=<none or exact warnings>
+blocker=<none or exact blocker>
+```
+
+PASS requires the exact repository, release and commit; a loopback-only bind;
+readiness; source content; numeric reranking scores; disabled external LLM
+roles; and a running service.
+
+## Failure behavior
+
+Stop and return FAIL when:
+
+- a prerequisite is missing;
+- the target directory already exists;
+- the expected tag or commit does not match;
+- the API port is occupied;
+- Docker build, download, integrity, startup, or readiness fails;
+- the query fails or lacks the required source content;
+- rerank_score is absent or non-numeric;
+- the service binds beyond loopback;
+- completing the task would require a prohibited action.
+
+Preserve the original error and name the next human decision. Do not silently
+switch to a different build profile or weaker verification.
+
+## Human-controlled stop and cleanup
+
+Stop the service without deleting the cached models or local data:
+
+```bash
+docker compose -f deploy/docker-compose.yml down
+```
+
+Destructive cleanup, only when the human explicitly asks:
+
+```bash
+docker compose -f deploy/docker-compose.yml down --volumes
+```
+
+## Public documentation
+
+Core Agent-assisted setup guide:
+https://github.com/cortrix/cortrix/blob/main/docs/AGENT_QUICKSTART.md
+
+Docker Quick Start:
+https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/QUICKSTART.md
+
+Compatibility and known status:
+https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/compatibility.md
+
+Agent access:
+https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/agent-access.md
+
+Agent-assisted installation does not verify every HTTP API, parser, built-in
+Agent, MCP, SDK, authentication, tenant, security, benchmark, or production
+surface.
