@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cortrix - Agent-Native Semantic Storage Engine</title>
+  <title>Cortrix — Agent-Native Semantic Storage for AI Agents</title>
   <meta name="description" content="Evaluate Cortrix, an active pre-release local-first semantic storage project for retrieval, reviewable records, and source traceability.">
   <meta name="keywords" content="Cortrix, agent-native semantic storage, AI agent data, retrieval, memory, traceability, open source, AGPL, MCP">
   <meta name="author" content="Cortrix">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://cortrix.ai/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/">
+  <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Cortrix - Agent-Native Semantic Storage Engine">
+  <meta property="og:title" content="Cortrix — Agent-Native Semantic Storage for AI Agents">
   <meta property="og:description" content="Evaluate a local-first semantic storage path for retrieval, reviewable records, and source traceability.">
   <meta property="og:url" content="https://cortrix.ai/">
   <meta property="og:site_name" content="Cortrix">
@@ -24,7 +25,7 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Cortrix - Agent-Native Semantic Storage Engine">
+  <meta name="twitter:title" content="Cortrix — Agent-Native Semantic Storage for AI Agents">
   <meta name="twitter:description" content="Active pre-release semantic storage with a local Docker Quick Start.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
@@ -53,29 +54,46 @@
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner container">
-      <a href="/" class="nav-logo" aria-label="Cortrix Home">
-        <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
-        <span class="logo-text">Cortrix</span>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 8 stars and 1 fork"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">8</span>
+        </span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon github-fork-icon">⑂</span>
+          <span id="github-fork-count">1</span>
+        </span>
       </a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="/#architecture">Architecture</a></li>
-
-        <li><a href="/#quickstart">Quick Start</a></li>
-        <li><a href="/for-builders/">For Builders</a></li>
-        <li><a href="/benchmark/">Benchmark</a></li>
-
-      </ul>
-      <div class="nav-actions">
-        <a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a>
-      </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
 
   <!-- Hero -->
   <header class="hero" id="hero">

@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Builders - Cortrix</title>
+  <title>Docker Quick Start for AI Agent Builders — Cortrix</title>
   <meta name="description" content="Cortrix for builders evaluating an active pre-release semantic layer through a local Docker Quick Start and explicit evidence states.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://cortrix.ai/for-builders/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/for-builders/">
   <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/for-builders/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="For Builders - Cortrix">
+  <meta property="og:title" content="Docker Quick Start for AI Agent Builders — Cortrix">
   <meta property="og:description" content="A local Docker evaluation path for builders exploring pre-release semantic storage.">
   <meta property="og:url" content="https://cortrix.ai/for-builders/">
   <meta property="og:site_name" content="Cortrix">
@@ -19,7 +19,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix - Agent-Native Semantic Storage">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="For Builders - Cortrix">
+  <meta name="twitter:title" content="Docker Quick Start for AI Agent Builders — Cortrix">
   <meta name="twitter:description" content="A local Docker evaluation path for builders exploring pre-release semantic storage.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
@@ -28,32 +28,50 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <nav class="nav" id="nav">
-    <div class="nav-inner container">
-      <a href="/" class="nav-logo" aria-label="Cortrix Home">
-        <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
-        <span class="logo-text">Cortrix</span>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 8 stars and 1 fork"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">8</span>
+        </span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon github-fork-icon">⑂</span>
+          <span id="github-fork-count">1</span>
+        </span>
       </a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="/#architecture">Architecture</a></li>
-
-        <li><a href="/#quickstart">Quick Start</a></li>
-        <li><a href="/for-builders/">For Builders</a></li>
-        <li><a href="/benchmark/">Benchmark</a></li>
-
-      </ul>
-      <div class="nav-actions">
-        <a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a>
-      </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
   <header class="page-hero">
     <div class="container">
       <div class="page-kicker">For builders</div>
-      <h1>Start with the local Docker path.</h1>
+      <h1>Start locally with Docker.</h1>
       <p>Keep your database and agent framework. Clone Cortrix, start the loopback-only Docker profile, check readiness, and run a source-backed reranked query. No <code>.env</code> file or LLM provider key is required.</p>
       <div class="page-actions"><a href="/#quickstart" class="btn btn-primary btn-lg">Open Quick Start</a><a href="https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/QUICKSTART.md" class="btn btn-outline btn-lg" target="_blank" rel="noopener">Read Docker Quick Start</a></div>
     </div>

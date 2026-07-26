@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Benchmark - Cortrix</title>
+  <title>BEIR Retrieval Benchmark — Cortrix</title>
   <meta name="description" content="Commit-pinned full-corpus retrieval results for Cortrix Full Stack and Embedding + Reranking across SciFact, FiQA, and NFCorpus, with latency and strict-status boundaries.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://cortrix.ai/benchmark/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/benchmark/">
   <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/benchmark/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Benchmark - Cortrix">
+  <meta property="og:title" content="BEIR Retrieval Benchmark — Cortrix">
   <meta property="og:description" content="Three full-corpus BEIR datasets, two Cortrix profiles, commit-pinned retrieval scores, latency, and strict-status boundaries.">
   <meta property="og:url" content="https://cortrix.ai/benchmark/">
   <meta property="og:site_name" content="Cortrix">
@@ -19,7 +19,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix benchmark">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Benchmark - Cortrix">
+  <meta name="twitter:title" content="BEIR Retrieval Benchmark — Cortrix">
   <meta name="twitter:description" content="Commit-pinned retrieval quality, latency, and strict status across three complete BEIR corpora.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix benchmark">
@@ -28,28 +28,46 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <nav class="nav" id="nav">
-    <div class="nav-inner container">
-      <a href="/" class="nav-logo" aria-label="Cortrix Home">
-        <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
-        <span class="logo-text">Cortrix</span>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 8 stars and 1 fork"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">8</span>
+        </span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon github-fork-icon">⑂</span>
+          <span id="github-fork-count">1</span>
+        </span>
       </a>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="/#architecture">Architecture</a></li>
-
-        <li><a href="/#quickstart">Quick Start</a></li>
-        <li><a href="/for-builders/">For Builders</a></li>
-        <li><a href="/benchmark/">Benchmark</a></li>
-
-      </ul>
-      <div class="nav-actions">
-        <a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a>
-      </div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-        <span></span><span></span><span></span>
-      </button>
     </div>
-  </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
 
   <header class="benchmark-page-hero">
     <div class="container benchmark-hero-grid">
