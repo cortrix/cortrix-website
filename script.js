@@ -121,19 +121,41 @@
   }
 
   // --- Copy Buttons ---
+  const copyText = text => {
+    if (navigator.clipboard?.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    return new Promise((resolve, reject) => {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      const copied = document.execCommand('copy');
+      textarea.remove();
+      if (copied) resolve();
+      else reject(new Error('Clipboard copy failed'));
+    });
+  };
+
   document.querySelectorAll('.copy-btn').forEach(btn => {
+    const originalLabel = btn.textContent;
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-target');
       const code = document.getElementById(targetId);
       if (!code) return;
 
       const text = code.textContent;
-      navigator.clipboard.writeText(text).then(() => {
+      copyText(text).then(() => {
         btn.textContent = 'Copied!';
-        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+        setTimeout(() => { btn.textContent = originalLabel; }, 2000);
       }).catch(() => {
         btn.textContent = 'Failed';
-        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+        setTimeout(() => { btn.textContent = originalLabel; }, 2000);
       });
     });
   });
