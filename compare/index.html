@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How Cortrix Fits - Cortrix</title>
   <meta name="description" content="How Cortrix fits alongside databases, retrieval systems, memory layers, and agent frameworks as an agent-native semantic storage layer.">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://cortrix.ai/compare/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/compare/">
   <meta property="og:type" content="website">
@@ -27,14 +27,46 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="compare-page">
-  <nav class="nav" id="nav">
-    <div class="nav-inner container">
-      <a href="/" class="nav-logo" aria-label="Cortrix Home"><img src="/assets/favicon.svg" alt="" class="nav-logo-icon"><span class="logo-text">Cortrix</span></a>
-      <ul class="nav-links" id="nav-links"><li><a href="/#architecture">Architecture</a></li><li><a href="/#quickstart">Quick Start</a></li><li><a href="/for-builders/">For Builders</a></li><li><a href="/benchmark/">Benchmark</a></li></ul>
-      <div class="nav-actions"><a href="https://github.com/cortrix/cortrix" class="btn btn-primary social-link" target="_blank" rel="noopener">Star on GitHub</a></div>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links"><span></span><span></span><span></span></button>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 8 stars and 1 fork"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">8</span>
+        </span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon github-fork-icon">⑂</span>
+          <span id="github-fork-count">1</span>
+        </span>
+      </a>
     </div>
-  </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
   <header class="compare-hero compare-hero-rich">
     <div class="container compare-hero-grid">
       <div class="compare-hero-copy"><div class="page-kicker">Semantic storage concept in your stack</div><h1>How Cortrix Fits</h1><p>Cortrix does not replace your database or agent framework. This is an evidence-scoped fit model, not a named-product compatibility or superiority matrix; check the pinned status before adopting an interface.</p><div class="compare-actions"><a href="/#quickstart" class="btn btn-primary btn-lg">Open Quick Start</a><a href="#semantic-lifecycle" class="btn btn-outline btn-lg">Explore the fit model</a></div></div>

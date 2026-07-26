@@ -17,4 +17,27 @@ Cortrix product roadmap, security reports, brand usage, and unapproved product c
 
 ## Local preview
 
-Open `index.html` in a browser, or serve this directory with any static file server.
+Run the shared-component renderer, then open `index.html` in a browser or serve this directory with any static file server:
+
+```bash
+node scripts/render-static-components.mjs
+python3 -m http.server 4190 --bind 127.0.0.1
+```
+
+## Shared static header
+
+The canonical site header is maintained in `components/site-header.html`. The renderer writes that template into every `index.html` between the `include:site-header` markers. The generated pages retain complete static navigation markup so search engines, AI crawlers, accessibility tools, and clients without JavaScript can read the same header.
+
+Run the renderer after changing the template:
+
+```bash
+node scripts/render-static-components.mjs
+```
+
+Verify that every page is synchronized:
+
+```bash
+node scripts/render-static-components.mjs --check
+```
+
+Vercel runs the renderer during the build and serves the repository root as the static output.

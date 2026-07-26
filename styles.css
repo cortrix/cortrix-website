@@ -159,6 +159,31 @@ code {
 }
 .nav-links a:hover { color: var(--c-text); }
 .nav-actions { display: flex; align-items: center; gap: 12px; }
+.github-repo-stats {
+  gap: 9px;
+  padding-right: 10px;
+}
+.github-repo-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 38px;
+  padding: 3px 7px;
+  border: 1px solid rgba(255, 255, 255, .28);
+  border-radius: 6px;
+  background: rgba(11, 15, 25, .18);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.github-repo-stat-icon {
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+}
+.github-fork-icon {
+  font-size: 14px;
+  transform: rotate(90deg);
+}
 .lang-switch {
   display: inline-flex;
   align-items: center;
