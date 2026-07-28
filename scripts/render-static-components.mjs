@@ -2,6 +2,8 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { validateGoogleSiteVerificationFile } from './google-site-verification.mjs';
+
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(scriptDirectory, '..');
 const headerTemplatePath = path.join(projectRoot, 'components', 'site-header.html');
@@ -53,9 +55,13 @@ function renderHeader(page, headerTemplate) {
 const headerTemplate = (await readFile(headerTemplatePath, 'utf8')).trim();
 const pageFiles = await findPageFiles(projectRoot);
 const stalePages = [];
+let sitePageCount = 0;
 
 for (const pageFile of pageFiles) {
   const page = await readFile(pageFile, 'utf8');
+  if (validateGoogleSiteVerificationFile(pageFile, page, projectRoot)) continue;
+
+  sitePageCount += 1;
   let renderedPage;
 
   try {
@@ -77,7 +83,7 @@ if (checkOnly && stalePages.length > 0) {
   console.error(`Site header is stale in:\n${stalePages.map(file => `- ${file}`).join('\n')}`);
   process.exitCode = 1;
 } else if (checkOnly) {
-  console.log(`Site header is synchronized across ${pageFiles.length} page(s).`);
+  console.log(`Site header is synchronized across ${sitePageCount} page(s).`);
 } else {
-  console.log(`Rendered the shared site header across ${pageFiles.length} page(s).`);
+  console.log(`Rendered the shared site header across ${sitePageCount} page(s).`);
 }
