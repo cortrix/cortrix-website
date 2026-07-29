@@ -49,8 +49,7 @@
   // --- GitHub Repository Stats ---
   const githubRepoStats = document.querySelector('[data-github-repo-stats]');
   const githubStarCount = document.getElementById('github-star-count');
-  const githubForkCount = document.getElementById('github-fork-count');
-  if (githubRepoStats && githubStarCount && githubForkCount) {
+  if (githubRepoStats && githubStarCount) {
     const cacheKey = 'cortrix-github-repo-stats';
     const cacheMaxAge = 15 * 60 * 1000;
 
@@ -59,20 +58,16 @@
       maximumFractionDigits: 1,
     }).format(count);
 
-    const renderRepoStats = (stars, forks) => {
+    const renderRepoStats = stars => {
       if (!Number.isInteger(stars) || stars < 0) return;
-      if (!Number.isInteger(forks) || forks < 0) return;
 
       const exactStars = new Intl.NumberFormat('en-US').format(stars);
-      const exactForks = new Intl.NumberFormat('en-US').format(forks);
       const starLabel = stars === 1 ? 'star' : 'stars';
-      const forkLabel = forks === 1 ? 'fork' : 'forks';
 
       githubStarCount.textContent = formatRepoCount(stars);
-      githubForkCount.textContent = formatRepoCount(forks);
       githubRepoStats.setAttribute(
         'aria-label',
-        `Cortrix on GitHub, ${exactStars} ${starLabel} and ${exactForks} ${forkLabel}`,
+        `Cortrix on GitHub, ${exactStars} ${starLabel}`,
       );
     };
 
@@ -83,8 +78,8 @@
       cachedStats = null;
     }
 
-    if (Number.isInteger(cachedStats?.stars) && Number.isInteger(cachedStats?.forks)) {
-      renderRepoStats(cachedStats.stars, cachedStats.forks);
+    if (Number.isInteger(cachedStats?.stars)) {
+      renderRepoStats(cachedStats.stars);
     }
 
     const cacheIsFresh = cachedStats
@@ -101,13 +96,11 @@
         })
         .then(repo => {
           if (!Number.isInteger(repo.stargazers_count)) return;
-          if (!Number.isInteger(repo.forks_count)) return;
 
-          renderRepoStats(repo.stargazers_count, repo.forks_count);
+          renderRepoStats(repo.stargazers_count);
           try {
             localStorage.setItem(cacheKey, JSON.stringify({
               stars: repo.stargazers_count,
-              forks: repo.forks_count,
               updatedAt: Date.now(),
             }));
           } catch {

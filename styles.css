@@ -180,10 +180,6 @@ code {
   font-size: 11px;
   line-height: 1;
 }
-.github-fork-icon {
-  font-size: 14px;
-  transform: rotate(90deg);
-}
 .lang-switch {
   display: inline-flex;
   align-items: center;
