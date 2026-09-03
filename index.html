@@ -41,7 +41,7 @@
     "operatingSystem": "Linux, macOS",
     "description": "Active pre-release local-first semantic storage for retrieval, reviewable records, and source traceability.",
     "url": "https://cortrix.ai",
-    "license": "https://spdx.org/licenses/AGPL-3.0-only.html",
+    "license": "https://spdx.org/licenses/Apache-2.0.html",
     "author": {
       "@type": "Organization",
       "name": "Cortrix",
@@ -74,14 +74,12 @@
         class="btn btn-primary social-link github-repo-stats"
         target="_blank"
         rel="noopener"
-        data-github-repo-stats
-        data-github-api="https://api.github.com/repos/cortrix/cortrix"
-        aria-label="Cortrix on GitHub, 8 stars"
+        aria-label="Cortrix on GitHub — star the repository"
       >
         <span>GitHub</span>
         <span class="github-repo-stat" aria-hidden="true">
           <span class="github-repo-stat-icon">★</span>
-          <span id="github-star-count">8</span>
+          <span>Star</span>
         </span>
       </a>
     </div>
@@ -106,7 +104,7 @@
           <p class="hero-sub">Evaluate a local-first semantic context layer for retrieval, reviewable records, and source traceability. Cortrix is active pre-release; interface and feature maturity is reported separately.</p>
           <div class="hero-badges" aria-label="Project status">
             <span class="hero-badge">Open Source</span>
-            <span class="hero-badge">AGPL-3.0-only</span>
+            <span class="hero-badge">Apache-2.0</span>
             <span class="hero-badge">Active Pre-release</span>
           </div>
           <div class="hero-actions">
@@ -352,7 +350,7 @@
             <pre id="agent-setup-prompt"><code>Install Cortrix locally under the cortrix-agent-quickstart/v1 contract at:
 https://cortrix.ai/agent-quickstart.txt
 
-Use only https://github.com/cortrix/cortrix.git at release v1.0.0-rc.1 and expected commit e159974f936bd987d5718195d54cd70ff3acc2e5.
+Use only https://github.com/cortrix/cortrix.git at release v1.0.0-rc.2 and expected commit __CORE_RC2_COMMIT__.
 
 Work only in a new local directory. Before changing state, verify Git, Docker, Docker Compose, curl, available disk, required network access, and that 127.0.0.1:8420 is available. Stop and report if preflight fails or the target directory already exists.
 
@@ -641,7 +639,7 @@ docker compose -f deploy/docker-compose.yml down</code></pre>
       </div>
     </div>
     <div class="footer-bottom container">
-      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under AGPL-3.0-only.</p>
+      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under Apache-2.0.</p>
     </div>
   </footer>
 

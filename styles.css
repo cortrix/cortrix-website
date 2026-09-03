@@ -1161,6 +1161,9 @@ code {
   color: var(--c-accent); font-weight: 500;
 }
 .compare-table tbody tr:hover { background: rgba(255, 100, 5, .04); }
+.benchmark-absolute-table td:nth-child(1) { color: var(--c-text); font-weight: 700; }
+.benchmark-absolute-table td:nth-child(4),
+.benchmark-absolute-table td:nth-child(5) { color: var(--c-accent); font-family: var(--font-mono); font-weight: 700; }
 @media (max-width: 640px) {
   .table-wrapper {
     overflow-x: visible;
@@ -1207,6 +1210,11 @@ code {
   .compare-table td:nth-child(1)::before { content: "Capability"; }
   .compare-table td:nth-child(2)::before { content: "Cortrix"; color: var(--c-accent); }
   .compare-table td:nth-child(3)::before { content: "Typical Glue-Code Stack"; }
+  .benchmark-absolute-table td:nth-child(1)::before { content: "Corpus"; }
+  .benchmark-absolute-table td:nth-child(2)::before { content: "Measured arm"; color: var(--c-text); }
+  .benchmark-absolute-table td:nth-child(3)::before { content: "Queries"; }
+  .benchmark-absolute-table td:nth-child(4)::before { content: "nDCG@10"; }
+  .benchmark-absolute-table td:nth-child(5)::before { content: "Recall@10"; }
 }
 .scope-pill {
   display: inline-flex;
@@ -2068,7 +2076,16 @@ code {
   }
   .dataset-scope-table th,
   .dataset-scope-table td {
-    padding: 13px 14px;
+    padding: 10px 5px;
+  }
+  .dataset-scope-table {
+    min-width: 0;
+    font-size: 11px;
+  }
+  .dataset-scope-table th {
+    font-size: 8px;
+    line-height: 1.3;
+    white-space: normal;
   }
 }
 

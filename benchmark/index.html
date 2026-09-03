@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BEIR Retrieval Benchmark — Cortrix</title>
-  <meta name="description" content="Review commit-pinned full-corpus BEIR results for Cortrix across SciFact, FiQA, and NFCorpus, including retrieval quality, latency, and status boundaries.">
+  <meta name="description" content="Review 16 commit-pinned Cortrix retrieval-accuracy cells across SciFact, NFCorpus, FiQA, and Quora, with explicit query scope and limitations.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://cortrix.ai/benchmark/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/benchmark/">
   <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/benchmark/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="BEIR Retrieval Benchmark — Cortrix">
-  <meta property="og:description" content="Three full-corpus BEIR datasets, two Cortrix profiles, commit-pinned retrieval scores, latency, and strict-status boundaries.">
+  <meta property="og:description" content="Four BEIR corpora, 16 CPU retrieval cells, absolute nDCG@10 and Recall@10 results, and explicit evidence boundaries.">
   <meta property="og:url" content="https://cortrix.ai/benchmark/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
@@ -20,10 +20,10 @@
   <meta property="og:image:alt" content="Cortrix benchmark">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="BEIR Retrieval Benchmark — Cortrix">
-  <meta name="twitter:description" content="Commit-pinned retrieval quality, latency, and strict status across three complete BEIR corpora.">
+  <meta name="twitter:description" content="Commit-pinned retrieval accuracy across four BEIR corpora, with 16 measured cells and explicit query scope.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix benchmark">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/benchmark/","description":"Review commit-pinned full-corpus BEIR results for Cortrix across SciFact, FiQA, and NFCorpus, including retrieval quality, latency, and status boundaries."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/benchmark/","description":"Review 16 commit-pinned Cortrix retrieval-accuracy cells across SciFact, NFCorpus, FiQA, and Quora, with explicit query scope and limitations."}</script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -47,14 +47,12 @@
         class="btn btn-primary social-link github-repo-stats"
         target="_blank"
         rel="noopener"
-        data-github-repo-stats
-        data-github-api="https://api.github.com/repos/cortrix/cortrix"
-        aria-label="Cortrix on GitHub, 8 stars"
+        aria-label="Cortrix on GitHub — star the repository"
       >
         <span>GitHub</span>
         <span class="github-repo-stat" aria-hidden="true">
           <span class="github-repo-stat-icon">★</span>
-          <span id="github-star-count">8</span>
+          <span>Star</span>
         </span>
       </a>
     </div>
@@ -69,10 +67,11 @@
     <div class="container benchmark-hero-grid">
       <div class="benchmark-hero-copy">
         <div class="page-kicker">Benchmark</div>
-        <h1>3 Full-corpus BEIR datasets.<br>2 Cortrix profiles.<br>Real and reproducible.</h1>
+        <h1>4 BEIR corpora.<br>16 measured retrieval cells.<br>Commit-pinned evidence.</h1>
         <div class="benchmark-kpi-strip" aria-label="Benchmark summary">
-          <div class="benchmark-kpi"><strong>Up to 84.6%</strong><span>higher NDCG@10 · Full Stack vs Embedding + Reranking on FiQA.</span></div>
-          <div class="benchmark-kpi"><strong>Up to 43.2%</strong><span>higher Recall@10 · Full Stack vs Embedding + Reranking on FiQA.</span></div>
+          <div class="benchmark-kpi"><strong>0.3125</strong><span>FiQA nDCG@10 · Embedding + Reranking.</span></div>
+          <div class="benchmark-kpi"><strong>0.4523</strong><span>FiQA Recall@10 · Embedding + Reranking.</span></div>
+          <div class="benchmark-kpi"><strong>16 cells</strong><span>CPU retrieval measurements · top_k=10.</span></div>
         </div>
         <div class="benchmark-hero-actions">
           <a href="#results" class="btn btn-primary btn-lg">View Results</a>
@@ -87,9 +86,9 @@
         </div>
         <div class="assembly-flow">
           <div class="assembly-node assembly-source">
-            <span class="assembly-label">3 BEIR datasets</span>
+            <span class="assembly-label">4 BEIR corpora</span>
             <div class="assembly-chip-grid">
-              <span>SciFact</span><span>FiQA</span><span>NFCorpus</span>
+              <span>SciFact</span><span>FiQA</span><span>NFCorpus</span><span>Quora</span>
             </div>
           </div>
           <div class="assembly-rail" aria-hidden="true"></div>
@@ -99,14 +98,8 @@
           </div>
           <div class="assembly-split" aria-hidden="true"></div>
           <div class="assembly-profile-grid">
-            <div class="assembly-profile is-full">
-              <span>Full Stack</span>
-              <strong>Requested profile: LLM-assisted ingestion, RAG Fusion, and listwise reranking</strong>
-            </div>
-            <div class="assembly-profile is-vector">
-              <span>Embedding + Reranking</span>
-              <strong>BGE-M3 and bge-reranker-v2-m3 without LLM-dependent stages</strong>
-            </div>
+            <div class="assembly-profile is-full"><span>5 recorded arms</span><strong>Dense + BM25, cross-encoder reranking, ingest enrichment, and listwise reranking where measured</strong></div>
+            <div class="assembly-profile is-vector"><span>Absolute results</span><strong>Every value stays attached to its corpus, arm, query scope, and published limitations</strong></div>
           </div>
           <div class="assembly-rail" aria-hidden="true"></div>
           <div class="assembly-node assembly-output">
@@ -124,83 +117,56 @@
   <main>
     <section class="section benchmark-summary-section" id="results">
       <div class="container">
-        <h2 class="section-title">Full-corpus measured results across three BEIR datasets</h2>
-        <p class="section-sub">These maintainer-reported scores cover a complete public BEIR corpus and every official test-qrels query, with zero query failures. Each card shows Full Stack first and Embedding + Reranking second; no score is projected or normalized. Per-dataset scores are the primary evidence.</p>
-        <div class="benchmark-result-grid">
-          <article class="benchmark-result-card">
-            <div class="result-card-head"><span>SciFact</span><strong>Scientific claims</strong></div>
-            <p>Small scientific claim retrieval set for checking whether research-like evidence can be surfaced in the top results.</p>
-            <div class="metric-bars">
-              <div class="metric-block">
-                <div class="metric-title"><span>Recall@10</span><strong>0.8698 vs 0.7794</strong></div>
-                <div class="dual-bars"><span class="bar full" style="--w:86.9778%"></span><span class="bar vector" style="--w:77.9444%"></span></div>
-              </div>
-              <div class="metric-block">
-                <div class="metric-title"><span>NDCG@10</span><strong>0.7716 vs 0.6009</strong></div>
-                <div class="dual-bars"><span class="bar full" style="--w:77.1563%"></span><span class="bar vector" style="--w:60.0919%"></span></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="benchmark-result-card">
-            <div class="result-card-head"><span>FiQA</span><strong>Finance QA</strong></div>
-            <p>Finance-language retrieval where short, practical questions need the right supporting material rather than loose semantic matches.</p>
-            <div class="metric-bars">
-              <div class="metric-block">
-                <div class="metric-title"><span>Recall@10</span><strong>0.5205 vs 0.3635</strong></div>
-                <div class="dual-bars"><span class="bar full" style="--w:52.0497%"></span><span class="bar vector" style="--w:36.3501%"></span></div>
-              </div>
-              <div class="metric-block">
-                <div class="metric-title"><span>NDCG@10</span><strong>0.4663 vs 0.2526</strong></div>
-                <div class="dual-bars"><span class="bar full" style="--w:46.6292%"></span><span class="bar vector" style="--w:25.2574%"></span></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="benchmark-result-card">
-            <div class="result-card-head"><span>NFCorpus</span><strong>Biomedical retrieval</strong></div>
-            <p>Small corpus with dense relevance labels, useful for seeing whether ranking quality holds when many documents may be relevant.</p>
-            <div class="metric-bars">
-              <div class="metric-block">
-                <div class="metric-title"><span>Recall@10</span><strong>0.1717 vs 0.1482</strong></div>
-                <div class="dual-bars"><span class="bar full" style="--w:17.1718%"></span><span class="bar vector" style="--w:14.8166%"></span></div>
-              </div>
-              <div class="metric-block">
-                <div class="metric-title"><span>NDCG@10</span><strong>0.3721 vs 0.2982</strong></div>
-                <div class="dual-bars"><span class="bar full" style="--w:37.2061%"></span><span class="bar vector" style="--w:29.8234%"></span></div>
-              </div>
-            </div>
-          </article>
-
+        <h2 class="section-title">Latest absolute retrieval-accuracy results</h2>
+        <p class="section-sub">These 16 maintainer-reported CPU cells are copied from the immutable August bundle. SciFact, NFCorpus, and FiQA use every judged test query; Quora uses a deterministic 2,000-query subset. No value below is a projection, cross-release comparison, or server-performance claim.</p>
+        <div class="table-wrapper">
+          <table class="compare-table benchmark-absolute-table">
+            <thead><tr><th>Corpus</th><th>Measured arm</th><th>Queries</th><th>nDCG@10</th><th>Recall@10</th></tr></thead>
+            <tbody>
+              <tr><td>SciFact</td><td>Dense + BM25, no reranking</td><td>300 / 300</td><td>0.5942</td><td>0.7728</td></tr>
+              <tr><td>SciFact</td><td>Embedding + Reranking</td><td>300 / 300</td><td>0.6184</td><td>0.8111</td></tr>
+              <tr><td>SciFact</td><td>Embedding + Reranking (full profile)</td><td>300 / 300</td><td>0.6206</td><td>0.8044</td></tr>
+              <tr><td>SciFact</td><td>Ingest-time LLM enrichment + Reranking</td><td>300 / 300</td><td>0.6449</td><td>0.8214</td></tr>
+              <tr><td>SciFact</td><td>Full Stack</td><td>300 / 300</td><td>0.7784</td><td>0.8752</td></tr>
+              <tr><td>NFCorpus</td><td>Dense + BM25, no reranking</td><td>323 / 323</td><td>0.2991</td><td>0.1495</td></tr>
+              <tr><td>NFCorpus</td><td>Embedding + Reranking</td><td>323 / 323</td><td>0.3121</td><td>0.1569</td></tr>
+              <tr><td>NFCorpus</td><td>Embedding + Reranking (full profile)</td><td>323 / 323</td><td>0.3091</td><td>0.1539</td></tr>
+              <tr><td>NFCorpus</td><td>Ingest-time LLM enrichment + Reranking</td><td>323 / 323</td><td>0.3124</td><td>0.1589</td></tr>
+              <tr><td>NFCorpus</td><td>Full Stack</td><td>323 / 323</td><td>0.3772</td><td>0.1768</td></tr>
+              <tr><td>FiQA</td><td>Dense + BM25, no reranking</td><td>648 / 648</td><td>0.2540</td><td>0.3703</td></tr>
+              <tr><td>FiQA</td><td>Embedding + Reranking</td><td>648 / 648</td><td>0.3125</td><td>0.4523</td></tr>
+              <tr><td>FiQA</td><td>Embedding + Reranking (full profile)</td><td>648 / 648</td><td>0.3156</td><td>0.4554</td></tr>
+              <tr><td>Quora</td><td>Dense + BM25, no reranking</td><td>2,000 / 10,000</td><td>0.5003</td><td>0.7142</td></tr>
+              <tr><td>Quora</td><td>Embedding + Reranking (full profile)</td><td>2,000 / 10,000</td><td>0.2031</td><td>0.3078</td></tr>
+              <tr><td>Quora</td><td>Full Stack</td><td>2,000 / 10,000</td><td>0.3039</td><td>0.3092</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="benchmark-legend" aria-label="Chart legend">
-          <span><i class="legend-full"></i>Full Stack</span>
-          <span><i class="legend-vector"></i>Embedding + Reranking</span>
-        </div>
-        <p class="section-sub">Quality came with higher measured query time in every paired run. Full Stack versus Embedding + Reranking p50 latency was 34,232 versus 7,311 ms on SciFact, 106,172 versus 26,521 ms on FiQA, and 29,504 versus 5,905 ms on NFCorpus. Compare only within each dataset and hardware pair.</p>
+        <p class="section-sub">All cells were measured at <code>top_k=10</code> with zero request failures and zero missing query text. Timing is recorded in the bundle for within-cell inspection but is not presented here as server performance. Quora is not a full-query-set result and must not be compared with one.</p>
       </div>
     </section>
 
     <section class="section section-dark" id="datasets">
       <div class="container">
-        <h2 class="section-title">Why these three BEIR datasets?</h2>
-        <p class="section-sub">SciFact, FiQA, and NFCorpus cover scientific claims, finance questions, and biomedical retrieval. They show three different public BEIR shapes under one paired full-corpus protocol, not every domain and not a global ranking of dataset difficulty.</p>
+        <h2 class="section-title">Four public retrieval shapes, with explicit query scope</h2>
+        <p class="section-sub">SciFact, FiQA, NFCorpus, and Quora cover scientific claims, finance questions, biomedical retrieval, and duplicate-question retrieval. They are evidence for these recorded tasks, not every domain or a global ranking of difficulty.</p>
         <div class="benchmark-dataset-panel">
           <div class="dataset-rationale">
             <span class="eyebrow-tag">Selection logic</span>
-            <h3>Three domains, one paired full-corpus protocol.</h3>
-            <p>The public BEIR inputs vary from a 3,633-document biomedical corpus to a 57,638-document finance corpus. Each dataset uses the same Cortrix source lock within its Full Stack and Embedding + Reranking pair, and every official test-qrels query is evaluated.</p>
-            <p>All official test queries completed with zero query failures. The NFCorpus and SciFact Full Stack runs had partial coverage in LLM-dependent feature verification. The retained FiQA cells predate the strict feature-completeness contract, so their run-specific feature completeness was not formally evaluated. These statuses limit feature attribution; the scores shown are the complete measured retrieval results.</p>
+            <h3>Full corpora, declared queries, no hidden extrapolation.</h3>
+            <p>Every cell uses the complete public corpus. SciFact, NFCorpus, and FiQA evaluate every judged test query. Quora uses the first 2,000 of 10,000 judged queries against all 522,931 documents, so it is explicitly not a full-query-set result.</p>
+            <p>All 16 cells completed every selected query with zero request failures and zero missing query text. The scores remain maintainer-reported measurements; checksums and validators establish file identity and contract consistency, not an independent rerun.</p>
           </div>
           <div class="dataset-table-wrapper">
             <table class="dataset-scope-table">
               <thead>
-                <tr><th>Dataset</th><th>Corpus docs</th><th>Official test queries</th><th>Scientific cells</th></tr>
+                <tr><th>Corpus</th><th>Documents</th><th>Selected queries</th><th>Measured cells</th></tr>
               </thead>
               <tbody>
-                <tr><td>SciFact</td><td>5,183</td><td>300</td><td>2 of 2 VALID</td></tr>
-                <tr><td>FiQA</td><td>57,638</td><td>648</td><td>2 of 2 VALID</td></tr>
-                <tr><td>NFCorpus</td><td>3,633</td><td>323</td><td>2 of 2 VALID</td></tr>
+                <tr><td>SciFact</td><td>5,183</td><td>300 of 300</td><td>5</td></tr>
+                <tr><td>NFCorpus</td><td>3,633</td><td>323 of 323</td><td>5</td></tr>
+                <tr><td>FiQA</td><td>57,638</td><td>648 of 648</td><td>3</td></tr>
+                <tr><td>Quora</td><td>522,931</td><td>2,000 of 10,000</td><td>3</td></tr>
               </tbody>
             </table>
           </div>
@@ -213,17 +179,17 @@
         <article class="content-card">
           <span class="eyebrow-tag">BEIR in plain English</span>
           <h3>A retrieval benchmark, not an end-to-end agent demo</h3>
-          <p>BEIR-style evaluation asks a narrow question: when a query is issued against a known corpus, does the system retrieve the relevant documents near the top? Each run ingests the complete corpus and evaluates every official test-qrels query. That is why Recall@10 and NDCG@10 are the main page metrics.</p>
+          <p>BEIR-style evaluation asks a narrow question: when a query is issued against a known corpus, does the system retrieve relevant documents near the top? Every cell uses the full corpus and evaluates its declared query set. The page keeps that query scope attached to Recall@10 and NDCG@10.</p>
         </article>
         <article class="content-card">
           <span class="eyebrow-tag">How to read the metrics</span>
           <h3>Recall finds relevant material. NDCG rewards ranking it higher.</h3>
-          <p><code>Recall@10</code> checks whether relevant material appears in the top ten results. <code>NDCG@10</code> also rewards placing stronger relevant results higher in that top-ten list. The runner records Recall and NDCG at 10 and 50.</p>
+          <p><code>Recall@10</code> checks whether relevant material appears in the top ten results. <code>NDCG@10</code> also rewards placing stronger relevant results higher in that top-ten list. This bundle measured only <code>top_k=10</code>; deeper cutoffs are absent rather than estimated.</p>
         </article>
         <article class="content-card">
           <span class="eyebrow-tag">Scope boundary</span>
           <h3>Retrieval quality only</h3>
-          <p>This benchmark does not claim third-party product superiority, business outcome gains, memory quality, audit coverage, or end-to-end RAG answer quality.</p>
+          <p>This benchmark does not claim server performance, third-party product superiority, business outcome gains, memory quality, audit coverage, security properties, or end-to-end RAG answer quality.</p>
         </article>
       </div>
     </section>
@@ -232,10 +198,11 @@
       <div class="container proof-grid">
         <article class="note-panel">
           <h3>Inspect the evidence before rerunning</h3>
-          <p>Start with the <code>immutable bundle</code>. After obtaining <code>upstream BEIR inputs</code>, capped runs using <code>--max-queries</code> and <code>--max-corpus-docs</code> can check installation, pipeline behavior, source-ID mapping, and metric generation. Capped scores are not comparable to the full-corpus measurements.</p>
+          <p>Start with the immutable bundle, its limitations, and its checksums. After obtaining upstream BEIR inputs, capped runs can check installation, pipeline behavior, source-ID mapping, and metric generation. Capped scores are not comparable to these measurements.</p>
           <div class="route-link-list">
-            <a href="https://github.com/cortrix/cortrix-benchmarks/tree/7bc29aa840c20db3935dfcf80eb048e553ebe2b0/results/published/beir-three-full-corpus-2026-07-v1" target="_blank" rel="noopener">Immutable result bundle</a>
-            <a href="https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/README.md" target="_blank" rel="noopener">Current benchmark guide</a>
+            <a href="https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1" target="_blank" rel="noopener">Immutable result bundle</a>
+            <a href="https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/results/published/beir-four-corpus-cpu-2026-08-v1/README.md" target="_blank" rel="noopener">Results and limitations</a>
+            <a href="https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/run_benchmark.py" target="_blank" rel="noopener">Public runner</a>
             <a href="/for-builders/">For Builders</a>
           </div>
         </article>
@@ -250,13 +217,13 @@
           <table class="compare-table">
             <thead><tr><th>Evidence field</th><th>Recorded value or source</th></tr></thead>
             <tbody>
-              <tr><td>Run date</td><td>2026-07-14 to 2026-07-15.</td></tr>
-              <tr><td>Hardware profile</td><td>NFCorpus and SciFact: AWS g5.2xlarge; FiQA: AWS c7i.8xlarge. Compare latency only within each paired dataset.</td></tr>
-              <tr><td>Source roles</td><td>Core evaluation snapshot <code>4a6299c</code>; historical measurement-runner identity <code>6defa0a</code>, mapped to a public file-level equivalent at <code>446dade</code>; evidence carrier and immutable bundle at <code>7bc29aa</code>. Dataset-pair manifests also lock orchestration sources.</td></tr>
-              <tr><td>Dataset version</td><td>Full public BEIR SciFact, FiQA, and NFCorpus corpora with all official test-qrels queries: 300, 648, and 323 respectively.</td></tr>
-              <tr><td>Methodology</td><td><a href="https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/README.md" target="_blank" rel="noopener">README</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/runner/run_benchmark.py" target="_blank" rel="noopener">public runner snapshot</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/7bc29aa840c20db3935dfcf80eb048e553ebe2b0/benchmarks/beir-retrieval-quality/docs/methodology.md" target="_blank" rel="noopener">methodology</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/provenance/source-equivalence.json" target="_blank" rel="noopener">source equivalence</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/README.md#source-access-and-historical-provenance" target="_blank" rel="noopener">current source-access note</a>, and <a href="https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/docs/local-reproduction.md" target="_blank" rel="noopener">maintainer rerun guide</a>.</td></tr>
-              <tr><td>Result bundle</td><td>The exact-commit bundle linked above contains a manifest, six full-corpus scorecards, profile records, summaries, checksums, and a maintainer rerun procedure.</td></tr>
-              <tr><td>Scope</td><td>Retrieval quality only: Recall@10/50, NDCG@10/50, paired-run latency, and inspectable artifact identity.</td></tr>
+              <tr><td>Run date</td><td>2026-08-28 to 2026-08-31.</td></tr>
+              <tr><td>Execution boundary</td><td>CPU-only measurements. Per-cell hardware and timing are recorded in the scorecards; this page does not present them as server-performance evidence.</td></tr>
+              <tr><td>Source roles</td><td>Measured Core <code>79a4eb1</code>; public runner <code>9490520</code>; immutable result bundle <code>4b94390</code>; RC2 Benchmark evidence carrier <code>__BENCH_FINAL_CARRIER__</code>. The bundle records the uncommitted measuring runners by content hash and does not mislabel the public rewrite as the measuring revision.</td></tr>
+              <tr><td>Dataset scope</td><td>Full SciFact, NFCorpus, FiQA, and Quora corpora. All judged queries are selected for the first three; Quora selects the first 2,000 of 10,000 judged queries.</td></tr>
+              <tr><td>Methodology</td><td><a href="https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/benchmarks/beir-retrieval-quality/README.md" target="_blank" rel="noopener">README</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/run_benchmark.py" target="_blank" rel="noopener">public runner</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/benchmarks/beir-retrieval-quality/docs/methodology.md" target="_blank" rel="noopener">methodology</a>, and <a href="https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md" target="_blank" rel="noopener">reproduction guide</a>.</td></tr>
+              <tr><td>Result bundle</td><td>The exact-commit bundle contains a manifest, summaries, 16 scorecards, reproduction instructions, and a complete SHA-256 inventory.</td></tr>
+              <tr><td>Scope</td><td>Retrieval accuracy at top_k=10 and inspectable artifact identity. No deeper cutoff, answer quality, server performance, security, competitive ranking, or business outcome is inferred.</td></tr>
             </tbody>
           </table>
         </div>
@@ -318,7 +285,7 @@
       </div>
     </div>
     <div class="footer-bottom container">
-      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under AGPL-3.0-only.</p>
+      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under Apache-2.0.</p>
     </div>
   </footer>
   <script src="/script.js"></script>

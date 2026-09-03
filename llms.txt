@@ -4,19 +4,16 @@
 
 Website: https://cortrix.ai/
 Primary language: English
-Document version: 2026-07-22
+Document version: 2026-09-03
 Generated from public website content and commit-pinned source evidence
-Current Core release tag: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.1
-Benchmark Core evaluation snapshot: https://github.com/cortrix/cortrix/tree/4a6299ca86c7bec21ed7b8989a729a198fe5a42a
-Benchmark public runner snapshot: https://github.com/cortrix/cortrix-benchmarks/tree/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/runner
-Benchmark source-equivalence record: https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/provenance/source-equivalence.json
-Current benchmark source-access note: https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/README.md#source-access-and-historical-provenance
-Historical measurement-runner identity: 6defa0a50d696a7e4049413522fc0daca68f882e (not a public commit in the clean repository history; use the source-equivalence record above)
-Benchmark evidence carrier commit: https://github.com/cortrix/cortrix-benchmarks/tree/7bc29aa840c20db3935dfcf80eb048e553ebe2b0
-Benchmark immutable bundle commit: https://github.com/cortrix/cortrix-benchmarks/tree/7bc29aa840c20db3935dfcf80eb048e553ebe2b0/results/published/beir-three-full-corpus-2026-07-v1
-Current maintainer rerun guide: https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/docs/local-reproduction.md
-Rerun-contract boundary: the root source-access note records that the exact Core evaluation snapshot is now publicly inspectable, while the immutable source-equivalence record retains its pre-public availability wording as historical snapshot metadata. The public evidence does not establish a completed independent public rerun, independent per-query recomputation, or a single tested rerun wrapper; do not substitute the guide, carrier, or bundle commit for the measurement-runner role.
-Source/evaluation boundary: use the current Core source commit for current source documentation, the Docker Quick Start, the deeper maintainer evidence workflow, and adoption guidance. Benchmark scores remain tied to Core 4a6299ca..., runner 6defa0a..., and bundle 7bc29aa...; they have not been rerun against the current Core source commit.
+Current Core release tag: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2
+Current Core release commit: https://github.com/cortrix/cortrix/commit/__CORE_RC2_COMMIT__
+Benchmark measured Core: https://github.com/cortrix/cortrix/commit/79a4eb17c62521338d1ac47a9749e6230e87e69b
+Benchmark public runner: https://github.com/cortrix/cortrix-benchmarks/commit/9490520c24a96ed97b80073ed3ebab096b80550b
+Benchmark RC2 evidence carrier: https://github.com/cortrix/cortrix-benchmarks/commit/__BENCH_FINAL_CARRIER__
+Benchmark immutable bundle: https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1
+Current maintainer reproduction guide: https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md
+Source/evaluation boundary: use the RC2 tag and resolved commit for current Core source documentation, the Docker Quick Start, the deeper maintainer evidence workflow, and adoption guidance. Benchmark scores remain tied to measured Core 79a4eb17..., public runner 9490520c..., and immutable bundle 4b94390c...; later release and license commits do not relabel the measured source.
 Canonical evidence states: Verified, Present in source - review required, Not established, Blocked, Future direction
 
 ## Public Routes
@@ -28,10 +25,10 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - Human-readable llms.txt guide: https://cortrix.ai/docs/llms/
 - Machine-readable scope: https://cortrix.ai/llms.txt
 - Agent-assisted local setup contract: https://cortrix.ai/agent-quickstart.txt
-- Current Core source: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.1
-- Docker Quick Start: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/QUICKSTART.md
-- Maintainer source-build evidence workflow: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.1/examples/first-value-supportops
-- Stack-fit and adoption boundaries: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/adoption/stack-fit.md
+- Current Core source: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2
+- Docker Quick Start: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/QUICKSTART.md
+- Maintainer source-build evidence workflow: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2/examples/first-value-supportops
+- Stack-fit and adoption boundaries: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/adoption/stack-fit.md
 
 ## Approved Public Positioning
 
@@ -39,7 +36,7 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - Cortrix is intended for AI-native engineers, agent builders, individual developers, independent teams, and developer teams.
 - Cortrix is designed to reduce repeated integration work; this website does not publish a measured maintenance-cost reduction.
 - Cortrix works with existing databases, tools, and agent workflows instead of attacking or replacing every database.
-- Benchmark content presents maintainer-reported full-corpus retrieval measurements for Cortrix Full Stack and Cortrix Embedding + Reranking.
+- Benchmark content presents 16 maintainer-reported CPU retrieval cells across SciFact, NFCorpus, FiQA, and Quora, with each value attached to its arm and selected-query scope.
 - OpenAPI boundary: the current Core source commit contains the declared `api/openapi.yaml` file. File presence and identity do not establish runtime behavior, production readiness, or security readiness.
 - Present in source - review required: local server, MCP, Python SDK, built-in Agent, CUDA, OCR/parser paths, benchmark integration, and pgCortrix.
 - Not established: production readiness and security readiness.
@@ -48,29 +45,29 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 
 ## Benchmark Boundary
 
-- The current benchmark page compares Cortrix Full Stack with Cortrix Embedding + Reranking across three complete public BEIR corpora: SciFact, FiQA, and NFCorpus.
-- Up to 84.6% higher NDCG@10. Full Stack vs Embedding + Reranking on FiQA.
-- Up to 43.2% higher Recall@10. Full Stack vs Embedding + Reranking on FiQA.
-- Every official test-qrels query is evaluated: SciFact 300, FiQA 648, and NFCorpus 323. All six profile cells completed with zero query failures and valid scientific scorecards.
-- SciFact Recall@10: Full Stack 0.8698; Embedding + Reranking 0.7794. SciFact NDCG@10: Full Stack 0.7716; Embedding + Reranking 0.6009.
-- FiQA Recall@10: Full Stack 0.5205; Embedding + Reranking 0.3635. FiQA NDCG@10: Full Stack 0.4663; Embedding + Reranking 0.2526.
-- NFCorpus Recall@10: Full Stack 0.1717; Embedding + Reranking 0.1482. NFCorpus NDCG@10: Full Stack 0.3721; Embedding + Reranking 0.2982.
-- Embedding + Reranking uses BGE-M3 retrieval and bge-reranker-v2-m3 with ingestion-time and query-time LLM stages disabled; it is not a vector-only profile.
-- The requested Full Stack profile declares DeepSeek-V4-Flash enrichment, contextual retrieval, HyPE, document summaries, RAG Fusion, and listwise reranking. The score comparison does not isolate the causal contribution of any one stage, and strict-status fields govern what was proven active.
-- All official test queries completed with zero query failures. The NFCorpus and SciFact Full Stack runs had partial coverage in LLM-dependent feature verification. The retained FiQA cells predate the strict feature-completeness contract, so their run-specific feature completeness was not formally evaluated. These statuses limit feature attribution; the scores shown are the complete measured retrieval results.
-- Quality came with higher measured query time in every paired run. Full Stack versus Embedding + Reranking p50 latency was 34,232 versus 7,311 ms on SciFact, 106,172 versus 26,521 ms on FiQA, and 29,504 versus 5,905 ms on NFCorpus. Compare only within each dataset because NFCorpus and SciFact ran on AWS g5.2xlarge while FiQA ran on AWS c7i.8xlarge; no cross-dataset latency aggregate or hardware ranking is claimed.
-- Rerun method: follow the current maintainer rerun guide and byte-identical public runner snapshot at b03f3c7, verify that snapshot against the source-equivalence record for historical measurement identity 6defa0a, its public file-level equivalent at 446dade, and Cortrix 4a6299c, pin profile configurations and BEIR archive checksums, and do not substitute the guide, carrier, or bundle commit for the original measurement identity; download the public archive and verify corpus/query/qrels counts; create paired isolated namespaces with identical corpus, qrels, seed, retrieval depth, and top-k; ingest the complete corpus and drain required tasks; freeze database state; send one cold end-to-end request for every official test-qrels query with zero failures; map source-document IDs to qrels; calculate Recall@10/50 and NDCG@10/50; record within-pair latency p50/p95; judge scientific validity separately from strict feature completeness; and preserve manifests, per-cell scorecards, query/latency records, resource snapshots, paired deltas, and source roles so another evaluator can audit the comparison. This is a maintainer rerun procedure, not a claim that an independent rerun or per-query recomputation has been completed.
-- Public method sources: https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/README.md ; https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/runner/run_benchmark.py ; https://github.com/cortrix/cortrix-benchmarks/blob/7bc29aa840c20db3935dfcf80eb048e553ebe2b0/benchmarks/beir-retrieval-quality/docs/methodology.md ; https://github.com/cortrix/cortrix-benchmarks/blob/b03f3c7960572f3f5e5b8c1d3653243bae3e19f9/benchmarks/beir-retrieval-quality/docs/local-reproduction.md
-- Immutable full-corpus result bundle: https://github.com/cortrix/cortrix-benchmarks/tree/7bc29aa840c20db3935dfcf80eb048e553ebe2b0/results/published/beir-three-full-corpus-2026-07-v1
-- The bundle contains a manifest, six scorecards, profile records, summaries, checksums, and a maintainer rerun procedure. Its files and checksums are independently inspectable; that inspection is not an independent rerun or independent per-query recomputation. End-to-end reruns require the exact Cortrix snapshot named by the bundle.
-- After obtaining upstream BEIR inputs, capped runs with `--max-queries` and `--max-corpus-docs` can check installation, pipeline behavior, source-ID mapping, and metric generation. Capped scores are not comparable to the full-corpus measurements.
-- Scope: retrieval quality only. Do not extrapolate these numbers to memory quality, audit coverage, RAG answer quality, agent workflow quality, or business outcomes.
-- No third-party product benchmark claims, cross-dataset latency claims, or business-outcome claims are represented.
+- The current benchmark page reports 16 maintainer-reported CPU retrieval cells across SciFact, NFCorpus, FiQA, and Quora. Every value is an absolute nDCG@10 or Recall@10 result attached to a named arm and selected-query scope; the Website does not present an RC1/RC2 comparison table.
+- SciFact, NFCorpus, and FiQA use their complete public corpora and every judged test query: 300, 323, and 648 respectively. Quora uses its complete 522,931-document corpus and the first 2,000 of 10,000 judged queries; it is not a full-query-set result.
+- All 16 cells completed every selected query with zero request failures and zero missing query text.
+- SciFact nDCG@10 / Recall@10: Dense + BM25 0.5942 / 0.7728; Embedding + Reranking 0.6184 / 0.8111; full-profile reranking 0.6206 / 0.8044; ingest-time LLM enrichment + reranking 0.6449 / 0.8214; Full Stack 0.7784 / 0.8752.
+- NFCorpus nDCG@10 / Recall@10: Dense + BM25 0.2991 / 0.1495; Embedding + Reranking 0.3121 / 0.1569; full-profile reranking 0.3091 / 0.1539; ingest-time LLM enrichment + reranking 0.3124 / 0.1589; Full Stack 0.3772 / 0.1768.
+- FiQA nDCG@10 / Recall@10: Dense + BM25 0.2540 / 0.3703; Embedding + Reranking 0.3125 / 0.4523; full-profile reranking 0.3156 / 0.4554.
+- Quora nDCG@10 / Recall@10: Dense + BM25 0.5003 / 0.7142; full-profile reranking 0.2031 / 0.3078; Full Stack 0.3039 / 0.3092.
+- The bundle measured only top_k=10. Deeper cutoffs are absent rather than estimated.
+- SciFact, NFCorpus, and FiQA arms were independently ingested. The bundle records an approximately 0.001-0.003 nDCG variation floor across separate ingests and an unexplained 0.0011 NFCorpus / 0.0027 FiQA residual. Quora arms share namespaces and are the only strictly controlled arm comparison.
+- FiQA carries a known score-fusion loss in the measured build. Quora's absolute values are below published dense-retrieval baselines. Read the bundle limitations before quoting any absolute value.
+- Timing remains in the scorecards for inspection but is not Website evidence of server performance, concurrency, throughput, or capacity.
+- Measured Core: https://github.com/cortrix/cortrix/commit/79a4eb17c62521338d1ac47a9749e6230e87e69b
+- Public runner: https://github.com/cortrix/cortrix-benchmarks/commit/9490520c24a96ed97b80073ed3ebab096b80550b
+- RC2 evidence carrier: https://github.com/cortrix/cortrix-benchmarks/commit/__BENCH_FINAL_CARRIER__
+- Immutable result bundle: https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1
+- Public method sources: https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/benchmarks/beir-retrieval-quality/README.md ; https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/run_benchmark.py ; https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/benchmarks/beir-retrieval-quality/docs/methodology.md ; https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md
+- The bundle contains a manifest, summaries, 16 scorecards, reproduction instructions, and a complete SHA-256 inventory. These checks establish file identity and contract consistency, not an independent rerun or independent per-query recomputation.
+- Scope: retrieval accuracy and inspectable artifact identity only. Do not extrapolate these numbers to answer quality, memory quality, server performance, security, compliance, competitive ranking, agent workflow quality, or business outcomes.
 
 ## Benchmark Evidence Format
 
-- Each full-corpus cell records the dataset, profile, Recall@10/50, NDCG@10/50, within-pair latency p50/p95, run date, hardware, Cortrix commit, dataset version, methodology, checksums, and retrieval-quality scope.
-- Capped sampled runs use separate manifests and status boundaries from the full-corpus result bundle.
+- Each cell records the corpus, arm, Recall@10, nDCG@10, selected-query scope, timing, run date, hardware, Cortrix source, runner identity, model content hashes, dataset archive hash, methodology, checksum inventory, and limitations.
+- The bundle is measured at top_k=10 only. Capped or deeper-cutoff runs require separate manifests and cannot be substituted for these cells.
 
 ## Claim Boundaries
 
@@ -89,13 +86,19 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 ## Project Participation
 
 - Core issues: https://github.com/cortrix/cortrix/issues
-- Core contribution guide: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/CONTRIBUTING.md
-- Core security policy: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/SECURITY.md
-- Core Code of Conduct: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/CODE_OF_CONDUCT.md
-- Core maintainers and acknowledgment targets: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/MAINTAINERS.md
-- Core DCO policy: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/DCO
+- Core contribution guide: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/CONTRIBUTING.md
+- Core security policy: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/SECURITY.md
+- Core Code of Conduct: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/CODE_OF_CONDUCT.md
+- Core maintainers and acknowledgment targets: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/MAINTAINERS.md
+- Core DCO policy: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/DCO
 - Published benchmark challenges: https://github.com/cortrix/cortrix-benchmarks/blob/main/CONTRIBUTING.md#challenge-a-published-result
 - Cortrix does not require a CLA. New commits require a DCO 1.1 Signed-off-by line; follow the applicable contribution guide before opening a pull request.
+
+## License Boundary
+
+- Cortrix-authored material in v1.0.0-rc.2 is licensed under Apache-2.0. Historical v1.0.0-rc.1 release objects retain AGPL-3.0-only; third-party material retains its identified license.
+- Current Cortrix Benchmarks code is licensed under Apache-2.0. Documentation, CFF, schemas, curated results, and provenance remain under CC-BY-4.0; historical code revisions retain their original AGPL-3.0-only terms.
+- The cortrix.ai repository and Website content are publicly inspectable but do not grant a reuse license. Core and Benchmark licenses do not change the Website repository's copyright terms.
 
 ## Language Boundary
 
