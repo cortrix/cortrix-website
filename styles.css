@@ -1161,9 +1161,6 @@ code {
   color: var(--c-accent); font-weight: 500;
 }
 .compare-table tbody tr:hover { background: rgba(255, 100, 5, .04); }
-.benchmark-absolute-table td:nth-child(1) { color: var(--c-text); font-weight: 700; }
-.benchmark-absolute-table td:nth-child(4),
-.benchmark-absolute-table td:nth-child(5) { color: var(--c-accent); font-family: var(--font-mono); font-weight: 700; }
 @media (max-width: 640px) {
   .table-wrapper {
     overflow-x: visible;
@@ -1210,11 +1207,6 @@ code {
   .compare-table td:nth-child(1)::before { content: "Capability"; }
   .compare-table td:nth-child(2)::before { content: "Cortrix"; color: var(--c-accent); }
   .compare-table td:nth-child(3)::before { content: "Typical Glue-Code Stack"; }
-  .benchmark-absolute-table td:nth-child(1)::before { content: "Corpus"; }
-  .benchmark-absolute-table td:nth-child(2)::before { content: "Measured arm"; color: var(--c-text); }
-  .benchmark-absolute-table td:nth-child(3)::before { content: "Queries"; }
-  .benchmark-absolute-table td:nth-child(4)::before { content: "nDCG@10"; }
-  .benchmark-absolute-table td:nth-child(5)::before { content: "Recall@10"; }
 }
 .scope-pill {
   display: inline-flex;
@@ -1425,7 +1417,7 @@ code {
 }
 .benchmark-result-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 .benchmark-result-card,
@@ -1467,6 +1459,26 @@ code {
   font-size: 14px;
   line-height: 1.6;
 }
+.result-profile {
+  display: grid;
+  gap: 5px;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 176, 32, .2);
+  border-radius: var(--radius);
+  background: rgba(255, 176, 32, .045);
+}
+.result-profile span {
+  color: var(--c-text-muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+.result-profile strong {
+  color: var(--c-accent);
+  font-size: 14px;
+  line-height: 1.4;
+}
 .metric-bars {
   display: grid;
   gap: 16px;
@@ -1504,6 +1516,27 @@ code {
 }
 .dual-bars .bar.vector {
   background: linear-gradient(90deg, #0f766e, #38bdf8);
+}
+.metric-value-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, .12);
+}
+.metric-value-bar {
+  display: block;
+  width: var(--w);
+  height: 100%;
+  border-radius: inherit;
+}
+.metric-value-bar.recall,
+.legend-recall {
+  background: linear-gradient(90deg, #0f766e, #38bdf8);
+}
+.metric-value-bar.ndcg,
+.legend-ndcg {
+  background: linear-gradient(90deg, #ff6405, #ffb020);
+  box-shadow: 0 0 20px rgba(255, 100, 5, .18);
 }
 .benchmark-average-card {
   display: grid;
