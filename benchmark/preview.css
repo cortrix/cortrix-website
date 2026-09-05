@@ -52,4 +52,6 @@
   .benchmark-preview .dataset-scope-table td { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border: 0; white-space: normal; }
   .benchmark-preview .dataset-scope-table td[data-label]::before { content: attr(data-label); color: #b6c3d3; font-family: var(--font-body); }
   .benchmark-preview .dataset-scope-table td:first-child { font-size: 17px; }
+  .benchmark-preview .compare-table td:first-child::before { content: 'Evidence field'; }
+  .benchmark-preview .compare-table td:nth-child(2)::before { content: 'Recorded value or source'; }
 }
