@@ -7,12 +7,12 @@ Primary language: English
 Document version: 2026-09-03
 Generated from public website content and commit-pinned source evidence
 Current Core release tag: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2
-Current Core release commit: https://github.com/cortrix/cortrix/commit/__CORE_RC2_COMMIT__
+Current Core release commit: https://github.com/cortrix/cortrix/commit/d298d6b7e64c67551f567e7cddd514bae1adb57b
 Benchmark measured Core: https://github.com/cortrix/cortrix/commit/79a4eb17c62521338d1ac47a9749e6230e87e69b
 Benchmark public runner: https://github.com/cortrix/cortrix-benchmarks/commit/9490520c24a96ed97b80073ed3ebab096b80550b
-Benchmark RC2 evidence carrier: https://github.com/cortrix/cortrix-benchmarks/commit/__BENCH_FINAL_CARRIER__
+Benchmark RC2 evidence carrier: https://github.com/cortrix/cortrix-benchmarks/commit/5381a6a50795d546cf5b6dfc52fc892293033bf7
 Benchmark immutable bundle: https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1
-Current maintainer reproduction guide: https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md
+Current maintainer reproduction guide: https://github.com/cortrix/cortrix-benchmarks/blob/5381a6a50795d546cf5b6dfc52fc892293033bf7/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md
 Source/evaluation boundary: use the RC2 tag and resolved commit for current Core source documentation, the Docker Quick Start, the deeper maintainer evidence workflow, and adoption guidance. Benchmark scores remain tied to measured Core 79a4eb17..., public runner 9490520c..., and immutable bundle 4b94390c...; later release and license commits do not relabel the measured source.
 Canonical evidence states: Verified, Present in source - review required, Not established, Blocked, Future direction
 
@@ -58,9 +58,9 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - Timing remains in the scorecards for inspection but is not Website evidence of server performance, concurrency, throughput, or capacity.
 - Measured Core: https://github.com/cortrix/cortrix/commit/79a4eb17c62521338d1ac47a9749e6230e87e69b
 - Public runner: https://github.com/cortrix/cortrix-benchmarks/commit/9490520c24a96ed97b80073ed3ebab096b80550b
-- RC2 evidence carrier: https://github.com/cortrix/cortrix-benchmarks/commit/__BENCH_FINAL_CARRIER__
+- RC2 evidence carrier: https://github.com/cortrix/cortrix-benchmarks/commit/5381a6a50795d546cf5b6dfc52fc892293033bf7
 - Immutable result bundle: https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1
-- Public method sources: https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/benchmarks/beir-retrieval-quality/README.md ; https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/run_benchmark.py ; https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/benchmarks/beir-retrieval-quality/docs/methodology.md ; https://github.com/cortrix/cortrix-benchmarks/blob/__BENCH_FINAL_CARRIER__/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md
+- Public method sources: https://github.com/cortrix/cortrix-benchmarks/blob/5381a6a50795d546cf5b6dfc52fc892293033bf7/benchmarks/beir-retrieval-quality/README.md ; https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/run_benchmark.py ; https://github.com/cortrix/cortrix-benchmarks/blob/5381a6a50795d546cf5b6dfc52fc892293033bf7/benchmarks/beir-retrieval-quality/docs/methodology.md ; https://github.com/cortrix/cortrix-benchmarks/blob/5381a6a50795d546cf5b6dfc52fc892293033bf7/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md
 - The bundle contains a manifest, summaries, 16 scorecards, reproduction instructions, and a complete SHA-256 inventory. These checks establish file identity and contract consistency, not an independent rerun or independent per-query recomputation.
 - Scope: retrieval accuracy and inspectable artifact identity only. Do not extrapolate these numbers to answer quality, memory quality, server performance, security, compliance, competitive ranking, agent workflow quality, or business outcomes.
 

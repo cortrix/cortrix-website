@@ -3,7 +3,7 @@
 Contract: cortrix-agent-quickstart/v1
 Repository: https://github.com/cortrix/cortrix.git
 Release: v1.0.0-rc.2
-Expected commit: __CORE_RC2_COMMIT__
+Expected commit: d298d6b7e64c67551f567e7cddd514bae1adb57b
 API bind: 127.0.0.1:8420
 
 This contract is for a terminal-capable AI Agent with access to a local
@@ -26,7 +26,7 @@ Use only this repository and installation target:
 
 - Repository: https://github.com/cortrix/cortrix.git
 - Release: v1.0.0-rc.2
-- Expected commit: __CORE_RC2_COMMIT__
+- Expected commit: d298d6b7e64c67551f567e7cddd514bae1adb57b
 
 Work in a new local directory. Do not modify, reset, delete, or reuse an
 existing Cortrix checkout.
@@ -78,7 +78,7 @@ git clone --branch v1.0.0-rc.2 --depth 1 \
 cd cortrix
 test "$(git remote get-url origin)" = "https://github.com/cortrix/cortrix.git"
 test "$(git describe --tags --exact-match)" = "v1.0.0-rc.2"
-test "$(git rev-parse HEAD)" = "__CORE_RC2_COMMIT__"
+test "$(git rev-parse HEAD)" = "d298d6b7e64c67551f567e7cddd514bae1adb57b"
 CORTRIX_SOURCE_REVISION="$(git rev-parse HEAD)" \
   docker compose -f deploy/docker-compose.yml up --build --wait
 ```
@@ -119,7 +119,7 @@ CORTRIX_AGENT_QUICKSTART=PASS|FAIL
 contract=cortrix-agent-quickstart/v1
 repository=https://github.com/cortrix/cortrix.git
 release=v1.0.0-rc.2
-commit=__CORE_RC2_COMMIT__
+commit=d298d6b7e64c67551f567e7cddd514bae1adb57b
 installation_directory=<absolute path>
 platform=<os and architecture>
 docker_version=<observed version>
