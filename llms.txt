@@ -45,7 +45,7 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 
 ## Benchmark Boundary
 
-- The current benchmark page reports 16 maintainer-reported CPU retrieval cells across SciFact, NFCorpus, FiQA, and Quora. Every value is an absolute nDCG@10 or Recall@10 result attached to a named arm and selected-query scope; the Website does not present an RC1/RC2 comparison table.
+- The public result bundle contains 16 maintainer-reported CPU retrieval results across SciFact, NFCorpus, FiQA, and Quora. The benchmark page displays four results: the best measured result for each corpus. Every value is an absolute nDCG@10 or Recall@10 result attached to a named arm and selected-query scope; the Website does not present an RC1/RC2 comparison table.
 - SciFact, NFCorpus, and FiQA use their complete public corpora and every judged test query: 300, 323, and 648 respectively. Quora uses its complete 522,931-document corpus and the first 2,000 of 10,000 judged queries; it is not a full-query-set result.
 - All 16 cells completed every selected query with zero request failures and zero missing query text.
 - SciFact nDCG@10 / Recall@10: Dense + BM25 0.5942 / 0.7728; Embedding + Reranking 0.6184 / 0.8111; full-profile reranking 0.6206 / 0.8044; ingest-time LLM enrichment + reranking 0.6449 / 0.8214; Full Stack 0.7784 / 0.8752.

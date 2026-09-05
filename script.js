@@ -46,6 +46,73 @@
   };
   window.addEventListener('scroll', onScroll, { passive: true });
 
+  // --- GitHub Repository Stats ---
+  const githubRepoStats = document.querySelector('[data-github-repo-stats]');
+  const githubStarCount = document.getElementById('github-star-count');
+  if (githubRepoStats && githubStarCount) {
+    const cacheKey = 'cortrix-github-repo-stats';
+    const cacheMaxAge = 15 * 60 * 1000;
+
+    const formatRepoCount = count => new Intl.NumberFormat('en-US', {
+      notation: count >= 1000 ? 'compact' : 'standard',
+      maximumFractionDigits: 1,
+    }).format(count);
+
+    const renderRepoStats = stars => {
+      if (!Number.isInteger(stars) || stars < 0) return;
+
+      const exactStars = new Intl.NumberFormat('en-US').format(stars);
+      const starLabel = stars === 1 ? 'star' : 'stars';
+
+      githubStarCount.textContent = formatRepoCount(stars);
+      githubRepoStats.setAttribute(
+        'aria-label',
+        `Cortrix on GitHub, ${exactStars} ${starLabel}`,
+      );
+    };
+
+    let cachedStats = null;
+    try {
+      cachedStats = JSON.parse(localStorage.getItem(cacheKey));
+    } catch {
+      cachedStats = null;
+    }
+
+    if (Number.isInteger(cachedStats?.stars)) {
+      renderRepoStats(cachedStats.stars);
+    }
+
+    const cacheIsFresh = cachedStats
+      && Number.isFinite(cachedStats.updatedAt)
+      && Date.now() - cachedStats.updatedAt < cacheMaxAge;
+
+    if (!cacheIsFresh) {
+      fetch(githubRepoStats.dataset.githubApi, {
+        headers: { Accept: 'application/vnd.github+json' },
+      })
+        .then(response => {
+          if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
+          return response.json();
+        })
+        .then(repo => {
+          if (!Number.isInteger(repo.stargazers_count)) return;
+
+          renderRepoStats(repo.stargazers_count);
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify({
+              stars: repo.stargazers_count,
+              updatedAt: Date.now(),
+            }));
+          } catch {
+            // The displayed counts remain valid when storage is unavailable.
+          }
+        })
+        .catch(() => {
+          // Keep the rendered fallback counts if GitHub is unavailable.
+        });
+    }
+  }
+
   // --- Copy Buttons ---
   const copyText = text => {
     if (navigator.clipboard?.writeText) {

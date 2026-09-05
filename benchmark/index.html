@@ -26,8 +26,9 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/benchmark/","description":"Review the strongest measured Cortrix retrieval result for each of four BEIR corpora, with explicit query scope and limitations."}</script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/benchmark/preview.css">
 </head>
-<body>
+<body class="benchmark-preview">
   <!-- include:site-header:start -->
 <nav class="nav" id="nav" aria-label="Primary navigation">
   <div class="nav-inner container">
@@ -47,12 +48,15 @@
         class="btn btn-primary social-link github-repo-stats"
         target="_blank"
         rel="noopener"
-        aria-label="Cortrix on GitHub — star the repository"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
       >
         <span>GitHub</span>
         <span class="github-repo-stat" aria-hidden="true">
           <span class="github-repo-stat-icon">★</span>
-          <span>Star</span>
+          <span id="github-star-count">61</span>
         </span>
       </a>
     </div>
@@ -67,18 +71,76 @@
     <div class="container benchmark-hero-grid">
       <div class="benchmark-hero-copy">
         <div class="page-kicker">Benchmark</div>
-        <h1>4 BEIR corpora.<br>4 strongest measured results.<br>Commit-pinned evidence.</h1>
-        <div class="benchmark-kpi-strip" aria-label="Benchmark summary">
-          <div class="benchmark-kpi"><strong>4 results</strong><span>Best measured arm for each corpus.</span></div>
-          <div class="benchmark-kpi"><strong>@10 only</strong><span>nDCG and Recall · retrieval accuracy.</span></div>
-        </div>
+        <h1>Cortrix retrieval benchmarks</h1>
+        <p class="benchmark-intro">Four BEIR corpora. Their best measured retrieval results, with source records and query scope.</p>
+        <p class="benchmark-meta">August 2026 · Recall@10 and nDCG@10 · Public result bundle</p>
         <div class="benchmark-hero-actions">
           <a href="#results" class="btn btn-primary btn-lg">View Results</a>
-          <a href="#datasets" class="btn btn-outline btn-lg">Why These Datasets</a>
+          <a href="#methodology" class="btn btn-outline btn-lg">View Methodology</a>
         </div>
       </div>
 
-      <aside class="benchmark-assembly" aria-label="Benchmark assembly diagram">
+
+    </div>
+  </header>
+
+  <main>
+    <section class="section benchmark-summary-section" id="results">
+      <div class="container">
+        <h2 class="section-title">Strongest measured result for each corpus</h2>
+        <p class="section-sub">Four corpora. Four configurations. Each card shows its corpus’s highest measured Recall@10 and nDCG@10.</p>
+        <div class="benchmark-result-grid">
+          <article class="benchmark-result-card" data-benchmark-dataset="SciFact" data-benchmark-arm="Full Stack" data-benchmark-queries="300 / 300" data-ndcg-at-10="0.7784" data-recall-at-10="0.8752">
+            <div class="result-card-head"><span>SciFact</span><strong>Scientific claims</strong></div>
+            <div class="metric-bars">
+              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.8752</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:87.52%"></span></div></div>
+              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.7784</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:77.84%"></span></div></div>
+            </div>
+            <div class="result-profile"><span>Best measured arm</span><strong>Full Stack</strong></div>
+            <p>All 300 judged queries. This RC2 arm uses ingest-time LLM enrichment and query-time listwise reranking, with <code>rag_fusion=false</code>.</p>
+            <a class="result-source" href="https://github.com/cortrix/cortrix-benchmarks/blob/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1/scorecards/scifact-llm-listwise.json" target="_blank" rel="noopener">View SciFact source results <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="benchmark-result-card" data-benchmark-dataset="NFCorpus" data-benchmark-arm="Full Stack" data-benchmark-queries="323 / 323" data-ndcg-at-10="0.3772" data-recall-at-10="0.1768">
+            <div class="result-card-head"><span>NFCorpus</span><strong>Biomedical retrieval</strong></div>
+            <div class="metric-bars">
+              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.1768</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:17.68%"></span></div></div>
+              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.3772</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:37.72%"></span></div></div>
+            </div>
+            <div class="result-profile"><span>Best measured arm</span><strong>Full Stack</strong></div>
+            <p>All 323 judged queries. This RC2 arm uses ingest-time LLM enrichment and query-time listwise reranking, with <code>rag_fusion=false</code>.</p>
+            <a class="result-source" href="https://github.com/cortrix/cortrix-benchmarks/blob/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1/scorecards/nfcorpus-llm-listwise.json" target="_blank" rel="noopener">View NFCorpus source results <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="benchmark-result-card" data-benchmark-dataset="FiQA" data-benchmark-arm="Embedding + Reranking (full profile)" data-benchmark-queries="648 / 648" data-ndcg-at-10="0.3156" data-recall-at-10="0.4554">
+            <div class="result-card-head"><span>FiQA</span><strong>Finance QA</strong></div>
+            <div class="metric-bars">
+              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.4554</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:45.54%"></span></div></div>
+              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.3156</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:31.56%"></span></div></div>
+            </div>
+            <div class="result-profile"><span>Best measured arm</span><strong>Embedding + Reranking (full profile)</strong></div>
+            <p>All 648 judged queries. No LLM arm was measured for FiQA in this RC2 bundle.</p>
+            <a class="result-source" href="https://github.com/cortrix/cortrix-benchmarks/blob/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1/scorecards/fiqa-cross-encoder-rerank-full.json" target="_blank" rel="noopener">View FiQA source results <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="benchmark-result-card" data-benchmark-dataset="Quora" data-benchmark-arm="Dense + BM25, no reranking" data-benchmark-queries="2,000 / 10,000" data-ndcg-at-10="0.5003" data-recall-at-10="0.7142">
+            <div class="result-card-head"><span>Quora</span><strong>Duplicate questions</strong></div>
+            <div class="metric-bars">
+              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.7142</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:71.42%"></span></div></div>
+              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.5003</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:50.03%"></span></div></div>
+            </div>
+            <div class="result-profile"><span>Best measured arm</span><strong>Dense + BM25, no reranking</strong></div>
+            <p>The first 2,000 of 10,000 judged queries against all 522,931 documents. This selected result has no LLM or reranking stage.</p>
+            <a class="result-source" href="https://github.com/cortrix/cortrix-benchmarks/blob/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1/scorecards/quora-dense-only.json" target="_blank" rel="noopener">View Quora source results <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <div class="benchmark-legend" aria-label="Chart legend"><span><i class="legend-recall"></i>Recall@10</span><span><i class="legend-ndcg"></i>nDCG@10</span></div>
+        <p class="benchmark-scope-note">Different configurations, not a cross-corpus ranking. Retrieval only. Quora covers the first 2,000 of 10,000 judged queries.</p>
+        <details class="benchmark-reading"><summary>How to read these results and configurations</summary><p>The four winners do not share one profile, so this is not a uniform Full Stack comparison or a cross-release comparison.</p><p class="section-sub">The SciFact and NFCorpus winners carry the bundle label <code>Full Stack</code>, but they are not like-for-like successors to the July Full Stack configuration. FiQA and Quora are won by non-LLM arms. All values are measured at <code>top_k=10</code>; timing remains available in the source bundle but is not presented here as server performance.</p><p>Both metrics use a 0–1 scale but measure different things. Their bar lengths are not expected to match. <a href="#metrics">Read the metric definitions</a>.</p></details>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="methodology"><div class="container benchmark-method-overview"><div><div class="page-kicker">Methodology</div><h2>From public corpus<br>to measured retrieval.</h2><p>Inspect the full corpus, selected queries, configuration, and source records behind every score. These are maintainer-reported measurements, not an independent rerun.</p><a class="btn btn-outline" href="#datasets">Explore dataset scope</a></div>      <aside class="benchmark-assembly" aria-label="Benchmark assembly diagram">
         <div class="assembly-title">
           <span>Benchmark assembly</span>
           <strong>BEIR scope to Cortrix signal</strong>
@@ -109,64 +171,11 @@
             </div>
           </div>
         </div>
-      </aside>
-    </div>
-  </header>
-
-  <main>
-    <section class="section benchmark-summary-section" id="results">
-      <div class="container">
-        <h2 class="section-title">Strongest measured result for each corpus</h2>
-        <p class="section-sub">Each card selects the one arm that records both the highest nDCG@10 and the highest Recall@10 for that corpus in the immutable August bundle. The four winners do not share one profile, so this is not a cross-corpus ranking, a uniform Full Stack comparison, or a cross-release comparison.</p>
-        <div class="benchmark-result-grid">
-          <article class="benchmark-result-card" data-benchmark-dataset="SciFact" data-benchmark-arm="Full Stack" data-benchmark-queries="300 / 300" data-ndcg-at-10="0.7784" data-recall-at-10="0.8752">
-            <div class="result-card-head"><span>SciFact</span><strong>Scientific claims</strong></div>
-            <div class="result-profile"><span>Best measured arm</span><strong>Full Stack</strong></div>
-            <p>All 300 judged queries. This RC2 arm uses ingest-time LLM enrichment and query-time listwise reranking, with <code>rag_fusion=false</code>.</p>
-            <div class="metric-bars">
-              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.8752</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:87.52%"></span></div></div>
-              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.7784</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:77.84%"></span></div></div>
-            </div>
-          </article>
-
-          <article class="benchmark-result-card" data-benchmark-dataset="NFCorpus" data-benchmark-arm="Full Stack" data-benchmark-queries="323 / 323" data-ndcg-at-10="0.3772" data-recall-at-10="0.1768">
-            <div class="result-card-head"><span>NFCorpus</span><strong>Biomedical retrieval</strong></div>
-            <div class="result-profile"><span>Best measured arm</span><strong>Full Stack</strong></div>
-            <p>All 323 judged queries. This RC2 arm uses ingest-time LLM enrichment and query-time listwise reranking, with <code>rag_fusion=false</code>.</p>
-            <div class="metric-bars">
-              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.1768</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:17.68%"></span></div></div>
-              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.3772</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:37.72%"></span></div></div>
-            </div>
-          </article>
-
-          <article class="benchmark-result-card" data-benchmark-dataset="FiQA" data-benchmark-arm="Embedding + Reranking (full profile)" data-benchmark-queries="648 / 648" data-ndcg-at-10="0.3156" data-recall-at-10="0.4554">
-            <div class="result-card-head"><span>FiQA</span><strong>Finance QA</strong></div>
-            <div class="result-profile"><span>Best measured arm</span><strong>Embedding + Reranking (full profile)</strong></div>
-            <p>All 648 judged queries. No LLM arm was measured for FiQA in this RC2 bundle.</p>
-            <div class="metric-bars">
-              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.4554</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:45.54%"></span></div></div>
-              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.3156</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:31.56%"></span></div></div>
-            </div>
-          </article>
-
-          <article class="benchmark-result-card" data-benchmark-dataset="Quora" data-benchmark-arm="Dense + BM25, no reranking" data-benchmark-queries="2,000 / 10,000" data-ndcg-at-10="0.5003" data-recall-at-10="0.7142">
-            <div class="result-card-head"><span>Quora</span><strong>Duplicate questions</strong></div>
-            <div class="result-profile"><span>Best measured arm</span><strong>Dense + BM25, no reranking</strong></div>
-            <p>The first 2,000 of 10,000 judged queries against all 522,931 documents. This selected result has no LLM or reranking stage.</p>
-            <div class="metric-bars">
-              <div class="metric-block"><div class="metric-title"><span>Recall@10</span><strong>0.7142</strong></div><div class="metric-value-track"><span class="metric-value-bar recall" style="--w:71.42%"></span></div></div>
-              <div class="metric-block"><div class="metric-title"><span>nDCG@10</span><strong>0.5003</strong></div><div class="metric-value-track"><span class="metric-value-bar ndcg" style="--w:50.03%"></span></div></div>
-            </div>
-          </article>
-        </div>
-        <div class="benchmark-legend" aria-label="Chart legend"><span><i class="legend-recall"></i>Recall@10</span><span><i class="legend-ndcg"></i>nDCG@10</span></div>
-        <p class="section-sub">The SciFact and NFCorpus winners carry the bundle label <code>Full Stack</code>, but they are not like-for-like successors to the July Full Stack configuration. FiQA and Quora are won by non-LLM arms. All values are measured at <code>top_k=10</code>; timing remains available in the source bundle but is not presented here as server performance.</p>
-      </div>
-    </section>
+      </aside></div></section>
 
     <section class="section section-dark" id="datasets">
       <div class="container">
-        <h2 class="section-title">Four public retrieval shapes, with explicit query scope</h2>
+        <h2 class="section-title">What was tested</h2>
         <p class="section-sub">SciFact, FiQA, NFCorpus, and Quora cover scientific claims, finance questions, biomedical retrieval, and duplicate-question retrieval. They are evidence for these recorded tasks, not every domain or a global ranking of difficulty.</p>
         <div class="benchmark-dataset-panel">
           <div class="dataset-rationale">
@@ -181,10 +190,10 @@
                 <tr><th>Corpus</th><th>Documents</th><th>Selected queries</th></tr>
               </thead>
               <tbody>
-                <tr><td>SciFact</td><td>5,183</td><td>300 of 300</td></tr>
-                <tr><td>NFCorpus</td><td>3,633</td><td>323 of 323</td></tr>
-                <tr><td>FiQA</td><td>57,638</td><td>648 of 648</td></tr>
-                <tr><td>Quora</td><td>522,931</td><td>2,000 of 10,000</td></tr>
+                <tr><td>SciFact</td><td data-label="Documents">5,183</td><td data-label="Selected queries">300 of 300</td></tr>
+                <tr><td>NFCorpus</td><td data-label="Documents">3,633</td><td data-label="Selected queries">323 of 323</td></tr>
+                <tr><td>FiQA</td><td data-label="Documents">57,638</td><td data-label="Selected queries">648 of 648</td></tr>
+                <tr><td>Quora</td><td data-label="Documents">522,931</td><td data-label="Selected queries">2,000 of 10,000</td></tr>
               </tbody>
             </table>
           </div>
@@ -192,7 +201,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="metrics">
       <div class="container benchmark-method-grid">
         <article class="content-card">
           <span class="eyebrow-tag">BEIR in plain English</span>
@@ -237,7 +246,7 @@
             <tbody>
               <tr><td>Run date</td><td>2026-08-28 to 2026-08-31.</td></tr>
               <tr><td>Execution boundary</td><td>CPU-only measurements. Hardware and timing for each result are recorded in the scorecards; this page does not present them as server-performance evidence.</td></tr>
-              <tr><td>Source roles</td><td>Measured Core <code>79a4eb1</code>; public runner <code>9490520</code>; immutable result bundle <code>4b94390</code>; RC2 Benchmark evidence carrier <code>5381a6a50795d546cf5b6dfc52fc892293033bf7</code>. The bundle records the uncommitted measuring runners by content hash and does not mislabel the public rewrite as the measuring revision.</td></tr>
+              <tr><td>Source roles</td><td>Measured Core <code>79a4eb1</code>; public runner <code>9490520</code>; immutable result bundle <code>4b94390</code>; RC2 Benchmark evidence carrier <code id="benchmark-carrier" class="visually-hidden">5381a6a50795d546cf5b6dfc52fc892293033bf7</code><code>5381a6a</code> <button class="copy-btn evidence-copy" data-target="benchmark-carrier" aria-label="Copy full benchmark evidence commit">Copy SHA</button>. The bundle records the uncommitted measuring runners by content hash and does not mislabel the public rewrite as the measuring revision.</td></tr>
               <tr><td>Dataset scope</td><td>Full SciFact, NFCorpus, FiQA, and Quora corpora. All judged queries are selected for the first three; Quora selects the first 2,000 of 10,000 judged queries.</td></tr>
               <tr><td>Methodology</td><td><a href="https://github.com/cortrix/cortrix-benchmarks/blob/5381a6a50795d546cf5b6dfc52fc892293033bf7/benchmarks/beir-retrieval-quality/README.md" target="_blank" rel="noopener">README</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/run_benchmark.py" target="_blank" rel="noopener">public runner</a>, <a href="https://github.com/cortrix/cortrix-benchmarks/blob/5381a6a50795d546cf5b6dfc52fc892293033bf7/benchmarks/beir-retrieval-quality/docs/methodology.md" target="_blank" rel="noopener">methodology</a>, and <a href="https://github.com/cortrix/cortrix-benchmarks/blob/5381a6a50795d546cf5b6dfc52fc892293033bf7/results/published/beir-four-corpus-cpu-2026-08-v1/reproduction.md" target="_blank" rel="noopener">reproduction guide</a>.</td></tr>
               <tr><td>Result bundle</td><td>The exact-commit bundle contains a manifest, summaries, 16 scorecards, reproduction instructions, and a complete SHA-256 inventory.</td></tr>

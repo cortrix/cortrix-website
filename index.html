@@ -74,12 +74,15 @@
         class="btn btn-primary social-link github-repo-stats"
         target="_blank"
         rel="noopener"
-        aria-label="Cortrix on GitHub — star the repository"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
       >
         <span>GitHub</span>
         <span class="github-repo-stat" aria-hidden="true">
           <span class="github-repo-stat-icon">★</span>
-          <span>Star</span>
+          <span id="github-star-count">61</span>
         </span>
       </a>
     </div>
@@ -375,8 +378,9 @@ Follow the contract's exact clone, identity, Compose, readiness and reranked-que
                 <span>Terminal</span>
                 <button class="copy-btn" data-target="code-1" aria-label="Copy to clipboard">Copy</button>
               </div>
-              <pre id="code-1"><code>git clone https://github.com/cortrix/cortrix.git
+              <pre id="code-1"><code>git clone --branch v1.0.0-rc.2 --depth 1 https://github.com/cortrix/cortrix.git
 cd cortrix
+test "$(git rev-parse HEAD)" = "d298d6b7e64c67551f567e7cddd514bae1adb57b" || exit 1
 CORTRIX_SOURCE_REVISION="$(git rev-parse HEAD)" \
   docker compose -f deploy/docker-compose.yml up --build --wait</code></pre>
             </div>
