@@ -50,7 +50,7 @@
   const githubRepoStats = document.querySelector('[data-github-repo-stats]');
   const githubStarCount = document.getElementById('github-star-count');
   if (githubRepoStats && githubStarCount) {
-    const cacheKey = 'cortrix-github-repo-stats';
+    const cacheKey = 'cortrix-github-repo-stats-v2';
     const cacheMaxAge = 15 * 60 * 1000;
 
     const formatRepoCount = count => new Intl.NumberFormat('en-US', {
@@ -78,17 +78,21 @@
       cachedStats = null;
     }
 
-    if (Number.isInteger(cachedStats?.stars)) {
+    const cacheIsFresh = cachedStats
+      && Number.isInteger(cachedStats.stars)
+      && cachedStats.stars >= 0
+      && Number.isFinite(cachedStats.updatedAt)
+      && cachedStats.updatedAt <= Date.now()
+      && Date.now() - cachedStats.updatedAt < cacheMaxAge;
+
+    if (cacheIsFresh) {
       renderRepoStats(cachedStats.stars);
     }
-
-    const cacheIsFresh = cachedStats
-      && Number.isFinite(cachedStats.updatedAt)
-      && Date.now() - cachedStats.updatedAt < cacheMaxAge;
 
     if (!cacheIsFresh) {
       fetch(githubRepoStats.dataset.githubApi, {
         headers: { Accept: 'application/vnd.github+json' },
+        cache: 'no-store',
       })
         .then(response => {
           if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
