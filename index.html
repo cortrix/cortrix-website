@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cortrix — Agent-Native Semantic Storage for AI Agents</title>
   <meta name="description" content="Evaluate Cortrix, an active pre-release local-first semantic storage project for retrieval, reviewable records, and source traceability.">
-  <meta name="keywords" content="Cortrix, agent-native semantic storage, AI agent data, retrieval, memory, traceability, open source, AGPL, MCP">
+  <meta name="keywords" content="Cortrix, agent-native semantic storage, AI agent data, retrieval, memory, traceability, open source, Apache 2.0, MCP">
   <meta name="author" content="Cortrix">
   <meta name="robots" content="index, follow">
   <meta name="google-site-verification" content="p0jG9hLyK75jbRbOIsPhfJFbwzNCBzUlquDpjHmfAcA" />
@@ -41,7 +41,7 @@
     "operatingSystem": "Linux, macOS",
     "description": "Active pre-release local-first semantic storage for retrieval, reviewable records, and source traceability.",
     "url": "https://cortrix.ai",
-    "license": "https://spdx.org/licenses/AGPL-3.0-only.html",
+    "license": "https://spdx.org/licenses/Apache-2.0.html",
     "author": {
       "@type": "Organization",
       "name": "Cortrix",
@@ -76,12 +76,13 @@
         rel="noopener"
         data-github-repo-stats
         data-github-api="https://api.github.com/repos/cortrix/cortrix"
-        aria-label="Cortrix on GitHub, 8 stars"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
       >
         <span>GitHub</span>
         <span class="github-repo-stat" aria-hidden="true">
           <span class="github-repo-stat-icon">★</span>
-          <span id="github-star-count">8</span>
+          <span id="github-star-count">61</span>
         </span>
       </a>
     </div>
@@ -103,10 +104,10 @@
           <p class="hero-slogan">Activate Data Brain</p>
           <p class="hero-positioning">Agent-Native Semantic Storage</p>
           <h1><span>Semantic Storage </span><span>Built for AI Agents</span></h1>
-          <p class="hero-sub">Evaluate a local-first semantic context layer for retrieval, reviewable records, and source traceability. Cortrix is active pre-release; interface and feature maturity is reported separately.</p>
+          <p class="hero-sub">Evaluate an agent-first semantic context layer for retrieval, reviewable records, and source traceability. Cortrix is active pre-release; interface and feature maturity is reported separately.</p>
           <div class="hero-badges" aria-label="Project status">
             <span class="hero-badge">Open Source</span>
-            <span class="hero-badge">AGPL-3.0-only</span>
+            <span class="hero-badge">Apache-2.0</span>
             <span class="hero-badge">Active Pre-release</span>
           </div>
           <div class="hero-actions">
@@ -352,7 +353,7 @@
             <pre id="agent-setup-prompt"><code>Install Cortrix locally under the cortrix-agent-quickstart/v1 contract at:
 https://cortrix.ai/agent-quickstart.txt
 
-Use only https://github.com/cortrix/cortrix.git at release v1.0.0-rc.1 and expected commit e159974f936bd987d5718195d54cd70ff3acc2e5.
+Use only https://github.com/cortrix/cortrix.git at release v1.0.0-rc.2 and expected commit d298d6b7e64c67551f567e7cddd514bae1adb57b.
 
 Work only in a new local directory. Before changing state, verify Git, Docker, Docker Compose, curl, available disk, required network access, and that 127.0.0.1:8420 is available. Stop and report if preflight fails or the target directory already exists.
 
@@ -377,8 +378,9 @@ Follow the contract's exact clone, identity, Compose, readiness and reranked-que
                 <span>Terminal</span>
                 <button class="copy-btn" data-target="code-1" aria-label="Copy to clipboard">Copy</button>
               </div>
-              <pre id="code-1"><code>git clone https://github.com/cortrix/cortrix.git
+              <pre id="code-1"><code>git clone --branch v1.0.0-rc.2 --depth 1 https://github.com/cortrix/cortrix.git
 cd cortrix
+test "$(git rev-parse HEAD)" = "d298d6b7e64c67551f567e7cddd514bae1adb57b" || exit 1
 CORTRIX_SOURCE_REVISION="$(git rev-parse HEAD)" \
   docker compose -f deploy/docker-compose.yml up --build --wait</code></pre>
             </div>
@@ -641,7 +643,7 @@ docker compose -f deploy/docker-compose.yml down</code></pre>
       </div>
     </div>
     <div class="footer-bottom container">
-      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under AGPL-3.0-only.</p>
+      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under Apache-2.0.</p>
     </div>
   </footer>
 

@@ -2,8 +2,8 @@
 
 Contract: cortrix-agent-quickstart/v1
 Repository: https://github.com/cortrix/cortrix.git
-Release: v1.0.0-rc.1
-Expected commit: e159974f936bd987d5718195d54cd70ff3acc2e5
+Release: v1.0.0-rc.2
+Expected commit: d298d6b7e64c67551f567e7cddd514bae1adb57b
 API bind: 127.0.0.1:8420
 
 This contract is for a terminal-capable AI Agent with access to a local
@@ -25,8 +25,8 @@ Install Cortrix locally under the cortrix-agent-quickstart/v1 contract.
 Use only this repository and installation target:
 
 - Repository: https://github.com/cortrix/cortrix.git
-- Release: v1.0.0-rc.1
-- Expected commit: e159974f936bd987d5718195d54cd70ff3acc2e5
+- Release: v1.0.0-rc.2
+- Expected commit: d298d6b7e64c67551f567e7cddd514bae1adb57b
 
 Work in a new local directory. Do not modify, reset, delete, or reuse an
 existing Cortrix checkout.
@@ -73,12 +73,12 @@ Run these commands only after preflight passes and from a human-approved parent
 directory where cortrix does not already exist:
 
 ```bash
-git clone --branch v1.0.0-rc.1 --depth 1 \
+git clone --branch v1.0.0-rc.2 --depth 1 \
   https://github.com/cortrix/cortrix.git cortrix
 cd cortrix
 test "$(git remote get-url origin)" = "https://github.com/cortrix/cortrix.git"
-test "$(git describe --tags --exact-match)" = "v1.0.0-rc.1"
-test "$(git rev-parse HEAD)" = "e159974f936bd987d5718195d54cd70ff3acc2e5"
+test "$(git describe --tags --exact-match)" = "v1.0.0-rc.2"
+test "$(git rev-parse HEAD)" = "d298d6b7e64c67551f567e7cddd514bae1adb57b"
 CORTRIX_SOURCE_REVISION="$(git rev-parse HEAD)" \
   docker compose -f deploy/docker-compose.yml up --build --wait
 ```
@@ -118,8 +118,8 @@ failed contract.
 CORTRIX_AGENT_QUICKSTART=PASS|FAIL
 contract=cortrix-agent-quickstart/v1
 repository=https://github.com/cortrix/cortrix.git
-release=v1.0.0-rc.1
-commit=e159974f936bd987d5718195d54cd70ff3acc2e5
+release=v1.0.0-rc.2
+commit=d298d6b7e64c67551f567e7cddd514bae1adb57b
 installation_directory=<absolute path>
 platform=<os and architecture>
 docker_version=<observed version>
@@ -179,13 +179,13 @@ Core Agent-assisted setup guide:
 https://github.com/cortrix/cortrix/blob/main/docs/AGENT_QUICKSTART.md
 
 Docker Quick Start:
-https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/QUICKSTART.md
+https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/QUICKSTART.md
 
 Compatibility and known status:
-https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/compatibility.md
+https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/compatibility.md
 
 Agent access:
-https://github.com/cortrix/cortrix/blob/v1.0.0-rc.1/docs/agent-access.md
+https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/agent-access.md
 
 Agent-assisted installation does not verify every HTTP API, parser, built-in
 Agent, MCP, SDK, authentication, tenant, security, benchmark, or production

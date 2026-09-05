@@ -1417,7 +1417,7 @@ code {
 }
 .benchmark-result-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 .benchmark-result-card,
@@ -1459,6 +1459,26 @@ code {
   font-size: 14px;
   line-height: 1.6;
 }
+.result-profile {
+  display: grid;
+  gap: 5px;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 176, 32, .2);
+  border-radius: var(--radius);
+  background: rgba(255, 176, 32, .045);
+}
+.result-profile span {
+  color: var(--c-text-muted);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+.result-profile strong {
+  color: var(--c-accent);
+  font-size: 14px;
+  line-height: 1.4;
+}
 .metric-bars {
   display: grid;
   gap: 16px;
@@ -1496,6 +1516,27 @@ code {
 }
 .dual-bars .bar.vector {
   background: linear-gradient(90deg, #0f766e, #38bdf8);
+}
+.metric-value-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, .12);
+}
+.metric-value-bar {
+  display: block;
+  width: var(--w);
+  height: 100%;
+  border-radius: inherit;
+}
+.metric-value-bar.recall,
+.legend-recall {
+  background: linear-gradient(90deg, #0f766e, #38bdf8);
+}
+.metric-value-bar.ndcg,
+.legend-ndcg {
+  background: linear-gradient(90deg, #ff6405, #ffb020);
+  box-shadow: 0 0 20px rgba(255, 100, 5, .18);
 }
 .benchmark-average-card {
   display: grid;
@@ -2068,7 +2109,16 @@ code {
   }
   .dataset-scope-table th,
   .dataset-scope-table td {
-    padding: 13px 14px;
+    padding: 10px 5px;
+  }
+  .dataset-scope-table {
+    min-width: 0;
+    font-size: 11px;
+  }
+  .dataset-scope-table th {
+    font-size: 8px;
+    line-height: 1.3;
+    white-space: normal;
   }
 }
 
