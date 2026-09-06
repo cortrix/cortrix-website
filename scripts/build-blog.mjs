@@ -204,21 +204,21 @@ function renderMeta({ title, description, url, type = 'website', structuredData,
 ${dates ? `${dates}\n` : ''}  <script type="application/ld+json">${jsonForHtml(structuredData)}</script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/assets/blog/blog.css">`;
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">`;
 }
 
 function renderCard(post, featured = false) {
   return `<article class="blog-card${featured ? ' blog-card-featured' : ''}" data-blog-card data-topic="${escapeHtml(post.topic)}">
-    <a class="blog-card-visual" href="/blog/${post.slug}/" tabindex="-1" aria-hidden="true">
-      <img src="/assets/blog/research-map.svg" alt="" width="720" height="430"${featured ? '' : ' loading="lazy"'}>
+${featured ? `    <a class="blog-card-visual" href="/blog/${post.slug}/" tabindex="-1" aria-hidden="true">
+      <img src="/assets/blog/research-map.svg" alt="" width="720" height="430">
       <span>${String(post.seriesOrder).padStart(2, '0')}</span>
     </a>
-    <div class="blog-card-copy">
-      <div class="blog-meta"><span>${escapeHtml(post.topic)}</span><span>${post.paperYear}</span><span>Note ${String(post.seriesOrder).padStart(2, '0')}</span><span>${post.readMinutes} min read</span></div>
+` : ''}    <div class="blog-card-copy">
+      <div class="blog-meta"><span>${escapeHtml(post.topic)}</span><span>Paper: ${post.paperYear}</span><span>Note ${String(post.seriesOrder).padStart(2, '0')}</span><span>${post.readMinutes} min read</span></div>
       <h${featured ? '2' : '3'}><a href="/blog/${post.slug}/">${escapeHtml(post.title)}</a></h${featured ? '2' : '3'}>
       <p>${escapeHtml(post.description)}</p>
-      <span class="blog-paper-label">Based on “${escapeHtml(post.paperTitle)}”</span>
-      <a class="blog-read-link" href="/blog/${post.slug}/">Read the research note <span aria-hidden="true">→</span></a>
+      <a class="blog-read-link" href="/blog/${post.slug}/">Read article <span aria-hidden="true">→</span></a>
     </div>
   </article>`;
 }
@@ -227,7 +227,7 @@ function renderFooter() {
   return `<footer class="blog-footer">
     <div class="container blog-footer-inner">
       <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
-      <div class="blog-footer-links"><a href="/#semantic-storage">Storage overview</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>`;
 }
@@ -237,7 +237,7 @@ function renderIndex(posts, header) {
   const remaining = posts;
   const topics = [...new Set(remaining.map(post => post.topic))];
   const title = 'Cortrix Blog | Semantic Storage and Agent Memory';
-  const description = 'Practical readings of foundational papers on linked data, knowledge graphs, retrieval, governance, and memory for AI agents.';
+  const description = 'Notes on semantic storage and AI agents, through classic papers on linked data, retrieval, and memory.';
   const url = `${siteUrl}/blog/`;
   const structuredData = {
     '@context': 'https://schema.org',
@@ -279,18 +279,18 @@ function renderIndex(posts, header) {
   <main id="main-content">
     <header class="blog-hero">
       <div class="container blog-hero-grid">
-        <div class="blog-hero-copy"><p class="blog-kicker">Research Notes</p><h1><span>Cortrix Blog.</span><span>Ideas that shape semantic systems.</span></h1><p>Practical readings of foundational papers on linked data, knowledge graphs, retrieval, governance, and agent memory.</p><a class="blog-rss-link" href="/blog/rss.xml">Follow via RSS <span aria-hidden="true">↗</span></a></div>
+        <div class="blog-hero-copy"><p class="blog-kicker">Research Notes</p><h1><span>Cortrix Blog.</span><span>A closer look at the ideas behind AI.</span></h1><p>Scott’s personal readings of research on semantic storage, retrieval, and agent memory. These articles explore ideas and their limits; they are not implementation notes for Cortrix.</p><a class="blog-rss-link" href="/blog/rss.xml">Follow via RSS <span aria-hidden="true">↗</span></a></div>
         <img src="/assets/blog/research-map.svg" alt="Abstract map of connected research concepts" width="720" height="430">
       </div>
     </header>
     <section class="blog-feature container" aria-labelledby="featured-title">
-      <div class="blog-section-heading"><div><p class="blog-kicker">Start here</p><h2 id="featured-title">Featured research note</h2></div><p>Five foundational papers, translated into practical mental models for builders.</p></div>
+      <div class="blog-section-heading"><div><p class="blog-kicker">Start here</p><h2 id="featured-title">Start with DBpedia</h2></div><p>New to the series? Begin with the question of how knowledge gets a stable identity.</p></div>
       ${renderCard(featured, true)}
     </section>
     <section class="blog-library container" aria-labelledby="library-title">
-      <div class="blog-section-heading"><div><p class="blog-kicker">The series</p><h2 id="library-title">Explore every note</h2></div><p>Read in order or choose the system layer you are working on.</p></div>
+      <div class="blog-section-heading"><div><p class="blog-kicker">The series</p><h2 id="library-title">All articles</h2></div><p>Read in order, or pick the topic that interests you.</p></div>
       <div class="blog-filters" role="group" aria-label="Filter articles by topic">
-        <button class="is-active" type="button" data-blog-filter="all" aria-pressed="true">All notes</button>
+        <button class="is-active" type="button" data-blog-filter="all" aria-pressed="true">All articles</button>
         ${topics.map(topic => `<button type="button" data-blog-filter="${escapeHtml(topic)}" aria-pressed="false">${escapeHtml(topic)}</button>`).join('\n        ')}
       </div>
       <div class="blog-card-grid" data-blog-grid>
@@ -301,6 +301,7 @@ function renderIndex(posts, header) {
   </main>
   ${renderFooter()}
   <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
   <script src="/assets/blog/blog.js"></script>
 </body>
 </html>
@@ -384,10 +385,10 @@ function renderArticle(post, posts, body, header) {
         <a href="${escapeHtml(post.paperUrl)}" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
       </div>
       <div class="article-layout">
-        <aside class="article-toc" aria-label="On this page"><div><p>On this page</p><ol>${processed.headings.map(heading => `<li><a href="#${heading.id}">${escapeHtml(heading.label)}</a></li>`).join('')}</ol></div></aside>
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol>${processed.headings.map(heading => `<li><a href="#${heading.id}">${escapeHtml(heading.label)}</a></li>`).join('')}</ol></details></div></aside>
         <article class="article-body">${processed.html}</article>
       </div>
-      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes the Cortrix research notes series, connecting foundational papers to practical questions in semantic data systems and agent memory.</p></div></section>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These articles share his personal understanding of research papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
       <nav class="series-navigation" aria-label="Previous and next research notes">
         ${previous ? `<a href="/blog/${previous.slug}/"><span>Previous note</span><strong>← ${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}
         ${next ? `<a href="/blog/${next.slug}/"><span>Next note</span><strong>${escapeHtml(next.title)} →</strong></a>` : '<span></span>'}
@@ -397,6 +398,7 @@ function renderArticle(post, posts, body, header) {
   </main>
   ${renderFooter()}
   <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
 </body>
 </html>
 `;
@@ -458,7 +460,7 @@ function renderLlmsSection(posts) {
 - RSS feed: ${siteUrl}/blog/rss.xml
 ${posts.map(post => `- Research Note ${String(post.seriesOrder).padStart(2, '0')}: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source paper: ${post.paperTitle} (${post.paperYear}), ${post.paperUrl}`).join('\n')}
 
-The Blog contains English explanations by Scott based on foundational papers. Article metadata and visible paper citations describe the referenced publications; they do not claim search placement, AI recommendation, or guaranteed discoverability.
+The Blog contains Scott’s personal English interpretations of foundational papers. Scott is one of Cortrix’s creators; these articles are not implementation notes for Cortrix. Article metadata and visible paper citations describe the referenced publications; they do not claim search placement, AI recommendation, or guaranteed discoverability.
 ${endMarker}`;
 }
 

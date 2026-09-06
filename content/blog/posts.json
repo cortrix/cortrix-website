@@ -2,7 +2,7 @@
   {
     "slug": "dbpedia-linked-data-explained",
     "title": "DBpedia explained: why linked data still matters",
-    "description": "A practical reading of the 2007 DBpedia paper: RDF, stable entity identity, linked data, and what they mean for semantic storage and AI agents.",
+    "description": "Why stable identities and linked data still matter when your agents retrieve knowledge from different systems.",
     "paperTitle": "DBpedia: A Nucleus for a Web of Open Data",
     "paperYear": 2007,
     "paperUrl": "https://doi.org/10.1007/978-3-540-76298-0_52",
@@ -22,7 +22,7 @@
   {
     "slug": "transe-knowledge-graph-embeddings",
     "title": "TransE explained: relationships beyond vector similarity",
-    "description": "How TransE uses h + r ≈ t to learn knowledge graph embeddings, where its simple model breaks down, and why vectors still need explicit relationships.",
+    "description": "What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.",
     "paperTitle": "Translating Embeddings for Modeling Multi-relational Data",
     "paperYear": 2013,
     "paperUrl": "https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html",
@@ -41,7 +41,7 @@
   {
     "slug": "rag-external-memory-data-governance",
     "title": "RAG explained: external memory brings data governance back",
-    "description": "Read the original RAG paper through a database engineer's lens: parametric memory, retrieval, RAG-Sequence, RAG-Token, and the limits of grounding.",
+    "description": "RAG lets a model use external knowledge. The original paper also helps explain why sources, updates, and data governance still matter.",
     "paperTitle": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
     "paperYear": 2020,
     "paperUrl": "https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html",
@@ -67,7 +67,7 @@
   {
     "slug": "reflexion-agent-memory-without-weight-updates",
     "title": "Reflexion explained: agent memory without weight updates",
-    "description": "How Reflexion turns feedback into agent memory, why the evaluator matters, and what its experiments do and do not establish about learning from failure.",
+    "description": "Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.",
     "paperTitle": "Reflexion: Language Agents with Verbal Reinforcement Learning",
     "paperYear": 2023,
     "paperUrl": "https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html",
@@ -86,7 +86,7 @@
   {
     "slug": "hipporag-knowledge-graphs-for-rag",
     "title": "HippoRAG explained: why RAG comes back to knowledge graphs",
-    "description": "How the original HippoRAG combines knowledge graphs and Personalized PageRank for retrieval across documents, with a close look at its limits.",
+    "description": "HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.",
     "paperTitle": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
     "paperYear": 2024,
     "paperUrl": "https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html",

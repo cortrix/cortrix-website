@@ -2546,3 +2546,29 @@ code {
     max-width: 100% !important;
   }
 }
+
+/* Keep navigation readable on tablets and compact windows. */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav-links, .nav-actions { display: none; }
+  .nav-toggle { display: block; }
+  .nav.open .nav-links, .nav.open .nav-actions { display: flex; }
+  .nav.open .nav-links {
+    position: absolute; top: var(--nav-h); left: 0; right: 0;
+    flex-direction: column; background: var(--c-bg);
+    border-bottom: 1px solid var(--c-border);
+    padding: 16px 24px; gap: 16px;
+  }
+  .nav.open .nav-actions {
+    position: absolute;
+    top: calc(var(--nav-h) + var(--mobile-nav-links-height, 184px));
+    left: 0; right: 0; justify-content: center; flex-wrap: wrap;
+    background: var(--c-bg); padding: 0 24px 16px;
+    border-bottom: 1px solid var(--c-border);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-layout { grid-template-columns: minmax(0, 1fr); }
+  .hero h1 { font-size: clamp(44px, 6vw, 64px); }
+  .hero h1 span { white-space: normal; }
+}

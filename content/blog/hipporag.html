@@ -29,7 +29,7 @@
 <p>A vector result can be similar without being relevant. A graph adds the possibility that two things are connected for the wrong reason. Nodes and edges give us something to inspect. That is a starting point for governance, not a certificate of accuracy.</p>
 
 <h2 id="storage-design">What this suggests for agent storage</h2>
-<p>In our design discussions around <a href="https://github.com/cortrix/cortrix">Cortrix</a>, I think about this as a storage question. If every block remains an isolated vector, how does an agent accumulate relationships across documents? If we introduce a graph, how do we preserve node identity and trace an edge to its source? What happens when the source turns out to be wrong?</p>
+<p>In our design discussions around <a href="https://github.com/cortrix/cortrix">Cortrix</a>, I think about this as a <a href="/semantic-storage/">semantic storage</a> question. If every block remains an isolated vector, how does an agent accumulate relationships across documents? If we introduce a graph, how do we preserve node identity and trace an edge to its source? What happens when the source turns out to be wrong?</p>
 <p>Those are requirements to work through. They don't imply that Cortrix implements HippoRAG or that every graph governance capability is already available.</p>
 <p>I don't take the paper as an instruction to force every dataset into a knowledge graph. I would rather let exact identifiers, full text retrieval, vector search, and explicit relationships do the jobs they are suited to. The system needs to keep the sources and boundaries clear enough that we can inspect the result.</p>
 

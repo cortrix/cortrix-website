@@ -27,7 +27,7 @@
 <p>I don't read TransE as the final answer to knowledge representation. I read it as a useful engineering tradeoff that made a clear question easy to work with. A classic paper can remain valuable after its original model stops being the one you would choose for every task.</p>
 
 <h2 id="semantic-records">A vector still needs a record behind it</h2>
-<p>This is the boundary I come back to when thinking about <a href="https://github.com/cortrix/cortrix">Cortrix</a> and storage for agent applications. Embeddings are useful, but they shouldn't swallow the original semantics.</p>
+<p>This is the boundary I come back to when thinking about <a href="https://github.com/cortrix/cortrix">Cortrix</a> and <a href="/semantic-storage/">semantic storage</a> for agent applications. Embeddings are useful, but they shouldn't swallow the original semantics.</p>
 <p>If two blocks are close, I still want to know why. Do they refer to the same entity? Does one cite the other? Are they versions of the same material? A cosine similarity score doesn't preserve those distinctions by itself.</p>
 <p>An agent can use vector retrieval to find candidates quickly. It still needs a way to inspect their identity and source, and the application must decide whether it is allowed to use them. These are design responsibilities, not capabilities established by an embedding model.</p>
 <p>I find it more useful to treat an embedding as one index over semantic records. If the score becomes the only thing we keep, the system may find an answer but struggle to explain where it came from or why it should be trusted.</p>

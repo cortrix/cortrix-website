@@ -1,0 +1,92 @@
+.has-image-dialog { overflow: hidden; }
+
+.image-dialog {
+  background: transparent;
+  border: 0;
+  color: var(--c-text);
+  margin: auto;
+  max-height: calc(100dvh - 2rem);
+  max-width: none;
+  overflow: hidden;
+  padding: 0;
+  width: min(1100px, calc(100vw - 3rem));
+}
+
+.image-dialog::backdrop { background: rgba(11, 15, 25, .88); }
+
+.image-dialog__panel {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  display: grid;
+  gap: 1rem;
+  max-height: calc(100dvh - 2rem);
+  overflow: auto;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  position: relative;
+}
+
+.image-dialog__close {
+  align-items: center;
+  align-self: start;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  color: var(--c-text);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: .875rem;
+  font-weight: 700;
+  justify-content: center;
+  justify-self: end;
+  min-height: 44px;
+  padding: .65rem 1rem;
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.image-dialog__close:hover { border-color: var(--c-primary-h); color: var(--c-primary-h); }
+.image-dialog__close:focus-visible { outline: 3px solid var(--c-primary-h); outline-offset: 3px; }
+
+.image-dialog__title {
+  color: var(--c-text);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.image-dialog__status {
+  color: var(--c-text-muted);
+  line-height: 1.6;
+  margin: 0;
+  min-height: 1.6em;
+  text-align: center;
+}
+
+.image-dialog__image {
+  height: auto;
+  justify-self: center;
+  max-height: calc(100dvh - 13rem);
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.image-dialog__caption {
+  color: var(--c-text-muted);
+  font-size: .875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.image-dialog-trigger { cursor: zoom-in; }
+.image-dialog-trigger:focus-visible { outline: 3px solid var(--c-primary-h); outline-offset: 4px; }
+
+@media (max-width: 680px) {
+  .image-dialog { max-height: calc(100dvh - 1rem); width: calc(100vw - 1rem); }
+  .image-dialog__panel { gap: .75rem; max-height: calc(100dvh - 1rem); padding: .75rem; }
+  .image-dialog__image { max-height: calc(100dvh - 11rem); }
+}

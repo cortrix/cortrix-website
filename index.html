@@ -104,7 +104,7 @@
       <span class="logo-text">Cortrix</span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
       <li><a href="/#quickstart">Quick Start</a></li>
       <li><a href="/for-builders/">For Builders</a></li>
       <li><a href="/benchmark/">Benchmark</a></li>
@@ -189,17 +189,16 @@
 
   <section class="section storage-guide" id="semantic-storage" aria-labelledby="storage-title">
     <div class="container">
-      <p class="storage-eyebrow">Understand the data layer</p>
-      <h2 id="storage-title">What is semantic storage?</h2>
-      <p class="storage-intro">Cortrix uses semantic storage to describe a data layer for AI applications that brings retrieval, reviewable records, memory APIs, and source context into one evaluation path. The project is open source and in active pre-release.</p>
-      <p class="storage-intro">Different terms emphasize different parts of an agent application's data needs. This is how we use them in the discussion.</p>
-      <dl class="storage-terms">
-        <div id="agent-storage"><dt>Agent storage</dt><dd>Data that an agent's tools read and write while carrying out a task. The practical starting point is to check how records enter the system and how a query retrieves them.</dd><dd><a href="/for-builders/">Evaluate agent storage locally →</a></dd></div>
-        <div id="context-storage"><dt>Context storage</dt><dd>Source material and records a system can retrieve to assemble model context. Storing that material is separate from deciding which evidence belongs in a particular prompt.</dd><dd><a href="/blog/rag-external-memory-data-governance/">Read how RAG uses external context →</a></dd></div>
-        <div id="memory-storage"><dt>Memory storage</dt><dd>Information retained for future interactions, such as earlier observations or recorded experience. Persistence and recall alone do not establish that a memory is valid or safe to share.</dd><dd><a href="/blog/reflexion-agent-memory-without-weight-updates/">Explore feedback and agent memory →</a></dd></div>
-      </dl>
-      <p class="storage-boundary">In Cortrix, memory and interface paths retain their individual review states. Authentication, authorization, and production readiness are not established by these descriptions. <a href="/docs/llms/">Read the capability boundaries</a>.</p>
-      <div class="storage-reading"><h3>Read the ideas behind the data layer</h3><p>Our <a href="/blog/">Semantic Classics series</a> follows five papers from linked data to agent memory. Start with <a href="/blog/dbpedia-linked-data-explained/">DBpedia and stable identity</a>, then explore the mechanisms and their limits.</p><a href="/benchmark/">Inspect measured retrieval results →</a></div>
+      <p class="storage-eyebrow">Start with the workflow</p>
+      <h2 id="storage-title">What is Semantic Storage?</h2>
+      <p class="storage-intro">Semantic storage connects information with the context an application needs to use it. Cortrix explores this through retrieval, memory records, and links back to sources. <a href="/semantic-storage/">Read the guide</a>, or start with the part of your workflow that interests you.</p>
+      <div class="storage-terms">
+        <article id="agent-storage"><h3>Agent workflows</h3><p>An agent needs to read source material, use tools, and keep track of what happened. When evaluating agent storage, start with one task and inspect what comes back from a query.</p><a href="/for-builders/">Try the Docker quick start →</a></article>
+        <article id="context-storage"><h3>Context for a task</h3><p>A useful answer needs relevant material at the right moment. Context storage keeps that material available; retrieval still has to decide which passages belong in the prompt.</p><a href="/blog/rag-external-memory-data-governance/">Read the RAG explainer →</a></article>
+        <article id="memory-storage"><h3>Memory across tasks</h3><p>Some experience is worth carrying into the next task. Memory storage preserves it, but the system still needs to check whether an old observation or lesson applies.</p><a href="/blog/reflexion-agent-memory-without-weight-updates/">Read the Reflexion explainer →</a></article>
+      </div>
+      <p class="storage-boundary">Cortrix is in active pre-release. Retrieval and memory interfaces have different maturity levels; authentication, authorization, and production readiness are not established. <a href="/docs/llms/">See current capabilities and limits</a>.</p>
+      <div class="storage-reading"><h3>Read the research</h3><p>Five classic papers trace the ideas from linked data to agent memory. Start with <a href="/blog/dbpedia-linked-data-explained/">DBpedia</a> or <a href="/blog/">browse the series</a>.</p><a href="/benchmark/">Explore the retrieval benchmarks →</a></div>
     </div>
   </section>
 
@@ -229,11 +228,11 @@
     </div>
   </section>
 
-  <!-- Defining a New Category -->
+  <!-- Workflow design -->
   <section class="section" id="category">
     <div class="container">
-      <h2 class="section-title">Defining a New Category</h2>
-      <p class="section-sub">Agent data workflows need more than isolated retrieval calls. They need a storage layer that can keep semantic context, memory, and traceability together.</p>
+      <h2 class="section-title">How the pieces fit together</h2>
+      <p class="section-sub">Cortrix brings retrieval, memory records, and source context into a shared design. These are the parts to consider alongside the tools you already use.</p>
       <div class="problem-grid">
         <div class="problem-card">
           <div class="problem-icon">
@@ -263,7 +262,7 @@
   <!-- Features -->
   <section class="section" id="features">
     <div class="container">
-      <h2 class="section-title">One Engine. Agent Data Foundations.</h2>
+      <h2 class="section-title">Explore the building blocks</h2>
       <p class="section-sub">Cortrix organizes semantic ingestion, hybrid retrieval, memory records, and source context in one pre-release design. The cited commit contains <code>api/openapi.yaml</code>; file presence and identity do not establish runtime, production, or security readiness.</p>
       <div class="features-grid">
 
@@ -665,6 +664,8 @@ docker compose -f deploy/docker-compose.yml down</code></pre>
             <li><a href="/">Home</a></li>
 
             <li><a href="/for-builders/">For Builders</a></li>
+            <li><a href="/semantic-storage/">Semantic Storage</a></li>
+            <li><a href="/#architecture">Architecture</a></li>
           </ul>
         </div>
         <div class="footer-col">

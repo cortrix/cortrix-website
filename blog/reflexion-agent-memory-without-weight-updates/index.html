@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reflexion explained: agent memory without weight updates — Cortrix Blog</title>
-  <meta name="description" content="How Reflexion turns feedback into agent memory, why the evaluator matters, and what its experiments do and do not establish about learning from failure.">
+  <meta name="description" content="Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.">
   <meta name="author" content="Scott">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/">
   <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Reflexion explained: agent memory without weight updates — Cortrix Blog">
-  <meta property="og:description" content="How Reflexion turns feedback into agent memory, why the evaluator matters, and what its experiments do and do not establish about learning from failure.">
+  <meta property="og:description" content="Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.">
   <meta property="og:url" content="https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/blog/social-card.png">
@@ -21,7 +21,7 @@
   <meta property="og:image:alt" content="Cortrix">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Reflexion explained: agent memory without weight updates — Cortrix Blog">
-  <meta name="twitter:description" content="How Reflexion turns feedback into agent memory, why the evaluator matters, and what its experiments do and do not establish about learning from failure.">
+  <meta name="twitter:description" content="Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/blog/social-card.png">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -30,7 +30,7 @@
       "@type": "BlogPosting",
       "@id": "https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/#article",
       "headline": "Reflexion explained: agent memory without weight updates",
-      "description": "How Reflexion turns feedback into agent memory, why the evaluator matters, and what its experiments do and do not establish about learning from failure.",
+      "description": "Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.",
       "url": "https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/",
       "mainEntityOfPage": "https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/",
       "author": {
@@ -108,6 +108,7 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
 </head>
 <body class="blog-page article-page">
   <a class="blog-skip-link" href="#main-content">Skip to content</a>
@@ -119,7 +120,7 @@
       <span class="logo-text">Cortrix</span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
       <li><a href="/#quickstart">Quick Start</a></li>
       <li><a href="/for-builders/">For Builders</a></li>
       <li><a href="/benchmark/">Benchmark</a></li>
@@ -155,7 +156,7 @@
       <header class="article-header">
         <p class="blog-kicker">Research Note 04 · Agent memory</p>
         <h1>Reflexion explained: agent memory without weight updates</h1>
-        <p class="article-deck">How Reflexion turns feedback into agent memory, why the evaluator matters, and what its experiments do and do not establish about learning from failure.</p>
+        <p class="article-deck">Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.</p>
         <div class="article-byline"><span>By Scott</span><span>5 min read</span><span>Paper published 2023</span></div>
       </header>
       <div class="article-paper-card">
@@ -163,7 +164,7 @@
         <a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
       </div>
       <div class="article-layout">
-        <aside class="article-toc" aria-label="On this page"><div><p>On this page</p><ol><li><a href="#the-loop">What changes if the weights stay the same?</a></li><li><a href="#evaluation">A useful memory starts with a credible evaluator</a></li><li><a href="#experimental-results">The results are encouraging, with important limits</a></li><li><a href="#memory-storage">Memory storage needs more than a pile of logs</a></li><li><a href="#connecting-experiences">What if the useful context is spread across documents?</a></li><li><a href="#references">References</a></li></ol></div></aside>
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#the-loop">What changes if the weights stay the same?</a></li><li><a href="#evaluation">A useful memory starts with a credible evaluator</a></li><li><a href="#experimental-results">The results are encouraging, with important limits</a></li><li><a href="#memory-storage">Memory storage needs more than a pile of logs</a></li><li><a href="#connecting-experiences">What if the useful context is spread across documents?</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
         <article class="article-body"><p class="article-lead">Reflexion stores feedback from an agent's attempts as written reflections and brings those reflections into later context. The model's weights stay fixed. Whether that memory helps depends heavily on who evaluates the attempt and how reliable the feedback is.</p>
 <p>Agents are going to make mistakes. What bothers me more is an agent hitting a wall, receiving evidence of failure, then taking exactly the same route with even more confidence. Sometimes it finishes by marking the job complete.</p>
 <p>Giving it a few more rounds of prompting won't necessarily fix that. The system first has to recognize what went wrong and carry that information into an action that can use it.</p>
@@ -195,7 +196,7 @@
 <p>The paper distinguishes the immediate trajectory from reflections retained as experience. Even the experimental memory is bounded: some tasks keep only a few recent reflections in a sliding window. “Long term” in that setup shouldn't be mistaken for an unlimited, governed memory service.</p>
 <p>Once you put the idea into an actual agent system, ordinary data questions arrive quickly. Which failures are worth retaining? If later evidence overturns a reflection, how do we stop using it? An experience that helped one agent may not apply to another task or user.</p>
 <p>Writing every failure into storage without judgment can turn the memory into a junk drawer. Retrieval may then make the problem worse by repeatedly surfacing advice that sounds relevant but is no longer valid.</p>
-<p>These questions come up in our design thinking around <a href="https://github.com/cortrix/cortrix">Cortrix</a>. I want a retained experience to be traceable to the task and feedback that produced it. Its scope should be clear, and later results should be able to challenge it.</p>
+<p>These questions come up when we discuss <a href="/semantic-storage/">semantic storage</a> in <a href="https://github.com/cortrix/cortrix">Cortrix</a>. I want a retained experience to be traceable to the task and feedback that produced it. Its scope should be clear, and later results should be able to challenge it.</p>
 <p>A reflection can certainly be embedded and retrieved. Vector similarity doesn't establish that the experience is valid, or that every agent should inherit it.</p>
 <p>I see memory governance as part of semantic governance. That is an ongoing design direction, not a claim that every part of it is already available in Cortrix. The hard work is deciding when a memory deserves trust and when it needs revision or removal. People and teams have a continuing role in those decisions.</p>
 
@@ -207,7 +208,7 @@
 <p>Noah Shinn et al. <cite>Reflexion: Language Agents with Verbal Reinforcement Learning</cite>. NeurIPS 2023. <a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html">Read the original paper</a>. <a href="https://github.com/noahshinn024/reflexion">Authors' code repository</a>.</p>
 </article>
       </div>
-      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes the Cortrix research notes series, connecting foundational papers to practical questions in semantic data systems and agent memory.</p></div></section>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These articles share his personal understanding of research papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
       <nav class="series-navigation" aria-label="Previous and next research notes">
         <a href="/blog/rag-external-memory-data-governance/"><span>Previous note</span><strong>← RAG explained: external memory brings data governance back</strong></a>
         <a href="/blog/hipporag-knowledge-graphs-for-rag/"><span>Next note</span><strong>HippoRAG explained: why RAG comes back to knowledge graphs →</strong></a>
@@ -218,9 +219,10 @@
   <footer class="blog-footer">
     <div class="container blog-footer-inner">
       <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
-      <div class="blog-footer-links"><a href="/#semantic-storage">Storage overview</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>
   <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
 </body>
 </html>

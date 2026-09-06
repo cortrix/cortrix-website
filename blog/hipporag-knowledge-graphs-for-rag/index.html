@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HippoRAG explained: why RAG comes back to knowledge graphs — Cortrix Blog</title>
-  <meta name="description" content="How the original HippoRAG combines knowledge graphs and Personalized PageRank for retrieval across documents, with a close look at its limits.">
+  <meta name="description" content="HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.">
   <meta name="author" content="Scott">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/">
   <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
   <meta property="og:type" content="article">
   <meta property="og:title" content="HippoRAG explained: why RAG comes back to knowledge graphs — Cortrix Blog">
-  <meta property="og:description" content="How the original HippoRAG combines knowledge graphs and Personalized PageRank for retrieval across documents, with a close look at its limits.">
+  <meta property="og:description" content="HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.">
   <meta property="og:url" content="https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/blog/social-card.png">
@@ -21,7 +21,7 @@
   <meta property="og:image:alt" content="Cortrix">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="HippoRAG explained: why RAG comes back to knowledge graphs — Cortrix Blog">
-  <meta name="twitter:description" content="How the original HippoRAG combines knowledge graphs and Personalized PageRank for retrieval across documents, with a close look at its limits.">
+  <meta name="twitter:description" content="HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/blog/social-card.png">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
@@ -30,7 +30,7 @@
       "@type": "BlogPosting",
       "@id": "https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/#article",
       "headline": "HippoRAG explained: why RAG comes back to knowledge graphs",
-      "description": "How the original HippoRAG combines knowledge graphs and Personalized PageRank for retrieval across documents, with a close look at its limits.",
+      "description": "HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.",
       "url": "https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/",
       "mainEntityOfPage": "https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/",
       "author": {
@@ -108,6 +108,7 @@
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
 </head>
 <body class="blog-page article-page">
   <a class="blog-skip-link" href="#main-content">Skip to content</a>
@@ -119,7 +120,7 @@
       <span class="logo-text">Cortrix</span>
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
       <li><a href="/#quickstart">Quick Start</a></li>
       <li><a href="/for-builders/">For Builders</a></li>
       <li><a href="/benchmark/">Benchmark</a></li>
@@ -155,7 +156,7 @@
       <header class="article-header">
         <p class="blog-kicker">Research Note 05 · Retrieval</p>
         <h1>HippoRAG explained: why RAG comes back to knowledge graphs</h1>
-        <p class="article-deck">How the original HippoRAG combines knowledge graphs and Personalized PageRank for retrieval across documents, with a close look at its limits.</p>
+        <p class="article-deck">HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.</p>
         <div class="article-byline"><span>By Scott</span><span>5 min read</span><span>Paper published 2024</span></div>
       </header>
       <div class="article-paper-card">
@@ -163,7 +164,7 @@
         <a href="https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
       </div>
       <div class="article-layout">
-        <aside class="article-toc" aria-label="On this page"><div><p>On this page</p><ol><li><a href="#disconnected-clues">Sometimes the clues were never connected</a></li><li><a href="#index-and-retrieve">How HippoRAG builds and searches its memory</a></li><li><a href="#multiple-hops">Multiple hops without repeated question generation</a></li><li><a href="#graph-errors">A graph can connect mistakes, too</a></li><li><a href="#storage-design">What this suggests for agent storage</a></li><li><a href="#series-recap">Seventeen years of papers, one persistent data problem</a></li><li><a href="#references">References</a></li></ol></div></aside>
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#disconnected-clues">Sometimes the clues were never connected</a></li><li><a href="#index-and-retrieve">How HippoRAG builds and searches its memory</a></li><li><a href="#multiple-hops">Multiple hops without repeated question generation</a></li><li><a href="#graph-errors">A graph can connect mistakes, too</a></li><li><a href="#storage-design">What this suggests for agent storage</a></li><li><a href="#series-recap">Seventeen years of papers, one persistent data problem</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
         <article class="article-body"><p class="article-lead">The original HippoRAG combines a knowledge graph with Personalized PageRank to retrieve evidence across documents. Its 2024 paper is useful when the clues to an answer don't all resemble the question closely enough to be retrieved as isolated passages.</p>
 <p>In my DTCC talk, “Not only Vector,” I keep coming back to the same point: vector retrieval is valuable, and we need to understand its limits. If the answer is sitting in one passage, similarity search can be a very direct way to find it.</p>
 <p>The awkward cases are the ones where a person appears in document A, the relevant relationship appears in document B, and the fact you need is in document C. Each passage may look only weakly related to the full question. The answer becomes visible when the clues connect.</p>
@@ -195,7 +196,7 @@
 <p>A vector result can be similar without being relevant. A graph adds the possibility that two things are connected for the wrong reason. Nodes and edges give us something to inspect. That is a starting point for governance, not a certificate of accuracy.</p>
 
 <h2 id="storage-design">What this suggests for agent storage</h2>
-<p>In our design discussions around <a href="https://github.com/cortrix/cortrix">Cortrix</a>, I think about this as a storage question. If every block remains an isolated vector, how does an agent accumulate relationships across documents? If we introduce a graph, how do we preserve node identity and trace an edge to its source? What happens when the source turns out to be wrong?</p>
+<p>In our design discussions around <a href="https://github.com/cortrix/cortrix">Cortrix</a>, I think about this as a <a href="/semantic-storage/">semantic storage</a> question. If every block remains an isolated vector, how does an agent accumulate relationships across documents? If we introduce a graph, how do we preserve node identity and trace an edge to its source? What happens when the source turns out to be wrong?</p>
 <p>Those are requirements to work through. They don't imply that Cortrix implements HippoRAG or that every graph governance capability is already available.</p>
 <p>I don't take the paper as an instruction to force every dataset into a knowledge graph. I would rather let exact identifiers, full text retrieval, vector search, and explicit relationships do the jobs they are suited to. The system needs to keep the sources and boundaries clear enough that we can inspect the result.</p>
 
@@ -209,7 +210,7 @@
 <p>Bernal Jiménez Gutiérrez et al. <cite>HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models</cite>. NeurIPS 2024. <a href="https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html">Read the original paper</a>. <a href="https://arxiv.org/abs/2405.14831">arXiv record for the original HippoRAG</a>. <a href="https://github.com/OSU-NLP-Group/HippoRAG">Authors' code repository</a>.</p>
 </article>
       </div>
-      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes the Cortrix research notes series, connecting foundational papers to practical questions in semantic data systems and agent memory.</p></div></section>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These articles share his personal understanding of research papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
       <nav class="series-navigation" aria-label="Previous and next research notes">
         <a href="/blog/reflexion-agent-memory-without-weight-updates/"><span>Previous note</span><strong>← Reflexion explained: agent memory without weight updates</strong></a>
         <span></span>
@@ -220,9 +221,10 @@
   <footer class="blog-footer">
     <div class="container blog-footer-inner">
       <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
-      <div class="blog-footer-links"><a href="/#semantic-storage">Storage overview</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>
   <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
 </body>
 </html>

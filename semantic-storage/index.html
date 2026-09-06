@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Is Semantic Storage? | Cortrix</title>
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://cortrix.ai/semantic-storage/">
+<meta name="description" content="A practical guide to semantic storage: how meaning, context, relationships, and sources fit alongside vector retrieval, databases, and agent memory.">
+<meta property="og:title" content="What Is Semantic Storage? | Cortrix">
+<meta property="og:description" content="A practical guide to semantic storage: how meaning, context, relationships, and sources fit alongside vector retrieval, databases, and agent memory.">
+<meta property="og:url" content="https://cortrix.ai/semantic-storage/">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
+<meta name="twitter:title" content="What Is Semantic Storage? | Cortrix">
+<meta name="twitter:description" content="A practical guide to semantic storage: how meaning, context, relationships, and sources fit alongside vector retrieval, databases, and agent memory.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://cortrix.ai/semantic-storage/#guide",
+      "headline": "What is semantic storage?",
+      "name": "What Is Semantic Storage? | Cortrix",
+      "description": "A practical guide to semantic storage: how meaning, context, relationships, and sources fit alongside vector retrieval, databases, and agent memory.",
+      "url": "https://cortrix.ai/semantic-storage/",
+      "inLanguage": "en",
+      "author": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai/"
+      },
+      "publisher": {
+        "@id": "https://cortrix.ai/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://cortrix.ai/#website"
+      },
+      "about": {
+        "@id": "https://cortrix.ai/semantic-storage/#term"
+      },
+      "mainEntityOfPage": "https://cortrix.ai/semantic-storage/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://cortrix.ai/semantic-storage/#term",
+      "name": "Semantic storage",
+      "description": "Semantic storage organizes information together with the meaning, relationships, and source context an application needs to retrieve and use it.",
+      "url": "https://cortrix.ai/semantic-storage/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Semantic Storage",
+          "item": "https://cortrix.ai/semantic-storage/"
+        }
+      ]
+    }
+  ]
+}</script>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/assets/blog/blog.css">
+<link rel="stylesheet" href="/assets/semantic-guide.css">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+</head>
+<body>
+<a class="blog-skip-link" href="#main-content">Skip to content</a>
+<!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">61</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+<main id="main-content" class="semantic-guide section"><div class="container"><div class="guide-inner"><nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Semantic Storage</li></ol></nav><header><p class="guide-label">A practical guide</p><h1>What is semantic storage?</h1></header><article class="guide-body">
+<p class="guide-definition">Semantic storage organizes information together with the meaning, relationships, and source context an application needs to retrieve and use it.</p>
+<p>This guide explains semantic storage as an architectural approach. The goal is to connect stored material with enough context for an application to find relevant information and inspect what it has found. Implementations can combine documents, structured records, vector or keyword indexes, and graph relationships in different ways.</p>
+<nav class="guide-contents" aria-label="Guide contents"><a href="#example">A practical example</a><a href="#components">What the system keeps</a><a href="#related-concepts">Related concepts</a><a href="#limits">Limits</a><a href="#cortrix">Where Cortrix fits</a></nav>
+
+<section id="example"><h2>Start with a question your data should answer</h2>
+<p>Imagine asking an agent why a deployment failed last week. A runbook describes the expected procedure. A ticket records an exception. A later note corrects the team's first diagnosis.</p>
+<p>Finding a passage that resembles the question is useful, but it leaves other questions open. Does the passage describe this deployment? Is it still current? Can the agent follow the correction back to the original incident?</p>
+<p>A semantic storage approach keeps those connections within reach. The application can retrieve material while retaining the identifiers and source information needed to check it. That is a design objective to evaluate, not an assurance that every retrieved answer will be correct.</p></section>
+
+<section id="components"><h2>What the system needs to keep</h2>
+<p>The source material remains important. A derived summary or embedding is useful in relation to the information it represents. The surrounding records can preserve a document's identity, its revision, and the passage an application actually retrieved.</p>
+<p>Relationships add another route through the data. An entity can occur in several documents, and two records may refer to the same event. Stable identifiers help an application recognize that connection. Depending on the workload, relationships can be represented as ordinary record fields, explicit links, or a graph.</p>
+<p>Retrieval indexes help select candidates. An application might combine a keyword match with an embedding score or use explicit relationships to follow a connection. The storage and retrieval design should keep a route back to the records those candidates came from.</p></section>
+
+<section id="related-concepts"><h2>How this relates to databases, RAG, and memory</h2>
+<p>These concepts address different parts of the workflow. A system can use several together.</p>
+<div class="guide-table" tabindex="0" role="region" aria-label="Related storage and retrieval concepts"><table><thead><tr><th scope="col">Concept</th><th scope="col">What it focuses on</th><th scope="col">How it connects</th></tr></thead><tbody>
+<tr><th scope="row">Database</th><td>Storing and querying application records.</td><td>A database can hold the source records, identifiers, and metadata used by a semantic storage layer.</td></tr>
+<tr><th scope="row">Vector database or index</th><td>Storing embeddings and ranking candidates by vector distance or similarity.</td><td>It is one retrieval method. The score alone does not establish identity, source quality, or whether a record is current.</td></tr>
+<tr><th scope="row">RAG</th><td>Using retrieved external material during generation.</td><td>It consumes evidence from an index or data layer. The application still needs to manage that external knowledge.</td></tr>
+<tr><th scope="row">Agent memory</th><td>Retaining information or experience for a future interaction.</td><td>Memory storage can use semantic retrieval, but relevance does not establish that an old memory is valid for a new task.</td></tr>
+</tbody></table></div>
+<p>For example, a RAG application retrieves external material and uses it during generation. Its data layer has to keep that material current and preserve a way to inspect the sources. Choosing a retrieval method is one part of that design.</p>
+<p>An agent memory system has a different responsibility: deciding what to retain for later use. A record of an earlier mistake may be useful, but it also needs enough context to show when that lesson applies.</p></section>
+
+<section id="workflow-terms"><h2>Agent storage, context storage, and memory storage</h2>
+<p>These terms emphasize different needs within an application. Agent storage concerns the data read and written during a workflow. Context storage keeps material available for a particular model invocation. Memory storage retains information that may matter in later interactions.</p>
+<p>The boundaries can overlap. A source passage retrieved as context today might inform a retained note for tomorrow. The useful question is what the application needs to preserve and check at each step, rather than which label it adopts.</p></section>
+
+<section id="limits"><h2>What this approach does not solve on its own</h2>
+<p>Structure and retrieval do not make a source true. An extracted relationship can be wrong, a document can be outdated, and a model can draw a conclusion its evidence does not support. Keeping the evidence inspectable helps you investigate those problems; it does not remove the need for evaluation.</p>
+<p>Access control, deletion, version handling, and memory review need explicit implementation and evaluation. A namespace label or a similarity score does not enforce those policies. Start with one realistic question and inspect the returned sources, then test what happens when the source changes or should no longer be used.</p></section>
+
+<section id="cortrix"><h2>Where Cortrix fits</h2>
+<p>Cortrix is an open source project exploring semantic storage for retrieval, reviewable records, memory APIs, and source context. It is in active pre-release, and the maturity of each interface needs to be checked separately.</p>
+<p>You can <a href="/for-builders/">try a local Docker evaluation</a>, inspect the <a href="/#architecture">architecture overview</a>, or read the <a href="/benchmark/">published retrieval benchmarks</a>. Those results concern their stated retrieval tasks and measurement scope; they do not establish memory quality or production readiness.</p>
+<p>Authentication, authorization, and production readiness are not established by this guide. The <a href="/docs/llms/">public evidence guide</a> keeps the current source references and capability limits together.</p></section>
+
+
+</article></div></div></main>
+<footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+          <div>
+            <span class="logo-text">Cortrix</span>
+            <div class="footer-slogan">Activate Data Brain</div>
+          </div>
+        </div>
+        <p>Open-source semantic storage built for AI agents.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/for-builders/">For Builders</a></li>
+            <li><a href="/semantic-storage/">Semantic Storage</a></li>
+            <li><a href="/#architecture">Architecture</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <ul>
+            <li><a href="/#quickstart">Quick Start</a></li>
+            <li><a href="/docs/llms/">Agent-readable Docs</a></li>
+            <li><a href="/llms.txt">llms.txt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Updates</h4>
+          <ul>
+            <li><a href="/community/">Project updates</a></li>
+            <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Project</h4>
+          <ul>
+            <li><a href="/benchmark/">Benchmark</a></li>
+
+            <li><a href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">Source code</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Social</h4>
+          <ul>
+            <li><a class="social-link" href="https://github.com/cortrix/cortrix" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a class="social-link" href="https://www.linkedin.com/company/cortrix/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a class="social-link" href="https://x.com/Cortrix_AI" target="_blank" rel="noopener">X</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 Cortrix Contributors. Cortrix Core is licensed under Apache-2.0.</p>
+    </div>
+  </footer>
+<script src="/script.js"></script>
+</body>
+</html>

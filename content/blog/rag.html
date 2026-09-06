@@ -27,7 +27,7 @@
 <p>RAG gives us an additional evidence path to inspect. Checking whether that evidence supports the answer remains a separate job.</p>
 
 <h2 id="context-storage">External context needs a data lifecycle</h2>
-<p>This is the part that connects most directly to our design thinking around <a href="https://github.com/cortrix/cortrix">Cortrix</a>. I am interested in external memory as a data layer that can be managed independently.</p>
+<p>This is the part that connects most directly to our thinking about <a href="/semantic-storage/">semantic storage</a> in <a href="https://github.com/cortrix/cortrix">Cortrix</a>. I am interested in external memory as a data layer that can be managed independently.</p>
 <p>For a particular agent response, I want to be able to identify the retrieved block and the document it belongs to. Then I want to follow the source and see whether the material has changed. If an earlier version should no longer be used, the application needs a way to enforce that decision.</p>
 <p>These are practical questions for context storage. A larger model doesn't answer them simply by having more parameters. An index also doesn't answer them simply by returning a similarity score.</p>
 <p>That is my engineering takeaway from the paper, rather than a claim that the RAG architecture implements a complete governance system. Moving knowledge outside the model creates room to govern it. We still have to build and operate that layer.</p>

@@ -78,3 +78,9 @@ The preview server and deployment routes exclude authoring fragments and tooling
 ```bash
 python3 scripts/check-site.py
 ```
+
+## Concept guide and reading experience
+
+The /semantic-storage/ page explains the concept independently from the Blog. Keep its definition scoped to this guide and describe current Cortrix capabilities using the product evidence pages. It is linked from the shared navigation, footer, and relevant article text. Architecture remains available from the homepage and footer.
+
+The Blog uses the homepage color tokens. Its articles are Scott’s personal interpretations of research, not descriptions of papers being implemented in Cortrix. The contents list can be expanded when needed. Images open in a page dialog with a close button and Escape support; article titles and reading links continue to navigate to the article.

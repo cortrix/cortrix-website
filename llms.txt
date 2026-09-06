@@ -19,6 +19,7 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 ## Public Routes
 
 - Home: https://cortrix.ai/
+- Semantic storage guide: https://cortrix.ai/semantic-storage/
 - For builders: https://cortrix.ai/for-builders/
 - Benchmark: https://cortrix.ai/benchmark/
 - Project updates: https://cortrix.ai/community/
@@ -30,14 +31,16 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - Maintainer source-build evidence workflow: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2/examples/first-value-supportops
 - Stack-fit and adoption boundaries: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/adoption/stack-fit.md
 
-## Storage terminology on this site
+## Agent workflow context
 
-- Semantic storage: the Cortrix evaluation frame for retrieval, reviewable records, memory APIs, and source context.
+- Cortrix explores semantic storage through retrieval, reviewable records, memory APIs, and source context.
 - Agent storage: data read and written by an agent workflow.
 - Context storage: source material and records retrieved to assemble model context. Storage alone does not decide what belongs in a prompt.
 - Memory storage: information retained for future interactions. Persistence and similarity do not establish validity, authorization, or safe sharing.
 - These explanations describe workflow needs, not additional shipped product capabilities. Existing source and security boundaries still apply.
-- Human-readable definitions: https://cortrix.ai/#semantic-storage
+- Workflow overview: https://cortrix.ai/#semantic-storage
+- Definition and related concepts: https://cortrix.ai/semantic-storage/
+- The conceptual guide is distinct from product documentation. Scott’s paper explainers are personal interpretations, not descriptions of papers implemented in Cortrix.
 
 ## Approved Public Positioning
 
@@ -126,5 +129,5 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - Research Note 04: Reflexion explained: agent memory without weight updates — https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/ — source paper: Reflexion: Language Agents with Verbal Reinforcement Learning (2023), https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html
 - Research Note 05: HippoRAG explained: why RAG comes back to knowledge graphs — https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/ — source paper: HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models (2024), https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html
 
-The Blog contains English explanations by Scott based on foundational papers. Article metadata and visible paper citations describe the referenced publications; they do not claim search placement, AI recommendation, or guaranteed discoverability.
+The Blog contains Scott’s personal English interpretations of foundational papers. Scott is one of Cortrix’s creators; these articles are not implementation notes for Cortrix. Article metadata and visible paper citations describe the referenced publications; they do not claim search placement, AI recommendation, or guaranteed discoverability.
 <!-- generated:blog:end -->
