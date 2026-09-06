@@ -1,8 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node scripts/render-static-components.mjs",
+  "buildCommand": "node scripts/build-blog.mjs && node scripts/render-static-components.mjs",
   "outputDirectory": ".",
   "routes": [
+    {
+      "src": "/(?:content|components|scripts|tests)(?:/.*)?",
+      "status": 404
+    },
     {
       "src": "/migration(?:/.*)?",
       "status": 410

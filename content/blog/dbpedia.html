@@ -1,0 +1,43 @@
+<p class="article-lead">DBpedia turns information from Wikipedia into structured, linked data that machines can query. Its 2007 paper is still worth reading because it takes entity identity seriously. That problem has followed us all the way into today's AI agents.</p>
+<p>When I joined Alibaba Cloud in 2015, a colleague suggested I read the DBpedia paper. I was working on databases, and my head was full of relational data. I gave it a quick read and moved on. When I started working on Cortrix, I picked it up again. This time, a lot more of it landed.</p>
+<p>Let's go back to 2007. There was no ChatGPT or RAG. The now familiar routine of splitting documents into chunks, embedding them, and putting them in a vector database hadn't become an industry habit.</p>
+<p>Suppose I had asked Wikipedia's search engine, “Which scientists born in Berlin have written papers about databases?” It might have returned pages containing those words. That isn't the same as identifying the people, their birthplaces, the papers, and the relationships between them.</p>
+<p>What struck me on rereading DBpedia was how much semantic technology depends on describing what a thing is. Once that description is clear enough, another system can query it and follow its links to check further information. A fluent answer alone doesn't give us that foundation.</p>
+
+<h2 id="from-pages-to-data">From Wikipedia pages to data a machine can use</h2>
+<p>Wikipedia already contained a huge amount of knowledge. But having content and making it usable by software are different jobs. A person can spot a birth date, occupation, or city in an article. A program gets a mixture of templates, tables, links, and prose. It all arrives in the same pot.</p>
+<p>DBpedia began with the dirty data engineering work. It extracted information from Wikipedia dumps and converted article metadata, infoboxes, and categories into RDF data. In current terms, you can see ETL, schema mapping, and a semantic layer in the same pipeline.</p>
+<figure><a href="/assets/blog/figures/dbpedia-flow.svg" aria-label="Open the full size diagram"><img src="/assets/blog/figures/dbpedia-flow.svg" width="1000" height="420" alt="Wikipedia information becomes explicit assertions with stable identifiers that can link to other datasets" loading="eager"></a><figcaption>Our schematic of the identity and linking idea in DBpedia. It is an independent explanation, not a reproduction of a paper figure. <a href="https://doi.org/10.1007/978-3-540-76298-0_52">Read the original paper</a>. <a href="/assets/blog/figures/dbpedia-flow.svg">Open full size diagram</a>.</figcaption></figure>
+<p>That diagram has aged well. Extraction has to connect to storage, and identifiers have to survive through querying and publication. If one part falls apart, you can end up with a very capable model sitting on top of a data mess.</p>
+<p>The paper reported about 103 million RDF triples in DBpedia. With the external datasets connected to it, the authors estimated the Web of Data at roughly two billion triples. Those are historical figures from the paper. The interesting point is that this work had already moved beyond a small demonstration and into the messiness of real data.</p>
+
+<h2 id="stable-identity">Stable identity is the part I keep coming back to</h2>
+<p>RDF vocabulary can be a rough introduction: subjects, predicates, objects, URIs, SPARQL. I find the identity question much easier to connect to engineering practice.</p>
+<p>The paper uses Busan, the city in South Korea, as an example. DBpedia identifies it with <code>http://dbpedia.org/resource/Busan</code>. Through content negotiation, a regular browser can receive an HTML representation while a client requesting RDF receives structured data. Both are asking about the same resource.</p>
+<p>That URI does more than a primary key inside one database. Another website can refer to it, and a client can use the Web to retrieve a description. It gives the city an identity that can travel across systems.</p>
+<p>Once identity is stable, relationships can accumulate around it. Another dataset doesn't need to copy every fact about Busan. It can state that its record and DBpedia's record refer to the same city, then let downstream systems follow the connection. This is why entity resolution and entity linking still matter. Similar names can hide different entities, and different names can describe the same one.</p>
+<p>That question also comes up in our design discussions around <a href="https://github.com/cortrix/cortrix">Cortrix</a>. We think about semantic storage for agent applications in terms of objects such as namespaces, documents, blocks, and queries. I don't take DBpedia as a reason to copy RDF wholesale. I take it as a reason to ask whether a block keeps a clear identity and source when different agents reuse it. Otherwise, it may remain just a piece of text retrieved on one occasion.</p>
+
+<h2 id="links-across-systems">Links let knowledge cross database boundaries</h2>
+<p>The “nucleus” in the paper's title describes a point of connection. DBpedia linked to datasets such as Geonames, DBLP, MusicBrainz, and US Census Data. It didn't need to put all their knowledge into one database.</p>
+<p>The Busan example makes this concrete. The paper links the DBpedia resource to its Geonames counterpart:</p>
+<pre><code>&lt;http://dbpedia.org/resource/Busan&gt;
+  owl:sameAs
+  &lt;http://sws.geonames.org/1838524/&gt; .</code></pre>
+<p>Here, <code>owl:sameAs</code> asserts that the two identifiers refer to the same thing. A client can follow the link to find more geographic information without copying the entire dataset first.</p>
+<p>The paper's Figure 4 illustrates the connections to external datasets. You can inspect that diagram in the <a href="https://doi.org/10.1007/978-3-540-76298-0_52">original DBpedia paper</a>.</p>
+<p>Compare that with putting PDFs, wiki pages, tickets, and chat logs into one vector index. It can be a quick route to a working RAG demo. But retrieving two passages doesn't tell you whether they describe the same entity or where their claims originated.</p>
+<p>Centralized storage can make access control and governance easier in many organizations. Links become especially useful when knowledge spans systems that keep changing and need to retain their own provenance. An agent then has a way to follow a relationship to the next piece of evidence. Filling a larger context window with loosely related text won't do that for you.</p>
+
+<h2 id="structure-and-truth">Structured data can still be wrong</h2>
+<p>DBpedia didn't remove Wikipedia's contradictions, inconsistent categories, errors, or spam. Extraction also depended on page templates and editing conventions. A changed field or a different template could carry a problem straight into the structured result.</p>
+<p>Putting a claim into RDF doesn't make it true. Garbage in, garbage out still applies.</p>
+<p>Structure does make the claim easier to locate and compare. You can attach a source and decide how to handle a conflict. That gives data governance something concrete to work with. The judgment still has to happen.</p>
+
+<h2 id="why-it-matters">Why I started this series with DBpedia</h2>
+<p>DBpedia made a practical connection between content people could read and data machines could address, query, and link. It also left the inconsistencies visible enough to work on. For me, that is the lasting infrastructure lesson.</p>
+<p>It's why I started this series here. Before we discuss better embeddings or larger context windows, I want to know whether we can identify the thing we're talking about and follow its evidence.</p>
+<p>In the <a href="/blog/transe-knowledge-graph-embeddings/">next article on TransE</a>, the question moves into vector space. What happens when a relationship becomes something we can learn and score, starting with <code>h + r ≈ t</code>?</p>
+
+<h2 id="references">References</h2>
+<p>Sören Auer et al. <cite>DBpedia: A Nucleus for a Web of Open Data</cite>. ISWC 2007. <a href="https://doi.org/10.1007/978-3-540-76298-0_52">Read the original paper</a>.</p>

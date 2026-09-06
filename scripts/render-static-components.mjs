@@ -18,6 +18,7 @@ async function findPageFiles(directory) {
     if (entry.name === '.git'
         || entry.name === '.vercel'
         || entry.name === 'node_modules'
+        || entryPath === path.join(projectRoot, 'content')
         || entryPath === path.join(projectRoot, 'components')) {
       continue;
     }

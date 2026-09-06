@@ -6,4 +6,13 @@
   <url><loc>https://cortrix.ai/community/</loc></url>
   <url><loc>https://cortrix.ai/docs/llms/</loc></url>
   <url><loc>https://cortrix.ai/llms.txt</loc></url>
+<!-- generated:blog:start -->
+  <url><loc>https://cortrix.ai/blog/</loc></url>
+  <url><loc>https://cortrix.ai/blog/rss.xml</loc></url>
+  <url><loc>https://cortrix.ai/blog/dbpedia-linked-data-explained/</loc></url>
+  <url><loc>https://cortrix.ai/blog/transe-knowledge-graph-embeddings/</loc></url>
+  <url><loc>https://cortrix.ai/blog/rag-external-memory-data-governance/</loc></url>
+  <url><loc>https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/</loc></url>
+  <url><loc>https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/</loc></url>
+  <!-- generated:blog:end -->
 </urlset>

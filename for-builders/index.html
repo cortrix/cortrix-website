@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Docker Quick Start for AI Agent Builders — Cortrix</title>
-  <meta name="description" content="Evaluate Cortrix through a local Docker Quick Start for agent builders, with active pre-release status, source evidence, and explicit capability boundaries.">
-  <meta name="robots" content="index, follow">
+  <title>Agent Storage Quick Start with Docker | Cortrix</title>
+  <meta name="description" content="Evaluate Cortrix semantic storage locally with Docker. Run a reranked query and inspect source context, memory APIs, and current capability boundaries.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://cortrix.ai/for-builders/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/for-builders/">
   <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/for-builders/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Docker Quick Start for AI Agent Builders — Cortrix">
-  <meta property="og:description" content="A local Docker evaluation path for builders exploring pre-release semantic storage.">
+  <meta property="og:title" content="Agent Storage Quick Start with Docker | Cortrix">
+  <meta property="og:description" content="Evaluate Cortrix semantic storage locally with Docker. Run a reranked query and inspect source context, memory APIs, and current capability boundaries.">
   <meta property="og:url" content="https://cortrix.ai/for-builders/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
@@ -19,11 +19,52 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix - Agent-Native Semantic Storage">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Docker Quick Start for AI Agent Builders — Cortrix">
-  <meta name="twitter:description" content="A local Docker evaluation path for builders exploring pre-release semantic storage.">
+  <meta name="twitter:title" content="Agent Storage Quick Start with Docker | Cortrix">
+  <meta name="twitter:description" content="Evaluate Cortrix semantic storage locally with Docker. Run a reranked query and inspect source context, memory APIs, and current capability boundaries.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"For Builders - Cortrix","url":"https://cortrix.ai/for-builders/","description":"Evaluate Cortrix through a local Docker Quick Start for agent builders, with active pre-release status, source evidence, and explicit capability boundaries."}</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://cortrix.ai/for-builders/#webpage",
+      "url": "https://cortrix.ai/for-builders/",
+      "name": "Agent Storage Quick Start with Docker | Cortrix",
+      "description": "Evaluate Cortrix semantic storage locally with Docker. Run a reranked query and inspect source context, memory APIs, and current capability boundaries.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://cortrix.ai/#website"
+      },
+      "about": {
+        "@id": "https://cortrix.ai/#software"
+      },
+      "breadcrumb": {
+        "@id": "https://cortrix.ai/for-builders/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://cortrix.ai/for-builders/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "For Builders",
+          "item": "https://cortrix.ai/for-builders/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -40,6 +81,7 @@
       <li><a href="/#quickstart">Quick Start</a></li>
       <li><a href="/for-builders/">For Builders</a></li>
       <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
     </ul>
     <div class="nav-actions">
       <a
@@ -68,8 +110,8 @@
   <header class="page-hero">
     <div class="container">
       <div class="page-kicker">For builders</div>
-      <h1>Start locally with Docker.</h1>
-      <p>Keep your database and agent framework. Clone Cortrix, start the loopback-only Docker profile, check readiness, and run a source-backed reranked query. No <code>.env</code> file or LLM provider key is required.</p>
+      <h1>Evaluate agent storage locally with Docker.</h1>
+      <p>Keep your database and agent framework. Evaluate Cortrix semantic storage: clone the repository, start the loopback-only Docker profile, check readiness, and run a source-backed reranked query. No <code>.env</code> file or LLM provider key is required.</p>
       <div class="page-actions"><a href="/#quickstart" class="btn btn-primary btn-lg">Open Quick Start</a><a href="https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/QUICKSTART.md" class="btn btn-outline btn-lg" target="_blank" rel="noopener">Read Docker Quick Start</a></div>
     </div>
   </header>
@@ -88,11 +130,12 @@
         <div class="path-list">
           <div class="path-item"><strong>Docker Quick Start</strong><p>Follow Quick Start to build the checked-out source, download pinned BGE-M3 embedding and bge-reranker-v2-m3 reranking assets, wait for source-backed readiness, and send a query with <code>rerank=true</code>. The path publishes only <code>127.0.0.1:8420</code>; external LLM roles and the built-in Agent remain disabled. It is not a production-readiness, parser-coverage, or retrieval-quality benchmark.</p></div>
           <div class="path-item"><strong>Existing stack</strong><p>Keep operational systems in place and review the <a href="https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/adoption/stack-fit.md" target="_blank" rel="noopener">commit-pinned stack-fit decision cards</a> for data movement, sync ownership, failure domains, security responsibility, and rollback boundaries. They do not claim universal compatibility or replacement.</p></div>
-          <div class="path-item"><strong>Retrieval evidence</strong><p>Open <code>/benchmark/</code> from the site navigation for commit-pinned retrieval scores, configurations, selected-query scope, methodology, and retrieval-only boundaries.</p></div>
+          <div class="path-item"><strong>Retrieval evidence</strong><p>Open the <a href="/benchmark/">semantic storage retrieval benchmarks</a> for commit-pinned retrieval scores, configurations, selected-query scope, methodology, and retrieval-only boundaries.</p></div>
         </div>
       </div>
     </section>
-  </main>
+  <section class="section"><div class="container"><h2>Understand context and memory before integrating</h2><p>Start with the <a href="/#semantic-storage">semantic storage overview</a>. For the underlying mechanisms, read how <a href="/blog/rag-external-memory-data-governance/">RAG uses external context</a> and how <a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion retains feedback as agent memory</a>.</p></div></section>
+</main>
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">

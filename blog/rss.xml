@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Cortrix Blog</title>
+    <link>https://cortrix.ai/blog/</link>
+    <description>Practical readings of foundational papers on semantic systems and agent memory.</description>
+    <language>en-us</language>
+    <atom:link href="https://cortrix.ai/blog/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DBpedia explained: why linked data still matters</title>
+      <link>https://cortrix.ai/blog/dbpedia-linked-data-explained/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/dbpedia-linked-data-explained/</guid>
+      <description>A practical reading of the 2007 DBpedia paper: RDF, stable entity identity, linked data, and what they mean for semantic storage and AI agents.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Knowledge graphs</category>
+    </item>
+    <item>
+      <title>TransE explained: relationships beyond vector similarity</title>
+      <link>https://cortrix.ai/blog/transe-knowledge-graph-embeddings/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/transe-knowledge-graph-embeddings/</guid>
+      <description>How TransE uses h + r ≈ t to learn knowledge graph embeddings, where its simple model breaks down, and why vectors still need explicit relationships.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Knowledge graphs</category>
+    </item>
+    <item>
+      <title>RAG explained: external memory brings data governance back</title>
+      <link>https://cortrix.ai/blog/rag-external-memory-data-governance/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/rag-external-memory-data-governance/</guid>
+      <description>Read the original RAG paper through a database engineer&#39;s lens: parametric memory, retrieval, RAG-Sequence, RAG-Token, and the limits of grounding.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Retrieval</category>
+    </item>
+    <item>
+      <title>Reflexion explained: agent memory without weight updates</title>
+      <link>https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/</guid>
+      <description>How Reflexion turns feedback into agent memory, why the evaluator matters, and what its experiments do and do not establish about learning from failure.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Agent memory</category>
+    </item>
+    <item>
+      <title>HippoRAG explained: why RAG comes back to knowledge graphs</title>
+      <link>https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/</guid>
+      <description>How the original HippoRAG combines knowledge graphs and Personalized PageRank for retrieval across documents, with a close look at its limits.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Retrieval</category>
+    </item>
+  </channel>
+</rss>

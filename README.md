@@ -17,11 +17,12 @@ Cortrix product roadmap, security reports, brand usage, and unapproved product c
 
 ## Local preview
 
-Run the shared-component renderer, then open `index.html` in a browser or serve this directory with any static file server:
+Build the Blog and shared components, then open `index.html` in a browser or serve this directory with any static file server:
 
 ```bash
+node scripts/build-blog.mjs
 node scripts/render-static-components.mjs
-python3 -m http.server 4190 --bind 127.0.0.1
+python3 scripts/preview.py --port 4190 --bind 127.0.0.1
 ```
 
 ## Shared static header
@@ -40,4 +41,40 @@ Verify that every page is synchronized:
 node scripts/render-static-components.mjs --check
 ```
 
-Vercel runs the renderer during the build and serves the repository root as the static output.
+Vercel runs the Blog generator followed by the shared-component renderer, then serves the repository root as the static output.
+
+## Writing a Blog research note
+
+The Blog uses small source files and no third party dependencies or CMS. Add an HTML body fragment under `content/blog/`, then add its metadata to `content/blog/posts.json`. Each metadata entry needs `slug`, `title`, `description`, `paperTitle`, `paperYear`, `paperUrl`, `paperAuthors`, `topic`, `seriesOrder`, `bodyFile`, and `readMinutes`. Optional `publishedAt` and `updatedAt` values must use an ISO date or timestamp; leave them out until the dates are confirmed.
+
+The HTML fragment should begin with the article introduction and use `h2` headings for the table of contents. Keep original mechanism diagrams under `/assets/blog/figures/` and reference them with paths starting at the site root. Use a `figure` with `figcaption` whenever an image needs context or attribution.
+
+Generate the Blog index, article pages, RSS feed, sitemap entries, and the Blog section in `llms.txt` before previewing:
+
+```bash
+node scripts/build-blog.mjs
+node scripts/render-static-components.mjs
+```
+
+Check that generated output and the shared header are current:
+
+```bash
+node scripts/build-blog.mjs --check
+node scripts/render-static-components.mjs --check
+```
+
+## Research attribution and reuse
+
+Each research note must identify its source paper, its authors, and a stable publication URL. Write an independent explanation and use original diagrams. Do not assume that a paper available on arXiv permits reuse of its text or figures: check the license of the exact version and any third party material. The [arXiv reuse guide](https://info.arxiv.org/help/license/reuse.html) explains the distinction. Record permission and attribution before adding reused material; the initial five notes do not reproduce paper figures or PDFs.
+
+The generator stops when a Blog directory is no longer listed in the metadata. Decide explicitly whether an existing article needs removal or a redirect before changing a published URL. It does not delete unlisted directories.
+
+## Search discovery
+
+Use unique titles and descriptions that match visible content, stable canonical URLs, and meaningful internal links. The homepage explains semantic storage, agent storage, context storage, and memory storage as workflow terms without expanding capability claims. Article source citations remain distinct from Blog authorship. RSS and Sitemap entries are generated from the same article metadata. Search indexing and AI citations can only be measured after publication; no ranking outcome is implied.
+
+The preview server and deployment routes exclude authoring fragments and tooling from page access. Local previews send an X-Robots-Tag noindex header; published pages retain their own index policy. Run the site checks with:
+
+```bash
+python3 scripts/check-site.py
+```

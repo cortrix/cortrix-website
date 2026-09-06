@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BEIR Retrieval Benchmark — Cortrix</title>
-  <meta name="description" content="Review the strongest measured Cortrix retrieval result for each of four BEIR corpora, with explicit query scope and limitations.">
-  <meta name="robots" content="index, follow">
+  <title>Semantic Storage Retrieval Benchmarks (BEIR) | Cortrix</title>
+  <meta name="description" content="Inspect Cortrix retrieval results on four BEIR corpora, with Recall@10, nDCG@10, selected query scope, source records, and measurement limits.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://cortrix.ai/benchmark/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/benchmark/">
   <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/benchmark/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="BEIR Retrieval Benchmark — Cortrix">
-  <meta property="og:description" content="Four BEIR corpora, four strongest measured results, absolute nDCG@10 and Recall@10, and explicit evidence boundaries.">
+  <meta property="og:title" content="Semantic Storage Retrieval Benchmarks (BEIR) | Cortrix">
+  <meta property="og:description" content="Inspect Cortrix retrieval results on four BEIR corpora, with Recall@10, nDCG@10, selected query scope, source records, and measurement limits.">
   <meta property="og:url" content="https://cortrix.ai/benchmark/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
@@ -19,11 +19,52 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix benchmark">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="BEIR Retrieval Benchmark — Cortrix">
-  <meta name="twitter:description" content="The strongest commit-pinned retrieval result for each of four BEIR corpora, with explicit query scope.">
+  <meta name="twitter:title" content="Semantic Storage Retrieval Benchmarks (BEIR) | Cortrix">
+  <meta name="twitter:description" content="Inspect Cortrix retrieval results on four BEIR corpora, with Recall@10, nDCG@10, selected query scope, source records, and measurement limits.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix benchmark">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Benchmark - Cortrix","url":"https://cortrix.ai/benchmark/","description":"Review the strongest measured Cortrix retrieval result for each of four BEIR corpora, with explicit query scope and limitations."}</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://cortrix.ai/benchmark/#webpage",
+      "url": "https://cortrix.ai/benchmark/",
+      "name": "Semantic Storage Retrieval Benchmarks (BEIR) | Cortrix",
+      "description": "Inspect Cortrix retrieval results on four BEIR corpora, with Recall@10, nDCG@10, selected query scope, source records, and measurement limits.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://cortrix.ai/#website"
+      },
+      "about": {
+        "@id": "https://cortrix.ai/#software"
+      },
+      "breadcrumb": {
+        "@id": "https://cortrix.ai/benchmark/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://cortrix.ai/benchmark/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Benchmark",
+          "item": "https://cortrix.ai/benchmark/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/benchmark/preview.css">
@@ -41,6 +82,7 @@
       <li><a href="/#quickstart">Quick Start</a></li>
       <li><a href="/for-builders/">For Builders</a></li>
       <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
     </ul>
     <div class="nav-actions">
       <a
@@ -71,7 +113,7 @@
     <div class="container benchmark-hero-grid">
       <div class="benchmark-hero-copy">
         <div class="page-kicker">Benchmark</div>
-        <h1>Cortrix retrieval benchmarks</h1>
+        <h1>Semantic storage retrieval benchmarks</h1>
         <p class="benchmark-intro">Four BEIR corpora. Their best measured retrieval results, with source records and query scope.</p>
         <p class="benchmark-meta">August 2026 · Recall@10 and nDCG@10 · Public result bundle</p>
         <div class="benchmark-hero-actions">

@@ -1,0 +1,15 @@
+.storage-guide { background: #101827; }
+.storage-eyebrow { color: #ffab72; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 1rem; }
+.storage-guide h2 { font-size: clamp(2rem,4vw,3.4rem); line-height: 1.12; margin-bottom: 1.4rem; letter-spacing: -.03em; }
+.storage-intro { color: #b3c0d2; font-size: 1.08rem; line-height: 1.8; max-width: 850px; margin: 0 0 1rem; }
+.storage-terms { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.4rem; margin: 2.5rem 0 1.5rem; }
+.storage-terms > div { border: 1px solid #304055; border-radius: 12px; padding: 1.6rem; min-width: 0; background: #131e30; }
+.storage-terms dt { font-size: 1.3rem; font-weight: 750; color: #f1f5f9; margin-bottom: .8rem; }
+.storage-terms dd { margin: 0; line-height: 1.75; color: #b3c0d2; }
+.storage-terms dd + dd { margin-top: 1.2rem; font-size: .93rem; }
+.storage-boundary { max-width: 1000px; color: #a4b4c9; font-size: .94rem; line-height: 1.8; }
+.storage-reading { margin-top: 2.5rem; padding-top: 1.8rem; border-top: 1px solid #304055; max-width: 900px; }
+.storage-reading h3 { font-size: 1.3rem; margin-bottom: .75rem; }
+.storage-reading p { color: #b3c0d2; line-height: 1.8; margin-bottom: 1rem; }
+.storage-guide a:focus-visible { outline: 3px solid #ff8a30; outline-offset: 4px; }
+@media (max-width: 760px) { .storage-terms { grid-template-columns: 1fr; } }

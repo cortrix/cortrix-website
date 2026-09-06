@@ -1,0 +1,41 @@
+<p class="article-lead">Reflexion stores feedback from an agent's attempts as written reflections and brings those reflections into later context. The model's weights stay fixed. Whether that memory helps depends heavily on who evaluates the attempt and how reliable the feedback is.</p>
+<p>Agents are going to make mistakes. What bothers me more is an agent hitting a wall, receiving evidence of failure, then taking exactly the same route with even more confidence. Sometimes it finishes by marking the job complete.</p>
+<p>Giving it a few more rounds of prompting won't necessarily fix that. The system first has to recognize what went wrong and carry that information into an action that can use it.</p>
+<p>The 2023 Reflexion paper explores that possibility without retraining the model. “An agent that reflects on itself” makes a good headline. I think the harder question is who gets to call the attempt a failure, and why we should trust the lesson that follows.</p>
+<p>In the <a href="/blog/rag-external-memory-data-governance/">RAG article</a>, we separated external knowledge from model parameters. Reflexion gives external memory another kind of content: an account of why the last attempt failed.</p>
+
+<h2 id="the-loop">What changes if the weights stay the same?</h2>
+<p>The Reflexion loop assigns three roles. The Actor attempts the task. The Evaluator judges what happened. The Self-Reflection component uses the feedback and trajectory to produce text that can guide a later attempt.</p>
+<p>That text enters episodic memory. When the Actor runs again, its context includes the experience from earlier attempts. The underlying model is unchanged, but the information it can act on has changed.</p>
+<figure><a href="/assets/blog/figures/reflexion-loop.svg" aria-label="Open the full size diagram"><img src="/assets/blog/figures/reflexion-loop.svg" width="1000" height="420" alt="Actor attempts a task, evaluator provides feedback, reflection becomes memory, and memory informs the next attempt" loading="eager"></a><figcaption>Our schematic of the feedback and memory loop described by Shinn et al. <a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html">See Figure 2 in the original paper</a>. <a href="/assets/blog/figures/reflexion-loop.svg">Open full size diagram</a>.</figcaption></figure>
+<p>The authors use the term “semantic gradient” for this kind of feedback. It is a useful metaphor, provided we don't confuse it with a gradient that updates model parameters. The reflection explains a possible mistake and suggests a different strategy in language the model can use during inference.</p>
+<p>A sparse signal such as success or failure can become a more specific reminder. That doesn't make the reminder correct. It gives the next attempt something more concrete to work with.</p>
+
+<h2 id="evaluation">A useful memory starts with a credible evaluator</h2>
+<p>The Evaluator is the part I pay the most attention to. Before an agent can reflect usefully, it needs a trustworthy signal about what happened. If the feedback is wrong, the reflection may turn a bad diagnosis into a very articulate one.</p>
+<p>The experiments used different forms of evaluation, including exact matches, task rules, judgments from another model, and programming feedback from tests. These sources don't all provide the same strength of evidence.</p>
+<p>In a business workflow, I would also consider where a human review belongs. Success and failure are often tied to a team's requirements, and the system doesn't get to define those requirements just because it can produce a score.</p>
+<p>A faulty test can reject correct code. An incomplete test can accept code that is wrong. Missing environmental feedback can send an agent into repeated attempts to repair a problem it has misunderstood.</p>
+<p>Without reliable observation, reflection can become a way to talk itself deeper into a corner. A confident explanation is still not evidence.</p>
+
+<h2 id="experimental-results">The results are encouraging, with important limits</h2>
+<p>In the paper's HumanEval Python setting, the reported pass@1 score was 0.80 for the GPT-4 baseline and 0.91 for Reflexion. The Reflexion procedure involved feedback and further attempts, so that comparison should be read with the paper's testing and retry setup in mind. It isn't a claim about an unaided first attempt in a production coding workflow.</p>
+<p>Some Rust and MBPP results also improved, but the gains weren't universal. The MBPP Python result in the table was below the baseline. <a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html">Table 2 in the paper</a> is worth reading as a whole.</p>
+<p>The WebShop result is an especially useful counterexample. Across four trials, the agent didn't improve or generate helpful reflections. The authors discuss the difficulty of tasks that need diverse exploration and can get stuck in a local optimum.</p>
+<p>If the starting assumption is wrong, writing it out more carefully won't make the answer appear. The agent may need a different observation, another search path, or an evaluator that can challenge the assumption itself.</p>
+<p>My reading of the evidence is modest: written reflection can improve subsequent attempts in some tasks and evaluation settings. The paper doesn't establish an agent that improves indefinitely just by reflecting.</p>
+
+<h2 id="memory-storage">Memory storage needs more than a pile of logs</h2>
+<p>The paper distinguishes the immediate trajectory from reflections retained as experience. Even the experimental memory is bounded: some tasks keep only a few recent reflections in a sliding window. “Long term” in that setup shouldn't be mistaken for an unlimited, governed memory service.</p>
+<p>Once you put the idea into an actual agent system, ordinary data questions arrive quickly. Which failures are worth retaining? If later evidence overturns a reflection, how do we stop using it? An experience that helped one agent may not apply to another task or user.</p>
+<p>Writing every failure into storage without judgment can turn the memory into a junk drawer. Retrieval may then make the problem worse by repeatedly surfacing advice that sounds relevant but is no longer valid.</p>
+<p>These questions come up in our design thinking around <a href="https://github.com/cortrix/cortrix">Cortrix</a>. I want a retained experience to be traceable to the task and feedback that produced it. Its scope should be clear, and later results should be able to challenge it.</p>
+<p>A reflection can certainly be embedded and retrieved. Vector similarity doesn't establish that the experience is valid, or that every agent should inherit it.</p>
+<p>I see memory governance as part of semantic governance. That is an ongoing design direction, not a claim that every part of it is already available in Cortrix. The hard work is deciding when a memory deserves trust and when it needs revision or removal. People and teams have a continuing role in those decisions.</p>
+
+<h2 id="connecting-experiences">What if the useful context is spread across documents?</h2>
+<p>RAG gives us external knowledge. Reflexion gives us recorded experience. Both can still leave us with isolated passages or a short memory window.</p>
+<p>The <a href="/blog/hipporag-knowledge-graphs-for-rag/">next article looks at HippoRAG</a>. It brings knowledge graphs and Personalized PageRank into retrieval to connect clues across documents. That takes us back to a question from the start of this series: what relationships do we need to preserve?</p>
+
+<h2 id="references">References</h2>
+<p>Noah Shinn et al. <cite>Reflexion: Language Agents with Verbal Reinforcement Learning</cite>. NeurIPS 2023. <a href="https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html">Read the original paper</a>. <a href="https://github.com/noahshinn024/reflexion">Authors' code repository</a>.</p>

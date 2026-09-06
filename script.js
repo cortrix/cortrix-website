@@ -258,22 +258,6 @@
     });
   }
 
-  // --- Scroll Reveal ---
-  const reveals = document.querySelectorAll('.feature-card, .problem-card, .usecase-card, .step, .arch-item, .content-card, .note-panel, .path-item, .benchmark-result-card, .benchmark-average-card, .benchmark-dataset-panel, .benchmark-assembly, .compare-block, .system-map, .proof-panel, .pipeline-panel, .terminal-panel');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+  // Keep content visible without requiring scrolling or an observer callback.
 
-  reveals.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
-  });
 })();

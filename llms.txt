@@ -4,7 +4,7 @@
 
 Website: https://cortrix.ai/
 Primary language: English
-Document version: 2026-09-03
+Document version: 2026-09-06
 Generated from public website content and commit-pinned source evidence
 Current Core release tag: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2
 Current Core release commit: https://github.com/cortrix/cortrix/commit/d298d6b7e64c67551f567e7cddd514bae1adb57b
@@ -29,6 +29,15 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - Docker Quick Start: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/QUICKSTART.md
 - Maintainer source-build evidence workflow: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2/examples/first-value-supportops
 - Stack-fit and adoption boundaries: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/adoption/stack-fit.md
+
+## Storage terminology on this site
+
+- Semantic storage: the Cortrix evaluation frame for retrieval, reviewable records, memory APIs, and source context.
+- Agent storage: data read and written by an agent workflow.
+- Context storage: source material and records retrieved to assemble model context. Storage alone does not decide what belongs in a prompt.
+- Memory storage: information retained for future interactions. Persistence and similarity do not establish validity, authorization, or safe sharing.
+- These explanations describe workflow needs, not additional shipped product capabilities. Existing source and security boundaries still apply.
+- Human-readable definitions: https://cortrix.ai/#semantic-storage
 
 ## Approved Public Positioning
 
@@ -105,3 +114,17 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - English is the canonical public language.
 - English remains the canonical source for machine-readable public boundaries.
 - English is the only public website language. Do not infer localized pages from this file.
+
+<!-- generated:blog:start -->
+## Blog
+
+- Blog index: https://cortrix.ai/blog/
+- RSS feed: https://cortrix.ai/blog/rss.xml
+- Research Note 01: DBpedia explained: why linked data still matters — https://cortrix.ai/blog/dbpedia-linked-data-explained/ — source paper: DBpedia: A Nucleus for a Web of Open Data (2007), https://doi.org/10.1007/978-3-540-76298-0_52
+- Research Note 02: TransE explained: relationships beyond vector similarity — https://cortrix.ai/blog/transe-knowledge-graph-embeddings/ — source paper: Translating Embeddings for Modeling Multi-relational Data (2013), https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html
+- Research Note 03: RAG explained: external memory brings data governance back — https://cortrix.ai/blog/rag-external-memory-data-governance/ — source paper: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (2020), https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
+- Research Note 04: Reflexion explained: agent memory without weight updates — https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/ — source paper: Reflexion: Language Agents with Verbal Reinforcement Learning (2023), https://proceedings.neurips.cc/paper_files/paper/2023/hash/1b44b878bb782e6954cd888628510e90-Abstract-Conference.html
+- Research Note 05: HippoRAG explained: why RAG comes back to knowledge graphs — https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/ — source paper: HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models (2024), https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html
+
+The Blog contains English explanations by Scott based on foundational papers. Article metadata and visible paper citations describe the referenced publications; they do not claim search placement, AI recommendation, or guaranteed discoverability.
+<!-- generated:blog:end -->

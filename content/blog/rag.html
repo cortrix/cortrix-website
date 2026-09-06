@@ -1,0 +1,40 @@
+<p class="article-lead">Retrieval augmented generation, or RAG, combines a language model with a retrievable document index. The 2020 paper separates knowledge in model parameters from external memory that can be replaced. For anyone working on data systems, that separation is where the interesting work starts.</p>
+<p>A lot of teams describe RAG as adding a search box to an LLM. It's an accessible explanation. It can also make the system sound much simpler than it is: connect an internal knowledge base, and the model will answer private questions correctly. Anyone who has operated one of these systems has probably seen how quickly that assumption breaks.</p>
+<p>In the <a href="/blog/transe-knowledge-graph-embeddings/">TransE article</a>, we looked at how relationships enter vector space. Now I want to follow the next step. Once knowledge has been represented and indexed, how does it get back in front of a model during generation?</p>
+
+<h2 id="two-kinds-of-memory">Parametric and nonparametric memory</h2>
+<p>The original RAG paper draws a useful distinction. Parametric memory is what a pretrained model has learned in its weights. Nonparametric memory is an external document index that the system can retrieve from.</p>
+<p>Model weights are an awkward place to maintain every changing business fact. A price list gets revised, a promotion ends, or a new incident report arrives. Retraining for every update is hardly a practical maintenance plan. And even after training, how do you confirm that the old fact was replaced rather than retained alongside the new one?</p>
+<p>An external index gives the system something more concrete to work with. We can inspect the documents and replace the indexed material separately from the generator.</p>
+<p>For its experiments, the paper used the December 2018 Wikipedia dump, divided into about 21 million passages of 100 words each. Those numbers describe a particular research snapshot. They aren't default settings that every RAG application should inherit.</p>
+
+<h2 id="retrieval-and-generation">How the retriever and generator work together</h2>
+<p>The query encoder turns a question into a vector. The retriever uses it to find candidate passages in the document index. The generator then conditions its output on the question and retrieved material.</p>
+<figure><a href="/assets/blog/figures/rag-flow.svg" aria-label="Open the full size diagram"><img src="/assets/blog/figures/rag-flow.svg" width="1000" height="420" alt="A query is encoded to retrieve passages from an external index, which condition the generator's answer" loading="eager"></a><figcaption>Our schematic of the retrieval and generation relationship in Lewis et al. The original model marginalizes over retrieved documents; this diagram shows the main components. <a href="https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html">Read Figure 1 in the paper</a>. <a href="/assets/blog/figures/rag-flow.svg">Open full size diagram</a>.</figcaption></figure>
+<p>The original model does more than paste the first search result into a prompt. It treats the retrieved document as a latent variable and combines generation probabilities across candidate documents.</p>
+<p>In <code>RAG-Sequence</code>, each candidate document conditions the whole output sequence, and the model marginalizes over those candidates. In <code>RAG-Token</code>, it marginalizes at each token, so different parts of the output can draw on different documents from the retrieved set. That doesn't mean it runs a fresh retrieval request for every token.</p>
+<p>The paper illustrates the latter with a question about Hemingway's works: different book names can draw support from different passages. Retrieval is part of how the answer is formed. It isn't just an attachment added after the model has finished writing.</p>
+
+<h2 id="replacing-an-index">What changes when you swap the external memory?</h2>
+<p>One experiment still stands out to me. The authors built Wikipedia indexes from 2016 and 2018 and asked about 82 world leader positions that had changed between those years. Answers tracked the time period more successfully when the index matched the question's year. Using the wrong year's index hurt accuracy.</p>
+<p>This demonstrates a useful boundary: external knowledge can be replaced without retraining the generator for that replacement. It doesn't mean an index automatically knows how to update itself.</p>
+<p>In a business application, someone still has to decide how new documents enter the index and what happens to superseded material. Permissions and deletion have to be implemented in the surrounding system. Those are data responsibilities that RAG makes visible again.</p>
+
+<h2 id="hallucinations">Why RAG does not eliminate hallucinations</h2>
+<p>The paper included a human evaluation of generated Jeopardy questions. Across 452 comparisons, evaluators preferred RAG over BART for factuality in 42.7% of cases and preferred BART in 7.1%. Those are preference rates in that experiment, not an overall answer accuracy score or a guarantee for an enterprise knowledge base. See <a href="https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html">Table 4 in the original paper</a>.</p>
+<p>The improvement is encouraging. The failure paths are still there.</p>
+<p>An external source can be wrong. The retriever can return the wrong passage, and the generator can ignore a useful one. It can also combine individually plausible statements into a conclusion the sources don't support.</p>
+<p>RAG gives us an additional evidence path to inspect. Checking whether that evidence supports the answer remains a separate job.</p>
+
+<h2 id="context-storage">External context needs a data lifecycle</h2>
+<p>This is the part that connects most directly to our design thinking around <a href="https://github.com/cortrix/cortrix">Cortrix</a>. I am interested in external memory as a data layer that can be managed independently.</p>
+<p>For a particular agent response, I want to be able to identify the retrieved block and the document it belongs to. Then I want to follow the source and see whether the material has changed. If an earlier version should no longer be used, the application needs a way to enforce that decision.</p>
+<p>These are practical questions for context storage. A larger model doesn't answer them simply by having more parameters. An index also doesn't answer them simply by returning a similarity score.</p>
+<p>That is my engineering takeaway from the paper, rather than a claim that the RAG architecture implements a complete governance system. Moving knowledge outside the model creates room to govern it. We still have to build and operate that layer.</p>
+
+<h2 id="remembering-failure">The next question: can an agent remember a mistake?</h2>
+<p>Our path through this series has moved from identifiable knowledge to vector representations and now to external memory used during generation. At this point, an agent can look things up. What happens after it tries something and fails?</p>
+<p>The <a href="/blog/reflexion-agent-memory-without-weight-updates/">next article reads Reflexion</a>, which stores feedback and reflection in episodic memory without updating model weights. It brings the question closer to the behavior of an actual working agent.</p>
+
+<h2 id="references">References</h2>
+<p>Patrick Lewis et al. <cite>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</cite>. NeurIPS 2020. <a href="https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html">Conference paper</a>. <a href="https://arxiv.org/abs/2005.11401">arXiv record and version history</a>.</p>
