@@ -9,3 +9,5 @@ If you believe a notice, attribution, or third-party reference is missing or inc
 ## Research notes
 
 The Blog contains independent commentary on cited research papers. Paper titles and bibliographic information identify the original work and its authors; links do not imply endorsement. The five Semantic Classics articles use original explanatory diagrams, without reproducing paper figures or hosting paper PDFs. Referenced publications retain their own copyright and license terms. Website copyright terms do not apply to the referenced papers.
+
+The RC2 release article visualizes published Cortrix Benchmarks result data, which remains under CC BY 4.0. The article links to the immutable source summaries and identifies the compared configurations. This visualization does not change or relicense the source data.

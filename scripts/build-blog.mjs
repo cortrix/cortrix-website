@@ -78,23 +78,41 @@ function validateDate(value, field, index) {
   }
 }
 
+function validateUrl(value, field, index) {
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(`posts.json[${index}].${field} must be a valid URL`);
+  }
+  if (url.protocol !== 'https:' && url.protocol !== 'http:') {
+    throw new Error(`posts.json[${index}].${field} must use HTTP or HTTPS`);
+  }
+}
+
 function validatePosts(rawPosts) {
   if (!Array.isArray(rawPosts) || rawPosts.length === 0) {
     throw new Error('posts.json must contain a non-empty array');
   }
 
-  const requiredStrings = [
-    'slug', 'title', 'description', 'paperTitle', 'paperUrl', 'topic', 'bodyFile',
-  ];
+  const requiredStrings = ['slug', 'title', 'description', 'topic', 'bodyFile'];
   const slugs = new Set();
   const titles = new Set();
   const orders = new Set();
+  let featuredCount = 0;
 
   return rawPosts.map((rawPost, index) => {
     if (!rawPost || typeof rawPost !== 'object' || Array.isArray(rawPost)) {
       throw new Error(`posts.json[${index}] must be an object`);
     }
-    for (const field of requiredStrings) {
+    const kind = rawPost.kind ?? 'paper';
+    if (!['paper', 'release'].includes(kind)) {
+      throw new Error(`posts.json[${index}].kind must be paper or release`);
+    }
+    const kindStrings = kind === 'paper'
+      ? ['paperTitle', 'paperUrl']
+      : ['releaseTag', 'releaseUrl', 'evidenceUrl', 'image', 'imageAlt'];
+    for (const field of [...requiredStrings, ...kindStrings]) {
       if (typeof rawPost[field] !== 'string' || rawPost[field].trim() === '') {
         throw new Error(`posts.json[${index}].${field} must be a non-empty string`);
       }
@@ -102,23 +120,31 @@ function validatePosts(rawPosts) {
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(rawPost.slug)) {
       throw new Error(`posts.json[${index}].slug must be a lowercase URL slug`);
     }
-    if (!Number.isInteger(rawPost.paperYear) || rawPost.paperYear < 1900 || rawPost.paperYear > 2100) {
-      throw new Error(`posts.json[${index}].paperYear must be a four-digit integer`);
-    }
-    if (!Number.isInteger(rawPost.seriesOrder) || rawPost.seriesOrder < 1) {
-      throw new Error(`posts.json[${index}].seriesOrder must be a positive integer`);
-    }
     if (!Number.isInteger(rawPost.readMinutes) || rawPost.readMinutes < 1) {
       throw new Error(`posts.json[${index}].readMinutes must be a positive integer`);
     }
-    let paperUrl;
-    try {
-      paperUrl = new URL(rawPost.paperUrl);
-    } catch {
-      throw new Error(`posts.json[${index}].paperUrl must be a valid URL`);
-    }
-    if (paperUrl.protocol !== 'https:' && paperUrl.protocol !== 'http:') {
-      throw new Error(`posts.json[${index}].paperUrl must use HTTP or HTTPS`);
+    if (kind === 'paper') {
+      if (!Number.isInteger(rawPost.paperYear) || rawPost.paperYear < 1900 || rawPost.paperYear > 2100) {
+        throw new Error(`posts.json[${index}].paperYear must be a four-digit integer`);
+      }
+      if (!Number.isInteger(rawPost.seriesOrder) || rawPost.seriesOrder < 1) {
+        throw new Error(`posts.json[${index}].seriesOrder must be a positive integer`);
+      }
+      validateUrl(rawPost.paperUrl, 'paperUrl', index);
+      if (orders.has(rawPost.seriesOrder)) throw new Error(`Duplicate seriesOrder: ${rawPost.seriesOrder}`);
+      orders.add(rawPost.seriesOrder);
+    } else {
+      validateDate(rawPost.releaseDate, 'releaseDate', index);
+      if (!rawPost.releaseDate) throw new Error(`posts.json[${index}].releaseDate must be an ISO date or date-time`);
+      validateUrl(rawPost.releaseUrl, 'releaseUrl', index);
+      validateUrl(rawPost.evidenceUrl, 'evidenceUrl', index);
+      if (!rawPost.image.startsWith('/') || path.normalize(rawPost.image).startsWith('..')) {
+        throw new Error(`posts.json[${index}].image must be a root-relative path`);
+      }
+      if (rawPost.featured !== undefined && typeof rawPost.featured !== 'boolean') {
+        throw new Error(`posts.json[${index}].featured must be a boolean`);
+      }
+      if (rawPost.featured) featuredCount += 1;
     }
     if (path.isAbsolute(rawPost.bodyFile)
         || path.normalize(rawPost.bodyFile).startsWith('..')
@@ -133,17 +159,24 @@ function validatePosts(rawPosts) {
     }
     if (slugs.has(rawPost.slug)) throw new Error(`Duplicate slug: ${rawPost.slug}`);
     if (titles.has(rawPost.title)) throw new Error(`Duplicate title: ${rawPost.title}`);
-    if (orders.has(rawPost.seriesOrder)) throw new Error(`Duplicate seriesOrder: ${rawPost.seriesOrder}`);
     slugs.add(rawPost.slug);
     titles.add(rawPost.title);
-    orders.add(rawPost.seriesOrder);
 
     return {
       ...rawPost,
+      kind,
       description: rawPost.description.trim(),
-      paperAuthors: normalizeAuthors(rawPost.paperAuthors, index),
+      ...(kind === 'paper' ? { paperAuthors: normalizeAuthors(rawPost.paperAuthors, index) } : {}),
     };
-  }).sort((a, b) => a.seriesOrder - b.seriesOrder);
+  }).sort((a, b) => {
+    if (a.featured !== b.featured) return a.featured ? -1 : 1;
+    if (a.kind !== b.kind) return a.kind === 'release' ? -1 : 1;
+    if (a.kind === 'release') return Date.parse(b.releaseDate) - Date.parse(a.releaseDate);
+    return a.seriesOrder - b.seriesOrder;
+  }).map((post, index, posts) => {
+    if (index === 0 && featuredCount > 1) throw new Error('Only one Blog post may be featured');
+    return post;
+  });
 }
 
 function addHeadingIds(body) {
@@ -173,6 +206,8 @@ function renderHeader(header) {
 }
 
 function renderMeta({ title, description, url, type = 'website', structuredData, post }) {
+  const image = post?.image ? `${siteUrl}${post.image}` : `${siteUrl}/assets/blog/social-card.png`;
+  const imageAlt = post?.imageAlt ?? 'Cortrix';
   const dates = post
     ? [
         post.publishedAt ? `  <meta property="article:published_time" content="${escapeHtml(post.publishedAt)}">` : '',
@@ -193,14 +228,13 @@ function renderMeta({ title, description, url, type = 'website', structuredData,
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:url" content="${escapeHtml(url)}">
   <meta property="og:site_name" content="Cortrix">
-  <meta property="og:image" content="${siteUrl}/assets/blog/social-card.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Cortrix">
+  <meta property="og:image" content="${escapeHtml(image)}">
+  <meta property="og:image:alt" content="${escapeHtml(imageAlt)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(title)}">
   <meta name="twitter:description" content="${escapeHtml(description)}">
-  <meta name="twitter:image" content="${siteUrl}/assets/blog/social-card.png">
+  <meta name="twitter:image" content="${escapeHtml(image)}">
+  <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}">
 ${dates ? `${dates}\n` : ''}  <script type="application/ld+json">${jsonForHtml(structuredData)}</script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
@@ -209,35 +243,44 @@ ${dates ? `${dates}\n` : ''}  <script type="application/ld+json">${jsonForHtml(s
 }
 
 function renderCard(post, featured = false) {
+  const isRelease = post.kind === 'release';
+  const visual = isRelease ? post.image : '/assets/blog/research-map.svg';
+  const visualAlt = isRelease ? post.imageAlt : '';
+  const label = isRelease ? post.releaseTag : String(post.seriesOrder).padStart(2, '0');
+  const metadata = isRelease
+    ? `<span>${escapeHtml(post.topic)}</span><span>${escapeHtml(post.releaseTag)}</span><span>Released ${escapeHtml(formatShortDate(post.releaseDate))}</span><span>${post.readMinutes} min read</span>`
+    : `<span>${escapeHtml(post.topic)}</span><span>Paper: ${post.paperYear}</span><span>Note ${String(post.seriesOrder).padStart(2, '0')}</span><span>${post.readMinutes} min read</span>`;
   return `<article class="blog-card${featured ? ' blog-card-featured' : ''}" data-blog-card data-topic="${escapeHtml(post.topic)}">
-${featured ? `    <a class="blog-card-visual" href="/blog/${post.slug}/" tabindex="-1" aria-hidden="true">
-      <img src="/assets/blog/research-map.svg" alt="" width="720" height="430">
-      <span>${String(post.seriesOrder).padStart(2, '0')}</span>
+${featured ? `    <a class="blog-card-visual" href="/blog/${post.slug}/"${isRelease ? '' : ' tabindex="-1" aria-hidden="true"'}>
+      <img src="${escapeHtml(visual)}" alt="${escapeHtml(visualAlt)}" width="${isRelease ? 1200 : 720}" height="${isRelease ? 630 : 430}">
+      ${isRelease ? "" : `<span>${escapeHtml(label)}</span>`}
     </a>
 ` : ''}    <div class="blog-card-copy">
-      <div class="blog-meta"><span>${escapeHtml(post.topic)}</span><span>Paper: ${post.paperYear}</span><span>Note ${String(post.seriesOrder).padStart(2, '0')}</span><span>${post.readMinutes} min read</span></div>
+      <div class="blog-meta">${metadata}</div>
       <h${featured ? '2' : '3'}><a href="/blog/${post.slug}/">${escapeHtml(post.title)}</a></h${featured ? '2' : '3'}>
       <p>${escapeHtml(post.description)}</p>
       <a class="blog-read-link" href="/blog/${post.slug}/">Read article <span aria-hidden="true">→</span></a>
     </div>
-  </article>`;
+  </article>`.replace(/^[ \\t]+$/gm, "");
 }
 
 function renderFooter() {
   return `<footer class="blog-footer">
     <div class="container blog-footer-inner">
-      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
       <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>`;
 }
 
 function renderIndex(posts, header) {
-  const featured = posts[0];
-  const remaining = posts;
-  const topics = [...new Set(remaining.map(post => post.topic))];
-  const title = 'Cortrix Blog | Semantic Storage and Agent Memory';
-  const description = 'Notes on semantic storage and AI agents, through classic papers on linked data, retrieval, and memory.';
+  const papers = posts.filter(post => post.kind === 'paper');
+  const latestRelease = posts.find(post => post.kind === 'release' && post.featured)
+    ?? posts.find(post => post.kind === 'release');
+  const featuredPaper = papers[0];
+  const topics = [...new Set(posts.map(post => post.topic))];
+  const title = 'Cortrix Blog | Semantic Storage Updates and Research';
+  const description = 'Cortrix product updates and Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory.';
   const url = `${siteUrl}/blog/`;
   const structuredData = {
     '@context': 'https://schema.org',
@@ -279,22 +322,26 @@ function renderIndex(posts, header) {
   <main id="main-content">
     <header class="blog-hero">
       <div class="container blog-hero-grid">
-        <div class="blog-hero-copy"><p class="blog-kicker">Research Notes</p><h1><span>Cortrix Blog.</span><span>A closer look at the ideas behind AI.</span></h1><p>Scott’s personal readings of research on semantic storage, retrieval, and agent memory. These articles explore ideas and their limits; they are not implementation notes for Cortrix.</p><a class="blog-rss-link" href="/blog/rss.xml">Follow via RSS <span aria-hidden="true">↗</span></a></div>
+        <div class="blog-hero-copy"><p class="blog-kicker">Product updates and research notes</p><h1><span>Cortrix Blog.</span><span>News and notes from Cortrix.</span></h1><p>Release updates from Cortrix alongside Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory. Research notes explore ideas and their limits; they are not implementation notes for Cortrix.</p><a class="blog-rss-link" href="/blog/rss.xml">Follow via RSS <span aria-hidden="true">↗</span></a></div>
         <img src="/assets/blog/research-map.svg" alt="Abstract map of connected research concepts" width="720" height="430">
       </div>
     </header>
+${latestRelease ? `    <section id="latest-release" class="blog-latest-release container" aria-labelledby="latest-release-title">
+      <div class="blog-section-heading"><div><p class="blog-kicker">Latest release</p><h2 id="latest-release-title">${escapeHtml(latestRelease.releaseTag)}</h2></div><p>Our latest release update: retrieval results, licensing, and practical fixes.</p></div>
+      ${renderCard(latestRelease, true)}
+    </section>` : ''}
     <section class="blog-feature container" aria-labelledby="featured-title">
       <div class="blog-section-heading"><div><p class="blog-kicker">Start here</p><h2 id="featured-title">Start with DBpedia</h2></div><p>New to the series? Begin with the question of how knowledge gets a stable identity.</p></div>
-      ${renderCard(featured, true)}
+      ${renderCard(featuredPaper, true)}
     </section>
     <section class="blog-library container" aria-labelledby="library-title">
-      <div class="blog-section-heading"><div><p class="blog-kicker">The series</p><h2 id="library-title">All articles</h2></div><p>Read in order, or pick the topic that interests you.</p></div>
+      <div class="blog-section-heading"><div><p class="blog-kicker">Browse the Blog</p><h2 id="library-title">All articles</h2></div><p>Read in order, or pick the topic that interests you.</p></div>
       <div class="blog-filters" role="group" aria-label="Filter articles by topic">
         <button class="is-active" type="button" data-blog-filter="all" aria-pressed="true">All articles</button>
         ${topics.map(topic => `<button type="button" data-blog-filter="${escapeHtml(topic)}" aria-pressed="false">${escapeHtml(topic)}</button>`).join('\n        ')}
       </div>
       <div class="blog-card-grid" data-blog-grid>
-        ${remaining.map(post => renderCard(post)).join('\n        ')}
+        ${posts.map(post => renderCard(post)).join('\n        ')}
       </div>
       <p class="blog-empty" data-blog-empty hidden>No notes match this topic yet. Choose another filter to keep exploring.</p>
     </section>
@@ -314,20 +361,39 @@ function formatDate(value) {
   }).format(new Date(value));
 }
 
+function formatShortDate(value) {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC',
+  }).format(new Date(value)).replace(/^Sep\b/, 'Sept');
+}
+
 function renderArticle(post, posts, body, header) {
-  const index = posts.indexOf(post);
-  const previous = posts[index - 1];
-  const next = posts[index + 1];
+  const papers = posts.filter(item => item.kind === 'paper');
+  const paperIndex = papers.indexOf(post);
+  const previous = paperIndex >= 0 ? papers[paperIndex - 1] : undefined;
+  const next = paperIndex >= 0 ? papers[paperIndex + 1] : undefined;
   const processed = addHeadingIds(body);
   const url = `${siteUrl}/blog/${post.slug}/`;
   const title = `${post.title} — Cortrix Blog`;
-  const paperCitation = {
-    '@type': 'ScholarlyArticle',
-    name: post.paperTitle,
-    url: post.paperUrl,
-    temporalCoverage: String(post.paperYear),
-    author: post.paperAuthors.map(name => ({ '@type': 'Person', name })),
-  };
+  const citation = post.kind === 'paper'
+    ? {
+        '@type': 'ScholarlyArticle',
+        name: post.paperTitle,
+        url: post.paperUrl,
+        temporalCoverage: String(post.paperYear),
+        author: post.paperAuthors.map(name => ({ '@type': 'Person', name })),
+      }
+    : {
+        '@type': 'SoftwareSourceCode',
+        name: `Cortrix ${post.releaseTag}`,
+        url: post.releaseUrl,
+        codeRepository: 'https://github.com/cortrix/cortrix',
+        about: {
+          '@type': 'CreativeWork',
+          name: 'Published benchmark evidence',
+          url: post.evidenceUrl,
+        },
+      };
   const blogPosting = {
     '@type': 'BlogPosting',
     '@id': `${url}#article`,
@@ -338,9 +404,9 @@ function renderArticle(post, posts, body, header) {
     author: { '@type': 'Person', name: 'Scott' },
     publisher: { '@type': 'Organization', name: 'Cortrix', url: siteUrl },
     isPartOf: { '@type': 'Blog', name: 'Cortrix Blog', url: `${siteUrl}/blog/` },
-    citation: paperCitation,
+    citation,
     inLanguage: 'en',
-    image: [`${siteUrl}/assets/blog/social-card.png`],
+    image: [`${post.image ? siteUrl + post.image : siteUrl + '/assets/blog/social-card.png'}`],
   };
   if (post.publishedAt) blogPosting.datePublished = post.publishedAt;
   if (post.updatedAt) blogPosting.dateModified = post.updatedAt;
@@ -362,38 +428,48 @@ function renderArticle(post, posts, body, header) {
     post.publishedAt ? `Published ${formatDate(post.publishedAt)}` : '',
     post.updatedAt ? `Updated ${formatDate(post.updatedAt)}` : '',
   ].filter(Boolean).join(' · ');
+  const isRelease = post.kind === 'release';
+  const breadcrumbLabel = isRelease ? post.releaseTag : `Note ${String(post.seriesOrder).padStart(2, '0')}`;
+  const kicker = isRelease
+    ? `Release update · ${escapeHtml(post.topic)}`
+    : `Research Note ${String(post.seriesOrder).padStart(2, '0')} · ${escapeHtml(post.topic)}`;
+  const byline = isRelease
+    ? `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Released ${escapeHtml(formatShortDate(post.releaseDate))}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`
+    : `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Paper published ${post.paperYear}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`;
+  const sourceCard = isRelease
+    ? `<div class="article-paper-card article-release-card"><div><p class="blog-kicker">Release sources</p><h2>${escapeHtml(post.releaseTag)}</h2><p>Published release details and benchmark evidence</p></div><div class="article-source-links"><a href="${escapeHtml(post.releaseUrl)}" target="_blank" rel="noopener noreferrer">Source release <span aria-hidden="true">↗</span></a><a href="${escapeHtml(post.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Benchmark evidence <span aria-hidden="true">↗</span></a></div></div>`
+    : `<div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>${escapeHtml(post.paperTitle)}</h2><p>${escapeHtml(post.paperAuthors.length > 2 ? post.paperAuthors.slice(0, 2).join(', ') + ' et al.' : post.paperAuthors.join(', '))} · ${post.paperYear}</p></div><a href="${escapeHtml(post.paperUrl)}" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>`;
+  const authorDescription = isRelease
+    ? 'Scott is one of Cortrix’s creators. He writes release updates that connect shipped changes with their public sources and practical implications.'
+    : 'Scott is one of Cortrix’s creators. These research notes share his personal understanding of papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.';
+  const followOn = isRelease
+    ? `<section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol>${papers.map(item => `<li><span>${String(item.seriesOrder).padStart(2, '0')}</span><a href="/blog/${item.slug}/">${escapeHtml(item.title)}</a><small>${escapeHtml(item.topic)} · ${item.readMinutes} min</small></li>`).join('')}</ol></section>`
+    : `<nav class="series-navigation" aria-label="Previous and next research notes">${previous ? `<a href="/blog/${previous.slug}/"><span>Previous note</span><strong>← ${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}${next ? `<a href="/blog/${next.slug}/"><span>Next note</span><strong>${escapeHtml(next.title)} →</strong></a>` : '<span></span>'}</nav><section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol>${papers.map(item => `<li${item.slug === post.slug ? ' aria-current="page"' : ''}><span>${String(item.seriesOrder).padStart(2, '0')}</span><a href="/blog/${item.slug}/">${escapeHtml(item.title)}</a><small>${escapeHtml(item.topic)} · ${item.readMinutes} min</small></li>`).join('')}</ol></section>`;
 
   return `<!DOCTYPE html>
 <!-- generated:blog-page -->
 <html lang="en">
 <head>${renderMeta({ title, description: post.description, url, type: 'article', structuredData, post })}
 </head>
-<body class="blog-page article-page">
+<body class="blog-page article-page${isRelease ? " release-page" : ""}">
   <a class="blog-skip-link" href="#main-content">Skip to content</a>
   ${renderHeader(header)}
   <main id="main-content">
     <div class="article-shell container">
-      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Note ${String(post.seriesOrder).padStart(2, '0')}</li></ol></nav>
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">${escapeHtml(breadcrumbLabel)}</li></ol></nav>
       <header class="article-header">
-        <p class="blog-kicker">Research Note ${String(post.seriesOrder).padStart(2, '0')} · ${escapeHtml(post.topic)}</p>
+        <p class="blog-kicker">${kicker}</p>
         <h1>${escapeHtml(post.title)}</h1>
         <p class="article-deck">${escapeHtml(post.description)}</p>
-        <div class="article-byline"><span>By Scott</span><span>${post.readMinutes} min read</span><span>Paper published ${post.paperYear}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}</div>
+        <div class="article-byline">${byline}</div>
       </header>
-      <div class="article-paper-card">
-        <div><p class="blog-kicker">Source paper</p><h2>${escapeHtml(post.paperTitle)}</h2><p>${escapeHtml(post.paperAuthors.length > 2 ? post.paperAuthors.slice(0, 2).join(', ') + ' et al.' : post.paperAuthors.join(', '))} · ${post.paperYear}</p></div>
-        <a href="${escapeHtml(post.paperUrl)}" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
-      </div>
+      ${sourceCard}
       <div class="article-layout">
         <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol>${processed.headings.map(heading => `<li><a href="#${heading.id}">${escapeHtml(heading.label)}</a></li>`).join('')}</ol></details></div></aside>
         <article class="article-body">${processed.html}</article>
       </div>
-      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These articles share his personal understanding of research papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
-      <nav class="series-navigation" aria-label="Previous and next research notes">
-        ${previous ? `<a href="/blog/${previous.slug}/"><span>Previous note</span><strong>← ${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}
-        ${next ? `<a href="/blog/${next.slug}/"><span>Next note</span><strong>${escapeHtml(next.title)} →</strong></a>` : '<span></span>'}
-      </nav>
-      <section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol>${posts.map(item => `<li${item.slug === post.slug ? ' aria-current="page"' : ''}><span>${String(item.seriesOrder).padStart(2, '0')}</span><a href="/blog/${item.slug}/">${escapeHtml(item.title)}</a><small>${escapeHtml(item.topic)} · ${item.readMinutes} min</small></li>`).join('')}</ol></section>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>${authorDescription}</p></div></section>
+      ${followOn}
     </div>
   </main>
   ${renderFooter()}
@@ -421,7 +497,7 @@ function renderRss(posts) {
   <channel>
     <title>Cortrix Blog</title>
     <link>${siteUrl}/blog/</link>
-    <description>Practical readings of foundational papers on semantic systems and agent memory.</description>
+    <description>Cortrix product updates and practical readings on semantic systems, retrieval, and agent memory.</description>
     <language>en-us</language>
     <atom:link href="${siteUrl}/blog/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
@@ -453,14 +529,17 @@ function renderSitemapSection(posts) {
 }
 
 function renderLlmsSection(posts) {
+  const releases = posts.filter(post => post.kind === 'release');
+  const papers = posts.filter(post => post.kind === 'paper');
   return `${startMarker}
 ## Blog
 
 - Blog index: ${siteUrl}/blog/
 - RSS feed: ${siteUrl}/blog/rss.xml
-${posts.map(post => `- Research Note ${String(post.seriesOrder).padStart(2, '0')}: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source paper: ${post.paperTitle} (${post.paperYear}), ${post.paperUrl}`).join('\n')}
+${releases.map(post => `- Release update: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source release: ${post.releaseUrl} — benchmark evidence: ${post.evidenceUrl}`).join('\n')}
+${papers.map(post => `- Research Note ${String(post.seriesOrder).padStart(2, '0')}: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source paper: ${post.paperTitle} (${post.paperYear}), ${post.paperUrl}`).join('\n')}
 
-The Blog contains Scott’s personal English interpretations of foundational papers. Scott is one of Cortrix’s creators; these articles are not implementation notes for Cortrix. Article metadata and visible paper citations describe the referenced publications; they do not claim search placement, AI recommendation, or guaranteed discoverability.
+The Blog contains Cortrix product updates and Scott’s personal English interpretations of foundational papers. Research notes are not implementation notes for Cortrix. Release updates cite their source release and supporting evidence; research notes keep separate, visible paper citations. This metadata does not claim search placement, AI recommendation, or guaranteed discoverability.
 ${endMarker}`;
 }
 

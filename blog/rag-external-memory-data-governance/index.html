@@ -16,13 +16,12 @@
   <meta property="og:url" content="https://cortrix.ai/blog/rag-external-memory-data-governance/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/blog/social-card.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="RAG explained: external memory brings data governance back — Cortrix Blog">
   <meta name="twitter:description" content="RAG lets a model use external knowledge. The original paper also helps explain why sources, updates, and data governance still matter.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/blog/social-card.png">
+  <meta name="twitter:image:alt" content="Cortrix">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -188,10 +187,7 @@
         <p class="article-deck">RAG lets a model use external knowledge. The original paper also helps explain why sources, updates, and data governance still matter.</p>
         <div class="article-byline"><span>By Scott</span><span>5 min read</span><span>Paper published 2020</span></div>
       </header>
-      <div class="article-paper-card">
-        <div><p class="blog-kicker">Source paper</p><h2>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</h2><p>Patrick Lewis, Ethan Perez et al. · 2020</p></div>
-        <a href="https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
-      </div>
+      <div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</h2><p>Patrick Lewis, Ethan Perez et al. · 2020</p></div><a href="https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>
       <div class="article-layout">
         <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#two-kinds-of-memory">Parametric and nonparametric memory</a></li><li><a href="#retrieval-and-generation">How the retriever and generator work together</a></li><li><a href="#replacing-an-index">What changes when you swap the external memory?</a></li><li><a href="#hallucinations">Why RAG does not eliminate hallucinations</a></li><li><a href="#context-storage">External context needs a data lifecycle</a></li><li><a href="#remembering-failure">The next question: can an agent remember a mistake?</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
         <article class="article-body"><p class="article-lead">Retrieval augmented generation, or RAG, combines a language model with a retrievable document index. The 2020 paper separates knowledge in model parameters from external memory that can be replaced. For anyone working on data systems, that separation is where the interesting work starts.</p>
@@ -236,17 +232,13 @@
 <p>Patrick Lewis et al. <cite>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</cite>. NeurIPS 2020. <a href="https://papers.nips.cc/paper_files/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html">Conference paper</a>. <a href="https://arxiv.org/abs/2005.11401">arXiv record and version history</a>.</p>
 </article>
       </div>
-      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These articles share his personal understanding of research papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
-      <nav class="series-navigation" aria-label="Previous and next research notes">
-        <a href="/blog/transe-knowledge-graph-embeddings/"><span>Previous note</span><strong>← TransE explained: relationships beyond vector similarity</strong></a>
-        <a href="/blog/reflexion-agent-memory-without-weight-updates/"><span>Next note</span><strong>Reflexion explained: agent memory without weight updates →</strong></a>
-      </nav>
-      <section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li aria-current="page"><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These research notes share his personal understanding of papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
+      <nav class="series-navigation" aria-label="Previous and next research notes"><a href="/blog/transe-knowledge-graph-embeddings/"><span>Previous note</span><strong>← TransE explained: relationships beyond vector similarity</strong></a><a href="/blog/reflexion-agent-memory-without-weight-updates/"><span>Next note</span><strong>Reflexion explained: agent memory without weight updates →</strong></a></nav><section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li aria-current="page"><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
     </div>
   </main>
   <footer class="blog-footer">
     <div class="container blog-footer-inner">
-      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
       <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>

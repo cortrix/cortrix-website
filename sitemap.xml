@@ -10,6 +10,7 @@
 <!-- generated:blog:start -->
   <url><loc>https://cortrix.ai/blog/</loc></url>
   <url><loc>https://cortrix.ai/blog/rss.xml</loc></url>
+  <url><loc>https://cortrix.ai/blog/cortrix-rc2-release/</loc></url>
   <url><loc>https://cortrix.ai/blog/dbpedia-linked-data-explained/</loc></url>
   <url><loc>https://cortrix.ai/blog/transe-knowledge-graph-embeddings/</loc></url>
   <url><loc>https://cortrix.ai/blog/rag-external-memory-data-governance/</loc></url>

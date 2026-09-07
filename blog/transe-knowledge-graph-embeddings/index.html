@@ -16,13 +16,12 @@
   <meta property="og:url" content="https://cortrix.ai/blog/transe-knowledge-graph-embeddings/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/blog/social-card.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="TransE explained: relationships beyond vector similarity — Cortrix Blog">
   <meta name="twitter:description" content="What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/blog/social-card.png">
+  <meta name="twitter:image:alt" content="Cortrix">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -160,10 +159,7 @@
         <p class="article-deck">What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.</p>
         <div class="article-byline"><span>By Scott</span><span>5 min read</span><span>Paper published 2013</span></div>
       </header>
-      <div class="article-paper-card">
-        <div><p class="blog-kicker">Source paper</p><h2>Translating Embeddings for Modeling Multi-relational Data</h2><p>Antoine Bordes, Nicolas Usunier et al. · 2013</p></div>
-        <a href="https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
-      </div>
+      <div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>Translating Embeddings for Modeling Multi-relational Data</h2><p>Antoine Bordes, Nicolas Usunier et al. · 2013</p></div><a href="https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>
       <div class="article-layout">
         <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#translation">What does h + r ≈ t actually mean?</a></li><li><a href="#engineering-choice">The simplicity is an engineering choice</a></li><li><a href="#link-prediction">The output is a ranked entity, not a fluent sentence</a></li><li><a href="#limitations">Where the translation model runs out of room</a></li><li><a href="#semantic-records">A vector still needs a record behind it</a></li><li><a href="#from-relations-to-retrieval">What happens when the model needs external knowledge?</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
         <article class="article-body"><p class="article-lead">TransE is a knowledge graph embedding model that represents a relationship as a translation between entity vectors: <code>h + r ≈ t</code>. The useful idea is that a relationship can shape a prediction, instead of disappearing into a generic similarity score.</p>
@@ -208,17 +204,13 @@
 <p>Antoine Bordes et al. <cite>Translating Embeddings for Modeling Multi-relational Data</cite>. NeurIPS 2013. <a href="https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html">Read the original paper</a>.</p>
 </article>
       </div>
-      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These articles share his personal understanding of research papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
-      <nav class="series-navigation" aria-label="Previous and next research notes">
-        <a href="/blog/dbpedia-linked-data-explained/"><span>Previous note</span><strong>← DBpedia explained: why linked data still matters</strong></a>
-        <a href="/blog/rag-external-memory-data-governance/"><span>Next note</span><strong>RAG explained: external memory brings data governance back →</strong></a>
-      </nav>
-      <section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li aria-current="page"><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These research notes share his personal understanding of papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
+      <nav class="series-navigation" aria-label="Previous and next research notes"><a href="/blog/dbpedia-linked-data-explained/"><span>Previous note</span><strong>← DBpedia explained: why linked data still matters</strong></a><a href="/blog/rag-external-memory-data-governance/"><span>Next note</span><strong>RAG explained: external memory brings data governance back →</strong></a></nav><section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li aria-current="page"><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
     </div>
   </main>
   <footer class="blog-footer">
     <div class="container blog-footer-inner">
-      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
       <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>

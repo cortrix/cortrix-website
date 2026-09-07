@@ -16,13 +16,12 @@
   <meta property="og:url" content="https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/blog/social-card.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="HippoRAG explained: why RAG comes back to knowledge graphs — Cortrix Blog">
   <meta name="twitter:description" content="HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/blog/social-card.png">
+  <meta name="twitter:image:alt" content="Cortrix">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -160,10 +159,7 @@
         <p class="article-deck">HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.</p>
         <div class="article-byline"><span>By Scott</span><span>5 min read</span><span>Paper published 2024</span></div>
       </header>
-      <div class="article-paper-card">
-        <div><p class="blog-kicker">Source paper</p><h2>HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models</h2><p>Bernal Jiménez Gutiérrez, Yiheng Shu et al. · 2024</p></div>
-        <a href="https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a>
-      </div>
+      <div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models</h2><p>Bernal Jiménez Gutiérrez, Yiheng Shu et al. · 2024</p></div><a href="https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>
       <div class="article-layout">
         <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#disconnected-clues">Sometimes the clues were never connected</a></li><li><a href="#index-and-retrieve">How HippoRAG builds and searches its memory</a></li><li><a href="#multiple-hops">Multiple hops without repeated question generation</a></li><li><a href="#graph-errors">A graph can connect mistakes, too</a></li><li><a href="#storage-design">What this suggests for agent storage</a></li><li><a href="#series-recap">Seventeen years of papers, one persistent data problem</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
         <article class="article-body"><p class="article-lead">The original HippoRAG combines a knowledge graph with Personalized PageRank to retrieve evidence across documents. Its 2024 paper is useful when the clues to an answer don't all resemble the question closely enough to be retrieved as isolated passages.</p>
@@ -211,17 +207,13 @@
 <p>Bernal Jiménez Gutiérrez et al. <cite>HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models</cite>. NeurIPS 2024. <a href="https://proceedings.nips.cc/paper_files/paper/2024/hash/6ddc001d07ca4f319af96a3024f6dbd1-Abstract-Conference.html">Read the original paper</a>. <a href="https://arxiv.org/abs/2405.14831">arXiv record for the original HippoRAG</a>. <a href="https://github.com/OSU-NLP-Group/HippoRAG">Authors' code repository</a>.</p>
 </article>
       </div>
-      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These articles share his personal understanding of research papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
-      <nav class="series-navigation" aria-label="Previous and next research notes">
-        <a href="/blog/reflexion-agent-memory-without-weight-updates/"><span>Previous note</span><strong>← Reflexion explained: agent memory without weight updates</strong></a>
-        <span></span>
-      </nav>
-      <section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li aria-current="page"><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These research notes share his personal understanding of papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
+      <nav class="series-navigation" aria-label="Previous and next research notes"><a href="/blog/reflexion-agent-memory-without-weight-updates/"><span>Previous note</span><strong>← Reflexion explained: agent memory without weight updates</strong></a><span></span></nav><section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li aria-current="page"><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
     </div>
   </main>
   <footer class="blog-footer">
     <div class="container blog-footer-inner">
-      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
       <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>

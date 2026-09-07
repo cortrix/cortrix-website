@@ -43,9 +43,11 @@ node scripts/render-static-components.mjs --check
 
 Vercel runs the Blog generator followed by the shared-component renderer, then serves the repository root as the static output.
 
-## Writing a Blog research note
+## Writing a Blog article
 
-The Blog uses small source files and no third party dependencies or CMS. Add an HTML body fragment under `content/blog/`, then add its metadata to `content/blog/posts.json`. Each metadata entry needs `slug`, `title`, `description`, `paperTitle`, `paperYear`, `paperUrl`, `paperAuthors`, `topic`, `seriesOrder`, `bodyFile`, and `readMinutes`. Optional `publishedAt` and `updatedAt` values must use an ISO date or timestamp; leave them out until the dates are confirmed.
+The Blog uses small source files and no third party dependencies or CMS. Add an HTML body fragment under `content/blog/`, then add its metadata to `content/blog/posts.json`. Every entry needs `slug`, `title`, `description`, `topic`, `bodyFile`, and `readMinutes`. Set `kind` to `release` for product updates; omitted `kind` values remain compatible with the existing research notes and are treated as `paper`. Optional `publishedAt` and `updatedAt` values must use an ISO date or timestamp; leave them out until the Blog publication dates are confirmed.
+
+Research notes additionally require `paperTitle`, `paperYear`, `paperUrl`, `paperAuthors`, and `seriesOrder`. Release updates instead require `releaseTag`, `releaseDate`, `releaseUrl`, `evidenceUrl`, `image`, and `imageAlt`; `featured` may select one release for the Latest release section. `releaseDate` records when the software release was published and does not become the Blog article’s `datePublished`.
 
 The HTML fragment should begin with the article introduction and use `h2` headings for the table of contents. Keep original mechanism diagrams under `/assets/blog/figures/` and reference them with paths starting at the site root. Use a `figure` with `figcaption` whenever an image needs context or attribution.
 
@@ -63,9 +65,11 @@ node scripts/build-blog.mjs --check
 node scripts/render-static-components.mjs --check
 ```
 
-## Research attribution and reuse
+## Sources, attribution, and reuse
 
 Each research note must identify its source paper, its authors, and a stable publication URL. Write an independent explanation and use original diagrams. Do not assume that a paper available on arXiv permits reuse of its text or figures: check the license of the exact version and any third party material. The [arXiv reuse guide](https://info.arxiv.org/help/license/reuse.html) explains the distinction. Record permission and attribution before adding reused material; the initial five notes do not reproduce paper figures or PDFs.
+
+Each release update must link to its public source release and supporting evidence without presenting release metadata as paper metadata. Keep release updates outside the numbered research series and its previous and next navigation.
 
 The generator stops when a Blog directory is no longer listed in the metadata. Decide explicitly whether an existing article needs removal or a redirect before changing a published URL. It does not delete unlisted directories.
 
@@ -83,4 +87,4 @@ python3 scripts/check-site.py
 
 The /semantic-storage/ page explains the concept independently from the Blog. Keep its definition scoped to this guide and describe current Cortrix capabilities using the product evidence pages. It is linked from the shared navigation, footer, and relevant article text. Architecture follows Semantic Storage in the primary navigation and also remains available from the homepage and footer.
 
-The Blog uses the homepage color tokens. Its articles are Scott’s personal interpretations of research, not descriptions of papers being implemented in Cortrix. The contents list can be expanded when needed. Images open in a page dialog with a close button and Escape support; article titles and reading links continue to navigate to the article.
+The Blog uses the homepage color tokens. Its five research notes are Scott’s personal interpretations of research, not descriptions of papers being implemented in Cortrix; release updates use a separate description and source treatment. The contents list can be expanded when needed. Images open in a page dialog with a close button and Escape support; article titles and reading links continue to navigate to the article.

@@ -4,25 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cortrix Blog | Semantic Storage and Agent Memory</title>
-  <meta name="description" content="Notes on semantic storage and AI agents, through classic papers on linked data, retrieval, and memory.">
+  <title>Cortrix Blog | Semantic Storage Updates and Research</title>
+  <meta name="description" content="Cortrix product updates and Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory.">
   <meta name="author" content="Scott">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://cortrix.ai/blog/">
   <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Cortrix Blog | Semantic Storage and Agent Memory">
-  <meta property="og:description" content="Notes on semantic storage and AI agents, through classic papers on linked data, retrieval, and memory.">
+  <meta property="og:title" content="Cortrix Blog | Semantic Storage Updates and Research">
+  <meta property="og:description" content="Cortrix product updates and Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory.">
   <meta property="og:url" content="https://cortrix.ai/blog/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/blog/social-card.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Cortrix Blog | Semantic Storage and Agent Memory">
-  <meta name="twitter:description" content="Notes on semantic storage and AI agents, through classic papers on linked data, retrieval, and memory.">
+  <meta name="twitter:title" content="Cortrix Blog | Semantic Storage Updates and Research">
+  <meta name="twitter:description" content="Cortrix product updates and Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/blog/social-card.png">
+  <meta name="twitter:image:alt" content="Cortrix">
   <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -30,7 +29,7 @@
       "@type": "Blog",
       "@id": "https://cortrix.ai/blog/#blog",
       "name": "Cortrix Blog",
-      "description": "Notes on semantic storage and AI agents, through classic papers on linked data, retrieval, and memory.",
+      "description": "Cortrix product updates and Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory.",
       "url": "https://cortrix.ai/blog/",
       "author": {
         "@type": "Person",
@@ -42,6 +41,16 @@
         "url": "https://cortrix.ai"
       },
       "blogPost": [
+        {
+          "@type": "BlogPosting",
+          "headline": "Cortrix RC2: 24.4% higher FiQA recall, with Apache 2.0",
+          "description": "Cortrix RC2 brings 24.4% higher FiQA Recall@10 in the published comparison, Apache 2.0 licensing, and practical ingestion and agent integration fixes.",
+          "url": "https://cortrix.ai/blog/cortrix-rc2-release/",
+          "author": {
+            "@type": "Person",
+            "name": "Scott"
+          }
+        },
         {
           "@type": "BlogPosting",
           "headline": "DBpedia explained: why linked data still matters",
@@ -162,10 +171,25 @@
   <main id="main-content">
     <header class="blog-hero">
       <div class="container blog-hero-grid">
-        <div class="blog-hero-copy"><p class="blog-kicker">Research Notes</p><h1><span>Cortrix Blog.</span><span>A closer look at the ideas behind AI.</span></h1><p>Scott’s personal readings of research on semantic storage, retrieval, and agent memory. These articles explore ideas and their limits; they are not implementation notes for Cortrix.</p><a class="blog-rss-link" href="/blog/rss.xml">Follow via RSS <span aria-hidden="true">↗</span></a></div>
+        <div class="blog-hero-copy"><p class="blog-kicker">Product updates and research notes</p><h1><span>Cortrix Blog.</span><span>News and notes from Cortrix.</span></h1><p>Release updates from Cortrix alongside Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory. Research notes explore ideas and their limits; they are not implementation notes for Cortrix.</p><a class="blog-rss-link" href="/blog/rss.xml">Follow via RSS <span aria-hidden="true">↗</span></a></div>
         <img src="/assets/blog/research-map.svg" alt="Abstract map of connected research concepts" width="720" height="430">
       </div>
     </header>
+    <section id="latest-release" class="blog-latest-release container" aria-labelledby="latest-release-title">
+      <div class="blog-section-heading"><div><p class="blog-kicker">Latest release</p><h2 id="latest-release-title">v1.0.0-rc.2</h2></div><p>Our latest release update: retrieval results, licensing, and practical fixes.</p></div>
+      <article class="blog-card blog-card-featured" data-blog-card data-topic="Product updates">
+    <a class="blog-card-visual" href="/blog/cortrix-rc2-release/">
+      <img src="/assets/blog/rc2/rc2-retrieval.png" alt="Cross-encoder retrieval scores in the July and August benchmark rounds" width="1200" height="630">
+
+    </a>
+    <div class="blog-card-copy">
+      <div class="blog-meta"><span>Product updates</span><span>v1.0.0-rc.2</span><span>Released Sept 5, 2026</span><span>10 min read</span></div>
+      <h2><a href="/blog/cortrix-rc2-release/">Cortrix RC2: 24.4% higher FiQA recall, with Apache 2.0</a></h2>
+      <p>Cortrix RC2 brings 24.4% higher FiQA Recall@10 in the published comparison, Apache 2.0 licensing, and practical ingestion and agent integration fixes.</p>
+      <a class="blog-read-link" href="/blog/cortrix-rc2-release/">Read article <span aria-hidden="true">→</span></a>
+    </div>
+  </article>
+    </section>
     <section class="blog-feature container" aria-labelledby="featured-title">
       <div class="blog-section-heading"><div><p class="blog-kicker">Start here</p><h2 id="featured-title">Start with DBpedia</h2></div><p>New to the series? Begin with the question of how knowledge gets a stable identity.</p></div>
       <article class="blog-card blog-card-featured" data-blog-card data-topic="Knowledge graphs">
@@ -182,14 +206,23 @@
   </article>
     </section>
     <section class="blog-library container" aria-labelledby="library-title">
-      <div class="blog-section-heading"><div><p class="blog-kicker">The series</p><h2 id="library-title">All articles</h2></div><p>Read in order, or pick the topic that interests you.</p></div>
+      <div class="blog-section-heading"><div><p class="blog-kicker">Browse the Blog</p><h2 id="library-title">All articles</h2></div><p>Read in order, or pick the topic that interests you.</p></div>
       <div class="blog-filters" role="group" aria-label="Filter articles by topic">
         <button class="is-active" type="button" data-blog-filter="all" aria-pressed="true">All articles</button>
+        <button type="button" data-blog-filter="Product updates" aria-pressed="false">Product updates</button>
         <button type="button" data-blog-filter="Knowledge graphs" aria-pressed="false">Knowledge graphs</button>
         <button type="button" data-blog-filter="Retrieval" aria-pressed="false">Retrieval</button>
         <button type="button" data-blog-filter="Agent memory" aria-pressed="false">Agent memory</button>
       </div>
       <div class="blog-card-grid" data-blog-grid>
+        <article class="blog-card" data-blog-card data-topic="Product updates">
+    <div class="blog-card-copy">
+      <div class="blog-meta"><span>Product updates</span><span>v1.0.0-rc.2</span><span>Released Sept 5, 2026</span><span>10 min read</span></div>
+      <h3><a href="/blog/cortrix-rc2-release/">Cortrix RC2: 24.4% higher FiQA recall, with Apache 2.0</a></h3>
+      <p>Cortrix RC2 brings 24.4% higher FiQA Recall@10 in the published comparison, Apache 2.0 licensing, and practical ingestion and agent integration fixes.</p>
+      <a class="blog-read-link" href="/blog/cortrix-rc2-release/">Read article <span aria-hidden="true">→</span></a>
+    </div>
+  </article>
         <article class="blog-card" data-blog-card data-topic="Knowledge graphs">
     <div class="blog-card-copy">
       <div class="blog-meta"><span>Knowledge graphs</span><span>Paper: 2007</span><span>Note 01</span><span>6 min read</span></div>
@@ -236,7 +269,7 @@
   </main>
   <footer class="blog-footer">
     <div class="container blog-footer-inner">
-      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
       <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
     </div>
   </footer>
