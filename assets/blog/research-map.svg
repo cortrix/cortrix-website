@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 430" role="img" aria-labelledby="title description">
+  <title id="title">Connected research map</title>
+  <desc id="description">An abstract map linking papers, data, retrieval, graphs, and memory.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d2846"/><stop offset="1" stop-color="#061426"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#ff6405" stop-opacity=".55"/><stop offset="1" stop-color="#ff6405" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0v36" fill="none" stroke="#9cb0c8" stroke-opacity=".08"/></pattern>
+  </defs>
+  <rect width="720" height="430" fill="url(#background)"/>
+  <rect width="720" height="430" fill="url(#grid)"/>
+  <circle cx="540" cy="104" r="170" fill="url(#glow)" opacity=".45"/>
+  <g fill="none" stroke="#90a7c1" stroke-opacity=".44" stroke-width="1.4">
+    <path d="M98 285L220 188 355 262 477 146 622 232"/>
+    <path d="M220 188L307 84 477 146M355 262L439 344 622 232M98 285L176 367 439 344"/>
+    <path d="M307 84L404 61 477 146 552 63" stroke-dasharray="5 8"/>
+  </g>
+  <g fill="#061426" stroke="#ff7a27" stroke-width="3">
+    <circle cx="98" cy="285" r="17"/><circle cx="220" cy="188" r="25"/><circle cx="307" cy="84" r="13"/><circle cx="355" cy="262" r="31"/><circle cx="477" cy="146" r="22"/><circle cx="439" cy="344" r="14"/><circle cx="622" cy="232" r="27"/><circle cx="552" cy="63" r="10"/>
+  </g>
+  <g fill="#f8fbff" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" letter-spacing="1">
+    <text x="68" y="324">DATA</text><text x="188" y="233">PAPERS</text><text x="322" y="315">RETRIEVAL</text><text x="448" y="190">GRAPHS</text><text x="592" y="281">MEMORY</text>
+  </g>
+</svg>

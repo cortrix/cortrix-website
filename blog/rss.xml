@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Cortrix Blog</title>
+    <link>https://cortrix.ai/blog/</link>
+    <description>Cortrix product updates and practical readings on semantic systems, retrieval, and agent memory.</description>
+    <language>en-us</language>
+    <atom:link href="https://cortrix.ai/blog/rss.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cortrix RC2: 24.4% higher FiQA recall, with Apache 2.0</title>
+      <link>https://cortrix.ai/blog/cortrix-rc2-release/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/cortrix-rc2-release/</guid>
+      <description>Cortrix RC2 brings 24.4% higher FiQA Recall@10 in the published comparison, Apache 2.0 licensing, and practical ingestion and agent integration fixes.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Product updates</category>
+    </item>
+    <item>
+      <title>DBpedia explained: why linked data still matters</title>
+      <link>https://cortrix.ai/blog/dbpedia-linked-data-explained/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/dbpedia-linked-data-explained/</guid>
+      <description>Why stable identities and linked data still matter when your agents retrieve knowledge from different systems.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Knowledge graphs</category>
+    </item>
+    <item>
+      <title>TransE explained: relationships beyond vector similarity</title>
+      <link>https://cortrix.ai/blog/transe-knowledge-graph-embeddings/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/transe-knowledge-graph-embeddings/</guid>
+      <description>What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Knowledge graphs</category>
+    </item>
+    <item>
+      <title>RAG explained: external memory brings data governance back</title>
+      <link>https://cortrix.ai/blog/rag-external-memory-data-governance/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/rag-external-memory-data-governance/</guid>
+      <description>RAG lets a model use external knowledge. The original paper also helps explain why sources, updates, and data governance still matter.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Retrieval</category>
+    </item>
+    <item>
+      <title>Reflexion explained: agent memory without weight updates</title>
+      <link>https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/</guid>
+      <description>Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Agent memory</category>
+    </item>
+    <item>
+      <title>HippoRAG explained: why RAG comes back to knowledge graphs</title>
+      <link>https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/</guid>
+      <description>HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Retrieval</category>
+    </item>
+  </channel>
+</rss>

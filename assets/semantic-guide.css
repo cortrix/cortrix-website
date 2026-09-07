@@ -1,0 +1,21 @@
+.semantic-guide { padding-top: calc(var(--nav-h) + 42px); }
+.semantic-guide .guide-inner { max-width: 900px; margin: 0 auto; }
+.semantic-guide .breadcrumbs { margin-bottom: 36px; }
+.semantic-guide .guide-label { color: var(--c-primary-h); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 18px; }
+.semantic-guide h1 { font-size: clamp(2.4rem,5.2vw,4rem); line-height: 1.08; letter-spacing: -.035em; margin: 0 0 28px; }
+.semantic-guide .guide-body { max-width: 780px; }
+.semantic-guide p { color: #b7c3d4; font-size: 1.08rem; line-height: 1.85; margin-bottom: 22px; }
+.semantic-guide .guide-definition { font-size: clamp(1.2rem,2vw,1.5rem); color: var(--c-text); line-height: 1.6; }
+.guide-contents { display: flex; flex-wrap: wrap; gap: 10px 20px; padding: 22px 0; margin: 28px 0 40px; border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border); }
+.guide-contents a { font-size: .9rem; padding: 5px 0; }
+.semantic-guide section { margin-top: 48px; scroll-margin-top: 96px; }
+.semantic-guide h2 { font-size: clamp(1.6rem,3vw,2.15rem); line-height: 1.22; margin-bottom: 22px; letter-spacing: -.025em; }
+.semantic-guide a { text-decoration: underline; text-underline-offset: .2em; }
+.semantic-guide a:focus-visible, .guide-table:focus-visible { outline: 3px solid var(--c-primary-h); outline-offset: 4px; }
+.guide-table { overflow-x: auto; margin: 28px 0; }
+.guide-table table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.guide-table th, .guide-table td { border: 1px solid var(--c-border); padding: 16px; text-align: left; vertical-align: top; line-height: 1.7; }
+.guide-table thead th { background: var(--c-surface-2); }
+.guide-table tbody th { min-width: 130px; background: var(--c-surface); }
+.guide-table td { min-width: 180px; color: #b7c3d4; }
+@media (max-width: 680px) { .semantic-guide { padding-top: calc(var(--nav-h) + 28px); } .semantic-guide .breadcrumbs { margin-bottom: 26px; } .guide-contents { gap: 6px 16px; } .semantic-guide p { font-size: 1.05rem; } }

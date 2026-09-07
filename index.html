@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cortrix — Agent-Native Semantic Storage for AI Agents</title>
-  <meta name="description" content="Evaluate Cortrix, an active pre-release local-first semantic storage project for retrieval, reviewable records, and source traceability.">
-  <meta name="keywords" content="Cortrix, agent-native semantic storage, AI agent data, retrieval, memory, traceability, open source, Apache 2.0, MCP">
+  <title>Semantic Storage for AI Agents | Cortrix</title>
+  <meta name="description" content="Explore Cortrix, an open source semantic storage project for AI agent retrieval, memory APIs, and source context. Start a local pre-release evaluation.">
   <meta name="author" content="Cortrix">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="google-site-verification" content="p0jG9hLyK75jbRbOIsPhfJFbwzNCBzUlquDpjHmfAcA" />
   <link rel="canonical" href="https://cortrix.ai/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/">
@@ -15,8 +14,8 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Cortrix — Agent-Native Semantic Storage for AI Agents">
-  <meta property="og:description" content="Evaluate a local-first semantic storage path for retrieval, reviewable records, and source traceability.">
+  <meta property="og:title" content="Semantic Storage for AI Agents | Cortrix">
+  <meta property="og:description" content="Explore Cortrix, an open source semantic storage project for AI agent retrieval, memory APIs, and source context. Start a local pre-release evaluation.">
   <meta property="og:url" content="https://cortrix.ai/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
@@ -26,32 +25,74 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Cortrix — Agent-Native Semantic Storage for AI Agents">
-  <meta name="twitter:description" content="Active pre-release semantic storage with a local Docker Quick Start.">
+  <meta name="twitter:title" content="Semantic Storage for AI Agents | Cortrix">
+  <meta name="twitter:description" content="Explore Cortrix, an open source semantic storage project for AI agent retrieval, memory APIs, and source context. Start a local pre-release evaluation.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Cortrix",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Linux, macOS",
-    "description": "Active pre-release local-first semantic storage for retrieval, reviewable records, and source traceability.",
-    "url": "https://cortrix.ai",
-    "license": "https://spdx.org/licenses/Apache-2.0.html",
-    "author": {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
       "@type": "Organization",
+      "@id": "https://cortrix.ai/#organization",
       "name": "Cortrix",
-      "url": "https://cortrix.ai"
+      "url": "https://cortrix.ai/",
+      "logo": "https://cortrix.ai/assets/favicon.svg",
+      "sameAs": [
+        "https://github.com/cortrix/cortrix",
+        "https://www.linkedin.com/company/cortrix/",
+        "https://x.com/Cortrix_AI"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cortrix.ai/#website",
+      "name": "Cortrix",
+      "url": "https://cortrix.ai/",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://cortrix.ai/#organization"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Cortrix",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Linux, macOS",
+      "description": "Cortrix is an active pre-release semantic storage project for retrieval, reviewable records, memory APIs, and source context.",
+      "url": "https://cortrix.ai",
+      "license": "https://spdx.org/licenses/Apache-2.0.html",
+      "author": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "@id": "https://cortrix.ai/#software"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://cortrix.ai/#webpage",
+      "url": "https://cortrix.ai/",
+      "name": "Semantic Storage for AI Agents | Cortrix",
+      "description": "Explore Cortrix, an open source semantic storage project for AI agent retrieval, memory APIs, and source context. Start a local pre-release evaluation.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://cortrix.ai/#website"
+      },
+      "about": {
+        "@id": "https://cortrix.ai/#software"
+      }
     }
-  }
+  ]
+}
   </script>
 
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/storage-guide.css">
 </head>
 <body>
 
@@ -63,10 +104,12 @@
       <span class="logo-text">Cortrix</span>
     </a>
     <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
       <li><a href="/#architecture">Architecture</a></li>
       <li><a href="/#quickstart">Quick Start</a></li>
       <li><a href="/for-builders/">For Builders</a></li>
       <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
     </ul>
     <div class="nav-actions">
       <a
@@ -104,7 +147,7 @@
           <p class="hero-slogan">Activate Data Brain</p>
           <p class="hero-positioning">Agent-Native Semantic Storage</p>
           <h1><span>Semantic Storage </span><span>Built for AI Agents</span></h1>
-          <p class="hero-sub">Evaluate an agent-first semantic context layer for retrieval, reviewable records, and source traceability. Cortrix is active pre-release; interface and feature maturity is reported separately.</p>
+          <p class="hero-sub">Explore open source semantic storage for AI agents, with retrieval, reviewable records, and source context. Cortrix is active pre-release; interface and feature maturity is reported separately.</p>
           <div class="hero-badges" aria-label="Project status">
             <span class="hero-badge">Open Source</span>
             <span class="hero-badge">Apache-2.0</span>
@@ -145,6 +188,21 @@
     </div>
   </header>
 
+  <section class="section storage-guide" id="semantic-storage" aria-labelledby="storage-title">
+    <div class="container">
+      <p class="storage-eyebrow">Start with the workflow</p>
+      <h2 id="storage-title">What is Semantic Storage?</h2>
+      <p class="storage-intro">Semantic storage connects information with the context an application needs to use it. Cortrix explores this through retrieval, memory records, and links back to sources. <a href="/semantic-storage/">Read the guide</a>, or start with the part of your workflow that interests you.</p>
+      <div class="storage-terms">
+        <article id="agent-storage"><h3>Agent workflows</h3><p>An agent needs to read source material, use tools, and keep track of what happened. When evaluating agent storage, start with one task and inspect what comes back from a query.</p><a href="/for-builders/">Try the Docker quick start →</a></article>
+        <article id="context-storage"><h3>Context for a task</h3><p>A useful answer needs relevant material at the right moment. Context storage keeps that material available; retrieval still has to decide which passages belong in the prompt.</p><a href="/blog/rag-external-memory-data-governance/">Read the RAG explainer →</a></article>
+        <article id="memory-storage"><h3>Memory across tasks</h3><p>Some experience is worth carrying into the next task. Memory storage preserves it, but the system still needs to check whether an old observation or lesson applies.</p><a href="/blog/reflexion-agent-memory-without-weight-updates/">Read the Reflexion explainer →</a></article>
+      </div>
+      <p class="storage-boundary">Cortrix is in active pre-release. Retrieval and memory interfaces have different maturity levels; authentication, authorization, and production readiness are not established. <a href="/docs/llms/">See current capabilities and limits</a>.</p>
+      <div class="storage-reading"><h3>Read the research</h3><p>Five classic papers trace the ideas from linked data to agent memory. Start with <a href="/blog/dbpedia-linked-data-explained/">DBpedia</a> or <a href="/blog/">browse the series</a>.</p><a href="/benchmark/">Explore the retrieval benchmarks →</a></div>
+    </div>
+  </section>
+
   <!-- Architecture -->
   <section class="section section-dark" id="architecture">
     <div class="container">
@@ -171,11 +229,11 @@
     </div>
   </section>
 
-  <!-- Defining a New Category -->
+  <!-- Workflow design -->
   <section class="section" id="category">
     <div class="container">
-      <h2 class="section-title">Defining a New Category</h2>
-      <p class="section-sub">Agent data workflows need more than isolated retrieval calls. They need a storage layer that can keep semantic context, memory, and traceability together.</p>
+      <h2 class="section-title">How the pieces fit together</h2>
+      <p class="section-sub">Cortrix brings retrieval, memory records, and source context into a shared design. These are the parts to consider alongside the tools you already use.</p>
       <div class="problem-grid">
         <div class="problem-card">
           <div class="problem-icon">
@@ -205,7 +263,7 @@
   <!-- Features -->
   <section class="section" id="features">
     <div class="container">
-      <h2 class="section-title">One Engine. Agent Data Foundations.</h2>
+      <h2 class="section-title">Explore the building blocks</h2>
       <p class="section-sub">Cortrix organizes semantic ingestion, hybrid retrieval, memory records, and source context in one pre-release design. The cited commit contains <code>api/openapi.yaml</code>; file presence and identity do not establish runtime, production, or security readiness.</p>
       <div class="features-grid">
 
@@ -607,6 +665,8 @@ docker compose -f deploy/docker-compose.yml down</code></pre>
             <li><a href="/">Home</a></li>
 
             <li><a href="/for-builders/">For Builders</a></li>
+            <li><a href="/semantic-storage/">Semantic Storage</a></li>
+            <li><a href="/#architecture">Architecture</a></li>
           </ul>
         </div>
         <div class="footer-col">

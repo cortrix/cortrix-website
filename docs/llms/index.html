@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>llms.txt Guide - Cortrix Docs</title>
-  <meta name="description" content="A source-locked guide for coding agents reading Cortrix routes, evidence states, benchmark fields, and claim boundaries.">
-  <meta name="robots" content="index, follow">
+  <title>Cortrix llms.txt Guide | Source Evidence for AI Agents</title>
+  <meta name="description" content="Find public source references and capability boundaries for Cortrix semantic storage. Read benchmark scope and research notes on context and agent memory.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://cortrix.ai/docs/llms/">
   <link rel="alternate" hreflang="en" href="https://cortrix.ai/docs/llms/">
   <link rel="alternate" hreflang="x-default" href="https://cortrix.ai/docs/llms/">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="llms.txt Guide - Cortrix Docs">
-  <meta property="og:description" content="How coding agents should read source-locked Cortrix evidence states and public claim boundaries.">
+  <meta property="og:title" content="Cortrix llms.txt Guide | Source Evidence for AI Agents">
+  <meta property="og:description" content="Find public source references and capability boundaries for Cortrix semantic storage. Read benchmark scope and research notes on context and agent memory.">
   <meta property="og:url" content="https://cortrix.ai/docs/llms/">
   <meta property="og:site_name" content="Cortrix">
   <meta property="og:image" content="https://cortrix.ai/assets/og-image.png">
@@ -19,11 +19,55 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Cortrix - Agent-Native Semantic Storage">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="llms.txt Guide - Cortrix Docs">
-  <meta name="twitter:description" content="Source-locked Cortrix evidence states and public claim boundaries for coding agents.">
+  <meta name="twitter:title" content="Cortrix llms.txt Guide | Source Evidence for AI Agents">
+  <meta name="twitter:description" content="Find public source references and capability boundaries for Cortrix semantic storage. Read benchmark scope and research notes on context and agent memory.">
   <meta name="twitter:image" content="https://cortrix.ai/assets/og-image.png">
   <meta name="twitter:image:alt" content="Cortrix - Agent-Native Semantic Storage">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"llms.txt Guide - Cortrix Docs","url":"https://cortrix.ai/docs/llms/","description":"A source-locked guide for coding agents reading Cortrix routes, evidence states, benchmark fields, and claim boundaries."}</script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "TechArticle",
+      "@id": "https://cortrix.ai/docs/llms/#webpage",
+      "url": "https://cortrix.ai/docs/llms/",
+      "name": "Cortrix llms.txt Guide | Source Evidence for AI Agents",
+      "description": "Find public source references and capability boundaries for Cortrix semantic storage. Read benchmark scope and research notes on context and agent memory.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://cortrix.ai/#website"
+      },
+      "about": {
+        "@id": "https://cortrix.ai/#software"
+      },
+      "author": {
+        "@id": "https://cortrix.ai/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://cortrix.ai/docs/llms/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://cortrix.ai/docs/llms/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "llms.txt Guide",
+          "item": "https://cortrix.ai/docs/llms/"
+        }
+      ]
+    }
+  ]
+}
+  </script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <link rel="stylesheet" href="/styles.css">
 </head>
@@ -36,10 +80,12 @@
       <span class="logo-text">Cortrix</span>
     </a>
     <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
       <li><a href="/#architecture">Architecture</a></li>
       <li><a href="/#quickstart">Quick Start</a></li>
       <li><a href="/for-builders/">For Builders</a></li>
       <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
     </ul>
     <div class="nav-actions">
       <a
@@ -80,7 +126,7 @@
         <li>Start with <code>/llms.txt</code> for version, route map, source references, and machine-readable boundaries.</li>
         <li>Read the current Core source, its commit-pinned Docker Quick Start, and stack-fit boundaries before treating any interface as Verified, production-ready, or security-ready.</li>
         <li>Use <code>/for-builders/</code> for the local Docker evaluation path and interface review states.</li>
-        <li>Use <code>/benchmark/</code> and its immutable bundle for retrieval scores, configurations, selected-query scope, methodology, and published limitations.</li>
+        <li>Use <a href="/benchmark/">/benchmark/</a> and its immutable bundle for retrieval scores, configurations, selected-query scope, methodology, and published limitations.</li>
       </ul>
       <h2>What agents must not infer</h2>
       <ul>
@@ -95,7 +141,8 @@
       <p>Keep each value attached to corpus, arm, selected-query scope, cutoff, run date, source role, model and dataset hashes, methodology, checksum inventory, and limitations. The latest bundle contains 16 CPU retrieval cells at <code>top_k=10</code> across SciFact, NFCorpus, FiQA, and Quora. It records measured Core <code>79a4eb1</code> and public runner <code>9490520</code>; the uncommitted measuring runners are identified by content hash rather than relabeled as the public rewrite. Timing is inspectable in the scorecards but is not Website evidence of server performance.</p>
       <div class="route-link-list"><a href="/">Home</a><a href="/for-builders/">For Builders</a><a href="https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2">Current Core source</a><a href="https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/QUICKSTART.md">Docker Quick Start</a><a href="https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/adoption/stack-fit.md">Stack-fit boundaries</a><a href="https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1">Immutable benchmark bundle</a><a href="/community/">Project updates</a></div>
     </div>
-  </main>
+  <section class="section"><div class="container"><h2>Further reading</h2><p>The <a href="/#semantic-storage">workflow overview</a> connects semantic storage to practical questions about agent data, context, and memory. The <a href="/blog/">Blog</a> contains independent readings of five foundational papers, with links to their original publications. These explanations provide technical context; they do not establish product capability or benchmark results.</p></div></section>
+</main>
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">
@@ -115,6 +162,8 @@
             <li><a href="/">Home</a></li>
 
             <li><a href="/for-builders/">For Builders</a></li>
+            <li><a href="/semantic-storage/">Semantic Storage</a></li>
+            <li><a href="/#architecture">Architecture</a></li>
           </ul>
         </div>
         <div class="footer-col">

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Cortrix Research Notes</title>
+  <desc id="description">A connected semantic map for the Cortrix Blog research notes series.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0d2846"/><stop offset="1" stop-color="#061426"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#ff6405" stop-opacity=".48"/><stop offset="1" stop-color="#ff6405" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0v48" fill="none" stroke="#b6c8db" stroke-opacity=".08"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="998" cy="118" r="360" fill="url(#glow)"/>
+  <g fill="none" stroke="#9eb3ca" stroke-opacity=".48" stroke-width="2">
+    <path d="M706 425L815 295 934 388 1029 236 1138 342M815 295L891 179 1029 236M934 388L1047 483 1138 342"/>
+  </g>
+  <g fill="#061426" stroke="#ff7a27" stroke-width="5">
+    <circle cx="706" cy="425" r="22"/><circle cx="815" cy="295" r="30"/><circle cx="891" cy="179" r="17"/><circle cx="934" cy="388" r="38"/><circle cx="1029" cy="236" r="28"/><circle cx="1047" cy="483" r="18"/><circle cx="1138" cy="342" r="33"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="78" y="118" fill="#ff7a27" font-size="22" font-weight="700" letter-spacing="5">RESEARCH NOTES</text>
+    <text x="78" y="246" fill="#ffffff" font-size="78" font-weight="750" letter-spacing="-4">Cortrix Blog.</text>
+    <text x="78" y="326" fill="#ffffff" font-size="58" font-weight="750" letter-spacing="-3">Ideas that shape</text>
+    <text x="78" y="392" fill="#ffffff" font-size="58" font-weight="750" letter-spacing="-3">semantic systems.</text>
+    <text x="82" y="478" fill="#b4c3d5" font-size="27">Linked data · knowledge graphs · retrieval · agent memory</text>
+  </g>
+</svg>

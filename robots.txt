@@ -30,5 +30,9 @@ Disallow: /
 
 User-agent: *
 Allow: /
+Disallow: /content/
+Disallow: /components/
+Disallow: /scripts/
+Disallow: /tests/
 
 Sitemap: https://cortrix.ai/sitemap.xml

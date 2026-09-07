@@ -2,8 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://cortrix.ai/</loc></url>
   <url><loc>https://cortrix.ai/for-builders/</loc></url>
+  <url><loc>https://cortrix.ai/semantic-storage/</loc></url>
   <url><loc>https://cortrix.ai/benchmark/</loc></url>
   <url><loc>https://cortrix.ai/community/</loc></url>
   <url><loc>https://cortrix.ai/docs/llms/</loc></url>
   <url><loc>https://cortrix.ai/llms.txt</loc></url>
+<!-- generated:blog:start -->
+  <url><loc>https://cortrix.ai/blog/</loc></url>
+  <url><loc>https://cortrix.ai/blog/rss.xml</loc></url>
+  <url><loc>https://cortrix.ai/blog/cortrix-rc2-release/</loc></url>
+  <url><loc>https://cortrix.ai/blog/dbpedia-linked-data-explained/</loc></url>
+  <url><loc>https://cortrix.ai/blog/transe-knowledge-graph-embeddings/</loc></url>
+  <url><loc>https://cortrix.ai/blog/rag-external-memory-data-governance/</loc></url>
+  <url><loc>https://cortrix.ai/blog/reflexion-agent-memory-without-weight-updates/</loc></url>
+  <url><loc>https://cortrix.ai/blog/hipporag-knowledge-graphs-for-rag/</loc></url>
+  <!-- generated:blog:end -->
 </urlset>

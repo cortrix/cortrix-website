@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- generated:blog-page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TransE explained: relationships beyond vector similarity — Cortrix Blog</title>
+  <meta name="description" content="What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.">
+  <meta name="author" content="Scott">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://cortrix.ai/blog/transe-knowledge-graph-embeddings/">
+  <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="TransE explained: relationships beyond vector similarity — Cortrix Blog">
+  <meta property="og:description" content="What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.">
+  <meta property="og:url" content="https://cortrix.ai/blog/transe-knowledge-graph-embeddings/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/blog/social-card.png">
+  <meta property="og:image:alt" content="Cortrix">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TransE explained: relationships beyond vector similarity — Cortrix Blog">
+  <meta name="twitter:description" content="What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/blog/social-card.png">
+  <meta name="twitter:image:alt" content="Cortrix">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cortrix.ai/blog/transe-knowledge-graph-embeddings/#article",
+      "headline": "TransE explained: relationships beyond vector similarity",
+      "description": "What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.",
+      "url": "https://cortrix.ai/blog/transe-knowledge-graph-embeddings/",
+      "mainEntityOfPage": "https://cortrix.ai/blog/transe-knowledge-graph-embeddings/",
+      "author": {
+        "@type": "Person",
+        "name": "Scott"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Cortrix Blog",
+        "url": "https://cortrix.ai/blog/"
+      },
+      "citation": {
+        "@type": "ScholarlyArticle",
+        "name": "Translating Embeddings for Modeling Multi-relational Data",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html",
+        "temporalCoverage": "2013",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Antoine Bordes"
+          },
+          {
+            "@type": "Person",
+            "name": "Nicolas Usunier"
+          },
+          {
+            "@type": "Person",
+            "name": "Alberto Garcia-Duran"
+          },
+          {
+            "@type": "Person",
+            "name": "Jason Weston"
+          },
+          {
+            "@type": "Person",
+            "name": "Oksana Yakhnenko"
+          }
+        ]
+      },
+      "inLanguage": "en",
+      "image": [
+        "https://cortrix.ai/assets/blog/social-card.png"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cortrix.ai/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TransE explained: relationships beyond vector similarity",
+          "item": "https://cortrix.ai/blog/transe-knowledge-graph-embeddings/"
+        }
+      ]
+    }
+  ]
+}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
+</head>
+<body class="blog-page article-page">
+  <a class="blog-skip-link" href="#main-content">Skip to content</a>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">61</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+  <main id="main-content">
+    <div class="article-shell container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Note 02</li></ol></nav>
+      <header class="article-header">
+        <p class="blog-kicker">Research Note 02 · Knowledge graphs</p>
+        <h1>TransE explained: relationships beyond vector similarity</h1>
+        <p class="article-deck">What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.</p>
+        <div class="article-byline"><span>By Scott</span><span>5 min read</span><span>Paper published 2013</span></div>
+      </header>
+      <div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>Translating Embeddings for Modeling Multi-relational Data</h2><p>Antoine Bordes, Nicolas Usunier et al. · 2013</p></div><a href="https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#translation">What does h + r ≈ t actually mean?</a></li><li><a href="#engineering-choice">The simplicity is an engineering choice</a></li><li><a href="#link-prediction">The output is a ranked entity, not a fluent sentence</a></li><li><a href="#limitations">Where the translation model runs out of room</a></li><li><a href="#semantic-records">A vector still needs a record behind it</a></li><li><a href="#from-relations-to-retrieval">What happens when the model needs external knowledge?</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
+        <article class="article-body"><p class="article-lead">TransE is a knowledge graph embedding model that represents a relationship as a translation between entity vectors: <code>h + r ≈ t</code>. The useful idea is that a relationship can shape a prediction, instead of disappearing into a generic similarity score.</p>
+<p>I sometimes hear TransE described as an early chapter in the history of embeddings. Fair enough. But that description can flatten the very thing that makes the paper interesting.</p>
+<p>Relationships in a knowledge graph have direction and meaning. If we reduce everything to “these two things look alike,” some of that information gets lost. In the <a href="/blog/dbpedia-linked-data-explained/">DBpedia article</a>, I focused on stable identity and queryable relationships. The 2013 TransE paper asks how those entities and relationships can also live in a vector space.</p>
+
+<h2 id="translation">What does h + r ≈ t actually mean?</h2>
+<p>Here, <code>h</code> is the head entity vector, <code>r</code> is the relationship vector, and <code>t</code> is the tail entity vector. To make it concrete, take an example of my own: Hangzhou → located in → Zhejiang. This example explains the formula; it isn't a case from the paper.</p>
+<p>Start at the vector for Hangzhou. Add the vector for “located in.” The model wants the result to land near the vector for Zhejiang.</p>
+<p>Ordinary similarity asks how close two representations are. TransE measures closeness after applying a particular relationship. That discrete edge in the graph now has a direction and distance in vector space. We can learn it and use it to score candidate facts.</p>
+<figure><a href="/assets/blog/figures/transe-flow.svg" aria-label="Open the full size diagram"><img src="/assets/blog/figures/transe-flow.svg" width="1000" height="420" alt="An illustrative TransE translation moves the Hangzhou entity vector toward Zhejiang along the located in relationship" loading="eager"></a><figcaption>Our own example of a relation as a vector translation. The positions are illustrative, not learned embeddings or measurements from the paper. <a href="/assets/blog/figures/transe-flow.svg">Open full size diagram</a>.</figcaption></figure>
+<p>During training, the model compares an observed triple with corrupted triples made by replacing its head or tail. In my example, swapping Zhejiang for Hainan gives us a negative example. The objective pushes the observed triple toward a smaller distance and the corrupted one toward a larger distance, with a margin between them.</p>
+<p>These constructed negatives are a training device. An incomplete knowledge graph can omit true facts, so an unobserved triple isn't automatically false. That distinction matters when you use the learned score.</p>
+
+<h2 id="engineering-choice">The simplicity is an engineering choice</h2>
+<p>What I like about this paper is that the authors don't mistake complexity for progress. Tensor factorization, matrix transformations, and other expressive models were already available. More expressive models can also bring more parameters and a harder optimization problem.</p>
+<p>TransE assigns one vector to each entity and one to each relationship. Its parameter count is <code>O(n_e k + n_r k)</code>, where <code>k</code> is the embedding dimension. In the paper's FB15k comparison, TransE used roughly 810,000 parameters, versus about 87.8 million for RESCAL.</p>
+<p>That is a familiar tradeoff if you have ever moved a model into a working system. A leaderboard doesn't tell you the whole story about training cost or how a system behaves as the dataset grows.</p>
+<p>The authors also ran experiments on FB1M, with a million entities, about 25,000 relationships, and more than 17.5 million training triples. They reported strong link prediction results under their experimental setup. Those numbers belong to the paper's datasets and evaluation protocol. They aren't a comparison with today's models.</p>
+
+<h2 id="link-prediction">The output is a ranked entity, not a fluent sentence</h2>
+<p>Table 5 is a good way to see what the model is doing. Given J. K. Rowling and the relationship “influenced by,” it ranks names including G. K. Chesterton, J. R. R. Tolkien, and C. S. Lewis. Given Lil Wayne and “born in,” it ranks candidate places.</p>
+<p>You can inspect the ranked examples in <a href="https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html">Table 5 of the original paper</a>, where the authors distinguish the test answer from other correct answers present in training.</p>
+<p>There is a resemblance to the top results from a retrieval system: score candidates, then send the leading ones downstream. But the relationship constrains what TransE is ranking. Asking who influenced Rowling is a different question from asking who resembles her.</p>
+
+<h2 id="limitations">Where the translation model runs out of room</h2>
+<p>A single translation can't express every relationship structure equally well. For example, when one head has several valid tails under the same relation, the model asks all those tails to sit near the same translated point. That can be a restrictive geometric assumption.</p>
+<p>The paper reports different results across relation categories, including one to one, one to many, many to one, and many to many. Later work such as TransH, TransR, and RotatE explored ways to give the representation more room.</p>
+<p>I don't read TransE as the final answer to knowledge representation. I read it as a useful engineering tradeoff that made a clear question easy to work with. A classic paper can remain valuable after its original model stops being the one you would choose for every task.</p>
+
+<h2 id="semantic-records">A vector still needs a record behind it</h2>
+<p>This is the boundary I come back to when thinking about <a href="https://github.com/cortrix/cortrix">Cortrix</a> and <a href="/semantic-storage/">semantic storage</a> for agent applications. Embeddings are useful, but they shouldn't swallow the original semantics.</p>
+<p>If two blocks are close, I still want to know why. Do they refer to the same entity? Does one cite the other? Are they versions of the same material? A cosine similarity score doesn't preserve those distinctions by itself.</p>
+<p>An agent can use vector retrieval to find candidates quickly. It still needs a way to inspect their identity and source, and the application must decide whether it is allowed to use them. These are design responsibilities, not capabilities established by an embedding model.</p>
+<p>I find it more useful to treat an embedding as one index over semantic records. If the score becomes the only thing we keep, the system may find an answer but struggle to explain where it came from or why it should be trusted.</p>
+
+<h2 id="from-relations-to-retrieval">What happens when the model needs external knowledge?</h2>
+<p>DBpedia gave knowledge a stable address. TransE showed how a relationship could become a learnable direction in vector space. The next step in this series is to ask how that indexed knowledge gets back in front of a model while it generates an answer.</p>
+<p>That is where <a href="/blog/rag-external-memory-data-governance/">RAG and external memory</a> enter the picture. They also bring some very familiar data responsibilities with them.</p>
+
+<h2 id="references">References</h2>
+<p>Antoine Bordes et al. <cite>Translating Embeddings for Modeling Multi-relational Data</cite>. NeurIPS 2013. <a href="https://proceedings.neurips.cc/paper_files/paper/2013/hash/1cecc7a77928ca8133fa24680a88d2f9-Abstract.html">Read the original paper</a>.</p>
+</article>
+      </div>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott is one of Cortrix’s creators. These research notes share his personal understanding of papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.</p></div></section>
+      <nav class="series-navigation" aria-label="Previous and next research notes"><a href="/blog/dbpedia-linked-data-explained/"><span>Previous note</span><strong>← DBpedia explained: why linked data still matters</strong></a><a href="/blog/rag-external-memory-data-governance/"><span>Next note</span><strong>RAG explained: external memory brings data governance back →</strong></a></nav><section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li aria-current="page"><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <div class="container blog-footer-inner">
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
+</body>
+</html>
