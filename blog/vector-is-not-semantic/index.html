@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!-- generated:blog-page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vector is not semantic — Cortrix Blog</title>
+  <meta name="description" content="A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.">
+  <meta name="author" content="Scott">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://cortrix.ai/blog/vector-is-not-semantic/">
+  <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Vector is not semantic — Cortrix Blog">
+  <meta property="og:description" content="A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.">
+  <meta property="og:url" content="https://cortrix.ai/blog/vector-is-not-semantic/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/blog/vector-is-not-semantic/01-relevance-en-v3.svg">
+  <meta property="og:image:alt" content="Comparison of relevance scores and lifecycle status for an old integration guide and a current migration notice">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vector is not semantic — Cortrix Blog">
+  <meta name="twitter:description" content="A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/blog/vector-is-not-semantic/01-relevance-en-v3.svg">
+  <meta name="twitter:image:alt" content="Comparison of relevance scores and lifecycle status for an old integration guide and a current migration notice">
+  <meta property="article:modified_time" content="2026-09-09T16:00:00Z">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cortrix.ai/blog/vector-is-not-semantic/#article",
+      "headline": "Vector is not semantic",
+      "description": "A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.",
+      "url": "https://cortrix.ai/blog/vector-is-not-semantic/",
+      "mainEntityOfPage": "https://cortrix.ai/blog/vector-is-not-semantic/",
+      "author": {
+        "@type": "Person",
+        "name": "Scott"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Cortrix Blog",
+        "url": "https://cortrix.ai/blog/"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Order API Field Migration scenario",
+        "url": "https://github.com/cortrix/cortrix-demos/tree/c3835a80026d22a8ed707511e9cbca6874c95e71/scenarios/order-api-field-migration"
+      },
+      "inLanguage": "en",
+      "image": [
+        "https://cortrix.ai/assets/blog/vector-is-not-semantic/01-relevance-en-v3.svg"
+      ],
+      "dateModified": "2026-09-09T16:00:00Z"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cortrix.ai/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Vector is not semantic",
+          "item": "https://cortrix.ai/blog/vector-is-not-semantic/"
+        }
+      ]
+    }
+  ]
+}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
+</head>
+<body class="blog-page article-page">
+  <a class="blog-skip-link" href="#main-content">Skip to content</a>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">61</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+  <main id="main-content">
+    <div class="article-shell container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Inside Cortrix</li></ol></nav>
+      <header class="article-header">
+        <p class="blog-kicker">Inside Cortrix · Inside Cortrix</p>
+        <h1>Vector is not semantic</h1>
+        <p class="article-deck">A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.</p>
+        <div class="article-byline"><span>By Scott</span><span>10 min read</span></div>
+      </header>
+      <div class="article-paper-card"><div><p class="blog-kicker">Scenario source</p><h2>Order API Field Migration scenario</h2><p>A public, version-pinned scenario records the synthetic documents, comparison contract, and responsibility boundary used in this article.</p></div><a href="https://github.com/cortrix/cortrix-demos/tree/c3835a80026d22a8ed707511e9cbca6874c95e71/scenarios/order-api-field-migration" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#four-documents-are-enough-to-make-the-problem-visible">Four documents are enough to make the problem visible</a></li><li><a href="#the-straight-line-fix-add-a-current-field">The straight-line fix: add a current field</a></li><li><a href="#move-semantic-work-into-ingestion">Move semantic work into ingestion</a></li><li><a href="#who-changes-the-order-and-who-adopts-it">Who changes the order, and who adopts it?</a></li><li><a href="#keep-the-evidence-for-the-questions-you-will-need-later">Keep the evidence for the questions you will need later</a></li><li><a href="#someone-asked-about-latency">Someone asked about latency</a></li><li><a href="#what-belongs-in-a-shared-foundation">What belongs in a shared foundation?</a></li></ol></details></div></aside>
+        <article class="article-body"><p class="article-lead">A Create Order request begins to fail. A vector-backed RAG system returns a detailed guide in first place. The guide is excellent, except for one detail: it still tells the caller to use a field the API no longer accepts.</p>
+<p>This is the kind of moment when it helps to slow down. Similarity found something related to the question. It did not establish that the material is the right answer now. I use this deliberately small demo to separate the stages: where the old document enters the result, what a reranker changes, and what the application still has to decide.</p>
+
+<h2 id="four-documents-are-enough-to-make-the-problem-visible">Four documents are enough to make the problem visible</h2>
+<p>The demo has four documents: a v1.0 integration guide, a v2.0 migration notice, and two topical distractions about cancelling orders and paginating lists.</p>
+<ul><li>The v1.0 integration guide is long. It describes <code>account_id</code>, and its language resembles the error. It becomes two text blocks during ingestion.</li><li>The v2.0 migration notice is short. It says the current field is <code>buyer_account_id</code>. The old guide was once correct; it has been superseded.</li></ul>
+<p>These are demo materials, not a postmortem for a customer incident. The four documents become five source blocks. That is far too small to call a benchmark, but it makes the path inspectable. We can look at each stage instead of guessing whether the issue came from the corpus, recall, or ranking.</p>
+<p>The vector baseline uses PostgreSQL and pgvector. The documents and the question are embedded with BGE-M3 and ordered by exact cosine distance. The table stores the version and original text, but this first query orders only by vector distance. No document lifecycle rule participates in the ranking.</p>
+<p>The result is unsurprising. The first block of the old guide scores 0.7532; the migration notice scores 0.5937. The old guide resembles the wording of the error more closely, so it comes first.</p>
+<figure><a href="/assets/blog/vector-is-not-semantic/01-relevance-en-v3.svg" aria-label="Open the full size figure"><img src="/assets/blog/vector-is-not-semantic/01-relevance-en-v3.svg" width="1200" height="820" alt="Relevance scores and lifecycle status for two documents in the demo" loading="eager"></a><figcaption>Figure 1. A slice of the vector result from this demo. These scores rank relevance; they are not probabilities that an answer is correct.</figcaption></figure>
+<p>pgvector did the job the query gave it. The question we actually need to answer is, “What should this request use now?” This query never defined what “now” means. The baseline is a retrieval foundation, not a complete RAG system with answer generation and business validation. It would be a mistake to use it as evidence that RAG as a whole does not work.</p>
+
+<h2 id="the-straight-line-fix-add-a-current-field">The straight-line fix: add a current field</h2>
+<p>The obvious reaction is that the demo is making this harder than it needs to be. Add a field, filter on <code>status = 'current'</code>, and move on.</p>
+<p>That can be the right answer. If there is one application, four documents, and an unambiguous definition of the current version, it is probably the first answer to try. There is no reason to replace a data layer before the small problem requires it.</p>
+<p>But then someone has to maintain that field everywhere it matters. When a version is released, who marks the old guide as superseded? What happens if an interface rolls out by region? If an old SDK is still in its support window, is the old guide still usable? When someone investigates a historical incident, should the old document return at all?</p>
+<p>Every one of those questions can be handled in code. The harder question is whether the same decision gets reimplemented in every application. A support agent writes it once, a developer agent writes it again, and an operations tool writes it a third time. After a while, <code>current</code> can mean three different things.</p>
+<p>That is why I care about what can be maintained together and what must remain a business decision. It is also the point of the second path I call semantic storage. In our engineering work, that is the direction we explore in <a href="https://github.com/cortrix/cortrix">Cortrix</a>: keeping semantic processing and evidence connected.</p>
+
+<h2 id="move-semantic-work-into-ingestion">Move semantic work into ingestion</h2>
+<p>The second path begins with the same four documents, but it does not store only vectors for the raw text. Each of the five source blocks keeps its identity. We also create other retrieval views: HyPE question blocks capture ways a user might ask about a passage, and document summaries express the material at a different level of granularity.</p>
+<p>Those views still have to lead back to the source. Generating three questions around one piece of text does not create three independent pieces of evidence. In this scenario, document summaries remain ingestion evidence; they are not query candidates.</p>
+<p>At query time, the original question produces three rewrites. The original and those rewrites make four expressions. They go through five retrieval paths: dense vectors, context enrichment, FTS5/BM25, HyPE questions, and sparse retrieval. Reciprocal Rank Fusion then combines the candidate ranks.</p>
+<figure><a href="/assets/blog/vector-is-not-semantic/02-retrieval-en-v3.svg" aria-label="Open the full size figure"><img src="/assets/blog/vector-is-not-semantic/02-retrieval-en-v3.svg" width="1200" height="980" alt="Multiple representations at ingestion and five retrieval paths at query time" loading="eager"></a><figcaption>Figure 2. Candidate generation in this demo. The record contains 20 path hits, which become four unique blocks from three documents after fusion.</figcaption></figure>
+<p>This work mostly creates more chances to recover useful material. A question may be worded differently, or a short migration notice may express the same idea more compactly. More than one route can bring it back.</p>
+<p>That still does not mean the resulting order matches the current business need.</p>
+<p>In the semantic-storage path, BGE reranking still places old guide block 0 first at 0.9467. Old guide block 1 is second at 0.6609. The v2 migration notice we want is third at 0.6197.</p>
+<p>So attaching a reranker after vector search does not automatically assume responsibility for document lifecycle. A reranker can judge how closely a question and a passage match. We should not turn that score into proof that the passage is safe to use today. And we should not compare 0.9467 with the earlier cosine score of 0.7532 and conclude that the system became more correct. Those scores come from different systems.</p>
+
+<h2 id="who-changes-the-order-and-who-adopts-it">Who changes the order, and who adopts it?</h2>
+<p>The LLM then orders the candidate set as a whole. In this instance, it moves the migration notice to first place. The demo application walks the final order and takes the highest-ranked document whose lifecycle state is <code>current</code>.</p>
+<figure><a href="/assets/blog/vector-is-not-semantic/03-ranking-en-v3.svg" aria-label="Open the full size figure"><img src="/assets/blog/vector-is-not-semantic/03-ranking-en-v3.svg" width="1200" height="980" alt="BGE ranking, final LLM order, and demo application adoption check" loading="eager"></a><figcaption>Figure 3. The ranking and adoption record from this demo. The LLM changes the order; the application checks lifecycle and keeps the migration notice already in first place. The adopted field is <code>buyer_account_id</code>.</figcaption></figure>
+<pre><code>for item in final_order:
+    if item.status == "current":
+        return item
+return None</code></pre>
+<p>Those lines do not settle the business question by themselves. The cancellation notice is also <code>current</code>, but it cannot answer which field a Create Order request should use. If the migration notice is missing, we still cannot tell whether the request comes from an old SDK in its support window. Checking only for <code>current</code> is not enough to establish the needed version context.</p>
+<p>The value of writing the stages down is that we can name their separate responsibilities: what order did the model produce, and what condition did the application use to adopt a result? We can examine that causal chain without pretending that a correct field at the end proves every step was sound.</p>
+
+<h2 id="keep-the-evidence-for-the-questions-you-will-need-later">Keep the evidence for the questions you will need later</h2>
+<p>The demo does end with the new field. That is not where the conclusion should stop.</p>
+<p>Because an LLM helps shape the result, the next failure needs a path for investigation. Did the migration notice enter the system? Did recall return it? Where did BGE rank it? Did the LLM change its position? What rule did the application actually apply? Each question points to a different repair.</p>
+<p>If the notice never entered the corpus, a new reranker will not help. If it was already a candidate, the issue may be ranking or adoption conditions. If the source lifecycle state is wrong, a careful model still has to operate from the wrong premise.</p>
+<p>I call this a causal chain. That phrase is about observable system stages, not a claim that we can expose a model's private reasoning. This demo does not preserve every internal detail. When we did not keep per-path ranks or the complete derived representations, we cannot honestly reconstruct them later as though they had been recorded. The practical lesson is simple: if you want to diagnose a layer, retain the evidence that layer requires while the system is running.</p>
+
+<h2 id="someone-asked-about-latency">Someone asked about latency</h2>
+<p>A practical question is what one retrieval takes once the LLM is involved. This demo is not a load-test result or a performance promise for the current version.</p>
+<p>The next question was more practical. An agent may need to consult a knowledge base many times while handling one task. If each call follows a long chain, how long does the whole task wait?</p>
+<p>We should not keep adding stages to retrieval while showing only the one time the final answer was right.</p>
+<p>The stages can be used selectively. If version and scope are already clear, filtering before retrieval may be enough. If an agent is looking up one exact identifier, there is no reason to ask an LLM to produce four query expressions first. If semantic-storage capabilities are offered to an agent through optional MCP or SDK interfaces, the agent should be able to choose the tool that matches the task.</p>
+<p>When is additional waiting and inference worth it? I would evaluate that inside a concrete agent task: given the same materials and request, a simple filter may be faster; what extra result does reranking and an LLM actually bring? This four-document demo does not isolate the contribution of those components. It cannot stand in for that comparison.</p>
+
+<h2 id="what-belongs-in-a-shared-foundation">What belongs in a shared foundation?</h2>
+<p>Michael Dubakov, in <a href="https://www.mdubakov.me/malleable-software-solid-bases-custom-code/">“Malleable software = solid bases + custom code”</a>, makes a useful case for stable foundations that custom code can build upon. That leads back to the four documents.</p>
+<p>An interface can be rewritten. An agent can be replaced. But the identity of a document, the version that applies to a request, the original source for a passage, and the processing evidence behind an answer should not need to be reinterpreted from scratch by every application.</p>
+<p>That does not mean every business rule belongs in one platform. Orders, customers, permissions, transactions, and constraints still have their own authoritative systems. A retrieval system can organize material, retain source identity and evidence, and pass candidates downstream. The business still needs explicit rules for what it is allowed to adopt.</p>
+<p>That is the approach we want to keep testing in Cortrix: make recurring semantic processing and evidence maintenance reusable, while leaving adoption conditions with the application that owns them. In this example, would you start with a version filter or keep the old documents in retrieval? When regions, SDK support windows, and historical lookups differ, where would you put the applicability rule?</p>
+<p><a href="https://github.com/cortrix/cortrix-demos/tree/c3835a80026d22a8ed707511e9cbca6874c95e71/scenarios/order-api-field-migration">The version-pinned synthetic scenario is public on GitHub</a>. <a href="https://github.com/cortrix/cortrix">Explore Cortrix on GitHub</a>. The more useful conversation is how to make a path easier to inspect, not how to add one more model to it.</p>
+</article>
+      </div>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes from an engineering perspective on retrieval, evidence, and the conditions that let an application adopt a result.</p></div></section>
+      <section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <div class="container blog-footer-inner">
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
+</body>
+</html>

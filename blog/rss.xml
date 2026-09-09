@@ -15,6 +15,14 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Vector is not semantic</title>
+      <link>https://cortrix.ai/blog/vector-is-not-semantic/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/vector-is-not-semantic/</guid>
+      <description>A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Inside Cortrix</category>
+    </item>
+    <item>
       <title>DBpedia explained: why linked data still matters</title>
       <link>https://cortrix.ai/blog/dbpedia-linked-data-explained/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/dbpedia-linked-data-explained/</guid>

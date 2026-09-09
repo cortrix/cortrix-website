@@ -134,9 +134,11 @@ for file, page in pages.items():
 posts = json.loads((ROOT / "content/blog/posts.json").read_text())
 for post in posts:
     post.setdefault("kind", "paper")
+    post.setdefault("visibility", "published")
+published_posts = [post for post in posts if post["visibility"] == "published"]
 items = ET.parse(ROOT / "blog/rss.xml").findall("./channel/item")
-require(len(items) == len(posts), "RSS item count differs from post count")
-require({item.findtext("link") for item in items} == {"https://cortrix.ai/blog/" + p["slug"] + "/" for p in posts}, "RSS URLs differ from articles")
+require(len(items) == len(published_posts), "RSS item count differs from published post count")
+require({item.findtext("link") for item in items} == {"https://cortrix.ai/blog/" + p["slug"] + "/" for p in published_posts}, "RSS URLs differ from published articles")
 featured_releases = [post for post in posts if post["kind"] == "release" and post.get("featured")]
 if featured_releases:
     require(items and items[0].findtext("link") == "https://cortrix.ai/blog/" + featured_releases[0]["slug"] + "/", "Featured release is not the first RSS item")
@@ -178,6 +180,17 @@ for post in posts:
         require(not any(label in article.source for label in ("Source paper", "Paper published", "Research Note 0")), f"{post['slug']}: release is presented as a paper")
         if not post.get("publishedAt"):
             require("datePublished" not in blog_posting and "article:published_time" not in article.source, f"{post['slug']}: release date was used as Blog publication date")
+    elif post["kind"] == "article" and post["visibility"] == "review":
+        require("noindex" in article.meta.get("robots", ""), f"{post['slug']}: review candidate is indexable")
+        require(citation.get("@type") == "CreativeWork", f"{post['slug']}: review candidate has wrong citation type")
+        require("Review candidate" in article.source and "Local editorial candidate" in article.source, f"{post['slug']}: review status is not visible")
+        require(article.canonical[0] not in sitemap, f"{post['slug']}: review candidate is in sitemap")
+        require(article.canonical[0] not in {item.findtext("link") for item in items}, f"{post['slug']}: review candidate is in RSS")
+    elif post["kind"] == "article":
+        require(citation.get("@type") == "CreativeWork", f"{post['slug']}: article citation has wrong type")
+        require(citation.get("url") == post.get("sourceUrl") and post.get("sourceUrl") in article.links, f"{post['slug']}: missing visible scenario source")
+        require("Scenario source" in article.source, f"{post['slug']}: missing scenario source label")
+        require("Review candidate" not in article.source, f"{post['slug']}: published article retains review label")
     else:
         require(False, f"{post['slug']}: unsupported post kind {post['kind']}")
 for file in (ROOT / "assets/blog").rglob("*.svg"):

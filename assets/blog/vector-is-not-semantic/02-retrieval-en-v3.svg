@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="980" viewBox="0 0 1200 980" role="img" aria-labelledby="title desc">
+  <title id="title">How this demo found its candidates</title>
+  <desc id="desc">Four documents become five source blocks. Ingestion creates multiple retrieval views with links to the original material and source-block identity. The original query and three rewrites form four expressions, which use five parallel retrieval paths and RRF fusion to return four unique blocks from three documents. Twenty path hits are not twenty independent pieces of evidence, and per-path ranks were not recorded.</desc>
+  <defs>
+    <style>
+      text { font-family: "PingFang SC", "Noto Sans CJK SC", sans-serif; fill: #111827; }
+      .title { font-size: 34px; font-weight: 700; }
+      .subtitle { font-size: 22px; fill: #4b5563; }
+      .section { font-size: 24px; font-weight: 700; fill: #1258a5; }
+      .body { font-size: 22px; }
+      .strong { font-size: 23px; font-weight: 700; }
+      .muted { fill: #5f6875; }
+    </style>
+    <style>
+      svg { color-scheme:light dark; --bg:#0B0F19; --surface:#131B2A; --surface2:#1A2236; --line:#1E293B; --txt:#F1F5F9; --muted:#94A3B8; --magma:#FF6405; --magma-h:#FF8A30; --amber:#FFB020; --info:#FF6405; --warning-bg:#2A1A08; --info-bg:#131B2A; }
+      text { font-family:"Inter", "PingFang SC", "Noto Sans CJK SC", sans-serif; fill:var(--txt); } .subtitle, .muted { fill:var(--muted); } .section { fill:var(--magma-h); } marker path { fill:var(--magma); }
+      rect[fill="#ffffff"] { fill:var(--bg); } rect[fill="#f5f8fc"] { fill:var(--surface); stroke:var(--line); } rect[fill="#f3f8ff"] { fill:var(--surface2); stroke:var(--line); } rect[fill="#eaf3ff"] { fill:var(--info-bg); stroke:var(--info); } rect[fill="#fff8f0"] { fill:var(--warning-bg); stroke:var(--amber); }
+      line[stroke="#1258a5"], path[stroke="#1258a5"] { stroke:var(--magma); } line[stroke="#d3dae4"] { stroke:var(--line); } text[fill="#8a480d"] { fill:var(--amber); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#1258a5"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="980" fill="#ffffff"/>
+  <text x="60" y="68" class="title">How this demo found its candidates</text>
+  <text x="60" y="106" class="subtitle">August 2026 demo · retrieval flow · not a benchmark</text>
+
+  <text x="60" y="160" class="section">Ingestion</text>
+  <rect x="60" y="182" width="250" height="112" rx="10" fill="#f5f8fc" stroke="#8fa8c5" stroke-width="2"/>
+  <text x="185" y="226" text-anchor="middle" class="strong">4 documents</text>
+  <text x="185" y="263" text-anchor="middle" class="body">5 source blocks</text>
+  <line x1="310" y1="238" x2="370" y2="238" stroke="#1258a5" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="385" y="170" width="420" height="136" rx="10" fill="#f3f8ff" stroke="#6e9ace" stroke-width="2"/>
+  <text x="595" y="208" text-anchor="middle" class="strong">Multiple retrieval views</text>
+  <text x="595" y="246" text-anchor="middle" class="body">Source blocks · HyPE · summaries</text>
+  <text x="595" y="282" text-anchor="middle" class="body muted">Keep links to original sources</text>
+  <line x1="805" y1="238" x2="865" y2="238" stroke="#1258a5" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="880" y="182" width="260" height="112" rx="10" fill="#f5f8fc" stroke="#8fa8c5" stroke-width="2"/>
+  <text x="1010" y="226" text-anchor="middle" class="strong">Retrieval index</text>
+  <text x="1010" y="263" text-anchor="middle" class="body">Source and block identity</text>
+
+  <line x1="60" y1="346" x2="1140" y2="346" stroke="#d3dae4" stroke-width="2"/>
+  <text x="60" y="400" class="section">Query</text>
+  <rect x="60" y="422" width="310" height="126" rx="10" fill="#f5f8fc" stroke="#8fa8c5" stroke-width="2"/>
+  <text x="215" y="465" text-anchor="middle" class="strong">Original query + 3 rewrites</text>
+  <text x="215" y="505" text-anchor="middle" class="body">4 expressions</text>
+  <line x1="370" y1="485" x2="428" y2="485" stroke="#1258a5" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <text x="670" y="404" text-anchor="middle" class="strong">5 parallel retrieval paths</text>
+  <rect x="445" y="424" width="205" height="58" rx="8" fill="#f3f8ff" stroke="#7ea6d6" stroke-width="2"/>
+  <text x="547" y="461" text-anchor="middle" class="body">Dense vectors</text>
+  <rect x="670" y="424" width="205" height="58" rx="8" fill="#f3f8ff" stroke="#7ea6d6" stroke-width="2"/>
+  <text x="772" y="461" text-anchor="middle" class="body">Context enrichment</text>
+  <rect x="895" y="424" width="245" height="58" rx="8" fill="#f3f8ff" stroke="#7ea6d6" stroke-width="2"/>
+  <text x="1017" y="461" text-anchor="middle" class="body">FTS5 / BM25</text>
+  <rect x="557" y="500" width="205" height="58" rx="8" fill="#f3f8ff" stroke="#7ea6d6" stroke-width="2"/>
+  <text x="659" y="537" text-anchor="middle" class="body">HyPE questions</text>
+  <rect x="782" y="500" width="205" height="58" rx="8" fill="#f3f8ff" stroke="#7ea6d6" stroke-width="2"/>
+  <text x="884" y="537" text-anchor="middle" class="body">Sparse retrieval</text>
+
+  <path d="M792 580 L792 624" stroke="#1258a5" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="645" y="640" width="295" height="96" rx="10" fill="#eaf3ff" stroke="#4f83bd" stroke-width="2"/>
+  <text x="792" y="680" text-anchor="middle" class="strong">RRF fusion</text>
+  <text x="792" y="714" text-anchor="middle" class="body">Merge path hits</text>
+  <line x1="940" y1="688" x2="956" y2="688" stroke="#1258a5" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="970" y="626" width="170" height="124" rx="10" fill="#f3f8ff" stroke="#4f83bd" stroke-width="2"/>
+  <text x="1055" y="669" text-anchor="middle" class="strong">4</text>
+  <text x="1055" y="704" text-anchor="middle" class="body">unique blocks</text>
+  <text x="1055" y="736" text-anchor="middle" class="body">3 documents</text>
+
+  <rect x="60" y="800" width="1080" height="126" rx="10" fill="#fff8f0" stroke="#d7b48f" stroke-width="2"/>
+  <text x="88" y="842" class="strong" fill="#8a480d">Boundary</text>
+  <text x="228" y="842" class="body">20 path hits ≠ 20 independent pieces of evidence.</text>
+  <text x="228" y="882" class="body">Per-path ranks were not saved; final set: 4 unique blocks.</text>
+</svg>

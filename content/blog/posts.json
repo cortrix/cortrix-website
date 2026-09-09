@@ -1,5 +1,20 @@
 [
   {
+    "kind": "article",
+    "visibility": "published",
+    "slug": "vector-is-not-semantic",
+    "title": "Vector is not semantic",
+    "description": "A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.",
+    "topic": "Inside Cortrix",
+    "bodyFile": "vector-is-not-semantic.html",
+    "readMinutes": 10,
+    "image": "/assets/blog/vector-is-not-semantic/01-relevance-en-v3.svg",
+    "imageAlt": "Comparison of relevance scores and lifecycle status for an old integration guide and a current migration notice",
+    "sourceLabel": "Order API Field Migration scenario",
+    "sourceUrl": "https://github.com/cortrix/cortrix-demos/tree/c3835a80026d22a8ed707511e9cbca6874c95e71/scenarios/order-api-field-migration",
+    "updatedAt": "2026-09-09T16:00:00Z"
+  },
+  {
     "slug": "dbpedia-linked-data-explained",
     "title": "DBpedia explained: why linked data still matters",
     "description": "Why stable identities and linked data still matter when your agents retrieve knowledge from different systems.",
