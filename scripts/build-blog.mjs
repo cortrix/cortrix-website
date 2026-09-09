@@ -106,12 +106,14 @@ function validatePosts(rawPosts) {
       throw new Error(`posts.json[${index}] must be an object`);
     }
     const kind = rawPost.kind ?? 'paper';
-    if (!['paper', 'release'].includes(kind)) {
-      throw new Error(`posts.json[${index}].kind must be paper or release`);
+    if (!['paper', 'release', 'article'].includes(kind)) {
+      throw new Error(`posts.json[${index}].kind must be paper, release, or article`);
     }
     const kindStrings = kind === 'paper'
       ? ['paperTitle', 'paperUrl']
-      : ['releaseTag', 'releaseUrl', 'evidenceUrl', 'image', 'imageAlt'];
+      : kind === 'release'
+        ? ['releaseTag', 'releaseUrl', 'evidenceUrl', 'image', 'imageAlt']
+        : ['image', 'imageAlt', 'sourceLabel', 'sourceUrl'];
     for (const field of [...requiredStrings, ...kindStrings]) {
       if (typeof rawPost[field] !== 'string' || rawPost[field].trim() === '') {
         throw new Error(`posts.json[${index}].${field} must be a non-empty string`);
@@ -133,7 +135,7 @@ function validatePosts(rawPosts) {
       validateUrl(rawPost.paperUrl, 'paperUrl', index);
       if (orders.has(rawPost.seriesOrder)) throw new Error(`Duplicate seriesOrder: ${rawPost.seriesOrder}`);
       orders.add(rawPost.seriesOrder);
-    } else {
+    } else if (kind === 'release') {
       validateDate(rawPost.releaseDate, 'releaseDate', index);
       if (!rawPost.releaseDate) throw new Error(`posts.json[${index}].releaseDate must be an ISO date or date-time`);
       validateUrl(rawPost.releaseUrl, 'releaseUrl', index);
@@ -145,6 +147,15 @@ function validatePosts(rawPosts) {
         throw new Error(`posts.json[${index}].featured must be a boolean`);
       }
       if (rawPost.featured) featuredCount += 1;
+    } else {
+      validateUrl(rawPost.sourceUrl, 'sourceUrl', index);
+    }
+    const visibility = rawPost.visibility ?? 'published';
+    if (!['published', 'review'].includes(visibility)) {
+      throw new Error(`posts.json[${index}].visibility must be published or review`);
+    }
+    if (visibility === 'review' && kind !== 'article') {
+      throw new Error(`posts.json[${index}].review visibility is reserved for article candidates`);
     }
     if (path.isAbsolute(rawPost.bodyFile)
         || path.normalize(rawPost.bodyFile).startsWith('..')
@@ -165,10 +176,12 @@ function validatePosts(rawPosts) {
     return {
       ...rawPost,
       kind,
+      visibility,
       description: rawPost.description.trim(),
       ...(kind === 'paper' ? { paperAuthors: normalizeAuthors(rawPost.paperAuthors, index) } : {}),
     };
   }).sort((a, b) => {
+    if (a.visibility !== b.visibility) return a.visibility === 'review' ? -1 : 1;
     if (a.featured !== b.featured) return a.featured ? -1 : 1;
     if (a.kind !== b.kind) return a.kind === 'release' ? -1 : 1;
     if (a.kind === 'release') return Date.parse(b.releaseDate) - Date.parse(a.releaseDate);
@@ -220,7 +233,7 @@ function renderMeta({ title, description, url, type = 'website', structuredData,
   <title>${escapeHtml(title)}</title>
   <meta name="description" content="${escapeHtml(description)}">
   <meta name="author" content="Scott">
-  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="robots" content="${post?.visibility === 'review' ? 'noindex, nofollow, noarchive' : 'index, follow, max-image-preview:large'}">
   <link rel="canonical" href="${escapeHtml(url)}">
   <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="${siteUrl}/blog/rss.xml">
   <meta property="og:type" content="${type}">
@@ -244,15 +257,21 @@ ${dates ? `${dates}\n` : ''}  <script type="application/ld+json">${jsonForHtml(s
 
 function renderCard(post, featured = false) {
   const isRelease = post.kind === 'release';
-  const visual = isRelease ? post.image : '/assets/blog/research-map.svg';
-  const visualAlt = isRelease ? post.imageAlt : '';
-  const label = isRelease ? post.releaseTag : String(post.seriesOrder).padStart(2, '0');
+  const isArticle = post.kind === 'article';
+  const isReview = post.visibility === 'review';
+  const visual = post.image ?? '/assets/blog/research-map.svg';
+  const visualAlt = post.imageAlt ?? '';
+  const label = isRelease ? post.releaseTag : isReview ? 'Review' : isArticle ? 'Inside' : String(post.seriesOrder).padStart(2, '0');
   const metadata = isRelease
     ? `<span>${escapeHtml(post.topic)}</span><span>${escapeHtml(post.releaseTag)}</span><span>Released ${escapeHtml(formatShortDate(post.releaseDate))}</span><span>${post.readMinutes} min read</span>`
-    : `<span>${escapeHtml(post.topic)}</span><span>Paper: ${post.paperYear}</span><span>Note ${String(post.seriesOrder).padStart(2, '0')}</span><span>${post.readMinutes} min read</span>`;
+    : isReview
+      ? `<span>${escapeHtml(post.topic)}</span><span>Review candidate</span><span>${post.readMinutes} min read</span>`
+      : isArticle
+        ? `<span>${escapeHtml(post.topic)}</span><span>${post.readMinutes} min read</span>`
+      : `<span>${escapeHtml(post.topic)}</span><span>Paper: ${post.paperYear}</span><span>Note ${String(post.seriesOrder).padStart(2, '0')}</span><span>${post.readMinutes} min read</span>`;
   return `<article class="blog-card${featured ? ' blog-card-featured' : ''}" data-blog-card data-topic="${escapeHtml(post.topic)}">
 ${featured ? `    <a class="blog-card-visual" href="/blog/${post.slug}/"${isRelease ? '' : ' tabindex="-1" aria-hidden="true"'}>
-      <img src="${escapeHtml(visual)}" alt="${escapeHtml(visualAlt)}" width="${isRelease ? 1200 : 720}" height="${isRelease ? 630 : 430}">
+      <img src="${escapeHtml(visual)}" alt="${escapeHtml(visualAlt)}" width="${isRelease || isReview ? 1200 : 720}" height="${isRelease || isReview ? 630 : 430}">
       ${isRelease ? "" : `<span>${escapeHtml(label)}</span>`}
     </a>
 ` : ''}    <div class="blog-card-copy">
@@ -274,11 +293,12 @@ function renderFooter() {
 }
 
 function renderIndex(posts, header) {
-  const papers = posts.filter(post => post.kind === 'paper');
-  const latestRelease = posts.find(post => post.kind === 'release' && post.featured)
-    ?? posts.find(post => post.kind === 'release');
+  const publishedPosts = posts.filter(post => post.visibility === 'published');
+  const papers = publishedPosts.filter(post => post.kind === 'paper');
+  const latestRelease = publishedPosts.find(post => post.kind === 'release' && post.featured)
+    ?? publishedPosts.find(post => post.kind === 'release');
   const featuredPaper = papers[0];
-  const topics = [...new Set(posts.map(post => post.topic))];
+  const topics = [...new Set(publishedPosts.map(post => post.topic))];
   const title = 'Cortrix Blog | Semantic Storage Updates and Research';
   const description = 'Cortrix product updates and Scott’s personal readings on semantic storage, retrieval, knowledge graphs, and agent memory.';
   const url = `${siteUrl}/blog/`;
@@ -293,7 +313,7 @@ function renderIndex(posts, header) {
         url,
         author: { '@type': 'Person', name: 'Scott' },
         publisher: { '@type': 'Organization', name: 'Cortrix', url: siteUrl },
-        blogPost: posts.map(post => ({
+        blogPost: publishedPosts.map(post => ({
           '@type': 'BlogPosting',
           headline: post.title,
           description: post.description,
@@ -330,10 +350,11 @@ ${latestRelease ? `    <section id="latest-release" class="blog-latest-release c
       <div class="blog-section-heading"><div><p class="blog-kicker">Latest release</p><h2 id="latest-release-title">${escapeHtml(latestRelease.releaseTag)}</h2></div><p>Our latest release update: retrieval results, licensing, and practical fixes.</p></div>
       ${renderCard(latestRelease, true)}
     </section>` : ''}
+${featuredPaper ? `
     <section class="blog-feature container" aria-labelledby="featured-title">
       <div class="blog-section-heading"><div><p class="blog-kicker">Start here</p><h2 id="featured-title">Start with DBpedia</h2></div><p>New to the series? Begin with the question of how knowledge gets a stable identity.</p></div>
       ${renderCard(featuredPaper, true)}
-    </section>
+    </section>` : ''}
     <section class="blog-library container" aria-labelledby="library-title">
       <div class="blog-section-heading"><div><p class="blog-kicker">Browse the Blog</p><h2 id="library-title">All articles</h2></div><p>Read in order, or pick the topic that interests you.</p></div>
       <div class="blog-filters" role="group" aria-label="Filter articles by topic">
@@ -341,7 +362,7 @@ ${latestRelease ? `    <section id="latest-release" class="blog-latest-release c
         ${topics.map(topic => `<button type="button" data-blog-filter="${escapeHtml(topic)}" aria-pressed="false">${escapeHtml(topic)}</button>`).join('\n        ')}
       </div>
       <div class="blog-card-grid" data-blog-grid>
-        ${posts.map(post => renderCard(post)).join('\n        ')}
+        ${publishedPosts.map(post => renderCard(post)).join('\n        ')}
       </div>
       <p class="blog-empty" data-blog-empty hidden>No notes match this topic yet. Choose another filter to keep exploring.</p>
     </section>
@@ -383,7 +404,7 @@ function renderArticle(post, posts, body, header) {
         temporalCoverage: String(post.paperYear),
         author: post.paperAuthors.map(name => ({ '@type': 'Person', name })),
       }
-    : {
+    : post.kind === 'release' ? {
         '@type': 'SoftwareSourceCode',
         name: `Cortrix ${post.releaseTag}`,
         url: post.releaseUrl,
@@ -393,7 +414,7 @@ function renderArticle(post, posts, body, header) {
           name: 'Published benchmark evidence',
           url: post.evidenceUrl,
         },
-      };
+      } : { '@type': 'CreativeWork', name: post.sourceLabel, url: post.sourceUrl };
   const blogPosting = {
     '@type': 'BlogPosting',
     '@id': `${url}#article`,
@@ -429,20 +450,36 @@ function renderArticle(post, posts, body, header) {
     post.updatedAt ? `Updated ${formatDate(post.updatedAt)}` : '',
   ].filter(Boolean).join(' · ');
   const isRelease = post.kind === 'release';
-  const breadcrumbLabel = isRelease ? post.releaseTag : `Note ${String(post.seriesOrder).padStart(2, '0')}`;
+  const isArticle = post.kind === 'article';
+  const isReview = post.visibility === 'review';
+  const breadcrumbLabel = isRelease ? post.releaseTag : isReview ? 'Review candidate' : isArticle ? 'Inside Cortrix' : `Note ${String(post.seriesOrder).padStart(2, '0')}`;
   const kicker = isRelease
     ? `Release update · ${escapeHtml(post.topic)}`
-    : `Research Note ${String(post.seriesOrder).padStart(2, '0')} · ${escapeHtml(post.topic)}`;
+    : isReview
+      ? `Inside Cortrix · Review candidate`
+      : isArticle
+        ? `Inside Cortrix · ${escapeHtml(post.topic)}`
+      : `Research Note ${String(post.seriesOrder).padStart(2, '0')} · ${escapeHtml(post.topic)}`;
   const byline = isRelease
     ? `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Released ${escapeHtml(formatShortDate(post.releaseDate))}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`
-    : `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Paper published ${post.paperYear}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`;
+    : isReview
+      ? `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Awaiting editorial review</span>`
+      : isArticle
+        ? `<span>By Scott</span><span>${post.readMinutes} min read</span>`
+      : `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Paper published ${post.paperYear}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`;
   const sourceCard = isRelease
     ? `<div class="article-paper-card article-release-card"><div><p class="blog-kicker">Release sources</p><h2>${escapeHtml(post.releaseTag)}</h2><p>Published release details and benchmark evidence</p></div><div class="article-source-links"><a href="${escapeHtml(post.releaseUrl)}" target="_blank" rel="noopener noreferrer">Source release <span aria-hidden="true">↗</span></a><a href="${escapeHtml(post.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Benchmark evidence <span aria-hidden="true">↗</span></a></div></div>`
-    : `<div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>${escapeHtml(post.paperTitle)}</h2><p>${escapeHtml(post.paperAuthors.length > 2 ? post.paperAuthors.slice(0, 2).join(', ') + ' et al.' : post.paperAuthors.join(', '))} · ${post.paperYear}</p></div><a href="${escapeHtml(post.paperUrl)}" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>`;
+    : isReview
+      ? `<div class="article-paper-card"><div><p class="blog-kicker">Review status</p><h2>Local editorial candidate</h2><p>This page is excluded from indexing, feeds, and the sitemap while it awaits publication confirmation.</p></div></div>`
+      : isArticle
+        ? `<div class="article-paper-card"><div><p class="blog-kicker">Scenario source</p><h2>${escapeHtml(post.sourceLabel)}</h2><p>A public, version-pinned scenario records the synthetic documents, comparison contract, and responsibility boundary used in this article.</p></div><a href="${escapeHtml(post.sourceUrl)}" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>`
+      : `<div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>${escapeHtml(post.paperTitle)}</h2><p>${escapeHtml(post.paperAuthors.length > 2 ? post.paperAuthors.slice(0, 2).join(', ') + ' et al.' : post.paperAuthors.join(', '))} · ${post.paperYear}</p></div><a href="${escapeHtml(post.paperUrl)}" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>`;
   const authorDescription = isRelease
     ? 'Scott is one of Cortrix’s creators. He writes release updates that connect shipped changes with their public sources and practical implications.'
-    : 'Scott is one of Cortrix’s creators. These research notes share his personal understanding of papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.';
-  const followOn = isRelease
+    : isReview || isArticle
+      ? 'Scott writes from an engineering perspective on retrieval, evidence, and the conditions that let an application adopt a result.'
+      : 'Scott is one of Cortrix’s creators. These research notes share his personal understanding of papers, with an emphasis on semantic storage and agent memory. They are not descriptions of papers being implemented in Cortrix.';
+  const followOn = isRelease || isArticle
     ? `<section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol>${papers.map(item => `<li><span>${String(item.seriesOrder).padStart(2, '0')}</span><a href="/blog/${item.slug}/">${escapeHtml(item.title)}</a><small>${escapeHtml(item.topic)} · ${item.readMinutes} min</small></li>`).join('')}</ol></section>`
     : `<nav class="series-navigation" aria-label="Previous and next research notes">${previous ? `<a href="/blog/${previous.slug}/"><span>Previous note</span><strong>← ${escapeHtml(previous.title)}</strong></a>` : '<span></span>'}${next ? `<a href="/blog/${next.slug}/"><span>Next note</span><strong>${escapeHtml(next.title)} →</strong></a>` : '<span></span>'}</nav><section class="article-series" aria-labelledby="series-title"><div class="blog-section-heading"><div><p class="blog-kicker">Research Notes</p><h2 id="series-title">Continue the series</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol>${papers.map(item => `<li${item.slug === post.slug ? ' aria-current="page"' : ''}><span>${String(item.seriesOrder).padStart(2, '0')}</span><a href="/blog/${item.slug}/">${escapeHtml(item.title)}</a><small>${escapeHtml(item.topic)} · ${item.readMinutes} min</small></li>`).join('')}</ol></section>`;
 
@@ -524,19 +561,21 @@ function replaceGeneratedSection(source, renderedSection, location) {
 }
 
 function renderSitemapSection(posts) {
-  const urls = [`${siteUrl}/blog/`, `${siteUrl}/blog/rss.xml`, ...posts.map(post => `${siteUrl}/blog/${post.slug}/`)];
+  const urls = [`${siteUrl}/blog/`, `${siteUrl}/blog/rss.xml`, ...posts.filter(post => post.visibility === 'published').map(post => `${siteUrl}/blog/${post.slug}/`)];
   return `${startMarker}\n${urls.map(url => `  <url><loc>${url}</loc></url>`).join('\n')}\n  ${endMarker}`;
 }
 
 function renderLlmsSection(posts) {
-  const releases = posts.filter(post => post.kind === 'release');
-  const papers = posts.filter(post => post.kind === 'paper');
+  const releases = posts.filter(post => post.kind === 'release' && post.visibility === 'published');
+  const papers = posts.filter(post => post.kind === 'paper' && post.visibility === 'published');
+  const articles = posts.filter(post => post.kind === 'article' && post.visibility === 'published');
   return `${startMarker}
 ## Blog
 
 - Blog index: ${siteUrl}/blog/
 - RSS feed: ${siteUrl}/blog/rss.xml
 ${releases.map(post => `- Release update: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source release: ${post.releaseUrl} — benchmark evidence: ${post.evidenceUrl}`).join('\n')}
+${articles.map(post => `- Inside Cortrix: ${post.title} — ${siteUrl}/blog/${post.slug}/ — scenario source: ${post.sourceLabel}, ${post.sourceUrl}`).join('\n')}
 ${papers.map(post => `- Research Note ${String(post.seriesOrder).padStart(2, '0')}: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source paper: ${post.paperTitle} (${post.paperYear}), ${post.paperUrl}`).join('\n')}
 
 The Blog contains Cortrix product updates and Scott’s personal English interpretations of foundational papers. Research notes are not implementation notes for Cortrix. Release updates cite their source release and supporting evidence; research notes keep separate, visible paper citations. This metadata does not claim search placement, AI recommendation, or guaranteed discoverability.
@@ -601,7 +640,7 @@ for (const post of postsWithBodies) {
     staleFiles,
   );
 }
-await writeOrCheck(path.join(blogDirectory, 'rss.xml'), renderRss(postsWithBodies), staleFiles);
+await writeOrCheck(path.join(blogDirectory, 'rss.xml'), renderRss(postsWithBodies.filter(post => post.visibility === 'published')), staleFiles);
 
 const sitemap = await readFile(sitemapPath, 'utf8');
 await writeOrCheck(sitemapPath, replaceGeneratedSection(sitemap, renderSitemapSection(posts), 'sitemap.xml'), staleFiles);

@@ -24,13 +24,30 @@ const release = {
   imageAlt: 'Cross-encoder retrieval scores in two benchmark rounds',
 };
 
+const reviewCandidate = {
+  kind: 'article',
+  visibility: 'review',
+  slug: 'review-candidate',
+  title: 'Review candidate',
+  description: 'A local editorial candidate that must not enter indexable Blog outputs before publication.',
+  topic: 'Inside Cortrix',
+  bodyFile: 'review-candidate.html',
+  readMinutes: 3,
+  image: '/assets/blog/research-map.svg',
+  imageAlt: 'Abstract review candidate illustration',
+  sourceLabel: 'Public scenario',
+  sourceUrl: 'https://github.com/cortrix/cortrix-demos',
+};
+
 async function fixture(run, { paperCount = 1 } = {}) {
   const dir = await mkdtemp(path.join(tmpdir(), 'cortrix-blog-test-'));
   try {
     for (const part of ['scripts', 'components', 'content/blog']) await mkdir(path.join(dir, part), { recursive: true });
     await copyFile(path.join(root, 'scripts/build-blog.mjs'), path.join(dir, 'scripts/build-blog.mjs'));
     await copyFile(path.join(root, 'components/site-header.html'), path.join(dir, 'components/site-header.html'));
-    const posts = JSON.parse(await readFile(path.join(root, 'content/blog/posts.json'), 'utf8')).slice(0, paperCount);
+    const posts = JSON.parse(await readFile(path.join(root, 'content/blog/posts.json'), 'utf8'))
+      .filter(post => (post.kind ?? 'paper') === 'paper')
+      .slice(0, paperCount);
     await writeFile(path.join(dir, 'content/blog/posts.json'), JSON.stringify(posts));
     for (const [index, post] of posts.entries()) {
       const heading = index === 0 ? '<h2 id="stable-mechanism">Mechanism</h2>' : '<h2>Mechanism</h2>';
@@ -50,6 +67,13 @@ async function addRelease(dir, posts) {
   await writeFile(path.join(dir, 'content/blog/posts.json'), JSON.stringify(withRelease));
   await writeFile(path.join(dir, 'content/blog', release.bodyFile), '<p>Release introduction.</p><h2>What changed</h2><p>Release details.</p>');
   return withRelease;
+}
+
+async function addReviewCandidate(dir, posts) {
+  const withCandidate = [...posts, reviewCandidate];
+  await writeFile(path.join(dir, 'content/blog/posts.json'), JSON.stringify(withCandidate));
+  await writeFile(path.join(dir, 'content/blog', reviewCandidate.bodyFile), '<p>Review introduction.</p><h2>Review scope</h2><p>Local-only candidate.</p>');
+  return withCandidate;
 }
 
 test('build is deterministic and check detects a changed source', async () => {
@@ -125,5 +149,20 @@ test('release entries do not require paper metadata or a Blog publication date',
     assert.doesNotMatch(article, /article:published_time|"datePublished"/);
     assert.match(article, new RegExp(release.releaseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
     assert.match(article, new RegExp(release.evidenceUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  });
+});
+
+test('review candidates are generated locally but excluded from public Blog outputs', async () => {
+  await fixture(async ({ dir, posts, build }) => {
+    await addReviewCandidate(dir, posts);
+    build();
+    const index = await readFile(path.join(dir, 'blog/index.html'), 'utf8');
+    const rss = await readFile(path.join(dir, 'blog/rss.xml'), 'utf8');
+    const sitemap = await readFile(path.join(dir, 'sitemap.xml'), 'utf8');
+    const article = await readFile(path.join(dir, 'blog', reviewCandidate.slug, 'index.html'), 'utf8');
+    assert.doesNotMatch(index, new RegExp(`/blog/${reviewCandidate.slug}/`));
+    assert.doesNotMatch(rss, new RegExp(`/blog/${reviewCandidate.slug}/`));
+    assert.doesNotMatch(sitemap, new RegExp(`/blog/${reviewCandidate.slug}/`));
+    assert.match(article, /noindex, nofollow, noarchive/);
   });
 });

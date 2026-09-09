@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">An old document can be more relevant and still be wrong for the current request</title>
+  <desc id="desc">In this small August 2026 demo, an old guide block has the higher cosine similarity but is superseded. The current migration notice has a lower score but applies to this request. Relevance ranking and adoption are separate decisions.</desc>
+  <defs>
+    <style>
+      svg { color-scheme:light dark; --bg:#0B0F19; --surface:#131B2A; --surface2:#1A2236; --line:#1E293B; --txt:#F1F5F9; --muted:#94A3B8; --magma:#FF6405; --magma-h:#FF8A30; --amber:#FFB020; --ok:#34D399; --warning-bg:#2A1A08; --success-bg:#092A22; }
+      @media (prefers-color-scheme:light) { svg { --bg:#F8FAFC; --surface:#FFFFFF; --surface2:#F1F5F9; --line:#E2E8F0; --txt:#0F172A; --muted:#64748B; --magma:#FF6405; --magma-h:#EA5000; --amber:#D97706; --ok:#059669; --warning-bg:#FFF7ED; --success-bg:#ECFDF5; } }
+      text { font-family:"Inter", "PingFang SC", "Noto Sans CJK SC", sans-serif; fill:var(--txt); }
+      .mono { font-family:"JetBrains Mono", "SFMono-Regular", Menlo, Consolas, monospace; }
+      .title { font-size:34px; font-weight:700; } .subtitle { font-size:22px; fill:var(--muted); } .head { font-size:23px; font-weight:650; } .body { font-size:22px; } .strong { font-size:24px; font-weight:700; }
+      .brand { fill:var(--magma-h); } .muted { fill:var(--muted); } .warning { fill:var(--muted); } .success { fill:var(--magma-h); }
+      .canvas { fill:var(--bg); } .panel { fill:var(--surface); stroke:var(--line); } .panel-2 { fill:var(--surface2); stroke:var(--line); } .warning-panel { fill:var(--surface2); stroke:var(--line); } .success-panel { fill:var(--surface); stroke:var(--magma); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L10,5 L0,10 Z" fill="#FF6405"/></marker>
+  </defs>
+  <rect width="1200" height="820" class="canvas"/>
+  <text x="70" y="72" class="title">More relevant does not mean usable now.</text>
+  <text x="70" y="112" class="subtitle">Small August 2026 demo · 4 order API documents · 5 source blocks · not a benchmark</text>
+  <rect x="70" y="155" width="1060" height="92" rx="10" class="panel-2" stroke-width="2"/>
+  <text x="96" y="192" class="head">Request error</text><text x="330" y="192" class="strong mono">unknown field account_id</text><text x="96" y="226" class="body muted">The answer needs textual relevance and a version that still applies.</text>
+  <text x="70" y="294" class="head brand">1. Relevance ranking</text><text x="720" y="294" class="head brand">2. Adoption in this demo</text><line x1="515" y1="286" x2="674" y2="286" stroke="#FF6405" stroke-width="3" marker-end="url(#arrow)"/>
+  <rect x="70" y="320" width="1060" height="64" class="panel-2"/><text x="94" y="361" class="head">Source block</text><text x="514" y="361" class="head">Cosine score</text><text x="744" y="361" class="head">Lifecycle</text><text x="978" y="361" class="head">This request</text>
+  <rect x="70" y="384" width="1060" height="126" class="warning-panel" stroke-width="2"/><text x="94" y="430" class="strong warning">v1.0 guide · block 0</text><text x="94" y="468" class="body muted">Old field guidance</text><text x="514" y="453" class="strong warning mono">0.7532</text><text x="744" y="453" class="strong warning mono">superseded</text><text x="978" y="453" class="strong warning">Not usable</text>
+  <rect x="70" y="510" width="1060" height="126" class="success-panel" stroke-width="2"/><text x="94" y="556" class="strong success">v2.0 migration notice</text><text x="94" y="594" class="body">Current field migration</text><text x="514" y="579" class="strong success mono">0.5937</text><text x="744" y="579" class="strong success mono">current</text><text x="978" y="579" class="strong success">Use this</text>
+  <rect x="70" y="680" width="1060" height="88" rx="10" class="panel" stroke-width="2"/><text x="96" y="718" class="strong brand">Takeaway</text><text x="265" y="718" class="body">A vector score is textual similarity, not answer correctness.</text><text x="265" y="752" class="body">Ranking and lifecycle adoption need separate rules.</text>
+</svg>
