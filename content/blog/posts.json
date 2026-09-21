@@ -16,7 +16,7 @@
   },
   {
     "kind": "article",
-    "visibility": "review",
+    "visibility": "published",
     "slug": "jev-laya-no-go",
     "title": "Jev and Laya are getting hyped. We're passing for now.",
     "description": "Jev can judge a candidate set, but it cannot improve recall. We reviewed the public evidence and decided not to replace Cortrix's local BGE path.",
@@ -27,7 +27,8 @@
     "imageAlt": "Cortrix",
     "sourceLabel": "Jev launch and public reranking evaluations",
     "sourceUrl": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
-    "updatedAt": "2026-09-21T12:26:06Z"
+    "publishedAt": "2026-09-21T13:31:51Z",
+    "updatedAt": "2026-09-21T13:31:51Z"
   },
   {
     "slug": "dbpedia-linked-data-explained",
