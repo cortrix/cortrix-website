@@ -15,6 +15,21 @@
     "updatedAt": "2026-09-09T16:00:00Z"
   },
   {
+    "kind": "article",
+    "visibility": "review",
+    "slug": "jev-laya-no-go",
+    "title": "Jev and Laya are getting hyped. We're passing for now.",
+    "description": "Jev can judge a candidate set, but it cannot improve recall. We reviewed the public evidence and decided not to replace Cortrix's local BGE path.",
+    "topic": "Inside Cortrix",
+    "bodyFile": "jev-laya-no-go.html",
+    "readMinutes": 8,
+    "image": "/assets/blog/social-card.png",
+    "imageAlt": "Cortrix",
+    "sourceLabel": "Jev launch and public reranking evaluations",
+    "sourceUrl": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+    "updatedAt": "2026-09-21T12:26:06Z"
+  },
+  {
     "slug": "dbpedia-linked-data-explained",
     "title": "DBpedia explained: why linked data still matters",
     "description": "Why stable identities and linked data still matter when your agents retrieve knowledge from different systems.",
