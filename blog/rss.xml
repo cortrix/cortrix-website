@@ -23,6 +23,15 @@
       <category>Inside Cortrix</category>
     </item>
     <item>
+      <title>Jev and Laya are getting hyped. We&#39;re passing for now.</title>
+      <link>https://cortrix.ai/blog/jev-laya-no-go/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/jev-laya-no-go/</guid>
+      <description>Jev can judge a candidate set, but it cannot improve recall. We reviewed the public evidence and decided not to replace Cortrix&#39;s local BGE path.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Inside Cortrix</category>
+      <pubDate>Mon, 21 Sep 2026 13:31:51 GMT</pubDate>
+    </item>
+    <item>
       <title>DBpedia explained: why linked data still matters</title>
       <link>https://cortrix.ai/blog/dbpedia-linked-data-explained/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/dbpedia-linked-data-explained/</guid>
