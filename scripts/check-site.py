@@ -4,6 +4,7 @@ import json
 import re
 import sys
 import xml.etree.ElementTree as ET
+from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -188,8 +189,9 @@ for post in posts:
         require(article.canonical[0] not in {item.findtext("link") for item in items}, f"{post['slug']}: review candidate is in RSS")
     elif post["kind"] == "article":
         require(citation.get("@type") == "CreativeWork", f"{post['slug']}: article citation has wrong type")
-        require(citation.get("url") == post.get("sourceUrl") and post.get("sourceUrl") in article.links, f"{post['slug']}: missing visible scenario source")
-        require("Scenario source" in article.source, f"{post['slug']}: missing scenario source label")
+        require(citation.get("url") == post.get("sourceUrl") and post.get("sourceUrl") in article.links, f"{post['slug']}: missing visible article source")
+        require(post.get("sourceKind", "Scenario source") in article.source, f"{post['slug']}: missing article source label")
+        require(post.get("sourceDescription", "A public, version-pinned scenario records the synthetic documents, comparison contract, and responsibility boundary used in this article.") in unescape(article.source), f"{post['slug']}: missing article source description")
         require("Review candidate" not in article.source, f"{post['slug']}: published article retains review label")
     else:
         require(False, f"{post['slug']}: unsupported post kind {post['kind']}")

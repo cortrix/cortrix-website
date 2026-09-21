@@ -25,7 +25,9 @@
     "readMinutes": 8,
     "image": "/assets/blog/social-card.png",
     "imageAlt": "Cortrix",
-    "sourceLabel": "Jev launch and public reranking evaluations",
+    "sourceKind": "Primary source",
+    "sourceLabel": "TypeSafe Jev launch post",
+    "sourceDescription": "The launch post introduces Jev. The article also links TypeSafe's reranking cookbook and the two independent evaluations behind the reported numbers.",
     "sourceUrl": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
     "publishedAt": "2026-09-21T13:31:51Z",
     "updatedAt": "2026-09-21T13:31:51Z"

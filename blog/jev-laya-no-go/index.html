@@ -50,7 +50,7 @@
       },
       "citation": {
         "@type": "CreativeWork",
-        "name": "Jev launch and public reranking evaluations",
+        "name": "TypeSafe Jev launch post",
         "url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
       },
       "inLanguage": "en",
@@ -135,12 +135,12 @@
     <div class="article-shell container">
       <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Inside Cortrix</li></ol></nav>
       <header class="article-header">
-        <p class="blog-kicker">Inside Cortrix · Inside Cortrix</p>
+        <p class="blog-kicker">Inside Cortrix</p>
         <h1>Jev and Laya are getting hyped. We&#39;re passing for now.</h1>
         <p class="article-deck">Jev can judge a candidate set, but it cannot improve recall. We reviewed the public evidence and decided not to replace Cortrix&#39;s local BGE path.</p>
         <div class="article-byline"><span>By Scott</span><span>8 min read</span></div>
       </header>
-      <div class="article-paper-card"><div><p class="blog-kicker">Scenario source</p><h2>Jev launch and public reranking evaluations</h2><p>A public, version-pinned scenario records the synthetic documents, comparison contract, and responsibility boundary used in this article.</p></div><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
+      <div class="article-paper-card"><div><p class="blog-kicker">Primary source</p><h2>TypeSafe Jev launch post</h2><p>The launch post introduces Jev. The article also links TypeSafe&#39;s reranking cookbook and the two independent evaluations behind the reported numbers.</p></div><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
       <div class="article-layout">
         <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#a-reranker-can-t-find-a-document-it-never-sees">A reranker can&#39;t find a document it never sees</a></li><li><a href="#the-public-result-is-interesting-within-its-limits">The public result is interesting, within its limits</a></li><li><a href="#cheap-tokens-don-t-settle-the-cost-question">Cheap tokens don&#39;t settle the cost question</a></li><li><a href="#we-came-away-with-three-conclusions">We came away with three conclusions</a></li><li><a href="#this-was-an-architecture-review-not-a-benchmark">This was an architecture review, not a benchmark</a></li></ol></details></div></aside>
         <article class="article-body"><p class="article-lead">Jev and Laya, a third-party open-source model in the same category, have been getting a lot of attention this week. We looked at how they would fit into Cortrix and decided to leave them out for now.</p>
@@ -155,9 +155,9 @@
 <p class="article-formula"><code>S_k ⊆ C_N</code></p>
 <p>It can change the top ten. It can't raise the recall ceiling imposed by the candidate set.</p>
 <h2 id="the-public-result-is-interesting-within-its-limits">The public result is interesting, within its limits</h2>
-<p>We checked TypeSafe's reranking example, the public result closest to our use case. It uses 40 CLERC queries and 3,565 passages. BM25 retrieves 30 candidates per query, then Jev scores them. The report shows top-10 accuracy going from roughly 38% to 62%.</p>
+<p>We checked <a href="https://docs.typesafe.ai/cookbooks/rerank_typesafe" target="_blank" rel="noopener noreferrer">TypeSafe's reranking example</a>, the public result closest to our use case. It uses 40 CLERC queries and 3,565 passages. BM25 retrieves 30 candidates per query, then Jev scores them. The report shows top-10 accuracy going from roughly 38% to 62%.</p>
 <p>That's evidence that Jev can make useful judgments about retrieved candidates. It doesn't establish a new ability to retrieve missing documents. It also doesn't tell us whether Jev beats the local BGE setup we already use. Laya, the third-party open-source model, doesn't currently have enough public data to establish that either.</p>
-<p>Independent public evaluations do not give us a reason to swap it in. <code>jev-search-rerank-eval</code> used 164 Chinese, English, and mixed-language queries with 9,831 labelled pairs. Jev reranking bge-m3's top 30 improved NDCG@10 by 0.012, with a 95% confidence interval from -0.013 to +0.037. Under labels produced without Jev, the result was -0.028. In a separate <code>jev-orderby-bench</code> Amazon ESCI hard probe, Jev failed four of six gates. Neither test is a Cortrix benchmark, but both show that Jev reranking is not a free replacement for the current path.</p>
+<p>Independent public evaluations do not give us a reason to swap it in. <a href="https://github.com/zhuyansen/jev-search-rerank-eval" target="_blank" rel="noopener noreferrer"><code>jev-search-rerank-eval</code></a> used 164 Chinese, English, and mixed-language queries with 9,831 labelled pairs. Jev reranking bge-m3's top 30 improved NDCG@10 by 0.012, with a 95% confidence interval from -0.013 to +0.037. Under labels produced without Jev, the result was -0.028. In a separate <a href="https://github.com/yodablocks/jev-orderby-bench" target="_blank" rel="noopener noreferrer"><code>jev-orderby-bench</code></a> Amazon ESCI hard probe, Jev failed four of six gates. Neither test is a Cortrix benchmark, but both show that Jev reranking is not a free replacement for the current path.</p>
 <p>The request budget deserves a closer look, too. Jev's documentation lists a limit of 1,200 requests per minute. If we score 20 candidates separately for each query, we spend 20 requests on one application query. That gives us a theoretical ceiling of about one query per second, before routing calls, retries, or other tenants use any of that capacity.</p>
 <p>Putting several candidates into a single request could reduce the request count. It would also change context length and potentially scoring consistency. We'd need to test that configuration separately rather than assume it behaves the same way.</p>
 <h2 id="cheap-tokens-don-t-settle-the-cost-question">Cheap tokens don't settle the cost question</h2>

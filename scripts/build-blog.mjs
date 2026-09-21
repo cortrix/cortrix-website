@@ -149,6 +149,11 @@ function validatePosts(rawPosts) {
       if (rawPost.featured) featuredCount += 1;
     } else {
       validateUrl(rawPost.sourceUrl, 'sourceUrl', index);
+      for (const field of ['sourceKind', 'sourceDescription']) {
+        if (rawPost[field] !== undefined && (typeof rawPost[field] !== 'string' || rawPost[field].trim() === '')) {
+          throw new Error(`posts.json[${index}].${field} must be a non-empty string when provided`);
+        }
+      }
     }
     const visibility = rawPost.visibility ?? 'published';
     if (!['published', 'review'].includes(visibility)) {
@@ -452,13 +457,15 @@ function renderArticle(post, posts, body, header) {
   const isRelease = post.kind === 'release';
   const isArticle = post.kind === 'article';
   const isReview = post.visibility === 'review';
+  const articleSourceKind = post.sourceKind ?? 'Scenario source';
+  const articleSourceDescription = post.sourceDescription ?? 'A public, version-pinned scenario records the synthetic documents, comparison contract, and responsibility boundary used in this article.';
   const breadcrumbLabel = isRelease ? post.releaseTag : isReview ? 'Review candidate' : isArticle ? 'Inside Cortrix' : `Note ${String(post.seriesOrder).padStart(2, '0')}`;
   const kicker = isRelease
     ? `Release update · ${escapeHtml(post.topic)}`
     : isReview
       ? `Inside Cortrix · Review candidate`
       : isArticle
-        ? `Inside Cortrix · ${escapeHtml(post.topic)}`
+        ? escapeHtml(post.topic)
       : `Research Note ${String(post.seriesOrder).padStart(2, '0')} · ${escapeHtml(post.topic)}`;
   const byline = isRelease
     ? `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Released ${escapeHtml(formatShortDate(post.releaseDate))}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`
@@ -472,7 +479,7 @@ function renderArticle(post, posts, body, header) {
     : isReview
       ? `<div class="article-paper-card"><div><p class="blog-kicker">Review status</p><h2>Local editorial candidate</h2><p>This page is excluded from indexing, feeds, and the sitemap while it awaits publication confirmation.</p></div></div>`
       : isArticle
-        ? `<div class="article-paper-card"><div><p class="blog-kicker">Scenario source</p><h2>${escapeHtml(post.sourceLabel)}</h2><p>A public, version-pinned scenario records the synthetic documents, comparison contract, and responsibility boundary used in this article.</p></div><a href="${escapeHtml(post.sourceUrl)}" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>`
+        ? `<div class="article-paper-card"><div><p class="blog-kicker">${escapeHtml(articleSourceKind)}</p><h2>${escapeHtml(post.sourceLabel)}</h2><p>${escapeHtml(articleSourceDescription)}</p></div><a href="${escapeHtml(post.sourceUrl)}" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>`
       : `<div class="article-paper-card"><div><p class="blog-kicker">Source paper</p><h2>${escapeHtml(post.paperTitle)}</h2><p>${escapeHtml(post.paperAuthors.length > 2 ? post.paperAuthors.slice(0, 2).join(', ') + ' et al.' : post.paperAuthors.join(', '))} · ${post.paperYear}</p></div><a href="${escapeHtml(post.paperUrl)}" target="_blank" rel="noopener noreferrer">Read the paper <span aria-hidden="true">↗</span></a></div>`;
   const authorDescription = isRelease
     ? 'Scott is one of Cortrix’s creators. He writes release updates that connect shipped changes with their public sources and practical implications.'
@@ -575,7 +582,7 @@ function renderLlmsSection(posts) {
 - Blog index: ${siteUrl}/blog/
 - RSS feed: ${siteUrl}/blog/rss.xml
 ${releases.map(post => `- Release update: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source release: ${post.releaseUrl} — benchmark evidence: ${post.evidenceUrl}`).join('\n')}
-${articles.map(post => `- Inside Cortrix: ${post.title} — ${siteUrl}/blog/${post.slug}/ — scenario source: ${post.sourceLabel}, ${post.sourceUrl}`).join('\n')}
+${articles.map(post => `- Inside Cortrix: ${post.title} — ${siteUrl}/blog/${post.slug}/ — ${(post.sourceKind ?? 'Scenario source').toLowerCase()}: ${post.sourceLabel}, ${post.sourceUrl}`).join('\n')}
 ${papers.map(post => `- Research Note ${String(post.seriesOrder).padStart(2, '0')}: ${post.title} — ${siteUrl}/blog/${post.slug}/ — source paper: ${post.paperTitle} (${post.paperYear}), ${post.paperUrl}`).join('\n')}
 
 The Blog contains Cortrix product updates and Scott’s personal English interpretations of foundational papers. Research notes are not implementation notes for Cortrix. Release updates cite their source release and supporting evidence; research notes keep separate, visible paper citations. This metadata does not claim search placement, AI recommendation, or guaranteed discoverability.

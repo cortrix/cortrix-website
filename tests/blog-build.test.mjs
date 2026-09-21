@@ -166,3 +166,27 @@ test('review candidates are generated locally but excluded from public Blog outp
     assert.match(article, /noindex, nofollow, noarchive/);
   });
 });
+
+test('published articles can describe a non-scenario source accurately', async () => {
+  await fixture(async ({ dir, posts, build }) => {
+    const article = {
+      ...reviewCandidate,
+      visibility: 'published',
+      slug: 'published-article',
+      title: 'Published article',
+      bodyFile: 'published-article.html',
+      sourceKind: 'Primary source',
+      sourceDescription: 'A launch post provides the primary public source.',
+    };
+    await writeFile(path.join(dir, 'content/blog/posts.json'), JSON.stringify([...posts, article]));
+    await writeFile(path.join(dir, 'content/blog', article.bodyFile), '<p>Published introduction.</p><h2>Evidence</h2><p>Public source details.</p>');
+    build();
+
+    const page = await readFile(path.join(dir, 'blog', article.slug, 'index.html'), 'utf8');
+    const llms = await readFile(path.join(dir, 'llms.txt'), 'utf8');
+    assert.match(page, /Primary source/);
+    assert.match(page, /A launch post provides the primary public source\./);
+    assert.doesNotMatch(page, /synthetic documents|Inside Cortrix · Inside Cortrix/);
+    assert.match(llms, /primary source: Public scenario/);
+  });
+});
