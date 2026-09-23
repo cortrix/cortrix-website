@@ -1,6 +1,22 @@
 [
   {
     "kind": "article",
+    "visibility": "review",
+    "slug": "jev-laya-agent-decision",
+    "title": "Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide.",
+    "description": "Cortrix retrieves relevant material and preserves its sources. An agent combines that with current business state, then can use Jev or Laya to assess its next step.",
+    "topic": "Inside Cortrix",
+    "bodyFile": "jev-laya-agent-decision.html",
+    "readMinutes": 8,
+    "image": "/assets/blog/jev-laya-agent-decision/figure-1-agent-seam-v05-en.png",
+    "imageAlt": "Cortrix retrieval, agent evidence, bounded decision, and policy enforcement",
+    "sourceKind": "Public references",
+    "sourceLabel": "TypeSafe Jev introduction",
+    "sourceDescription": "The article links Jev documentation, Laya source code, and the previous Cortrix article.",
+    "sourceUrl": "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
+  },
+  {
+    "kind": "article",
     "visibility": "published",
     "slug": "vector-is-not-semantic",
     "title": "Vector is not semantic",
