@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!-- generated:blog-page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide. — Cortrix Blog</title>
+  <meta name="description" content="Cortrix retrieves relevant material and preserves its sources. An agent combines that with current business state, then can use Jev or Laya to assess its next step.">
+  <meta name="author" content="Scott">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://cortrix.ai/blog/jev-laya-agent-decision/">
+  <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide. — Cortrix Blog">
+  <meta property="og:description" content="Cortrix retrieves relevant material and preserves its sources. An agent combines that with current business state, then can use Jev or Laya to assess its next step.">
+  <meta property="og:url" content="https://cortrix.ai/blog/jev-laya-agent-decision/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/blog/jev-laya-agent-decision/figure-1-agent-seam-v05-en.png">
+  <meta property="og:image:alt" content="Cortrix retrieval, agent evidence, bounded decision, and policy enforcement">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide. — Cortrix Blog">
+  <meta name="twitter:description" content="Cortrix retrieves relevant material and preserves its sources. An agent combines that with current business state, then can use Jev or Laya to assess its next step.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/blog/jev-laya-agent-decision/figure-1-agent-seam-v05-en.png">
+  <meta name="twitter:image:alt" content="Cortrix retrieval, agent evidence, bounded decision, and policy enforcement">
+  <meta property="article:published_time" content="2026-09-24">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cortrix.ai/blog/jev-laya-agent-decision/#article",
+      "headline": "Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide.",
+      "description": "Cortrix retrieves relevant material and preserves its sources. An agent combines that with current business state, then can use Jev or Laya to assess its next step.",
+      "url": "https://cortrix.ai/blog/jev-laya-agent-decision/",
+      "mainEntityOfPage": "https://cortrix.ai/blog/jev-laya-agent-decision/",
+      "author": {
+        "@type": "Person",
+        "name": "Scott"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Cortrix Blog",
+        "url": "https://cortrix.ai/blog/"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "TypeSafe Jev introduction",
+        "url": "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
+      },
+      "inLanguage": "en",
+      "image": [
+        "https://cortrix.ai/assets/blog/jev-laya-agent-decision/figure-1-agent-seam-v05-en.png"
+      ],
+      "datePublished": "2026-09-24"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cortrix.ai/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide.",
+          "item": "https://cortrix.ai/blog/jev-laya-agent-decision/"
+        }
+      ]
+    }
+  ]
+}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
+</head>
+<body class="blog-page article-page">
+  <a class="blog-skip-link" href="#main-content">Skip to content</a>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">61</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+  <main id="main-content">
+    <div class="article-shell container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Inside Cortrix</li></ol></nav>
+      <header class="article-header">
+        <p class="blog-kicker">Inside Cortrix</p>
+        <h1>Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide.</h1>
+        <p class="article-deck">Cortrix retrieves relevant material and preserves its sources. An agent combines that with current business state, then can use Jev or Laya to assess its next step.</p>
+        <div class="article-byline"><span>By Scott</span><span>8 min read</span></div>
+      </header>
+      <div class="article-paper-card"><div><p class="blog-kicker">Public references</p><h2>TypeSafe Jev introduction</h2><p>The article links Jev documentation, Laya source code, and the previous Cortrix article.</p></div><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#the-refund-hasn-t-arrived-now-what">The refund hasn&amp;#x27;t arrived. Now what?</a></li><li><a href="#first-the-evidence-has-to-be-sufficient">First, the evidence has to be sufficient</a></li><li><a href="#flag-conflicts-keep-the-evidence">Flag conflicts. Keep the evidence.</a></li><li><a href="#the-refund-failed-what-should-the-agent-do-next">The refund failed. What should the Agent do next?</a></li><li><a href="#cost-savings-have-to-show-up-across-the-whole-workflow">Cost savings have to show up across the whole workflow</a></li><li><a href="#jev-and-laya-put-the-runtime-boundary-in-different-places">Jev and Laya put the runtime boundary in different places</a></li><li><a href="#how-jev-and-laya-fit-into-the-cortrix-ecosystem">How Jev and Laya fit into the Cortrix ecosystem</a></li></ol></details></div></aside>
+        <article class="article-body"><p>In my previous post, I explained why we aren&#x27;t adding Jev or Laya to the Cortrix core right now.</p>
+<p>We don&#x27;t think Jev or Laya should be responsible for finding candidates in Semantic Storage, the underlying system where semantic data persists. But give them an organized state, the relevant results, and a defined set of options, and they can do what they&#x27;re good at: make a fast decision.</p>
+<p>Retrieval and decision-making are different jobs. Putting a decision model inside storage doesn&#x27;t give storage an understanding of the business. Put it in the Agent that uses Cortrix for a concrete business task, though, and Jev and Laya become interesting.</p>
+<p>The diagram below shows the Agent workflow I have in mind.</p>
+<p>Cortrix retrieves material first. The Agent combines those results with source information and current state from business systems into an evidence input. It then decides whether the evidence is sufficient, whether records conflict, and whether a problem calls for another lookup, a different route, or a human. Jev or Laya could help at each of these points.</p>
+<p>These steps don&#x27;t need another generated answer. They need a decision with a clear scope.</p>
+<figure><a href="/assets/blog/jev-laya-agent-decision/figure-1-agent-seam-v05-en.png" aria-label="Open diagram at full size"><img src="/assets/blog/jev-laya-agent-decision/figure-1-agent-seam-v05-en.png" width="960" height="760" alt="Cortrix retrieves material with a path back to its sources; the Agent combines it with current business state; Jev or Laya makes a bounded decision; Agent code enforces policy before acting or escalating." loading="lazy"></a><figcaption>Cortrix retrieves material with a path back to its sources; the Agent combines it with current business state; Jev or Laya makes a bounded decision; Agent code enforces policy before acting or escalating.</figcaption></figure>
+<h2 id="the-refund-hasn-t-arrived-now-what">The refund hasn&#x27;t arrived. Now what?</h2>
+<p>Suppose a customer contacts support again today. Last week they were told their refund had been processed, but the money still hasn&#x27;t arrived. They&#x27;re angry, want it fixed now, and say they&#x27;ll file a complaint and take the story to the media if it isn&#x27;t resolved.</p>
+<p>This is no longer just a support ticket. The relevant information is scattered:</p>
+<ul>
+<li>What did support promise the customer last time?</li>
+<li>Is the refund status in the order system correct?</li>
+<li>Does the finance system show an actual payment?</li>
+<li>Which refund rules applied when the customer bought the product?</li>
+<li>What changed later, and are there precedents for exceptions?</li>
+<li>How were similar problems handled before?</li>
+</ul>
+<p>The Agent uses Cortrix for semantic retrieval, then combines the results with current state from support, orders, finance, and policy into an evidence input. The retrieved material and business records supply what each item is, where it came from, when it happened, and how it relates to the issue. The Agent puts them in one context.</p>
+<p>Then the conflict shows up.</p>
+<p>Support says the full refund has been processed. The order system says a partial refund has been initiated. The finance record says the payment channel rejected the transaction. The process has started, and none of these records is wrong. They describe different stages.</p>
+<p>If the Agent picks just one record and generates a reply, it can easily tell the customer, again, that the refund has been processed. The support record backs that statement, but the actual business outcome doesn&#x27;t.</p>
+<p>Cortrix&#x27;s job is to retrieve relevant material. The Agent combines it with current business state into an evidence input. That is where Jev or Laya can help the Agent make its next decision.</p>
+<figure><a href="/assets/blog/jev-laya-agent-decision/figure-2-refund-stages-v05-en.png" aria-label="Open diagram at full size"><img src="/assets/blog/jev-laya-agent-decision/figure-2-refund-stages-v05-en.png" width="960" height="760" alt="Support, order, payment, and policy records describe different stages of the refund. There is no successful settlement record, so the Agent should escalate with the evidence." loading="lazy"></a><figcaption>Support, order, payment, and policy records describe different stages of the refund. There is no successful settlement record, so the Agent should escalate with the evidence.</figcaption></figure>
+<h2 id="first-the-evidence-has-to-be-sufficient">First, the evidence has to be sufficient</h2>
+<p>The Agent shouldn&#x27;t treat “I found something” as “I can answer.”</p>
+<p>If I were designing the data structure for this refund, it might look like this:</p>
+<pre><code>state:
+  customer_promise: full_refund_processed
+  order_status: partial_refund_started
+  payment_status: rejected_by_channel
+  applicable_policy: original_purchase_policy
+
+decision:
+  - evidence_is_sufficient
+  - more_finance_evidence_needed
+  - policy_owner_review_needed
+  - human_escalation_required</code></pre>
+<p>Jev or Laya isn&#x27;t receiving an open-ended task like “solve the customer&#x27;s xx problem.” It would receive what the Agent assembled from Cortrix retrieval results and business system state, along with the paths the Agent is allowed to choose.</p>
+<p>That distinction matters. A decision model can flag insufficient evidence, but it can&#x27;t invent a payment record. It can recommend escalation only if escalation is among the options it was given. A confident answer doesn&#x27;t authorize it to approve a new compensation payment.</p>
+<p>Evidence, permissions, and business facts stay in their existing systems.</p>
+<h2 id="flag-conflicts-keep-the-evidence">Flag conflicts. Keep the evidence.</h2>
+<p>Many RAG pipelines try to end with one most relevant answer. That&#x27;s a dangerous habit when something has gone wrong in a business process.</p>
+<p>The support commitment, order status, and payment failure aren&#x27;t interchangeable answers. Together, they describe the refund&#x27;s path from commitment to execution to failure. Drop any one of them and the Agent gets only part of the story.</p>
+<p>A better role for Jev or Laya is to annotate the candidates:</p>
+<pre><code>support:
+  - customer service marked a full refund as processed
+
+conflict:
+  - order status says partial refund
+  - payment status says rejected
+
+missing:
+  - no successful settlement record</code></pre>
+<p>Those annotations help the Agent organize its next step, while the original evidence stays intact. The decision model&#x27;s output is an annotation, not an action that deletes other evidence.</p>
+<p>This is the boundary between a semantic data layer like Cortrix and a decision layer. Cortrix retrieves relevant material, and the Agent keeps source information in the evidence input. Jev or Laya assesses what that evidence means for the action under consideration. The Agent can always return to the sources instead of seeing only secondhand information filtered by a model.</p>
+<h2 id="the-refund-failed-what-should-the-agent-do-next">The refund failed. What should the Agent do next?</h2>
+<p>Back to the example: the refund Agent checks the payment channel again, and the transaction is still rejected. It has several possible next steps:</p>
+<pre><code>choice:
+  - retry_same_channel
+  - use_authorized_fallback
+  - ask_finance_owner
+  - escalate_to_human</code></pre>
+<p>This is a useful place for a typed decision. The business workflow and permission system have already defined the candidate paths. Jev or Laya only needs to assess which one fits the current state. Code still enforces the hard limits: how many retries the same channel allows, whether a fallback is available for this order, and which amounts require human approval.</p>
+<p>The model handles the ambiguous judgment. Code holds the boundaries that can&#x27;t be ambiguous.</p>
+<h2 id="cost-savings-have-to-show-up-across-the-whole-workflow">Cost savings have to show up across the whole workflow</h2>
+<p>A cheap call doesn&#x27;t automatically make the whole Agent workflow cheaper. Jev can be called as a lightweight service, and Laya can run locally. But if the Agent has already done several retrieval rounds, called an LLM, and written the reply before asking Jev whether that reply can be used, the expensive work has already happened.</p>
+<p>The useful decision points come earlier:</p>
+<ul>
+<li>Before generating a customer reply, check whether the evidence is sufficient.</li>
+<li>Before querying the same system again, decide whether to take another route.</li>
+<li>Before entering an automated compensation path, flag conflicts and route the case to human approval.</li>
+<li>Before running more enrichment, identify the specific kind of evidence that is missing.</li>
+</ul>
+<figure><a href="/assets/blog/jev-laya-agent-decision/figure-3-decide-before-cost-v05-en.png" aria-label="Open diagram at full size"><img src="/assets/blog/jev-laya-agent-decision/figure-3-decide-before-cost-v05-en.png" width="960" height="760" alt="Make the decision before expensive generation. The decision layer produces a net benefit only when the work it avoids costs more than the decision and its fallback." loading="lazy"></a><figcaption>Make the decision before expensive generation. The decision layer produces a net benefit only when the work it avoids costs more than the decision and its fallback.</figcaption></figure>
+<p>The decision cost plus the fallback cost has to be lower than the work this layer actually avoids. That&#x27;s how we can show a net benefit to the system.</p>
+<p>The benefit is more than an API bill. Pointless retries consume customer patience. A wrong route can create rework. Premature generation can turn conflicting evidence into a reply that sounds certain even though the evidence isn&#x27;t sufficient. Helping the Agent avoid one wrong round and handle the business problem correctly matters more than saving tokens.</p>
+<h2 id="jev-and-laya-put-the-runtime-boundary-in-different-places">Jev and Laya put the runtime boundary in different places</h2>
+<p>In this architecture, Jev and Laya could sit behind a common <code>DecisionProvider</code> interface. The two options imply different operating models.</p>
+<p>Jev is the hosted path. The Agent sends the prepared state and candidates to a service and receives a choice, score, or another typed decision. The team doesn&#x27;t have to run the model. Network behavior, service availability, and the data boundary become part of the system instead.</p>
+<p>Laya is the local, open-weight path. The team can keep the evidence input in its own environment and manage inference resources, versions, and fallbacks itself. It also takes responsibility for model loading, runtime cost, language performance, and maintenance.</p>
+<p>Cortrix doesn&#x27;t need to make that choice for the Agent.</p>
+<p>The more natural interface starts with the Agent organizing Cortrix retrieval results and business system state into a consistent evidence input. The Agent can then use Jev, Laya, ordinary rules, or a generative model according to its latency, privacy, cost, and operational requirements.</p>
+<p>Different providers can evaluate the same business state, but they must receive the same evidence and options and remain subject to the same permission constraints. That makes the decision layer replaceable, instead of turning it into a second set of business facts hidden inside the Agent.</p>
+<h2 id="how-jev-and-laya-fit-into-the-cortrix-ecosystem">How Jev and Laya fit into the Cortrix ecosystem</h2>
+<p>Cortrix addresses how an Agent finds material relevant to its current problem in persistently stored information, while preserving a path back to the sources.</p>
+<p>Jev and Laya address how an Agent can make a bounded decision quickly once it has the state.</p>
+<p>The connection between them can be straightforward:</p>
+<pre><code>Cortrix retrieval results
+        +
+business system state
+        ↓
+Agent-built evidence input
+        ↓
+DecisionProvider
+  Jev / Laya / rules / LLM
+        ↓
+Agent policy and state machine
+        ↓
+business action or human review</code></pre>
+<p>Cortrix doesn&#x27;t approve actions on behalf of business systems. Jev or Laya doesn&#x27;t recover facts Cortrix failed to retrieve. The Agent doesn&#x27;t turn probability into permission. That lets ordinary code stay simpler: it enforces the business boundaries without encoding every ambiguous judgment in an ever-growing pile of <code>if</code> statements.</p>
+<p>My previous post was about why Jev and Laya don&#x27;t belong inside the Cortrix core.</p>
+<p>This one is about where they belong once they&#x27;re outside it.</p>
+<p>I&#x27;d put Jev or Laya after the Agent has received Cortrix&#x27;s retrieval results and assembled its evidence input, but before it takes action.</p>
+<p>Public references:</p>
+<ul>
+<li><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">TypeSafe: Introducing System One Models &amp; Jev</a></li>
+<li><a href="https://api.typesafe.ai/docs">TypeSafe Jev API</a></li>
+<li><a href="https://github.com/NandhaKishorM/laya">Laya GitHub repository</a></li>
+<li><a href="https://cortrix.ai/blog/jev-laya-no-go/">Previous post: Jev and Laya are getting hyped. We&#x27;re passing for now.</a></li>
+</ul>
+</article>
+      </div>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes from an engineering perspective on retrieval, evidence, and the conditions that let an application adopt a result.</p></div></section>
+      <section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <div class="container blog-footer-inner">
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
+</body>
+</html>
