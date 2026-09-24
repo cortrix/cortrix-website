@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 627" role="img" aria-labelledby="title desc">
+  <title id="title">Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide.</title>
+  <desc id="desc">Article cover with the full title and a compact Cortrix, Jev or Laya, and agent code sequence.</desc>
+  <style>
+    :root { --bg:#0B0F19; --panel:#151C29; --ink:#F1F5F9; --muted:#B8C4D5; --line:#485263; --accent:#FF6405; }
+    @media (prefers-color-scheme: light) { :root { --bg:#F8FAFC; --panel:#FFFFFF; --ink:#111827; --muted:#465164; --line:#B8C2CF; --accent:#D45100; } }
+    .sans { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; }
+    .mono { font-family: "JetBrains Mono", SFMono-Regular, Consolas, monospace; }
+  </style>
+  <rect width="1200" height="627" fill="var(--bg)"/>
+  <path d="M0 0h16v627H0z" fill="var(--accent)"/>
+  <path d="M45 46h1110v535H45z" fill="var(--panel)" stroke="var(--line)" stroke-width="2"/>
+  <text class="mono" x="95" y="119" font-size="31" font-weight="700" fill="var(--accent)">CORTRIX / AGENT SYSTEMS</text>
+  <text class="sans" x="95" y="221" font-size="62" font-weight="760" fill="var(--ink)">Cortrix Handles Retrieval.</text>
+  <text class="sans" x="95" y="303" font-size="62" font-weight="760" fill="var(--ink)">Jev or Laya Can Help</text>
+  <text class="sans" x="95" y="385" font-size="62" font-weight="760" fill="var(--ink)">the Agent Decide.</text>
+  <path d="M95 421h1008" stroke="var(--line)" stroke-width="2"/>
+  <g class="sans" font-size="33" font-weight="700" fill="var(--ink)">
+    <text x="95" y="489">CORTRIX</text>
+    <text x="456" y="489">JEV OR LAYA</text>
+    <text x="864" y="489">AGENT CODE</text>
+  </g>
+  <g fill="var(--accent)"><path d="M391 473l19 13-19 13v-8h-23v-10h23z"/><path d="M800 473l19 13-19 13v-8h-23v-10h23z"/></g>
+  <text class="mono" x="95" y="549" font-size="31" fill="var(--muted)">CORTRIX.AI</text>
+</svg>
