@@ -36,3 +36,4 @@ Disallow: /scripts/
 Disallow: /tests/
 
 Sitemap: https://cortrix.ai/sitemap.xml
+Sitemap: https://cortrix.ai/docs/sitemap.xml

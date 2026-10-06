@@ -27,9 +27,10 @@ Canonical evidence states: Verified, Present in source - review required, Not es
 - Machine-readable scope: https://cortrix.ai/llms.txt
 - Agent-assisted local setup contract: https://cortrix.ai/agent-quickstart.txt
 - Current Core source: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2
-- Docker Quick Start: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/QUICKSTART.md
+- Documentation: https://cortrix.ai/docs/
+- Docker Quick Start: https://cortrix.ai/docs/get-started/quickstart/
 - Maintainer source-build evidence workflow: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2/examples/first-value-supportops
-- Stack-fit and adoption boundaries: https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/adoption/stack-fit.md
+- Stack-fit and adoption boundaries: https://cortrix.ai/docs/resources/stack-fit/
 
 ## Agent workflow context
 

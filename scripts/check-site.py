@@ -120,6 +120,11 @@ for file, page in pages.items():
             if parsed.netloc != "cortrix.ai":
                 continue
         path = unquote(parsed.path)
+        local = ROOT / path.lstrip("/")
+        if path.startswith("/docs/") and not (local.is_file() or (local / "index.html").is_file()):
+            # /docs/ is forwarded to the documentation site (see vercel.json);
+            # only files kept in this repository, such as /docs/llms/, are local.
+            continue
         if not path:
             target = file
         elif path.startswith("/"):

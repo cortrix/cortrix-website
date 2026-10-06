@@ -13,6 +13,17 @@
     },
     {
       "handle": "filesystem"
+    },
+    {
+      "src": "/docs",
+      "status": 308,
+      "headers": {
+        "Location": "/docs/"
+      }
+    },
+    {
+      "src": "/docs/(.*)",
+      "dest": "https://cortrix.github.io/cortrix/$1"
     }
   ]
 }
