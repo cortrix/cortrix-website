@@ -175,6 +175,9 @@ docker compose -f deploy/docker-compose.yml down --volumes
 
 ## Public documentation
 
+Documentation site:
+https://cortrix.ai/docs/
+
 Core Agent-assisted setup guide:
 https://github.com/cortrix/cortrix/blob/main/docs/AGENT_QUICKSTART.md
 
