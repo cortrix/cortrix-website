@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!-- generated:blog-page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech — Cortrix Blog</title>
+  <meta name="description" content="Cortrix runs an LLM when a document is written, so context, likely questions, and a document summary each become a recall path at query time. See what we measured and when to enable it.">
+  <meta name="author" content="Scott">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://cortrix.ai/blog/write-time-llm-inference/">
+  <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech — Cortrix Blog">
+  <meta property="og:description" content="Cortrix runs an LLM when a document is written, so context, likely questions, and a document summary each become a recall path at query time. See what we measured and when to enable it.">
+  <meta property="og:url" content="https://cortrix.ai/blog/write-time-llm-inference/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/blog/write-time-llm-inference/article-card-v1-en.png">
+  <meta property="og:image:alt" content="Article cover: Write-Time LLM Inference Gives Every Query More Recall Paths">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech — Cortrix Blog">
+  <meta name="twitter:description" content="Cortrix runs an LLM when a document is written, so context, likely questions, and a document summary each become a recall path at query time. See what we measured and when to enable it.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/blog/write-time-llm-inference/article-card-v1-en.png">
+  <meta name="twitter:image:alt" content="Article cover: Write-Time LLM Inference Gives Every Query More Recall Paths">
+  <meta property="article:published_time" content="2026-10-09">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cortrix.ai/blog/write-time-llm-inference/#article",
+      "headline": "Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech",
+      "description": "Cortrix runs an LLM when a document is written, so context, likely questions, and a document summary each become a recall path at query time. See what we measured and when to enable it.",
+      "url": "https://cortrix.ai/blog/write-time-llm-inference/",
+      "mainEntityOfPage": "https://cortrix.ai/blog/write-time-llm-inference/",
+      "author": {
+        "@type": "Person",
+        "name": "Scott"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Cortrix Blog",
+        "url": "https://cortrix.ai/blog/"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Four-corpus CPU evidence pack",
+        "url": "https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1"
+      },
+      "inLanguage": "en",
+      "image": [
+        "https://cortrix.ai/assets/blog/write-time-llm-inference/article-card-v1-en.png"
+      ],
+      "datePublished": "2026-10-09"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cortrix.ai/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech",
+          "item": "https://cortrix.ai/blog/write-time-llm-inference/"
+        }
+      ]
+    }
+  ]
+}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
+</head>
+<body class="blog-page article-page">
+  <a class="blog-skip-link" href="#main-content">Skip to content</a>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/docs/">Docs</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">61</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+  <main id="main-content">
+    <div class="article-shell container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Inside Cortrix</li></ol></nav>
+      <header class="article-header">
+        <p class="blog-kicker">Inside Cortrix</p>
+        <h1>Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech</h1>
+        <p class="article-deck">Cortrix runs an LLM when a document is written, so context, likely questions, and a document summary each become a recall path at query time. See what we measured and when to enable it.</p>
+        <div class="article-byline"><span>By Scott</span><span>10 min read</span></div>
+      </header>
+      <div class="article-paper-card"><div><p class="blog-kicker">Public evidence</p><h2>Four-corpus CPU evidence pack</h2><p>The nDCG@10 figures come from the public Cortrix benchmark evidence pack, pinned to a commit.</p></div><a href="https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#before-a-passage-reaches-semantic-storage">Before a passage reaches semantic storage</a></li><li><a href="#what-we-measured">What we measured</a></li><li><a href="#which-corpora-write-time-llm-inference-suits">Which corpora write-time LLM inference suits</a></li><li><a href="#how-to-enable-it-in-cortrix">How to enable it in Cortrix</a></li><li><a href="#use-cortrix-or-write-the-glue-code-yourself">Use Cortrix, or write the glue code yourself</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
+        <article class="article-body"><blockquote><p>Summary: Cortrix is open-source semantic storage for AI agents. Write-time LLM inference means that when a document is written, an LLM generates context, likely questions, and a document summary for it. At query time each of these becomes its own recall path, and this step needs no LLM call at query time. In our public measurements, write-time LLM inference combined with query-time LLM reranking, which is the full-stack configuration, scores 31.0% above the baseline in nDCG@10 on SciFact and 26.1% above it on NFCorpus.</p></blockquote>
+<p>Most talk about LLMs in RAG is about the query path: rewriting the question, ranking the results, generating the answer. Cortrix moves part of that work into ingestion and runs the LLM when a document is written. We call this write-time LLM inference. In this article we walk through what Cortrix has the LLM do at write time, how much that changes retrieval, and which kinds of corpora are worth enabling this feature for.</p>
+<h2 id="before-a-passage-reaches-semantic-storage">Before a passage reaches semantic storage</h2>
+<p>Take a customer-support knowledge base as an example. Somewhere in the refund policy is this sentence: &quot;Requests filed after the period above are handled under Section 4.&quot; A typical RAG pipeline cuts that sentence into its own chunk and stores it. Then a user asks, &quot;Can I still return something I bought forty days ago?&quot; The chunk doesn&#x27;t contain &quot;forty days&quot;, doesn&#x27;t contain &quot;return&quot;, and doesn&#x27;t say how long &quot;the period above&quot; is. As a result, the chunk sits at least two steps away from the question: the two are worded differently, and the context that would connect them has been lost.</p>
+<p>An embedding model closes some of that distance, but it only sees the chunk itself. An LLM that has read the whole document can fill in much more if it gets to process the chunk before it is stored. Cortrix&#x27;s write path is called SPC, short for Semantic Processing Chain. Once an LLM is configured, SPC does a few extra things between chunking and indexing:</p>
+<ul>
+<li>It adds a short piece of context to each chunk, saying what the chunk is about within the whole document, and then generates a second vector. The original vector without the context is kept, so both exist side by side.</li>
+<li>It generates a few questions a user might ask about each chunk and indexes those questions too.</li>
+<li>It extracts entities and generates a summary of the content.</li>
+<li>It generates a summary of the whole document and stores it as a chunk that can be retrieved.</li>
+</ul>
+<p>All of this generated content is stored in semantic storage alongside the original text. At query time three kinds of it each become a recall path: the contextualized vectors and the pre-generated questions are fused by rank at the chunk level with the existing vector search and full-text search, and the document summary takes part in fusion at the document level. The extracted entities and content summaries are not recall paths; they are used to score results and are returned along with them. Because all of this content was already generated at write time, a query does not need another LLM call to produce it.</p>
+<p>The diagram below shows write-time LLM inference in Cortrix: the extra work done when a document is written, and the extra recall paths a query gets as a result.</p>
+<figure><a href="/assets/blog/write-time-llm-inference/fig-write-time-llm-llm-ingest-v02-en.png" aria-label="Open image at full size"><img src="/assets/blog/write-time-llm-inference/fig-write-time-llm-llm-ingest-v02-en.png" width="960" height="1010" alt="Write-time LLM inference in Cortrix: at write time the LLM adds context, pre-generates questions, extracts entities and summaries, and generates a document summary; at query time the contextualized vectors, the pre-generated questions, and the document summary each become a recall path, fused with vector and full-text search, with no LLM call at query time" loading="lazy"></a><figcaption>Write-time LLM inference in Cortrix: at write time the LLM adds context, pre-generates questions, extracts entities and summaries, and generates a document summary; at query time the contextualized vectors, the pre-generated questions, and the document summary each become a recall path, fused with vector and full-text search, with no LLM call at query time</figcaption></figure>
+<p>We are not the first to run an LLM at write time. Anthropic proposed the Contextual Retrieval method for knowledge-base retrieval, which adds context to each chunk before it is stored.</p>
+<figure><a href="/assets/blog/write-time-llm-inference/fig-write-time-llm-src-anthropic-v01-en.png" aria-label="Open image at full size"><img src="/assets/blog/write-time-llm-inference/fig-write-time-llm-src-anthropic-v01-en.png" width="960" height="346" alt="Screenshot of the Anthropic post: Contextual Retrieval prepends chunk-specific explanatory context to each chunk before generating embeddings and building the BM25 index" loading="lazy"></a><figcaption>Screenshot of the Anthropic post: Contextual Retrieval prepends chunk-specific explanatory context to each chunk before generating embeddings and building the BM25 index</figcaption></figure>
+<p>Microsoft&#x27;s Azure AI Search can call a large language model at indexing time to generate new content such as summaries. With Amazon Bedrock Knowledge Bases you can attach a custom function at ingestion to do the same thing.</p>
+<figure><a href="/assets/blog/write-time-llm-inference/fig-write-time-llm-src-azure-v01-en.png" aria-label="Open image at full size"><img src="/assets/blog/write-time-llm-inference/fig-write-time-llm-src-azure-v01-en.png" width="960" height="549" alt="Screenshot of the Microsoft Learn page: the GenAI Prompt skill in Azure AI Search calls a large language model to generate new content that can be indexed and retrieved" loading="lazy"></a><figcaption>Screenshot of the Microsoft Learn page: the GenAI Prompt skill in Azure AI Search calls a large language model to generate new content that can be indexed and retrieved</figcaption></figure>
+<figure><a href="/assets/blog/write-time-llm-inference/fig-write-time-llm-src-aws-v01-en.png" aria-label="Open image at full size"><img src="/assets/blog/write-time-llm-inference/fig-write-time-llm-src-aws-v01-en.png" width="960" height="416" alt="Screenshot of the AWS blog post: Amazon Bedrock Knowledge Bases uses a custom Lambda function at ingestion to generate contextual information for each chunk" loading="lazy"></a><figcaption>Screenshot of the AWS blog post: Amazon Bedrock Knowledge Bases uses a custom Lambda function at ingestion to generate contextual information for each chunk</figcaption></figure>
+<p>What these offer is a method or an extension point you can attach to, so the user still has to implement and orchestrate how the content is generated and how it is used for retrieval. Cortrix takes its own approach: it generates several kinds of content together, gives three of them their own recall path, and always keeps the original vector. The storage write path does all of it, so the agents and applications on top don&#x27;t have to orchestrate anything.</p>
+<h2 id="what-we-measured">What we measured</h2>
+<p>Here is nDCG@10 on two corpora from our public evidence pack. The numbers in parentheses are the change relative to the first column.</p>
+<table tabindex="0" aria-label="nDCG@10 on SciFact and NFCorpus for four Cortrix configurations"><thead><tr><th scope="col">Corpus</th><th scope="col">Dense + full-text</th><th scope="col">+ Rerank</th><th scope="col">+ Write-time LLM inference</th><th scope="col">Full stack</th></tr></thead><tbody>
+<tr><th scope="row">SciFact</th><td>0.5942</td><td>0.6184 (+4.1%)</td><td>0.6449 (+8.5%)</td><td>0.7784 (+31.0%)</td></tr>
+<tr><th scope="row">NFCorpus</th><td>0.2991</td><td>0.3121 (+4.3%)</td><td>0.3124 (+4.4%)</td><td>0.3772 (+26.1%)</td></tr>
+</tbody></table>
+<p>&quot;Full stack&quot; is write-time LLM inference plus an LLM ranking the top 30 candidates as a whole at query time. Both steps use the same model, deepseek-v4-flash. Every number was measured on the same hardware configuration with <code>top_k=10</code>. The measurements were taken in August 2026 against Cortrix core commit <code>79a4eb17</code>, which predates v1.0.0-rc.2.</p>
+<p>The full stack shows the clearest effect: it is about 30% above the baseline on SciFact and about a quarter above it on NFCorpus.</p>
+<p>If we look only at the write-time LLM inference step, it adds another 0.0265 on SciFact on top of reranking, and it is essentially flat on NFCorpus.</p>
+<p>Query-time reranking and write-time LLM inference solve two different problems. Reranking reorders candidates that have already been retrieved, and it has nothing to work with for content that was never retrieved. Write-time LLM inference builds extra recall paths when the document is written, which gives chunks that used to be missed a chance to become candidates. That is why the two can be used together, and using both is the best configuration we have measured so far.</p>
+<h2 id="which-corpora-write-time-llm-inference-suits">Which corpora write-time LLM inference suits</h2>
+<p>Our advice is to look first at the shape of your documents and the shape of your questions.</p>
+<p>If the chunks in your documents cannot be understood once they are taken out of context, then adding context at write time will help. Contract clauses, policies, and technical specifications are like this, and so are long documents full of references such as &quot;the above&quot; and &quot;said item&quot;.</p>
+<p>If the way your users ask questions is far from the way your documents are written, then generating questions in advance will help. SciFact has this shape: you take a scientific claim and look for paper abstracts that support or refute it, and the two sides rarely share wording.</p>
+<p>If your documents are written once and queried many times, this step is also more valuable, because the processing happens only once at write time and every query after that benefits from it.</p>
+<p>On the other hand, if the corpus is already question-answer pairs, or every chunk stands on its own, then there is little for write-time processing to add, and the value of enabling it is low.</p>
+<p>You don&#x27;t have to wait for an aggregate score to find out which kind of corpus you have. If you use Cortrix, the <code>?explain=true</code> query parameter shows you directly what each recall path contributed. Take a representative batch of real questions from your application and run them one at a time, like this:</p>
+<pre><code>curl -fsS -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{&quot;namespaces&quot;: [&quot;your_namespace&quot;], &quot;query&quot;: &quot;Can I still return something I bought forty days ago?&quot;, &quot;top_k&quot;: 10, &quot;route&quot;: &quot;complex&quot;}&#x27; \
+  &#x27;http://127.0.0.1:8420/api/v1/query?explain=true&#x27;</code></pre>
+<p>The response includes an <code>explain</code> section. Its <code>rrf_path_counts</code> field counts which paths ranked the returned results in. It counts five chunk-level paths: <code>dense</code>, <code>sparse</code>, and <code>fts5</code> are the existing vector and full-text paths, <code>contextualized</code> is the vector with context, and <code>hype_question</code> is the pre-generated questions. It counts only the results that were returned, and it does not cover the document-summary path. The <code>route</code> parameter in the request is covered in the next section.</p>
+<p>This is the <code>explain</code> we got from running that command against one sample document on v1.0.0-rc.2, trimmed to the relevant fields and otherwise shown as it was returned:</p>
+<pre><code>{
+  &quot;complexity_score&quot;: 1.0,
+  &quot;query&quot;: &quot;Can I still return something I bought forty days ago?&quot;,
+  &quot;routing_decision_source&quot;: &quot;force_route&quot;,
+  &quot;routing_path&quot;: &quot;complex&quot;,
+  &quot;rrf_path_counts&quot;: { &quot;contextualized&quot;: 1, &quot;dense&quot;: 1, &quot;fts5&quot;: 1, &quot;hype_question&quot;: 1, &quot;sparse&quot;: 1 },
+  &quot;via_path_counts&quot;: { &quot;hybrid&quot;: 1 }
+}</code></pre>
+<p>The one result returned was ranked in by five paths at once: the three existing paths, <code>dense</code>, <code>sparse</code>, and <code>fts5</code>, plus <code>contextualized</code> and <code>hype_question</code>, both added at write time. When we ran the same question again without the <code>route</code> parameter, the query was judged <code>simple</code> and <code>rrf_path_counts</code> contained only the three existing paths.</p>
+<p>If the added paths show up often, it means the content generated by write-time LLM inference is doing real work for your questions. If they rarely show up, you can leave the feature off for that kind of corpus for now.</p>
+<p>If your application needs higher retrieval quality, add query-time LLM reranking on top of write-time LLM inference. That combination is the Cortrix full stack. Query-time reranking needs one more role to be configured, <code>semantic_llm</code>.</p>
+<h2 id="how-to-enable-it-in-cortrix">How to enable it in Cortrix</h2>
+<p><a href="https://cortrix.ai/docs/get-started/quickstart/">The Quickstart</a> does not enable any LLM by default, and retrieval runs end to end using only the local embedding and rerank models. The LLMs used for write-time LLM inference are configured by role: <code>enricher_llm</code> handles enrichment and <code>doc_summary_llm</code> handles document summaries.</p>
+<pre><code>enricher_llm:
+  provider: &quot;openai&quot;
+  api_key: &quot;your-api-key&quot;
+  model: &quot;your-model&quot;
+  base_url: &quot;https://your-endpoint/v1&quot;
+
+doc_summary_llm:
+  provider: &quot;openai&quot;
+  api_key: &quot;your-api-key&quot;
+  model: &quot;your-model&quot;
+  base_url: &quot;https://your-endpoint/v1&quot;</code></pre>
+<p>A role counts as configured once provider, api_key, and model are all filled in, and any role you leave unfilled stays off. The server speaks the OpenAI-compatible protocol, so pointing it at a local model gateway works too.</p>
+<p>When Cortrix receives a query, it first judges the query&#x27;s complexity and sorts it into one of three tiers: <code>simple</code>, <code>complex</code>, or <code>chat</code>. The three tiers do not use the same write-time content. The <code>complex</code> tier brings the contextualized vectors and the pre-generated questions into the fusion. The <code>simple</code> tier uses only the original chunk vectors and the full-text path, so those two added paths take no part; the document summary, however, takes part according to retrieval granularity, and at the default granularity it is fused in the <code>simple</code> tier as well. The <code>chat</code> tier does not search chunks at all, because it takes a memory-only path. The <code>routing_path</code> field in the response&#x27;s <code>explain</code> tells you which tier a query actually took. If you want a query to always take the complete path, you can add <code>&quot;route&quot;: &quot;complex&quot;</code> to the request, which is what we did for every column in the measurements above except the baseline in the first column. For the full request parameters, check the profiles in the public runner. Before you enable any of this, we recommend reading <a href="https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/docs/releases/v1.0.0-rc.2.md">the v1.0.0-rc.2 release notes</a>.</p>
+<h2 id="use-cortrix-or-write-the-glue-code-yourself">Use Cortrix, or write the glue code yourself</h2>
+<p>If you don&#x27;t use Cortrix as the semantic storage under your agents, you are still welcome to read <a href="https://github.com/cortrix/cortrix">the Cortrix source</a>, which is open under Apache-2.0. To implement write-time LLM inference inside the data architecture you already have, these are the four things you must get right:</p>
+<ul>
+<li>Keep the contextualized vector and the original vector together. Both paths take part in retrieval, so when the new one performs poorly the original is still there as a fallback.</li>
+<li>Keep generated content tied to its source text. When the original is updated or deleted, the added context, the pre-generated questions, and the summaries all have to be regenerated or cleaned up, or retrieval will hit content that no longer exists.</li>
+<li>Don&#x27;t let a failed LLM call block writes. The document should be stored first as if there were no LLM, with the LLM processing filled in afterward.</li>
+<li>Make each recall path&#x27;s contribution visible across the whole write-time LLM inference process. A total score can&#x27;t tell you which path is doing the work, and the agents on top can&#x27;t make their next business decision without that.</li>
+</ul>
+<p>Each of the four takes glue code, and that glue code then becomes a separate module you maintain for the long run. If you would rather not hand-write it, or add to your own maintenance load later, just use Cortrix. Keep your attention on your application and leave the complicated data management to us. These of the four are already in Cortrix: the two vectors are kept side by side, enrichment has a budget cap and a fallback, the document summary falls back to text matching when the LLM is unavailable, and every query can show each path&#x27;s contribution through <code>explain</code>.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3>What is write-time LLM inference?</h3>
+<p>Write-time LLM inference is a feature of Cortrix semantic storage. When a document is written, an LLM adds context to each chunk, generates questions a user might ask about it, extracts entities and summaries, and writes a summary of the whole document. At query time, the contextualized vectors, the pre-generated questions, and the document summary each become their own recall path.</p>
+<h3>Once write-time LLM inference is enabled, does a query still need to call an LLM?</h3>
+<p>No. The content is generated at write time and kept in semantic storage, so a query only does recall and fusion. If you want to push retrieval quality further, you can add query-time LLM reranking on top (it needs <code>semantic_llm</code> to be configured), which is the Cortrix full-stack configuration.</p>
+<h3>Which corpora are a good fit for write-time LLM inference?</h3>
+<p>Documents whose chunks cannot be understood out of context, such as contract clauses, policies, and technical specifications, and corpora where the way users ask is far from the way the documents are written. If the corpus is already question-answer pairs, or every chunk stands on its own, the value of enabling it is low.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>Cortrix on GitHub: <a href="https://github.com/cortrix/cortrix">https://github.com/cortrix/cortrix</a></li>
+</ul>
+<ul>
+<li>Cortrix Quickstart: <a href="https://cortrix.ai/docs/get-started/quickstart/">https://cortrix.ai/docs/get-started/quickstart/</a></li>
+</ul>
+<ul>
+<li>Four-corpus CPU evidence pack, pinned to commit <code>4b94390c</code>: <a href="https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1">https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1</a></li>
+</ul>
+<ul>
+<li>Profile definitions in the public runner: <a href="https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/profiles.py">https://github.com/cortrix/cortrix-benchmarks/blob/9490520c24a96ed97b80073ed3ebab096b80550b/benchmarks/beir-retrieval-quality/runner/profiles.py</a></li>
+</ul>
+<ul>
+<li>Cortrix feature index: <a href="https://github.com/cortrix/cortrix/blob/main/docs/feature-index.md">https://github.com/cortrix/cortrix/blob/main/docs/feature-index.md</a></li>
+</ul>
+<ul>
+<li>Anthropic, Introducing Contextual Retrieval (2024-09-19): <a href="https://www.anthropic.com/engineering/contextual-retrieval">https://www.anthropic.com/engineering/contextual-retrieval</a></li>
+</ul>
+<ul>
+<li>Microsoft Learn, GenAI Prompt skill (2026-07-28): <a href="https://learn.microsoft.com/en-us/azure/search/cognitive-search-skill-genai-prompt">https://learn.microsoft.com/en-us/azure/search/cognitive-search-skill-genai-prompt</a></li>
+</ul>
+<ul>
+<li>AWS Machine Learning Blog, Contextual retrieval in Anthropic using Amazon Bedrock Knowledge Bases (2025-06-05): <a href="https://aws.amazon.com/blogs/machine-learning/contextual-retrieval-in-anthropic-using-amazon-bedrock-knowledge-bases/">https://aws.amazon.com/blogs/machine-learning/contextual-retrieval-in-anthropic-using-amazon-bedrock-knowledge-bases/</a></li>
+</ul>
+<p>These measurements cover retrieval quality at <code>top_k=10</code> on two corpora; they show direction and are not a comparison between Cortrix and other products. The behavior described in this article corresponds to Cortrix v1.0.0-rc.2, which is a pre-release version; the numbers in the table were measured in August 2026 against core commit <code>79a4eb17</code>.</p>
+</article>
+      </div>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes from an engineering perspective on retrieval, evidence, and the conditions that let an application adopt a result.</p></div></section>
+      <section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <div class="container blog-footer-inner">
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
+</body>
+</html>

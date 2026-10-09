@@ -2,6 +2,23 @@
   {
     "kind": "article",
     "visibility": "published",
+    "publishedAt": "2026-10-09",
+    "slug": "write-time-llm-inference",
+    "title": "Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech",
+    "description": "Cortrix runs an LLM when a document is written, so context, likely questions, and a document summary each become a recall path at query time. See what we measured and when to enable it.",
+    "topic": "Inside Cortrix",
+    "bodyFile": "write-time-llm-inference.html",
+    "readMinutes": 10,
+    "image": "/assets/blog/write-time-llm-inference/article-card-v1-en.png",
+    "imageAlt": "Article cover: Write-Time LLM Inference Gives Every Query More Recall Paths",
+    "sourceKind": "Public evidence",
+    "sourceLabel": "Four-corpus CPU evidence pack",
+    "sourceDescription": "The nDCG@10 figures come from the public Cortrix benchmark evidence pack, pinned to a commit.",
+    "sourceUrl": "https://github.com/cortrix/cortrix-benchmarks/tree/4b94390c1d5f7be95065e7483362ec7f93774ed7/results/published/beir-four-corpus-cpu-2026-08-v1"
+  },
+  {
+    "kind": "article",
+    "visibility": "published",
     "publishedAt": "2026-09-24",
     "slug": "jev-laya-agent-decision",
     "title": "Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide.",
