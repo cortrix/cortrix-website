@@ -15,6 +15,15 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech</title>
+      <link>https://cortrix.ai/blog/write-time-llm-inference/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/write-time-llm-inference/</guid>
+      <description>Cortrix runs an LLM when a document is written, so context, likely questions, and a document summary each become a recall path at query time. See what we measured and when to enable it.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Inside Cortrix</category>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Cortrix Handles Retrieval. Jev or Laya Can Help the Agent Decide.</title>
       <link>https://cortrix.ai/blog/jev-laya-agent-decision/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/jev-laya-agent-decision/</guid>
