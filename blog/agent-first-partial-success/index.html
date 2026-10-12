@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!-- generated:blog-page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything | Semantic Tech — Cortrix Blog</title>
+  <meta name="description" content="When a Cortrix query can&#39;t reach part of what it asked for, it still returns HTTP 200 and says what&#39;s missing. See what comes back, how an agent should use it, and when to treat it as a failure.">
+  <meta name="author" content="Scott">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://cortrix.ai/blog/agent-first-partial-success/">
+  <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything | Semantic Tech — Cortrix Blog">
+  <meta property="og:description" content="When a Cortrix query can&#39;t reach part of what it asked for, it still returns HTTP 200 and says what&#39;s missing. See what comes back, how an agent should use it, and when to treat it as a failure.">
+  <meta property="og:url" content="https://cortrix.ai/blog/agent-first-partial-success/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/blog/agent-first-partial-success/fig-partial-success-cover-v01-en.png">
+  <meta property="og:image:alt" content="Article cover: Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything | Semantic Tech — Cortrix Blog">
+  <meta name="twitter:description" content="When a Cortrix query can&#39;t reach part of what it asked for, it still returns HTTP 200 and says what&#39;s missing. See what comes back, how an agent should use it, and when to treat it as a failure.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/blog/agent-first-partial-success/fig-partial-success-cover-v01-en.png">
+  <meta name="twitter:image:alt" content="Article cover: Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything">
+  <meta property="article:published_time" content="2026-10-14">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cortrix.ai/blog/agent-first-partial-success/#article",
+      "headline": "Agent First Design: HTTP 200 Doesn't Mean You Got Everything | Semantic Tech",
+      "description": "When a Cortrix query can't reach part of what it asked for, it still returns HTTP 200 and says what's missing. See what comes back, how an agent should use it, and when to treat it as a failure.",
+      "url": "https://cortrix.ai/blog/agent-first-partial-success/",
+      "mainEntityOfPage": "https://cortrix.ai/blog/agent-first-partial-success/",
+      "author": {
+        "@type": "Person",
+        "name": "Scott"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Cortrix Blog",
+        "url": "https://cortrix.ai/blog/"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Cortrix docs: Query and rerank",
+        "url": "https://cortrix.ai/docs/guides/query/"
+      },
+      "inLanguage": "en",
+      "image": [
+        "https://cortrix.ai/assets/blog/agent-first-partial-success/fig-partial-success-cover-v01-en.png"
+      ],
+      "datePublished": "2026-10-14"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cortrix.ai/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Agent First Design: HTTP 200 Doesn't Mean You Got Everything | Semantic Tech",
+          "item": "https://cortrix.ai/blog/agent-first-partial-success/"
+        }
+      ]
+    }
+  ]
+}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
+</head>
+<body class="blog-page article-page">
+  <a class="blog-skip-link" href="#main-content">Skip to content</a>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/docs/">Docs</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        aria-label="Cortrix on GitHub, 61 stars"
+        title="61 stars — snapshot checked September 5, 2026; updates when GitHub is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">61</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+  <main id="main-content">
+    <div class="article-shell container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Inside Cortrix</li></ol></nav>
+      <header class="article-header">
+        <p class="blog-kicker">Inside Cortrix</p>
+        <h1>Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything | Semantic Tech</h1>
+        <p class="article-deck">When a Cortrix query can&#39;t reach part of what it asked for, it still returns HTTP 200 and says what&#39;s missing. See what comes back, how an agent should use it, and when to treat it as a failure.</p>
+        <div class="article-byline"><span>By Scott</span><span>12 min read</span></div>
+      </header>
+      <div class="article-paper-card"><div><p class="blog-kicker">Public documentation</p><h2>Cortrix docs: Query and rerank</h2><p>The request and the meta sample in this article come from the Cortrix documentation for v1.0.0-rc.2.</p></div><a href="https://cortrix.ai/docs/guides/query/" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#one-query-only-half-worked-now-what">One query only half worked. Now what?</a></li><li><a href="#an-agent-first-response">An Agent First response</a></li><li><a href="#which-agent-calls-need-a-partial-success-response">Which agent calls need a partial success response</a></li><li><a href="#two-other-cases-to-watch-for">Two other cases to watch for</a></li><li><a href="#use-cortrix-or-write-the-glue-code-yourself">Use Cortrix, or write the glue code yourself</a></li><li><a href="#try-it-on-your-own-machine">Try it on your own machine</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
+        <article class="article-body"><blockquote><p>Summary: Cortrix is open source semantic storage for AI agents. When a query can&#x27;t reach part of what it asked for, Cortrix returns a partial success response. The HTTP status is still 200. <code>coverage_ratio</code> tells you how complete the result is, and <code>namespaces_failed</code> lists what failed, whether you can retry it, and how long to wait. That&#x27;s the Agent First design in Cortrix: the agent can pick its next step without parsing error text.</p></blockquote>
+<p>Ask most of us whether an API call worked and we look at the HTTP status code first. 200 means it worked, and anything else means it didn&#x27;t. But when one request has to hit several places at once, you often get something in between. APIs used to be written for code that people write by hand. Cortrix is built for agents first, and we call that Agent First. When a query only partly works, Cortrix returns a partial success response. This post walks through what comes back when some of the data can&#x27;t be reached, how an agent should use it, and which callers should treat it as a failure.</p>
+<h2 id="one-query-only-half-worked-now-what">One query only half worked. Now what?</h2>
+<p>Take a customer support agent. A user asks, &quot;Where&#x27;s my refund?&quot; To answer, the agent has to look in two places at once: the refund rules in the policy store, and this user&#x27;s orders in the order store. Right then, the order store doesn&#x27;t respond.</p>
+<p>An API can handle this in one of two ways. It can fail the whole request. Then the agent can&#x27;t use the policy results even though they were already found, so it walks away with nothing and starts over. Or it can hand the policy results to the agent right away, and also tell it that the order store didn&#x27;t come back this time, why, and whether it&#x27;s worth trying again.</p>
+<p>This is where Agent First comes in. We go with the second option. A query can span several namespaces. When one of them fails, the request still returns HTTP 200. You get the results that came back, and what failed shows up in <code>meta</code>.</p>
+<p>The diagram below shows the Cortrix partial success response: what comes back when part of a query fails, and what the agent can do next.</p>
+<figure><a href="/assets/blog/agent-first-partial-success/fig-partial-success-response-v02-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-partial-success/fig-partial-success-response-v02-en.png" width="960" height="1280" alt="The Cortrix partial success response: one query goes to the policy store and the order store, and the order store times out; Cortrix returns HTTP 200 with the policy results in results, plus coverage_ratio and namespaces_failed saying the order store failed, whether it can be retried, and how long to wait; the agent answers with what it has, retries only the order store, and tells the user what&#x27;s missing" loading="lazy"></a><figcaption>Figure 1 | The Cortrix partial success response: what comes back when one part fails, and what the agent can do next.</figcaption></figure>
+<p>Plenty of systems already return partial results from one request. The Elasticsearch search API allows partial results by default: when some shards time out or fail, you still get the results from the rest.</p>
+<figure><a href="/assets/blog/agent-first-partial-success/fig-partial-success-src-es-v02-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-partial-success/fig-partial-success-src-es-v02-en.png" width="960" height="720" alt="Screenshot of the Elastic docs: when allow_partial_search_results is true, the request returns partial results if shards time out or fail, and the default is true" loading="lazy"></a><figcaption>Figure 2 | The Elastic docs on allow_partial_search_results, captured 2026-10-12. The orange underline is ours. See reference [1]</figcaption></figure>
+<p>When Amazon S3 deletes several objects in one request and one of them can&#x27;t be deleted, the response is still a 200, and it says for each object whether it worked.</p>
+<figure><a href="/assets/blog/agent-first-partial-success/fig-partial-success-src-s3-v02-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-partial-success/fig-partial-success-src-s3-v02-en.png" width="960" height="720" alt="Screenshot of the AWS docs: an S3 DeleteObjects response contains both the object that was deleted and the object that wasn&#x27;t, because the caller had no permission" loading="lazy"></a><figcaption>Figure 3 | The Amazon S3 DeleteObjects API reference, captured 2026-10-12. See reference [2]</figcaption></figure>
+<p>The GraphQL spec also says one response can carry both partial data and errors for individual fields.</p>
+<figure><a href="/assets/blog/agent-first-partial-success/fig-partial-success-src-graphql-v02-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-partial-success/fig-partial-success-src-graphql-v02-en.png" width="960" height="720" alt="Screenshot of the GraphQL spec: a response can contain both a partial result and field errors" loading="lazy"></a><figcaption>Figure 4 | The GraphQL spec on data and errors in a response, captured 2026-10-12. See reference [3]</figcaption></figure>
+<p>All of these were designed for programs that people write, where hardcoded logic, written from the docs, decides what to do with each response. Our take is Agent First. We build for agents first, so every failure says whether it can be retried, what kind of problem it is, and how long to wait. The agent doesn&#x27;t have to parse error text to figure out its next step.</p>
+<p>By Agent First we mean this: when we design an API, the first question is whether an agent holding this response can just keep going. So we hand over whatever results we have, say plainly what&#x27;s missing, and put the next step right in the response so the agent doesn&#x27;t have to guess.</p>
+<h2 id="an-agent-first-response">An Agent First response</h2>
+<p>Here&#x27;s an example from our docs site, which is based on v1.0.0-rc.2. <code>guide</code> is a namespace with data in it, and <code>nope</code> stands in for a scope that can&#x27;t be queried:</p>
+<pre><code>curl -fsS -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{&quot;namespaces&quot;: [&quot;guide&quot;, &quot;nope&quot;], &quot;query&quot;: &quot;refunds&quot;, &quot;top_k&quot;: 2}&#x27; \
+  http://127.0.0.1:8420/api/v1/query</code></pre>
+<p>The request returns a 200, and <code>results</code> holds what came back from <code>guide</code>. The failure in this example isn&#x27;t the timeout from the scenario above. <code>nope</code> is a scope the query can&#x27;t reach, so it&#x27;s marked not retryable. We&#x27;ll get to timeouts below. Here&#x27;s <code>meta</code> this time:</p>
+<pre><code>{
+  &quot;coverage_ratio&quot;: 0.5,
+  &quot;namespaces_failed&quot;: [
+    {
+      &quot;category&quot;: &quot;permanent&quot;,
+      &quot;error_code&quot;: &quot;CX_ERR_INDEX_CORRUPT&quot;,
+      &quot;message&quot;: &quot;CX_ERR_INDEX_CORRUPT&quot;,
+      &quot;namespace&quot;: &quot;nope&quot;,
+      &quot;retry_after_ms&quot;: null,
+      &quot;retryable&quot;: false,
+      &quot;structured_data&quot;: { &quot;index_state&quot;: &quot;unavailable&quot;, &quot;namespace&quot;: &quot;nope&quot; }
+    }
+  ],
+  &quot;namespaces_queried&quot;: [&quot;guide&quot;, &quot;nope&quot;],
+  &quot;namespaces_succeeded&quot;: [&quot;guide&quot;]
+}</code></pre>
+<p>Two fields in <code>meta</code> are there for the agent:</p>
+<ul>
+<li><code>coverage_ratio</code>: a number for completeness. The 0.5 here means only one of the two namespaces came back. Any time it&#x27;s below 1, the results cover only part of what you asked for.</li>
+<li><code>namespaces_failed</code>: the list of failures. Each entry names the namespace that failed and tells you what to do about it:<ul>
+<li><code>retryable</code>: whether it&#x27;s worth retrying.</li>
+<li><code>retry_after_ms</code>: how long to wait before you try again.</li>
+<li><code>category</code>: what kind of problem it is.</li>
+</ul></li>
+</ul>
+<p><code>category</code> has five values, and each one maps to a way of handling it:</p>
+<ul>
+<li><code>auth</code>, <code>permanent</code>: don&#x27;t retry the request as is.</li>
+<li><code>transient</code>, <code>timeout</code>: retry after the suggested wait.</li>
+<li><code>quota</code>: cut the size or the rate of your requests first.</li>
+</ul>
+<p>One detail. <code>nope</code> is actually a namespace that doesn&#x27;t exist, but the query API&#x27;s response doesn&#x27;t say so. It reports the namespace as unavailable. A comment on the query path in the public Cortrix source calls this a guard against namespace enumeration.</p>
+<p>With real workloads, the other case you&#x27;ll see is a timeout. Each namespace has its own time budget. The one that runs over is recorded as <code>CX_ERR_NS_TIMEOUT</code> and marked retryable, and the results from the other namespaces come back as usual.</p>
+<p>Submitting documents in a batch follows the same rules. One request can submit up to 100 documents, and when some of them fail, the request still returns a 200. The ones that failed are listed in <code>meta.failed[]</code>, and each entry carries <code>retryable</code>, <code>category</code>, and <code>retry_after_ms</code> too.</p>
+<h2 id="which-agent-calls-need-a-partial-success-response">Which agent calls need a partial success response</h2>
+<p>Our advice: start with who the caller is and what it&#x27;s going to do with the result.</p>
+<ul>
+<li>If the caller is an agent gathering material for an answer, a partial success response helps. The agent can use the results it already has, retry only the part that&#x27;s retryable, and tell the user which part it couldn&#x27;t get this time. That way it doesn&#x27;t take half the material and write an answer that looks complete.</li>
+</ul>
+<ul>
+<li>If the caller is doing evaluation, reconciliation, or batch processing, or it has to produce a number like &quot;how many records in total,&quot; it should treat a <code>coverage_ratio</code> below 1 as a failure, and either rerun the request or throw the result away. In this kind of work, an incomplete result that gets recorded as a normal one is harder to catch than an outright error.</li>
+</ul>
+<ul>
+<li>If you&#x27;re building monitoring, keep in mind that a partial failure doesn&#x27;t show up in the status code. Emit separate metrics for <code>coverage_ratio</code> and <code>namespaces_failed</code>, or they&#x27;ll never show up on a dashboard. Going by the public source, the request still returns a 200 even when every namespace fails. In that case <code>coverage_ratio</code> is 0 and <code>results</code> is empty.</li>
+</ul>
+<ul>
+<li>If the caller is a client you don&#x27;t control, or there are gateways and retry middleware in between that only look at the status code, we recommend turning incomplete results into errors in your own service layer before you pass them along.</li>
+</ul>
+<p>In Cortrix, every query response includes <code>coverage_ratio</code> and <code>namespaces_failed</code>, so your agent can make these decisions itself. Here&#x27;s one way to handle a query with the Python SDK. <code>retry_later</code>, <code>note_missing</code>, and <code>answer_with</code> stand for your own application functions:</p>
+<pre><code>from cortrix import Cortrix
+
+client = Cortrix(base_url=&quot;http://localhost:8420&quot;, api_key=&quot;your-cortrix-api-key&quot;)
+resp = client.search([&quot;policy&quot;, &quot;orders&quot;], question)
+
+if resp.meta.coverage_ratio &lt; 1:
+    for failed in resp.meta.namespaces_failed or []:
+        if failed[&quot;retryable&quot;]:
+            # Retry only the namespace that failed, after the wait it suggests
+            retry_later(failed[&quot;namespace&quot;], wait_ms=failed[&quot;retry_after_ms&quot;] or 1000)
+        else:
+            # Record it, and say in the answer that this part couldn&#x27;t be reached
+            note_missing(failed[&quot;namespace&quot;], failed[&quot;category&quot;])
+
+answer_with(resp.results)</code></pre>
+<p>When you integrate, go by <code>retryable</code> and <code>category</code> in the response. Don&#x27;t match on the text of the error code.</p>
+<h2 id="two-other-cases-to-watch-for">Two other cases to watch for</h2>
+<p>The first is a bad request. Cortrix still answers those with a 4xx, not a 200. For example, a query that uses the deprecated singular <code>namespace</code> field gets a 400, and <code>structured_data</code> tells you to use <code>namespaces</code> instead. You only get a partial success response when the request itself is fine and part of what it asked for couldn&#x27;t be queried.</p>
+<p>The second is async processing. A successful upload request only means the task was accepted. To find out how the document processing actually went, you have to check the task&#x27;s progress. The progress carries an <code>agent_decision_hint</code>: when it&#x27;s <code>done_fetch_doc</code>, the agent can go read the document, and when it&#x27;s <code>inspect_error_code</code>, the agent should look at the error code. An inline upload returns a 202 first even if the namespace is wrong, so the problem only shows up in the task progress.</p>
+<h2 id="use-cortrix-or-write-the-glue-code-yourself">Use Cortrix, or write the glue code yourself</h2>
+<p>If Cortrix isn&#x27;t the semantic storage under your agents, you still have to do the same check in whatever system you use. With Elasticsearch, look at <code>_shards.failed</code> in the response, or set <code>allow_partial_search_results</code> to <code>false</code> so it returns an error when the results are incomplete. With an S3 DeleteObjects call, go through the response one item at a time and check for an <code>Error</code>. With GraphQL, look at both <code>data</code> and <code>errors</code>.</p>
+<p>If you want to build a partial success response into your own API so an agent can use it directly, there are four things you have to get right:</p>
+<ul>
+<li>The response needs a number for completeness. A caller should be able to look at that one number and know whether the result is complete.</li>
+<li>The response needs a list of what failed. Telling the caller &quot;some part failed&quot; isn&#x27;t enough. It needs to know exactly which part.</li>
+<li>Every failure needs to say whether it can be retried and what kind of problem it is. Without those two, the agent on top is back to parsing error text, and it can&#x27;t make the business decisions that come next.</li>
+<li>Every retryable failure needs a suggested wait time. Otherwise the caller can only guess, and it&#x27;ll either retry too soon or wait too long.</li>
+</ul>
+<p>Each of these four means glue code. It has to behave the same on every endpoint that can return partial results, and then somebody has to maintain it as its own module for the long haul. If you&#x27;d rather not write all that by hand, or sign up for the upkeep later, just use Cortrix. You get to focus on your application and leave the messy data management to us. All of this is already in the Cortrix query and batch submit APIs: completeness is <code>coverage_ratio</code>, query failures are listed in <code>namespaces_failed</code>, batch submit failures are listed in <code>meta.failed[]</code>, and every entry carries <code>retryable</code>, <code>category</code>, and <code>retry_after_ms</code>.</p>
+<h2 id="try-it-on-your-own-machine">Try it on your own machine</h2>
+<p>Once you&#x27;ve got Cortrix running with the <a href="https://cortrix.ai/docs/get-started/quickstart/">Quickstart</a>, you don&#x27;t need to load any data. The Quickstart ships with a namespace called <code>demo</code>, and these three commands use it to show the partial success response described in this post. The commands and output are from a real run on v1.0.0-rc.2.</p>
+<p>First, query <code>demo</code> and a namespace that doesn&#x27;t exist, <code>nope</code>, and look only at the status code:</p>
+<pre><code>curl -sS -o /dev/null -w &#x27;%{http_code}\n&#x27; -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{&quot;namespaces&quot;: [&quot;demo&quot;, &quot;nope&quot;], &quot;query&quot;: &quot;What does semantic storage keep close to the agents that need it?&quot;, &quot;top_k&quot;: 2}&#x27; \
+  http://127.0.0.1:8420/api/v1/query</code></pre>
+<pre><code>200</code></pre>
+<p>Second, send the same request again, and this time print the fields an agent acts on:</p>
+<pre><code>curl -sS -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{&quot;namespaces&quot;: [&quot;demo&quot;, &quot;nope&quot;], &quot;query&quot;: &quot;What does semantic storage keep close to the agents that need it?&quot;, &quot;top_k&quot;: 2}&#x27; \
+  http://127.0.0.1:8420/api/v1/query \
+  | python3 -c &#x27;import json,sys; d=json.load(sys.stdin); m=d[&quot;meta&quot;]; f=m[&quot;namespaces_failed&quot;][0]; print(m[&quot;coverage_ratio&quot;], len(d[&quot;results&quot;]), f[&quot;namespace&quot;], f[&quot;retryable&quot;], f[&quot;category&quot;])&#x27;</code></pre>
+<pre><code>0.5 1 nope False permanent</code></pre>
+<p>That line is <code>coverage_ratio</code>, the number of results, the namespace that failed, <code>retryable</code>, and <code>category</code>. So the query only half worked: the 1 result from <code>demo</code> came back as usual, and <code>nope</code> is marked not retryable.</p>
+<p>Third, query two namespaces that can&#x27;t be found:</p>
+<pre><code>curl -sS -w &#x27;\n%{http_code}\n&#x27; -H &#x27;Content-Type: application/json&#x27; \
+  -d &#x27;{&quot;namespaces&quot;: [&quot;nope&quot;, &quot;nope-2&quot;], &quot;query&quot;: &quot;What does semantic storage keep close to the agents that need it?&quot;, &quot;top_k&quot;: 2}&#x27; \
+  http://127.0.0.1:8420/api/v1/query \
+  | python3 -c &#x27;import json,sys; body,status=sys.stdin.read().strip().rsplit(&quot;\n&quot;,1); d=json.loads(body); print(status, d[&quot;meta&quot;][&quot;coverage_ratio&quot;], len(d[&quot;results&quot;]))&#x27;</code></pre>
+<pre><code>200 0.0 0</code></pre>
+<p>That line is the status code, <code>coverage_ratio</code>, and the number of results. The status is still 200, and you get 0 results. Monitoring that only looks at status codes will count this as a normal query.</p>
+<p>If you send the deprecated singular <code>namespace</code> field in place of <code>namespaces</code>, you get a 400, not a partial success response.</p>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3>What is a partial success response?</h3>
+<p>A partial success response is what Cortrix semantic storage returns when only part of a query works. The request still returns HTTP 200, and you get the part that worked as usual. In <code>meta</code>, <code>coverage_ratio</code> tells you how complete the result is, and <code>namespaces_failed</code> lists each namespace that failed.</p>
+<h3>Does an HTTP 200 mean the query result is complete?</h3>
+<p>Not always. Check <code>coverage_ratio</code> in the response. Any time it&#x27;s below 1, the result covers only part of what you asked for.</p>
+<h3>When should a partial success response be treated as a failure?</h3>
+<p>When you&#x27;re doing evaluation, reconciliation, or batch processing, or you have to report a total count, treat a <code>coverage_ratio</code> below 1 as a failure and either rerun the request or throw the result away. If an agent is gathering material for an answer, it can use the results it already has and tell the user which part it couldn&#x27;t get.</p>
+<h3>What does Agent First mean?</h3>
+<p>Agent First is how Cortrix approaches API design: it&#x27;s built for agents first. That&#x27;s why every failure says whether it can be retried, what kind of problem it is, and how long to wait, so the agent can pick its next step on its own. The Cortrix docs site calls this agent-native, and it means the same thing as Agent First here.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>[1] Elastic Docs, Run a search: <a href="https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search">https://www.elastic.co/docs/api/doc/elasticsearch/operation/operation-search</a></li>
+<li>[2] Amazon S3 API Reference, DeleteObjects: <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html">https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjects.html</a></li>
+<li>[3] GraphQL Specification, October 2021, Response: <a href="https://spec.graphql.org/October2021/#sec-Response">https://spec.graphql.org/October2021/#sec-Response</a></li>
+<li>[4] Cortrix on GitHub: <a href="https://github.com/cortrix/cortrix">https://github.com/cortrix/cortrix</a></li>
+<li>[5] Cortrix Quickstart: <a href="https://cortrix.ai/docs/get-started/quickstart/">https://cortrix.ai/docs/get-started/quickstart/</a></li>
+<li>[6] Cortrix docs, Interface conventions: <a href="https://cortrix.ai/docs/concepts/interfaces/">https://cortrix.ai/docs/concepts/interfaces/</a></li>
+<li>[7] Cortrix docs, Error codes: <a href="https://cortrix.ai/docs/reference/errors/">https://cortrix.ai/docs/reference/errors/</a></li>
+<li>[8] Cortrix docs, Query and reranking: <a href="https://cortrix.ai/docs/guides/query/">https://cortrix.ai/docs/guides/query/</a></li>
+</ul>
+<p>This post describes Cortrix v1.0.0-rc.2, which is a prerelease. A namespace is a logical query scope, and in the v1.0.0-rc.2 local runtime it isn&#x27;t a permission boundary.</p>
+</article>
+      </div>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes from an engineering perspective on retrieval, evidence, and the conditions that let an application adopt a result.</p></div></section>
+      <section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <div class="container blog-footer-inner">
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+  <script src="/assets/blog/image-dialog.js"></script>
+</body>
+</html>
