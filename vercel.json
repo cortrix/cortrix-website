@@ -15,6 +15,10 @@
       "handle": "filesystem"
     },
     {
+      "src": "/github-stars.json",
+      "dest": "https://img.shields.io/github/stars/cortrix/cortrix.json"
+    },
+    {
       "src": "/docs",
       "status": 308,
       "headers": {
