@@ -58,18 +58,50 @@
       maximumFractionDigits: 1,
     }).format(count);
 
-    const renderRepoStats = stars => {
+    const renderRepoStats = (stars, { approximate = false } = {}) => {
       if (!Number.isInteger(stars) || stars < 0) return;
 
       const exactStars = new Intl.NumberFormat('en-US').format(stars);
       const starLabel = stars === 1 ? 'star' : 'stars';
+      const summary = `${approximate ? 'about ' : ''}${exactStars} ${starLabel}`;
 
       githubStarCount.textContent = formatRepoCount(stars);
-      githubRepoStats.setAttribute(
-        'aria-label',
-        `Cortrix on GitHub, ${exactStars} ${starLabel}`,
-      );
+      githubRepoStats.setAttribute('aria-label', `Cortrix on GitHub, ${summary}`);
+      githubRepoStats.setAttribute('title', `${summary} on GitHub`);
     };
+
+    // The fallback endpoint reports a display string such as "76" or "1.2k".
+    const parseBadgeCount = value => {
+      const match = /^(\d+(?:\.\d+)?)([km]?)$/i.exec(String(value ?? '').trim());
+      if (!match) return null;
+      const scale = { '': 1, k: 1000, m: 1000000 }[match[2].toLowerCase()];
+      return { stars: Math.round(Number(match[1]) * scale), approximate: scale !== 1 };
+    };
+
+    const fetchJson = (url, accept = 'application/json') => fetch(url, { headers: { Accept: accept }, cache: 'no-store' })
+      .then(response => {
+        if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+        return response.json();
+      });
+
+    // GitHub's unauthenticated API is limited per visitor IP address, so shared
+    // networks often get a 403. The fallback is tried when that happens. It is a
+    // same-origin path that the site forwards to the badge service, so the
+    // visitor's browser doesn't contact a third party.
+    const fetchLiveStats = () => fetchJson(githubRepoStats.dataset.githubApi, 'application/vnd.github+json')
+      .then(repo => {
+        if (!Number.isInteger(repo.stargazers_count)) throw new Error('No star count in the GitHub response');
+        return { stars: repo.stargazers_count, approximate: false };
+      })
+      .catch(error => {
+        const fallbackUrl = githubRepoStats.dataset.githubStarsFallback;
+        if (!fallbackUrl) throw error;
+        return fetchJson(fallbackUrl).then(badge => {
+          const parsed = parseBadgeCount(badge.message ?? badge.value);
+          if (!parsed) throw new Error('No star count in the fallback response');
+          return parsed;
+        });
+      });
 
     let cachedStats = null;
     try {
@@ -86,25 +118,17 @@
       && Date.now() - cachedStats.updatedAt < cacheMaxAge;
 
     if (cacheIsFresh) {
-      renderRepoStats(cachedStats.stars);
+      renderRepoStats(cachedStats.stars, { approximate: cachedStats.approximate === true });
     }
 
     if (!cacheIsFresh) {
-      fetch(githubRepoStats.dataset.githubApi, {
-        headers: { Accept: 'application/vnd.github+json' },
-        cache: 'no-store',
-      })
-        .then(response => {
-          if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
-          return response.json();
-        })
-        .then(repo => {
-          if (!Number.isInteger(repo.stargazers_count)) return;
-
-          renderRepoStats(repo.stargazers_count);
+      fetchLiveStats()
+        .then(({ stars, approximate }) => {
+          renderRepoStats(stars, { approximate });
           try {
             localStorage.setItem(cacheKey, JSON.stringify({
-              stars: repo.stargazers_count,
+              stars,
+              approximate,
               updatedAt: Date.now(),
             }));
           } catch {
@@ -112,7 +136,7 @@
           }
         })
         .catch(() => {
-          // Keep the rendered fallback counts if GitHub is unavailable.
+          // Keep the rendered snapshot if neither source is available.
         });
     }
   }
