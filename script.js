@@ -78,15 +78,17 @@
       return { stars: Math.round(Number(match[1]) * scale), approximate: scale !== 1 };
     };
 
-    const fetchJson = url => fetch(url, { headers: { Accept: 'application/json' }, cache: 'no-store' })
+    const fetchJson = (url, accept = 'application/json') => fetch(url, { headers: { Accept: accept }, cache: 'no-store' })
       .then(response => {
         if (!response.ok) throw new Error(`${url} returned ${response.status}`);
         return response.json();
       });
 
     // GitHub's unauthenticated API is limited per visitor IP address, so shared
-    // networks often get a 403. The badge endpoint is tried when that happens.
-    const fetchLiveStats = () => fetchJson(githubRepoStats.dataset.githubApi)
+    // networks often get a 403. The fallback is tried when that happens. It is a
+    // same-origin path that the site forwards to the badge service, so the
+    // visitor's browser doesn't contact a third party.
+    const fetchLiveStats = () => fetchJson(githubRepoStats.dataset.githubApi, 'application/vnd.github+json')
       .then(repo => {
         if (!Number.isInteger(repo.stargazers_count)) throw new Error('No star count in the GitHub response');
         return { stars: repo.stargazers_count, approximate: false };
@@ -95,7 +97,7 @@
         const fallbackUrl = githubRepoStats.dataset.githubStarsFallback;
         if (!fallbackUrl) throw error;
         return fetchJson(fallbackUrl).then(badge => {
-          const parsed = parseBadgeCount(badge.value);
+          const parsed = parseBadgeCount(badge.message ?? badge.value);
           if (!parsed) throw new Error('No star count in the fallback response');
           return parsed;
         });

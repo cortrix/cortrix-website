@@ -9,14 +9,14 @@ const start = source.indexOf('// --- GitHub Repository Stats ---');
 const end = source.indexOf('// --- Copy Buttons ---');
 assert.ok(start >= 0 && end > start, 'The production stats block must exist');
 
-async function render(cache, { legacy = false, live = null, badge = undefined } = {}) {
+async function render(cache, { legacy = false, live = null, badge = undefined, badgeField = 'value' } = {}) {
   const node = { textContent: '76' };
   const storage = new Map();
   if (cache) storage.set(legacy ? 'cortrix-github-repo-stats' : 'cortrix-github-repo-stats-v2', JSON.stringify(cache));
   let requests = 0;
   const attributes = {};
   const dataset = { githubApi: 'https://api.github.com/repos/cortrix/cortrix' };
-  if (badge !== undefined) dataset.githubStarsFallback = 'https://img.shields.io/github/stars/cortrix/cortrix.json';
+  if (badge !== undefined) dataset.githubStarsFallback = '/github-stars.json';
   vm.runInNewContext(source.slice(start, end), {
     document: {
       querySelector: () => ({ dataset, setAttribute(name, value) { attributes[name] = value; } }),
@@ -25,8 +25,9 @@ async function render(cache, { legacy = false, live = null, badge = undefined } 
     localStorage: { getItem: key => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) },
     fetch: async url => {
       requests++;
-      if (String(url).startsWith('https://img.shields.io/')) {
-        return { ok: badge !== null, status: badge === null ? 503 : 200, json: async () => ({ value: badge }) };
+      if (String(url) === '/github-stars.json') {
+        const body = badgeField === 'message' ? { message: badge } : { value: badge };
+        return { ok: badge !== null, status: badge === null ? 503 : 200, json: async () => body };
       }
       return { ok: live !== null, status: live === null ? 403 : 200, json: async () => ({ stargazers_count: live }) };
     },
@@ -65,4 +66,12 @@ test('the snapshot stays when both sources fail', async () => {
 });
 test('an unreadable badge value keeps the snapshot', async () => {
   assert.deepEqual(await render(null, { badge: 'invalid' }), { displayed: '76', requests: 2, label: null });
+});
+test('the fallback count is read from the message field when present', async () => {
+  assert.deepEqual(await render(null, { badge: '82', badgeField: 'message' }), { displayed: '82', requests: 2, label: 'Cortrix on GitHub, 82 stars' });
+});
+test('the page never requests the badge service directly', () => {
+  assert.ok(!source.includes('img.shields.io'), 'script.js must use the same-origin fallback path');
+  const header = fs.readFileSync(path.join(__dirname, '../components/site-header.html'), 'utf8');
+  assert.match(header, /data-github-stars-fallback="\/github-stars\.json"/);
 });
