@@ -15,6 +15,15 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything | Semantic Tech</title>
+      <link>https://cortrix.ai/blog/agent-first-partial-success/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/agent-first-partial-success/</guid>
+      <description>When a Cortrix query can&#39;t reach part of what it asked for, it still returns HTTP 200 and says what&#39;s missing. See what comes back, how an agent should use it, and when to treat it as a failure.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Inside Cortrix</category>
+      <pubDate>Wed, 14 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Write-Time LLM Inference Gives Every Query More Recall Paths | Semantic Tech</title>
       <link>https://cortrix.ai/blog/write-time-llm-inference/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/write-time-llm-inference/</guid>
