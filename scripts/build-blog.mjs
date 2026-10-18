@@ -374,6 +374,7 @@ ${featuredPaper ? `
   </main>
   ${renderFooter()}
   <script src="/script.js"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0545af22e4f4479aa9be3ea3d7c750d3"}'></script><!-- End Cloudflare Web Analytics -->
   <script src="/assets/blog/image-dialog.js"></script>
   <script src="/assets/blog/blog.js"></script>
 </body>
@@ -518,6 +519,7 @@ function renderArticle(post, posts, body, header) {
   </main>
   ${renderFooter()}
   <script src="/script.js"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0545af22e4f4479aa9be3ea3d7c750d3"}'></script><!-- End Cloudflare Web Analytics -->
   <script src="/assets/blog/image-dialog.js"></script>
 </body>
 </html>
