@@ -15,6 +15,15 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Tiger Data Ships a New Vector Index for Postgres, Zep Releases v4, a Paper Finds Agent Memory Won&#39;t Fully Forget | Semantic Tech Insights, Oct 19</title>
+      <link>https://cortrix.ai/blog/semantic-tech-insights-2026-w42/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/semantic-tech-insights-2026-w42/</guid>
+      <description>A vector index, two memory platforms and three papers all ran into the same problem this week: deleting agent memory cleanly. Here&#39;s what each one shows, and what has to be recorded at write time.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Agent memory</category>
+      <pubDate>Sun, 18 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Agent First Design: HTTP 200 Doesn&#39;t Mean You Got Everything | Semantic Tech</title>
       <link>https://cortrix.ai/blog/agent-first-partial-success/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/agent-first-partial-success/</guid>
