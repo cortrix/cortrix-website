@@ -2,7 +2,7 @@
   {
     "kind": "article",
     "visibility": "published",
-    "publishedAt": "2026-10-19",
+    "publishedAt": "2026-10-18",
     "slug": "semantic-tech-insights-2026-w42",
     "title": "Tiger Data Ships a New Vector Index for Postgres, Zep Releases v4, a Paper Finds Agent Memory Won't Fully Forget | Semantic Tech Insights, Oct 19",
     "description": "A vector index, two memory platforms and three papers all ran into the same problem this week: deleting agent memory cleanly. Here's what each one shows, and what has to be recorded at write time.",
