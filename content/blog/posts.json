@@ -10,7 +10,7 @@
     "bodyFile": "semantic-tech-insights-2026-w42.html",
     "readMinutes": 9,
     "image": "/assets/blog/semantic-tech-insights-2026-w42/S02-official-cover-en.png",
-    "imageAlt": "Article cover: Remembering is easy. Deleting cleanly is hard.",
+    "imageAlt": "Article cover: Remembering is easy. Deleting cleanly is hard. None of the six memory systems tested in the Bemula benchmark passed more than 1.5% of deletion requests.",
     "sourceKind": "Public references",
     "sourceLabel": "Bemula paper on arXiv",
     "sourceDescription": "Every item in this roundup links to its public release notes, blog post, or paper in the references.",
