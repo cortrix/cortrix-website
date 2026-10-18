@@ -2,6 +2,23 @@
   {
     "kind": "article",
     "visibility": "published",
+    "publishedAt": "2026-10-19",
+    "slug": "semantic-tech-insights-2026-w42",
+    "title": "Tiger Data Ships a New Vector Index for Postgres, Zep Releases v4, a Paper Finds Agent Memory Won't Fully Forget | Semantic Tech Insights, Oct 19",
+    "description": "A vector index, two memory platforms and three papers all ran into the same problem this week: deleting agent memory cleanly. Here's what each one shows, and what has to be recorded at write time.",
+    "topic": "Agent memory",
+    "bodyFile": "semantic-tech-insights-2026-w42.html",
+    "readMinutes": 9,
+    "image": "/assets/blog/semantic-tech-insights-2026-w42/S02-official-cover-en.png",
+    "imageAlt": "Article cover: Remembering is easy. Deleting cleanly is hard.",
+    "sourceKind": "Public references",
+    "sourceLabel": "Bemula paper on arXiv",
+    "sourceDescription": "Every item in this roundup links to its public release notes, blog post, or paper in the references.",
+    "sourceUrl": "https://arxiv.org/abs/2610.18052"
+  },
+  {
+    "kind": "article",
+    "visibility": "published",
     "publishedAt": "2026-10-14",
     "slug": "agent-first-partial-success",
     "title": "Agent First Design: HTTP 200 Doesn't Mean You Got Everything | Semantic Tech",
