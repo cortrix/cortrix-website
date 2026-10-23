@@ -15,6 +15,15 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Agent First Design: kill -9 Halfway Through a Write, and the Data Lines Up Again After Restart | Semantic Tech</title>
+      <link>https://cortrix.ai/blog/agent-first-namespace-recovery/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/agent-first-namespace-recovery/</guid>
+      <description>We killed Cortrix with kill -9 halfway through importing 40 documents. After the restart, every vector matched a block again. Here is what it checks and how to run the test yourself.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Inside Cortrix</category>
+      <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Tiger Data Ships a New Vector Index for Postgres, Zep Releases v4, a Paper Finds Agent Memory Won&#39;t Fully Forget | Semantic Tech Insights, Oct 19</title>
       <link>https://cortrix.ai/blog/semantic-tech-insights-2026-w42/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/semantic-tech-insights-2026-w42/</guid>
