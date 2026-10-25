@@ -2,6 +2,23 @@
   {
     "kind": "article",
     "visibility": "published",
+    "publishedAt": "2026-10-28",
+    "slug": "claude-code-carry-whole-project",
+    "title": "Stop Making Claude Code Carry Your Whole Project: Up to 43% Fewer Tokens with Cortrix | Semantic Tech",
+    "description": "In our test on 932 internal design docs, Claude Code scored the same with and without Cortrix, but used 43% fewer tokens on the hardest question and 32% fewer tool calls.",
+    "topic": "Inside Cortrix",
+    "bodyFile": "claude-code-carry-whole-project.html",
+    "readMinutes": 6,
+    "image": "/assets/blog/claude-code-carry-whole-project/fig-cc-cover-v03-en.png",
+    "imageAlt": "Article cover: Stop making Claude Code carry your whole project, 43% fewer tokens on the hardest question",
+    "sourceKind": "Get started",
+    "sourceLabel": "Cortrix Quickstart",
+    "sourceDescription": "Get Cortrix running locally, then try your own design questions and see how much context each approach carries.",
+    "sourceUrl": "https://cortrix.ai/docs/get-started/quickstart/"
+  },
+  {
+    "kind": "article",
+    "visibility": "published",
     "publishedAt": "2026-10-18",
     "slug": "semantic-tech-insights-2026-w42",
     "title": "Tiger Data Ships a New Vector Index for Postgres, Zep Releases v4, a Paper Finds Agent Memory Won't Fully Forget | Semantic Tech Insights, Oct 19",
