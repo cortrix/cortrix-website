@@ -15,6 +15,15 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Agent Memory Starts Dreaming in the Background: When to Consolidate, Who Signs Off, and Whether the Originals Stay | Semantic Tech Insights, Oct 26</title>
+      <link>https://cortrix.ai/blog/semantic-tech-insights-2026-w43/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/semantic-tech-insights-2026-w43/</guid>
+      <description>Databricks consolidates agent memory in the background, PowerContext waits for a person to approve each revision, and EverOS keeps the original Markdown as the source of truth.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Agent memory</category>
+      <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Tiger Data Ships a New Vector Index for Postgres, Zep Releases v4, a Paper Finds Agent Memory Won&#39;t Fully Forget | Semantic Tech Insights, Oct 19</title>
       <link>https://cortrix.ai/blog/semantic-tech-insights-2026-w42/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/semantic-tech-insights-2026-w42/</guid>
