@@ -19,7 +19,7 @@
   {
     "kind": "article",
     "visibility": "published",
-    "publishedAt": "2026-10-30",
+    "publishedAt": "2026-10-26",
     "slug": "agent-first-namespace-recovery",
     "title": "Agent First Design: kill -9 Halfway Through a Write, and the Data Lines Up Again After Restart | Semantic Tech",
     "description": "We killed Cortrix with kill -9 halfway through importing 40 documents. After the restart, every vector matched a block again. Here is what it checks and how to run the test yourself.",
