@@ -21,7 +21,7 @@
       <description>We killed Cortrix with kill -9 halfway through importing 40 documents. After the restart, every vector matched a block again. Here is what it checks and how to run the test yourself.</description>
       <dc:creator>Scott</dc:creator>
       <category>Inside Cortrix</category>
-      <pubDate>Fri, 30 Oct 2026 00:00:00 GMT</pubDate>
+      <pubDate>Mon, 26 Oct 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>Tiger Data Ships a New Vector Index for Postgres, Zep Releases v4, a Paper Finds Agent Memory Won&#39;t Fully Forget | Semantic Tech Insights, Oct 19</title>
