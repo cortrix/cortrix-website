@@ -1,0 +1,68 @@
+<p>Plenty of teams already have agents like Claude Code, Codex, Pi Agent and OpenClaw answering questions like "Why was this module designed this way?" or "Which component handles the circuit breaker between the plugins and the core?" The answers usually live somewhere in the team's few hundred design docs and discussion threads.</p>
+<p>The annoying part: to get the answer right, the agent tends to read every matching file in full, and nothing it reads gets thrown away. It all goes back to the model on every single turn. The more docs there are and the more back and forth it takes, the heavier the context the agent has to carry.</p>
+<p>So we tested it. Same Claude Code, same model, same three design questions, two setups: one used Claude Code's native tools to read files directly, the other used semantic retrieval in Cortrix to find the relevant passages, then read the original only when it needed to. The corpus was 932 internal design docs and discussion threads from a real engineering team, frozen for the test.</p>
+<p>Both setups scored about the same. But on the hardest question, the Claude Code runs that went through Cortrix used 43% fewer tokens. Across the whole test, there were nearly a third fewer tool calls, 27% fewer tokens in total, and run time was 8% shorter.</p>
+<h2>Where do the tokens go when an agent reads docs?</h2>
+<p>Start with how Claude Code finds answers with its own native tools. It searches for keywords, then reads each matching file in full. If one file isn't enough, it reads another.</p>
+<p>The catch is that none of that gets thrown away. On every turn, Claude Code sends the model the whole conversation so far plus all the raw text it has already read. So the more it reads and the more turns it takes, the more baggage every later turn has to haul.</p>
+<p>When the agent goes through Cortrix, it gets the passages that matter for the question first, and reads the original by section only when it needs to. What it carries is mostly the passages and sections tied to this question.</p>
+<p>In one line: reading files directly means hauling whole files around; going through Cortrix means grabbing the relevant passages first.</p>
+<p>Here's what each approach carries during one answer:</p>
+<figure><a href="/assets/blog/claude-code-carry-whole-project/fig-cc-main-v03-en.png" aria-label="Open image at full size"><img src="/assets/blog/claude-code-carry-whole-project/fig-cc-main-v03-en.png" width="960" height="1280" alt="Figure 1: What rides along in the context" loading="lazy"></a><figcaption>Figure 1: For the same question, what each approach carries in its context.</figcaption></figure>
+<h2>The hardest question: about the same score, 43% fewer tokens</h2>
+<p>Of the three questions, one got low scores from both setups, and it's the one with the most to read. Reading files directly, this question went through two to five times the tokens of the other two. We ran it 3 times:</p>
+<ul>
+<li>Reading files directly: 1,012K tokens per run on average.</li>
+<li>Through Cortrix: 574K tokens per run on average, 43% fewer.</li>
+</ul>
+<p>On this question, the runs through Cortrix scored 19 and the direct-read runs scored 21, out of 36, which is within the normal variation across 3 runs. Quality is a tie. The gap is in how many tokens of context the agent carried along.</p>
+<p>The gap is biggest here because the context keeps piling up. Reading files directly, the other two questions averaged just 208K and 509K per run. Across these three questions, the more the agent reads, the more raw text gets repeated on every turn, and the more you save by retrieving only what's needed.</p>
+<h2>Nearly a third fewer steps, and faster too</h2>
+<p>Across all three questions, each approach answered 7 times, for a possible 80 points. We stripped the source markers from the answers, shuffled them together, and had the same large language model (LLM) judge score them all.</p>
+<table tabindex="0" aria-label="Table"><thead><tr><th scope="col">Metric</th><th scope="col">Through Cortrix</th><th scope="col">Reading files directly</th></tr></thead><tbody>
+<tr><th scope="row">Score</th><td>54 / 80</td><td>55 / 80</td></tr>
+<tr><th scope="row">Tool calls (7 runs total)</th><td>94</td><td>138</td></tr>
+<tr><th scope="row">Total tokens (7 runs total)</th><td>3.28M</td><td>4.47M</td></tr>
+<tr><th scope="row">Average run time</th><td>169 s</td><td>183 s</td></tr>
+</tbody></table>
+<p>A few things jump out:</p>
+<ul>
+<li>Tool calls dropped from 138 to 94, nearly a third fewer. Reading files directly, the agent keeps alternating between keyword searches and reading whole files. Through Cortrix, one query brings back the relevant passages from several docs at once. Run time is a bit shorter too: 14 s faster per run on average, and 23 s faster per run on the hardest question.</li>
+<li>Total tokens dropped 27%. Most of that is the context that gets resent on every turn, which fell by about 30% (2.69M vs 3.86M). Less raw text to carry means every later turn is lighter.</li>
+</ul>
+<figure><a href="/assets/blog/claude-code-carry-whole-project/fig-cc-steps-v03-en.png" aria-label="Open image at full size"><img src="/assets/blog/claude-code-carry-whole-project/fig-cc-steps-v03-en.png" width="960" height="1120" alt="Figure 2: Native tools haul whole files; Cortrix starts from passages" loading="lazy"></a><figcaption>Figure 2: Each bar is the full context sent to the model on that turn (illustrative).</figcaption></figure>
+<p>A score of 54 vs 55 is within the normal variation across 7 runs. Bottom line: answer quality is a tie, with fewer steps, fewer tokens and less time.</p>
+<h2>Which questions get the most out of Cortrix?</h2>
+<p>Break it down by question and the effect isn't even:</p>
+<ul>
+<li>The hardest question: 43% fewer tokens.</li>
+<li>The second question: 465K per run through Cortrix, 509K reading directly.</li>
+<li>The third question: reading files directly actually used less, 313K per run through Cortrix vs 208K reading directly.</li>
+</ul>
+<figure><a href="/assets/blog/claude-code-carry-whole-project/fig-cc-which-v03-en.png" aria-label="Open image at full size"><img src="/assets/blog/claude-code-carry-whole-project/fig-cc-which-v03-en.png" width="960" height="1000" alt="Figure 3: The more there is to read, the more Cortrix pays off" loading="lazy"></a><figcaption>Figure 3: Tokens per run for each question and approach (illustrative; further right means more).</figcaption></figure>
+<p>When the files are small and the agent doesn't read many of them, pulling them in whole isn't much of a burden. But when it has to dig through a lot and compare back and forth, the full text you're carrying piles up turn after turn, like a snowball.</p>
+<p>So here's a rule of thumb:</p>
+<ul>
+<li>Your design docs and discussion threads have piled up to the point where the agent has to dig through a lot to answer one question → retrieving through Cortrix pays off clearly in tokens, and run time is a little shorter too.</li>
+<li>The question only touches a handful of docs → just let it read the files directly.</li>
+</ul>
+<p>If you lead a team: first check whether what your team asks the agent every day is the "has to dig through a lot" kind. If it is, that's where retrieval pays off most. If it isn't, don't hook it up just for the sake of it.</p>
+<h2>How we tested</h2>
+<p>This was a research test on a real engineering team's actual material:</p>
+<ul>
+<li>Corpus: 932 internal design docs and discussion threads from a real engineering team, frozen for the duration of the test.</li>
+<li>Questions: three design questions, each with 5 to 6 scoring points. Each approach answered 7 times in total, split 2, 2 and 3 across the three questions.</li>
+<li>Client: Claude Code, with the model claude-sonnet-5 at high reasoning effort.</li>
+<li>Scoring: answers from both approaches had their source markers stripped, were shuffled together, and were scored by the same LLM judge.</li>
+<li><strong>Cortrix version:</strong> the <code>main</code> development branch as of October 19, 2026. It's not a release yet. <strong>Reranking was off at query time.</strong></li>
+<li><strong>Access:</strong> Claude Code connected to Cortrix over the Model Context Protocol (MCP), using four tools: query, outline, read section and catalog. In the Cortrix setup, Claude Code's built-in file reading and search tools were turned off.</li>
+<li>Run time: measured from starting Claude Code to getting the final answer. For the Cortrix setup, it also includes the network overhead of remote queries from the test machine.</li>
+<li>Sample size: three questions, 7 runs per approach, one judge. That's only enough to see fairly large differences.</li>
+</ul>
+<p>We're putting together a dataset we can share publicly, and we'll write another post when it's ready so you can run this yourself.</p>
+<h2>Try it on the same kind of question</h2>
+<p>If your team also has agents reading through a lot of internal docs, get Cortrix running with the Quickstart, then take your own design questions and compare how much context "reading files directly" and "going through retrieval" end up carrying:</p>
+<ul>
+<li>Quickstart: <a href="https://cortrix.ai/docs/get-started/quickstart/">https://cortrix.ai/docs/get-started/quickstart/</a></li>
+<li>GitHub: <a href="https://github.com/cortrix/cortrix">https://github.com/cortrix/cortrix</a></li>
+</ul>
