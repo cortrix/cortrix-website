@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!-- generated:blog-page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent First Design: Getting a Deleted Doc Back Is as Easy as &quot;Ctrl+Z&quot; | Semantic Tech — Cortrix Blog</title>
+  <meta name="description" content="What if an AI agent deletes the wrong document from its knowledge base? In Cortrix, deletes are soft: restore the document by ID within 30 days, and it comes back with the same score.">
+  <meta name="author" content="Scott">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://cortrix.ai/blog/agent-first-delete-restore/">
+  <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Agent First Design: Getting a Deleted Doc Back Is as Easy as &quot;Ctrl+Z&quot; | Semantic Tech — Cortrix Blog">
+  <meta property="og:description" content="What if an AI agent deletes the wrong document from its knowledge base? In Cortrix, deletes are soft: restore the document by ID within 30 days, and it comes back with the same score.">
+  <meta property="og:url" content="https://cortrix.ai/blog/agent-first-delete-restore/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/blog/agent-first-delete-restore/fig-af3-cover-v01-en.png">
+  <meta property="og:image:alt" content="Article cover: Cortrix soft delete and restore, a deleted document comes back by ID within 30 days">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agent First Design: Getting a Deleted Doc Back Is as Easy as &quot;Ctrl+Z&quot; | Semantic Tech — Cortrix Blog">
+  <meta name="twitter:description" content="What if an AI agent deletes the wrong document from its knowledge base? In Cortrix, deletes are soft: restore the document by ID within 30 days, and it comes back with the same score.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/blog/agent-first-delete-restore/fig-af3-cover-v01-en.png">
+  <meta name="twitter:image:alt" content="Article cover: Cortrix soft delete and restore, a deleted document comes back by ID within 30 days">
+  <meta property="article:published_time" content="2026-11-05">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cortrix.ai/blog/agent-first-delete-restore/#article",
+      "headline": "Agent First Design: Getting a Deleted Doc Back Is as Easy as \"Ctrl+Z\" | Semantic Tech",
+      "description": "What if an AI agent deletes the wrong document from its knowledge base? In Cortrix, deletes are soft: restore the document by ID within 30 days, and it comes back with the same score.",
+      "url": "https://cortrix.ai/blog/agent-first-delete-restore/",
+      "mainEntityOfPage": "https://cortrix.ai/blog/agent-first-delete-restore/",
+      "author": {
+        "@type": "Person",
+        "name": "Scott"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Cortrix Blog",
+        "url": "https://cortrix.ai/blog/"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Cortrix examples: delete-restore",
+        "url": "https://github.com/cortrix/cortrix/tree/main/examples/delete-restore"
+      },
+      "inLanguage": "en",
+      "image": [
+        "https://cortrix.ai/assets/blog/agent-first-delete-restore/fig-af3-cover-v01-en.png"
+      ],
+      "datePublished": "2026-11-05"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cortrix.ai/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Agent First Design: Getting a Deleted Doc Back Is as Easy as \"Ctrl+Z\" | Semantic Tech",
+          "item": "https://cortrix.ai/blog/agent-first-delete-restore/"
+        }
+      ]
+    }
+  ]
+}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
+</head>
+<body class="blog-page article-page">
+  <a class="blog-skip-link" href="#main-content">Skip to content</a>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/docs/">Docs</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        data-github-stars-fallback="/github-stars.json"
+        aria-label="Cortrix on GitHub, 76 stars"
+        title="76 stars — snapshot checked October 12, 2026; updates when a live count is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">76</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+  <main id="main-content">
+    <div class="article-shell container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Inside Cortrix</li></ol></nav>
+      <header class="article-header">
+        <p class="blog-kicker">Inside Cortrix</p>
+        <h1>Agent First Design: Getting a Deleted Doc Back Is as Easy as &quot;Ctrl+Z&quot; | Semantic Tech</h1>
+        <p class="article-deck">What if an AI agent deletes the wrong document from its knowledge base? In Cortrix, deletes are soft: restore the document by ID within 30 days, and it comes back with the same score.</p>
+        <div class="article-byline"><span>By Scott</span><span>9 min read</span></div>
+      </header>
+      <div class="article-paper-card"><div><p class="blog-kicker">Public code</p><h2>Cortrix examples: delete-restore</h2><p>Both experiments in this post are in the Cortrix repo, so you can rerun them on your own machine.</p></div><a href="https://github.com/cortrix/cortrix/tree/main/examples/delete-restore" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#what-happens-when-an-ai-agent-deletes-a-document-from-the-knowledge-base">What happens when an AI agent deletes a document from the knowledge base</a></li><li><a href="#cortrix-soft-delete-restore-a-deleted-document-by-id-within-30-days">Cortrix soft delete: restore a deleted document by ID within 30 days</a></li><li><a href="#recovering-a-deleted-document-in-a-vector-database-backups-in-pinecone-snapshots-in-qdrant-versions-in-lancedb">Recovering a deleted document in a vector database: backups in Pinecone, snapshots in Qdrant, versions in LanceDB</a></li><li><a href="#before-you-give-an-agent-delete-rights-log-ids-split-permissions-be-careful-with-purge">Before you give an agent delete rights: log IDs, split permissions, be careful with purge</a></li><li><a href="#frequently-asked-questions">Frequently asked questions</a></li><li><a href="#series-navigation">Series navigation</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
+        <article class="article-body"><blockquote><p>Summary: Cortrix is open source semantic storage for AI agents. In Cortrix, deleting a document is a soft delete: the document disappears from search results right away, but its data is kept for 30 days. During that time you can restore a wrongly deleted document by its document ID, with no need to parse it again or recompute its vectors. We simulated a customer support knowledge base in which an agent deletes the current refund policy by mistake. When we asked "How long does a refund take?", the top result was the retired policy that says "7 to 10 business days." After we restored the document by ID, the ranking and the scores matched what they were before the delete. A purge, which can't be undone, takes an explicit confirmation. This is part 3 of the Agent First Design series.</p></blockquote>
+<p>Agents are taking over more and more of the upkeep on knowledge bases: clearing out expired campaign notes, deleting rules that a newer version replaced, tidying up files that got uploaded twice. This kind of work usually runs in batches when nobody's watching, and agents make mistakes (AI is made by people, and people get things wrong, so AI does too). Pick the wrong ID, or get a loop condition wrong, and you can delete a document that's still in use.</p>
+<p>When a delete goes wrong, the storage doesn't raise an error. The agent keeps working. Every answer from then on is missing that piece, and what's left can point the agent the wrong way. What you want is that one document back, on its own, without rolling the whole database back to last night's backup and losing everyone else's writes from that day (DBAs will recognize this: it's a lot like Oracle Flashback).</p>
+<h2 id="what-happens-when-an-ai-agent-deletes-a-document-from-the-knowledge-base">What happens when an AI agent deletes a document from the knowledge base</h2>
+<p>Here's an example with a customer support knowledge base. The namespace holds 5 documents, and two of them are refund policies. The current one says refunds to a bank card take 3 to 5 business days. The 2024 version says 7 to 10 business days, and its title says it's retired.</p>
+<p>Every document gets a document ID when it's written. List the documents in the namespace and you can see which ID goes with which file name:</p>
+<pre><code>documents:
+  01M6J974Z0EDVXW3J95CM1VT80  invoices.md
+  01M6J975ZW2CKGDN031MNWNEYA  loyalty-points.md
+  01M6J976H5RJRFXAJCQW3V53VT  refund-policy-2024.md
+  01M6J9772F2TC8PWWWZ8RR18Y1  refund-policy.md
+  01M6J977KREHJG0A34FDV4J8ST  shipping.md</code></pre>
+<p>Before the delete, we ask, "How long does a refund take?" The current policy comes first and the old version second:</p>
+<pre><code>before the delete:
+  1  refund-policy.md         rerank_score=0.9866  How long a refund takes: the money goes back to ...
+  2  refund-policy-2024.md    rerank_score=0.7770  The money goes back to the original payment ...
+  3  invoices.md              rerank_score=0.0110  You can request an electronic invoice from the ...</code></pre>
+<p>Then we simulate the agent deleting the current policy, <code>refund-policy.md</code>, the one that scored 0.9866. Query again and the result looks like this:</p>
+<pre><code>DELETE /documents/01M6J9772F2TC8PWWWZ8RR18Y1 -&gt; 204
+after the delete:
+  1  refund-policy-2024.md    rerank_score=0.7770  The money goes back to the original payment ...
+  2  invoices.md              rerank_score=0.0110  You can request an electronic invoice from the ...
+  3  shipping.md              rerank_score=0.0010  Orders within the same city arrive the same ...</code></pre>
+<p>The current policy is gone, and the top result is a policy that's been retired. A support agent that gets this result would tell the customer "7 to 10 business days."</p>
+<h2 id="cortrix-soft-delete-restore-a-deleted-document-by-id-within-30-days">Cortrix soft delete: restore a deleted document by ID within 30 days</h2>
+<p>In Cortrix, <code>DELETE /api/v1/documents/{id}?namespace={ns}</code> doesn't wipe the data right away. Instead, it soft-deletes the document:</p>
+<ul>
+<li>The document is marked as deleted, and the deletion time is recorded. From that moment, queries, document listings, and reads by ID can't see it.</li>
+<li>Its chunks, vectors, and original file are still on disk, so after a restore there's no need to parse the file again or recompute vectors.</li>
+<li>The default retention is 30 days (the config option <code>gc.soft_delete_retention_days</code>). A background job runs every 24 hours, and only documents past the retention period are purged.</li>
+</ul>
+<p>Inside the retention period, you restore a document by its ID with <code>POST /api/v1/gc/restore</code>. The ID to pass is the one on the <code>refund-policy.md</code> line in the listing above, <code>01M6J9772F2TC8PWWWZ8RR18Y1</code>. You can pass several IDs in one call, and the results come back per document. To make that visible, we passed one more ID in the same call: the same ID with its last character changed from <code>1</code> to <code>X</code>, to simulate an agent that copied an ID wrong:</p>
+<pre><code>restore 01M6J9772F2TC8PWWWZ8RR18Y1 and 01M6J9772F2TC8PWWWZ8RR18YX:
+  succeeded  01M6J9772F2TC8PWWWZ8RR18Y1
+  failed     01M6J9772F2TC8PWWWZ8RR18YX  CX_ERR_GC_DOC_NOT_FOUND  retryable=false
+             no deleted document with this id
+  coverage_ratio=0.5</code></pre>
+<p>The current refund policy is back, and the mistyped ID is listed on its own under <code>failed</code>, marked as not retryable. This is the same convention as the partial success in part 1 of the series: the HTTP status is 200, and the agent has to read <code>coverage_ratio</code> and <code>failed</code> to know which documents didn't come back and why. Query again:</p>
+<pre><code>after the restore:
+  1  refund-policy.md         rerank_score=0.9866  How long a refund takes: the money goes back to ...
+  2  refund-policy-2024.md    rerank_score=0.7770  The money goes back to the original payment ...
+  3  invoices.md              rerank_score=0.0110  You can request an electronic invoice from the ...</code></pre>
+<p>The ranking and the scores are the same as before the delete, because a soft delete only marks the document as deleted. The chunks and vectors were never touched, and for 30 days that mark can be cleared.</p>
+<figure><a href="/assets/blog/agent-first-delete-restore/fig-af3-main-v04-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-delete-restore/fig-af3-main-v04-en.png" width="960" height="1280" alt="Cortrix soft delete and restore: after a delete the document is hidden from queries but its data is kept for 30 days; after a restore by ID the ranking and scores return to what they were before the delete; once it is purged, by the daily cleanup after 30 days or by a manual purge with the confirmation header, it can't be restored" loading="lazy"></a><figcaption>Figure 1 | Deleting a document through the API is a soft delete, restorable by ID for 30 days. A purge, which can't be undone, takes an explicit confirmation.</figcaption></figure>
+<p>To purge soft-deleted documents so they can't be restored, there are two endpoints. <code>POST /api/v1/gc/run</code> cleans up documents that are past the retention period. <code>POST /api/v1/gc/purge</code> doesn't wait for the retention period and removes every soft-deleted document right away. Both require admin permission, and both must carry the request header <code>X-Ops-Confirm: true</code>. Say you're sure you don't need the 2024 version anymore. Delete it, then purge:</p>
+<pre><code>DELETE /documents/01M6J976H5RJRFXAJCQW3V53VT (refund-policy-2024.md) -&gt; 204
+POST /gc/purge without X-Ops-Confirm -&gt; 400 CX_ERR_OPS_CONFIRM_REQUIRED
+POST /gc/purge with X-Ops-Confirm: true -&gt; 202
+restore 01M6J976H5RJRFXAJCQW3V53VT:
+  failed     01M6J976H5RJRFXAJCQW3V53VT  CX_ERR_GC_DOC_NOT_FOUND  retryable=false
+             no deleted document with this id
+  coverage_ratio=0.0</code></pre>
+<p>A purge without the confirmation header is rejected outright. With it, the old version is purged, and trying to restore it only gets you <code>CX_ERR_GC_DOC_NOT_FOUND</code>.</p>
+<p>There's one more kind of delete that an agent often doesn't notice. You upload a changed file with the same name through the upload endpoint, <code>POST /api/v1/namespaces/{ns}/documents</code>. Cortrix treats it as a new version, and the upload response tells the caller which ID it replaced in <code>superseded_doc_id</code>. The moment the new version finishes processing, the old version is soft-deleted. If you then try to restore the old version, Cortrix won't let two versions be live at once. Instead, it spells out the next step in <code>message</code>:</p>
+<pre><code>upload refund-policy.md again: doc_id=01M6J97GKED58ZS15BANHEGVMT superseded_doc_id=01M6J97G0Q56CJKB2HNR03DXKK
+restore the first version 01M6J97G0Q56CJKB2HNR03DXKK:
+  CX_ERR_GC_RESTORE_SUPERSEDED
+  another version is live: delete 01M6J97GKED58ZS15BANHEGVMT in namespace new-version-1793762508, then restore 01M6J97G0Q56CJKB2HNR03DXKK
+DELETE /documents/01M6J97GKED58ZS15BANHEGVMT -&gt; 204
+restore 01M6J97G0Q56CJKB2HNR03DXKK again: succeeded=['01M6J97G0Q56CJKB2HNR03DXKK'] coverage_ratio=1.0</code></pre>
+<p>The agent can just follow that: delete the new version, then restore the old one. Nobody has to step in and explain. The new version's ID and its namespace are also in the returned <code>structured_data</code>, so the agent doesn't have to parse the sentence.</p>
+<h2 id="recovering-a-deleted-document-in-a-vector-database-backups-in-pinecone-snapshots-in-qdrant-versions-in-lancedb">Recovering a deleted document in a vector database: backups in Pinecone, snapshots in Qdrant, versions in LanceDB</h2>
+<p>In Cortrix, each deleted document has its own retention clock, and restore works per document, so other writes in the same namespace aren't touched. That makes recovery finer-grained and more flexible. Some products in the industry restore at the level of an index, a collection, or a whole table.</p>
+<p>A Pinecone backup is a copy of a whole serverless index, and you restore it by creating a new index from the backup.</p>
+<figure><a href="/assets/blog/agent-first-delete-restore/fig-af3-src-pinecone-v01-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-delete-restore/fig-af3-src-pinecone-v01-en.png" width="960" height="720" alt="Screenshot of the Pinecone docs: to create a serverless index from a backup, you provide the backup ID and a name for the new index" loading="lazy"></a><figcaption>Figure 2 | How the Pinecone docs restore an index from a backup, captured 2026-11-03. See references [1] and [7]</figcaption></figure>
+<p>When Qdrant recovers a collection from a snapshot, it overwrites the data that collection currently has on the node.</p>
+<figure><a href="/assets/blog/agent-first-delete-restore/fig-af3-src-qdrant-v01-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-delete-restore/fig-af3-src-qdrant-v01-en.png" width="960" height="720" alt="Screenshot of the Qdrant API reference: recovering from a snapshot overwrites the collection's data on the node" loading="lazy"></a><figcaption>Figure 3 | How the Qdrant API reference describes recovering a collection from a snapshot, captured 2026-11-03. See reference [2]</figcaption></figure>
+<p>LanceDB uses versions. A table has versions, and a delete creates a new one. You can open the version from before the delete, or roll the whole table back to it. Old versions are cleaned up when you run <code>optimize()</code>, according to the retention settings, and the default is to keep them for 7 days.</p>
+<figure><a href="/assets/blog/agent-first-delete-restore/fig-af3-src-lancedb-v01-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-delete-restore/fig-af3-src-lancedb-v01-en.png" width="960" height="720" alt="Screenshot of the LanceDB docs: LanceDB supports fast rollback to any previous version without copying data" loading="lazy"></a><figcaption>Figure 4 | How the LanceDB docs describe rolling back to a previous version, captured 2026-11-03. See reference [3]</figcaption></figure>
+<h2 id="before-you-give-an-agent-delete-rights-log-ids-split-permissions-be-careful-with-purge">Before you give an agent delete rights: log IDs, split permissions, be careful with purge</h2>
+<ul>
+<li>Before a delete, write the document ID and file name into the agent's own action log. Restore works by ID, and once a document is deleted you can't see it in the listing.</li>
+<li>Restore needs admin permission. With authentication on, give the agent a key with read and write permission only: add an entry under <code>auth.api_keys</code> in the config file with <code>permissions: 3</code>. That key can delete, but calling restore with it gets a 403 and <code>ADMIN permission required</code>. Better yet, split the roles: the agent can delete, and only a person or a job holding an admin key restores what was deleted by mistake.</li>
+<li>A purge applies to the whole server. <code>/gc/purge</code> clears soft-deleted documents in every namespace, not just the one you deleted from a moment ago. Don't call it while any document is still waiting to be restored.</li>
+<li>Documents imported from a watched directory follow their source files. If a file is removed from the watched directory, the matching document is deleted outright and never enters the 30-day window. To get it back, restore the file in the source directory.</li>
+<li>If a document hadn't finished processing when it was deleted, restore returns <code>CX_ERR_GC_RESTORE_INCOMPLETE</code>. Follow the message and submit the original file again.</li>
+</ul>
+<h2 id="frequently-asked-questions">Frequently asked questions</h2>
+<h3>Can I restore a deleted document in Cortrix?</h3>
+<p>Yes. Deleting a document through the API is a soft delete, and the default retention is 30 days. During that time, pass the document ID to <code>POST /api/v1/gc/restore</code> and the document comes back, with its chunks and vectors still in place, so nothing needs to be ingested again.</p>
+<h3>Do deleted documents still show up in search results?</h3>
+<p>No. After a soft delete, queries, document listings, and reads by ID can't see the document until it's restored.</p>
+<h3>How do I purge a document so it can't be restored?</h3>
+<p>Delete it first, then call <code>POST /api/v1/gc/purge</code> with the request header <code>X-Ops-Confirm: true</code>. A purge can't be undone, it applies to every soft-deleted document on the whole server, and it needs admin permission. You can also wait for the retention period to pass, and the daily background cleanup will purge it.</p>
+<h3>How is this different from backups and snapshots in a vector database?</h3>
+<p>Backups and snapshots work on a whole index, collection, or table. Restoring one rolls back the other writes made after the restore point, or means creating a new index. Cortrix restores by document, so only the wrongly deleted one comes back.</p>
+<h2 id="series-navigation">Series navigation</h2>
+<ul>
+<li>Part 1: <a href="https://cortrix.ai/blog/agent-first-partial-success/">HTTP 200 Doesn't Mean You Got Everything</a>. When a query only covers part of the data, the storage has to say what's missing.</li>
+<li>Part 2: <a href="https://cortrix.ai/blog/agent-first-namespace-recovery/">kill -9 Halfway Through a Write, and the Data Lines Up Again After Restart</a>. If a crash interrupts a write, the storage cleans up the half-written data on its own.</li>
+<li>Part 3 is this post: an agent deleted a document, and you can get it back by ID within 30 days.</li>
+</ul>
+<p>Both experiments in this post are in the Cortrix repo, at <a href="https://github.com/cortrix/cortrix/tree/main/examples/delete-restore">examples/delete-restore</a>. Build and start Cortrix from <code>main</code> by following the instructions in that directory, and you can run them yourself:</p>
+<pre><code>python examples/delete-restore/delete_restore.py
+python examples/delete-restore/new_version.py</code></pre>
+<p>Add <code>--purge</code> to <code>delete_restore.py</code> to run the purge step too. A purge removes every soft-deleted document on the server, so only do that on a server where nothing else is waiting to be restored.</p>
+<p>The output in this post comes from that example. If it saves you from building your own soft delete and recycle bin, we'd love it if you gave Cortrix a star on <a href="https://github.com/cortrix/cortrix">GitHub</a>.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>[1] Pinecone Docs, Restore an index: <a href="https://docs.pinecone.io/guides/manage-data/restore-an-index">https://docs.pinecone.io/guides/manage-data/restore-an-index</a></li>
+<li>[2] Qdrant API Reference, Recover from a snapshot: <a href="https://api.qdrant.tech/api-reference/snapshots/recover-from-snapshot">https://api.qdrant.tech/api-reference/snapshots/recover-from-snapshot</a></li>
+<li>[3] LanceDB Docs, Versioning: <a href="https://docs.lancedb.com/tables/versioning">https://docs.lancedb.com/tables/versioning</a></li>
+<li>[4] Cortrix on GitHub: <a href="https://github.com/cortrix/cortrix">https://github.com/cortrix/cortrix</a></li>
+<li>[5] Cortrix API spec, document delete and restore: <a href="https://github.com/cortrix/cortrix/blob/main/api/paths/ops.yaml">https://github.com/cortrix/cortrix/blob/main/api/paths/ops.yaml</a></li>
+<li>[6] Code for the experiments in this post, examples/delete-restore: <a href="https://github.com/cortrix/cortrix/tree/main/examples/delete-restore">https://github.com/cortrix/cortrix/tree/main/examples/delete-restore</a></li>
+<li>[7] Pinecone Docs, Backups overview: <a href="https://docs.pinecone.io/guides/manage-data/backups-overview">https://docs.pinecone.io/guides/manage-data/backups-overview</a></li>
+</ul>
+<p>The commands and output in this post come from a build of Cortrix <code>main</code> at commit <code>0d8d2b8</code>, CPU only, with no LLM configured.</p>
+</article>
+      </div>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes from an engineering perspective on retrieval, evidence, and the conditions that let an application adopt a result.</p></div></section>
+      <section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <div class="container blog-footer-inner">
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0545af22e4f4479aa9be3ea3d7c750d3"}'></script><!-- End Cloudflare Web Analytics -->
+  <script src="/assets/blog/image-dialog.js"></script>
+</body>
+</html>
