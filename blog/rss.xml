@@ -15,6 +15,15 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Agent First Design: Getting a Deleted Doc Back Is as Easy as &quot;Ctrl+Z&quot; | Semantic Tech</title>
+      <link>https://cortrix.ai/blog/agent-first-delete-restore/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/agent-first-delete-restore/</guid>
+      <description>What if an AI agent deletes the wrong document from its knowledge base? In Cortrix, deletes are soft: restore the document by ID within 30 days, and it comes back with the same score.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Inside Cortrix</category>
+      <pubDate>Thu, 05 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Stop Making Claude Code Carry Your Whole Project: Up to 43% Fewer Tokens with Cortrix | Semantic Tech</title>
       <link>https://cortrix.ai/blog/claude-code-carry-whole-project/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/claude-code-carry-whole-project/</guid>

@@ -2,6 +2,23 @@
   {
     "kind": "article",
     "visibility": "published",
+    "publishedAt": "2026-11-05",
+    "slug": "agent-first-delete-restore",
+    "title": "Agent First Design: Getting a Deleted Doc Back Is as Easy as \"Ctrl+Z\" | Semantic Tech",
+    "description": "What if an AI agent deletes the wrong document from its knowledge base? In Cortrix, deletes are soft: restore the document by ID within 30 days, and it comes back with the same score.",
+    "topic": "Inside Cortrix",
+    "bodyFile": "agent-first-delete-restore.html",
+    "readMinutes": 9,
+    "image": "/assets/blog/agent-first-delete-restore/fig-af3-cover-v01-en.png",
+    "imageAlt": "Article cover: Cortrix soft delete and restore, a deleted document comes back by ID within 30 days",
+    "sourceKind": "Public code",
+    "sourceLabel": "Cortrix examples: delete-restore",
+    "sourceDescription": "Both experiments in this post are in the Cortrix repo, so you can rerun them on your own machine.",
+    "sourceUrl": "https://github.com/cortrix/cortrix/tree/main/examples/delete-restore"
+  },
+  {
+    "kind": "article",
+    "visibility": "published",
     "publishedAt": "2026-10-28",
     "slug": "claude-code-carry-whole-project",
     "title": "Stop Making Claude Code Carry Your Whole Project: Up to 43% Fewer Tokens with Cortrix | Semantic Tech",
