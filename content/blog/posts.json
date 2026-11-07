@@ -2,7 +2,7 @@
   {
     "kind": "article",
     "visibility": "published",
-    "publishedAt": "2026-11-09",
+    "publishedAt": "2026-11-07",
     "slug": "semantic-tech-insights-2026-w45",
     "title": "Anthropic Breaks Down Claude's Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9",
     "description": "Anthropic, Google and RAGFlow all compile knowledge ahead of time. Three questions follow: what to compile, whether it stays correct, and whether it gets used.",
