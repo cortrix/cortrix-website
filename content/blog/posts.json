@@ -2,6 +2,23 @@
   {
     "kind": "article",
     "visibility": "published",
+    "publishedAt": "2026-11-09",
+    "slug": "semantic-tech-insights-2026-w45",
+    "title": "Anthropic Breaks Down Claude's Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9",
+    "description": "Anthropic takes Claude's memory apart, Google makes humans approve agent context, and RAGFlow 1.0 compiles knowledge ahead of time. Three questions: what, still right, used.",
+    "topic": "Agent memory",
+    "bodyFile": "semantic-tech-insights-2026-w45.html",
+    "readMinutes": 16,
+    "image": "/assets/blog/semantic-tech-insights-2026-w45/S02-official-cover-en.png",
+    "imageAlt": "Cover image: Semantic Tech Insights, 2026.11.09, with the Cortrix Semantic icon at top left, the title \"Anthropic Breaks Down Claude's Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time\", and on the right a stack of thin lines with an arrow pointing to three solid bars",
+    "sourceKind": "Public references",
+    "sourceLabel": "Anthropic: The components of agent memory",
+    "sourceDescription": "Every item in this roundup links to its public release notes, blog post, or paper in the references.",
+    "sourceUrl": "https://www.anthropic.com/research/components-of-agent-memory"
+  },
+  {
+    "kind": "article",
+    "visibility": "published",
     "publishedAt": "2026-11-05",
     "slug": "agent-first-delete-restore",
     "title": "Agent First Design: Getting a Deleted Doc Back Is as Easy as \"Ctrl+Z\" | Semantic Tech",
