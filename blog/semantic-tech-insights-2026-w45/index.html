@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!-- generated:blog-page -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anthropic Breaks Down Claude&#39;s Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9 — Cortrix Blog</title>
+  <meta name="description" content="Anthropic, Google and RAGFlow all compile knowledge ahead of time. Three questions follow: what to compile, whether it stays correct, and whether it gets used.">
+  <meta name="author" content="Scott">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://cortrix.ai/blog/semantic-tech-insights-2026-w45/">
+  <link rel="alternate" type="application/rss+xml" title="Cortrix Blog RSS" href="https://cortrix.ai/blog/rss.xml">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Anthropic Breaks Down Claude&#39;s Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9 — Cortrix Blog">
+  <meta property="og:description" content="Anthropic, Google and RAGFlow all compile knowledge ahead of time. Three questions follow: what to compile, whether it stays correct, and whether it gets used.">
+  <meta property="og:url" content="https://cortrix.ai/blog/semantic-tech-insights-2026-w45/">
+  <meta property="og:site_name" content="Cortrix">
+  <meta property="og:image" content="https://cortrix.ai/assets/blog/semantic-tech-insights-2026-w45/S02-official-cover-en.png">
+  <meta property="og:image:alt" content="Cover image: Semantic Tech Insights, 2026.11.09, with the Cortrix Semantic icon at top left, the title &quot;Anthropic Breaks Down Claude&#39;s Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time&quot;, and on the right a stack of thin lines with an arrow pointing to three solid bars">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Anthropic Breaks Down Claude&#39;s Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9 — Cortrix Blog">
+  <meta name="twitter:description" content="Anthropic, Google and RAGFlow all compile knowledge ahead of time. Three questions follow: what to compile, whether it stays correct, and whether it gets used.">
+  <meta name="twitter:image" content="https://cortrix.ai/assets/blog/semantic-tech-insights-2026-w45/S02-official-cover-en.png">
+  <meta name="twitter:image:alt" content="Cover image: Semantic Tech Insights, 2026.11.09, with the Cortrix Semantic icon at top left, the title &quot;Anthropic Breaks Down Claude&#39;s Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time&quot;, and on the right a stack of thin lines with an arrow pointing to three solid bars">
+  <meta property="article:published_time" content="2026-11-07">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cortrix.ai/blog/semantic-tech-insights-2026-w45/#article",
+      "headline": "Anthropic Breaks Down Claude's Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9",
+      "description": "Anthropic, Google and RAGFlow all compile knowledge ahead of time. Three questions follow: what to compile, whether it stays correct, and whether it gets used.",
+      "url": "https://cortrix.ai/blog/semantic-tech-insights-2026-w45/",
+      "mainEntityOfPage": "https://cortrix.ai/blog/semantic-tech-insights-2026-w45/",
+      "author": {
+        "@type": "Person",
+        "name": "Scott"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Cortrix",
+        "url": "https://cortrix.ai"
+      },
+      "isPartOf": {
+        "@type": "Blog",
+        "name": "Cortrix Blog",
+        "url": "https://cortrix.ai/blog/"
+      },
+      "citation": {
+        "@type": "CreativeWork",
+        "name": "Anthropic: The components of agent memory",
+        "url": "https://www.anthropic.com/research/components-of-agent-memory"
+      },
+      "inLanguage": "en",
+      "image": [
+        "https://cortrix.ai/assets/blog/semantic-tech-insights-2026-w45/S02-official-cover-en.png"
+      ],
+      "datePublished": "2026-11-07"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://cortrix.ai/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://cortrix.ai/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Anthropic Breaks Down Claude's Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9",
+          "item": "https://cortrix.ai/blog/semantic-tech-insights-2026-w45/"
+        }
+      ]
+    }
+  ]
+}</script>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/assets/blog/blog.css">
+  <link rel="stylesheet" href="/assets/blog/image-dialog.css">
+</head>
+<body class="blog-page article-page">
+  <a class="blog-skip-link" href="#main-content">Skip to content</a>
+  <!-- include:site-header:start -->
+<nav class="nav" id="nav" aria-label="Primary navigation">
+  <div class="nav-inner container">
+    <a href="/" class="nav-logo" aria-label="Cortrix home">
+      <img src="/assets/favicon.svg" alt="" class="nav-logo-icon">
+      <span class="logo-text">Cortrix</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/semantic-storage/">Semantic Storage</a></li>
+      <li><a href="/#architecture">Architecture</a></li>
+      <li><a href="/#quickstart">Quick Start</a></li>
+      <li><a href="/for-builders/">For Builders</a></li>
+      <li><a href="/benchmark/">Benchmark</a></li>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/docs/">Docs</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a
+        href="https://github.com/cortrix/cortrix"
+        class="btn btn-primary social-link github-repo-stats"
+        target="_blank"
+        rel="noopener"
+        data-github-repo-stats
+        data-github-api="https://api.github.com/repos/cortrix/cortrix"
+        data-github-stars-fallback="/github-stars.json"
+        aria-label="Cortrix on GitHub, 76 stars"
+        title="76 stars — snapshot checked October 12, 2026; updates when a live count is available"
+      >
+        <span>GitHub</span>
+        <span class="github-repo-stat" aria-hidden="true">
+          <span class="github-repo-stat-icon">★</span>
+          <span id="github-star-count">76</span>
+        </span>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<!-- include:site-header:end -->
+  <main id="main-content">
+    <div class="article-shell container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/blog/">Blog</a></li><li aria-current="page">Inside Cortrix</li></ol></nav>
+      <header class="article-header">
+        <p class="blog-kicker">Agent memory</p>
+        <h1>Anthropic Breaks Down Claude&#39;s Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9</h1>
+        <p class="article-deck">Anthropic, Google and RAGFlow all compile knowledge ahead of time. Three questions follow: what to compile, whether it stays correct, and whether it gets used.</p>
+        <div class="article-byline"><span>By Scott</span><span>16 min read</span></div>
+      </header>
+      <div class="article-paper-card"><div><p class="blog-kicker">Public references</p><h2>Anthropic: The components of agent memory</h2><p>Every item in this roundup links to its public release notes, blog post, or paper in the references.</p></div><a href="https://www.anthropic.com/research/components-of-agent-memory" target="_blank" rel="noopener noreferrer">Open source <span aria-hidden="true">↗</span></a></div>
+      <div class="article-layout">
+        <aside class="article-toc" aria-label="On this page"><div><details class="article-contents"><summary>On this page</summary><ol><li><a href="#memory-architecture-anthropic-breaks-down-claude-s-memory">Memory architecture: Anthropic breaks down Claude&#39;s memory</a></li><li><a href="#enterprise-context-google-lets-agents-fill-in-context-and-data-stewards-can-approve-or-roll-it-back">Enterprise context: Google lets agents fill in context, and data stewards can approve or roll it back</a></li><li><a href="#retrieval-ragflow-1-0-ships-with-knowledge-compiled-ahead-of-time">Retrieval: RAGFlow 1.0 ships, with knowledge compiled ahead of time</a></li><li><a href="#skills-zep-compiles-runs-that-worked-into-skill-md-and-the-agent-s-word-isn-t-enough">Skills: Zep compiles runs that worked into SKILL.md, and the agent&#39;s word isn&#39;t enough</a></li><li><a href="#memory-platforms-powercontext-v1-5-0-can-say-which-memories-it-used">Memory platforms: PowerContext v1.5.0 can say which memories it used</a></li><li><a href="#papers-memory-was-delivered-and-the-agent-mostly-didn-t-use-it">Papers: memory was delivered, and the agent mostly didn&#39;t use it</a></li><li><a href="#other-semantic-tech-news-from-around-the-world">Other semantic tech news from around the world</a></li><li><a href="#my-read-on-this-week">My read on this week</a></li><li><a href="#references">References</a></li></ol></details></div></aside>
+        <article class="article-body"><blockquote><p>Semantic Tech Insights, Week 45, 2026</p></blockquote>
+<p>This week in semantic tech, one idea kept coming up: instead of digging through raw material every time a question comes in, prepare it ahead of time and compile it into data an agent can use right away.</p>
+<p>Each vendor came at it a little differently. Anthropic published a long post that takes Claude's memory apart: what to remember, how to fix a wrong memory, and whether turning notes into a wiki actually helps. Google lets its Knowledge Catalog mine Jira and Confluence for context on its own, and data stewards can review and approve the proposed updates, with versioning and rollback. RAGFlow 1.0 is out, and the team calls what it does "knowledge compilation": every fact it compiles carries a quote from the original. Zep compiles runs that worked into <code>SKILL.md</code> files, and every step says which run it came from. PowerContext shipped v1.5.0, where artifacts carry their lineage and a receipt shows which memories went into a given answer. Two papers poured some cold water on all this: memory gets delivered, but agents mostly don't use it, and on fact-recall tasks, memory compressed into summaries helps less than the original.</p>
+<p>So <strong>knowledge compilation</strong> can't avoid three questions: <strong>what to compile, whether it's still right afterward, and whether it was actually used.</strong></p>
+<blockquote><p>The numbers here are public information as read on 2026-11-07 and may change. Numbers from papers and vendors are the publishers' own claims, reported here the way the sources put them.</p></blockquote>
+<figure><a href="/assets/blog/semantic-tech-insights-2026-w45/F01-knowledge-compilation-en.png" aria-label="Open image at full size"><img src="/assets/blog/semantic-tech-insights-2026-w45/F01-knowledge-compilation-en.png" width="960" height="1280" alt="This week&#x27;s thread: raw material (session records, documents, tickets, run logs) goes through a compile step into wikis, evidence chains, context sets and Skills, then reaches the agent at use time. The core box holds three questions: what to compile, whether it&#x27;s still right afterward, whether it was used. Below, where each of this week&#x27;s six stories lands" loading="lazy"></a><figcaption>Figure 1 | This week's thread: compile knowledge ahead of time.</figcaption></figure>
+<h2 id="memory-architecture-anthropic-breaks-down-claude-s-memory">Memory architecture: Anthropic breaks down Claude's memory</h2>
+<p>On November 6, Anthropic published a research post, "The components of agent memory," sharing what it has learned building memory for Claude. A few of the experiments are interesting:</p>
+<ul>
+<li>What to remember: Claude played Pokémon, one run each for Sonnet 3.7 and Fable 5, and the team compared the memory folders at around step 10,000. Sonnet 3.7 wrote down everything, with a separate file for each battle and each item: 413 files across 225 folders, and it earned one badge. Fable 5 wrote nine files plus a single <code>global.md</code>, and earned four badges. Anything visible on screen every turn, like money or position, doesn't need to be remembered. What's worth writing down is strategy the model worked out itself, and rules it has verified.</li>
+<li>How to teach it: just tell the model what memory is for, and don't dictate how to use it. That worked better. When the team imposed a hard rule of "record only failures," Opus 5 and Opus 4.7 lost much of the boost they got from memory.</li>
+<li>What if a memory is wrong: Claude wrote down the wrong side of the map for the PokéCenter, and fell back onto the same route three times. In an offline "dreaming" pass, Claude checked the note against the session transcript, the wrong entry was fixed, and Claude walked into the cave and on to the next city.</li>
+<li>Turning memory into a wiki: on about 350,000 internal files, roughly 420M tokens of company documents, the team scaled "dreaming" from 2 sessions to 128. The score on 25 questions, answered from the wiki alone, went from 13% to 48% of graded criteria. With the wiki and search together, it went from 54% to 61% (search alone: 53%), and each question used about 20,000 fewer tokens. Not every case worked: on one task the wiki grew larger than the raw files, which means it abstracted nothing.</li>
+<li>Keep the layer that loads automatically small: Claude Code's auto memory loads only the first 200 lines or 25 KB of <code>MEMORY.md</code>, and uses it as an index. Everything else gets looked up when needed.</li>
+</ul>
+<figure><a href="/assets/blog/semantic-tech-insights-2026-w45/W01-anthropic-memory-files-en.png" aria-label="Open image at full size"><img src="/assets/blog/semantic-tech-insights-2026-w45/W01-anthropic-memory-files-en.png" width="960" height="720" alt="Screenshot of Anthropic&#x27;s research post: the passage comparing the Pokémon memory folders, where Sonnet 3.7 wrote 413 memory files across 225 folders and earned one badge, while Fable 5 wrote nine files in two folders" loading="lazy"></a><figcaption>Figure 2 | Anthropic's research post "The components of agent memory," captured on 2026-11-07. The orange underline was added for this article. See reference [1].</figcaption></figure>
+<p><strong>My take:</strong> The number that jumps out is the file counts: 413 to 9. The classic storage mistake is "just save it, we'll sort it out later," and this post shows with an experiment that remembering more isn't remembering better. You also pay to dig through your own old notes. (In the post, Sonnet 3.7 spent 17 steps creating and deleting files and didn't move once in the game.) I like another detail too: the fix came from checking the note against the original. The contract experiment says the same thing. Several agents wrote summaries into one shared table, and only 41 of 57 contract terms survived. When they switched to one page per contract, with terms copied word for word, all 57 made it. From a <strong>semantic storage</strong> point of view, this is exactly the job: the distilled layers can stack up as high as you like, but every layer has to lead back to the original, or you can't check anything when it goes wrong. At Cortrix, we see it the same way: storing a bit less is fine, but a distilled note you can't check against the original is the real risk.</p>
+<hr>
+<h2 id="enterprise-context-google-lets-agents-fill-in-context-and-data-stewards-can-approve-or-roll-it-back">Enterprise context: Google lets agents fill in context, and data stewards can approve or roll it back</h2>
+<p>On November 5, Google Cloud announced a batch of updates to its Agentic Data Cloud. The part that matters here is Knowledge Catalog, which Google calls its "universal context engine":</p>
+<ul>
+<li>Self-learning enrichment (preview): it keeps mining Google Workspace, GitHub, Jira, Confluence and SharePoint for documents and tickets, fills context gaps based on the questions people actually ask, and packages the result into reusable context sets in Open Knowledge Format (OKF).</li>
+<li>A new studio experience (preview): data stewards can review, audit and approve the proposed enrichment updates, with full versioning and rollback.</li>
+<li>Business definitions aren't left to the model: trusted semantic models from BigQuery, Looker (LookML), Databricks, Snowflake, dbt and SAP are now generally available. When an agent calculates net revenue or customer churn, it uses the same governed formulas the business teams use. In Google's words: "critical business definitions cannot be left to an LLM's guesswork" (LLM is large language model).</li>
+<li>Google also says that in its internal benchmarks, Knowledge Catalog made agents nearly 4x more accurate, cut latency by up to 33% and used up to 75% fewer tokens. No test conditions were given.</li>
+</ul>
+<figure><a href="/assets/blog/semantic-tech-insights-2026-w45/W02-google-knowledge-catalog-en.png" aria-label="Open image at full size"><img src="/assets/blog/semantic-tech-insights-2026-w45/W02-google-knowledge-catalog-en.png" width="960" height="720" alt="Screenshot of the Google Cloud blog post: the passage about reviewing, auditing and approving proposed enrichment updates with full versioning and rollback" loading="lazy"></a><figcaption>Figure 3 | Google Cloud's blog post on the Agentic Data Cloud, captured on 2026-11-07. See reference [2].</figcaption></figure>
+<p><strong>My take:</strong> "Nearly 4x" is the eye-catching number, but with no conditions given, I'm treating it as a reference point only. What I care about more is the division of labor. Machines compile the stuff scattered across Jira and Confluence, humans can approve it, and if an approval was wrong, you can roll back. That's an old rule from data warehouses: the data owner sets the definition, and not every SQL query someone runs counts as authoritative. From a <strong>semantic storage</strong> point of view, compiled context needs versions and an approval status too. Changing it should go through the same process as changing a table schema, and it shouldn't change just because a model said so. We see it that way at Cortrix too: an agent should be able to propose a memory change, but who approves it and how to roll it back should be rules in the storage layer, not just a reminder in a prompt.</p>
+<hr>
+<h2 id="retrieval-ragflow-1-0-ships-with-knowledge-compiled-ahead-of-time">Retrieval: RAGFlow 1.0 ships, with knowledge compiled ahead of time</h2>
+<p>On November 6, InfiniFlow released RAGFlow 1.0.0, which the team says is ready for production after three release candidates. 1.0 is a complete rewrite in Go, and it includes a decision model that judges whether the evidence is enough. A day earlier, the team's blog published a 35-minute post, "Context as Infrastructure," on the thinking behind it, and moved RAGFlow's positioning from an "end-to-end retrieval-augmented generation (RAG) engine" to an Agent Native Database:</p>
+<ul>
+<li>Knowledge compilation: move the understanding from query time to indexing time, so the agent doesn't start from zero on every question. What gets compiled includes tree navigation, entity relation graphs, timelines, wikis and ontology templates. The one that matters most is the atomic proposition: a one-sentence fact paired with a quote from the source, and the quote has to be a contiguous piece of the original text.</li>
+<li>A lesson learned the hard way: just organizing documents into a tree didn't help the agent much, and it kept relying on search and grep. What helped was the evidence chain hanging off the leaf nodes.</li>
+<li>How much it saves, according to the team: when compiled evidence hits, a single question can save over 90% of tokens, and when it misses, the loss is only about 2%. On the multi-hop FRAMES benchmark, it saves 30% to 40% on average. Extracting evidence chains doesn't need a big model; a small one is enough.</li>
+<li>Evidence that's not enough gets dropped as a whole block, not stuffed into the context. Every artifact records which document and which passage it came from, and when a document is deleted, its contributions are removed precisely. When an answer is wrong, you can tell "didn't find it" from "found it but didn't use it."</li>
+</ul>
+<figure><a href="/assets/blog/semantic-tech-insights-2026-w45/W03-ragflow-compilation-en.png" aria-label="Open image at full size"><img src="/assets/blog/semantic-tech-insights-2026-w45/W03-ragflow-compilation-en.png" width="960" height="720" alt="Screenshot of the RAGFlow blog post: the passage saying that when compilation artifacts hit, a single question can save over 90% of tokens, and when they miss, the loss is only about 2%" loading="lazy"></a><figcaption>Figure 4 | RAGFlow's blog post "Context as Infrastructure," captured on 2026-11-07. See reference [3].</figcaption></figure>
+<p><strong>My take:</strong> The 90% token saving gets the attention, but the line that's easy to skip is "the quote has to be a contiguous piece of the original." Compilation tends to drift as it goes, and if a summary gains or loses a single word, an agent may still trust it. RAGFlow makes every proposition match the source word for word, and if it doesn't match, it doesn't count. That lines up with the conclusion of Anthropic's contract experiment. I also like that it admits a plain directory tree doesn't work, which is rare among all the projects saying "we have tree navigation too." From a <strong>semantic storage</strong> point of view, compiled output is basically a materialized view: fast to query, but you need to know which rows it was computed from, and it has to refresh when the source data changes. Our view at Cortrix is the same: compiled output is derived data, the original text is the source of truth, and anything derived should be rebuildable from the original.</p>
+<hr>
+<h2 id="skills-zep-compiles-runs-that-worked-into-skill-md-and-the-agent-s-word-isn-t-enough">Skills: Zep compiles runs that worked into SKILL.md, and the agent's word isn't enough</h2>
+<p>On November 5, Zep launched Agent Skills. Founder Daniel Chalef wrote the announcement, and an arXiv preprint came with it:</p>
+<ul>
+<li>It compiles an agent's run records into versioned <code>SKILL.md</code> files. Similar tasks are grouped together automatically, and later runs keep refining the Skill.</li>
+<li>It only accepts runs whose success was confirmed from outside: a tool or an eval has to say so, and the agent saying it succeeded doesn't count. Before a Skill is admitted, code checks that every claim cites an event from the runs, and instructions that came from tool output are rejected.</li>
+<li>Every change is an immutable version you can compare and restore. If a source run is deleted, every Skill that cites it is deleted too. Verified uses raise a Skill's rank, and verified failures lower it.</li>
+<li>Zep's own test: Skills compiled from Opus 5.5's run records, handed to DeepSeek V4.1 Flash, passed 58.3% of tasks on EnterpriseOps-Gym. That's 10 points above the baseline without Skills, and ahead of Opus 5.5 at maximum effort. On τ³-bench banking, tokens per passed episode dropped by up to 45%. Zep also says that today it only learns from successful runs, and on tasks the model is already good at, the gain is small.</li>
+</ul>
+<figure><a href="/assets/blog/semantic-tech-insights-2026-w45/W04-zep-agent-skills-en.png" aria-label="Open image at full size"><img src="/assets/blog/semantic-tech-insights-2026-w45/W04-zep-agent-skills-en.png" width="960" height="720" alt="Screenshot of the Zep blog post: the passage saying Skills learn only from outcomes confirmed by a tool or an evaluation, and every step cites the run it came from" loading="lazy"></a><figcaption>Figure 5 | Zep's announcement of Agent Skills, captured on 2026-11-07. See reference [4].</figcaption></figure>
+<p><strong>My take:</strong> "The agent saying it succeeded doesn't count" is getting a manual thumbs-up from me! When you let an agent summarize its own experience, the worst case is that it records one lucky run as a rule (survivorship bias). Another detail has a real database flavor: delete the source run, and the Skills that cite it go with it. That's a foreign key with ON DELETE CASCADE, isn't it? For <strong>semantic storage</strong>, a compiled artifact and its source need a real reference between them, so that when the source is gone, the artifact knows it has to be invalidated. At Cortrix, we think that reference between source and artifact should be guarded by the data layer, not left to the agent's good behavior.</p>
+<hr>
+<h2 id="memory-platforms-powercontext-v1-5-0-can-say-which-memories-it-used">Memory platforms: PowerContext v1.5.0 can say which memories it used</h2>
+<p>On November 3, PowerContext released v1.5.0 under the slogan "Not only memory, but a full story." These are the parts tied to this week's thread:</p>
+<ul>
+<li>Artifact plugins: you can define your own artifact types, like incident reports or ticket summaries, with versioned schemas and exact source lineage, searchable by text or by vector. If a plugin is removed, artifacts it already generated stay readable.</li>
+<li>Context receipts: when preparing context, you can ask for a receipt (<code>include_receipt</code>) that shows which version of which memory was selected, which kind of retrieval ran, and what got left out. The receipt contains no query or evidence text.</li>
+<li>Saving tokens: repeated evidence can use a shared JSON encoding that restores exactly, and it's used only when it restores word for word and is actually smaller. It's off by default. Prepared context can be reused, but permissions and evidence are checked again every time, so if a memory is forgotten or a permission is revoked, the reuse stops.</li>
+</ul>
+<figure><a href="/assets/blog/semantic-tech-insights-2026-w45/W05-powercontext-receipt-en.png" aria-label="Open image at full size"><img src="/assets/blog/semantic-tech-insights-2026-w45/W05-powercontext-receipt-en.png" width="960" height="720" alt="Screenshot of the PowerContext v1.5.0 release notes: the Artifact plugin entry with versioned schemas and exact source lineage" loading="lazy"></a><figcaption>Figure 6 | The PowerContext v1.5.0 release notes, captured on 2026-11-07. See reference [5].</figcaption></figure>
+<p><strong>My take:</strong> The context receipt is a genuinely practical feature. Before, when an agent got something wrong, you could only guess: was it not found, found but never handed to the agent, or handed over and ignored? With a receipt, you can at least settle the first two. The token saving part is restrained, too: the encoding only turns on when it restores word for word, and it's off by default. The release notes include a line I'll quote: "exact restoration alone does not establish equivalent model understanding or lower total task cost." That's a refreshingly candid caveat. For <strong>semantic storage</strong>, an artifact has to remember where it came from, and every use has to leave a record, so that when something goes wrong you can trace it back. We feel the same way at Cortrix: you should be able to look up afterward which memories an agent used, much like an audit log in a database.</p>
+<hr>
+<h2 id="papers-memory-was-delivered-and-the-agent-mostly-didn-t-use-it">Papers: memory was delivered, and the agent mostly didn't use it</h2>
+<p>Two papers this week ask the same question: did the memory actually get used?</p>
+<ul>
+<li>"Delivered, Not Used" ran 8,000 episodes on SWE-bench Verified and compared three memory systems. The authors say that by resolve rate, having memory or not differed by less than 0.4 percentage points. Following each memory delivery down to what happened next, they found that most delivered entries were irrelevant, most relevant entries went unused, and in two of the systems most deliveries restated content the agent could still see.</li>
+<li>"What Is This Memory Useful For?" doesn't give each memory one fixed importance score. It looks at whether a memory helps a specific task. The authors say that on factual recall tasks, memories compressed into summaries or structured records helped less than the original, even at the same total context. On software engineering and scientific coding tasks, even the original memories showed no measurable effect.</li>
+</ul>
+<figure><a href="/assets/blog/semantic-tech-insights-2026-w45/W06-arxiv-delivered-not-used-en.png" aria-label="Open image at full size"><img src="/assets/blog/semantic-tech-insights-2026-w45/W06-arxiv-delivered-not-used-en.png" width="960" height="960" alt="Screenshot of the arXiv abstract page for &quot;Delivered, Not Used&quot;: the sentence saying most delivered entries were irrelevant, most relevant entries went unused" loading="lazy"></a><figcaption>Figure 7 | The arXiv abstract page for "Delivered, Not Used," captured on 2026-11-07. See reference [6].</figcaption></figure>
+<p><strong>My take:</strong> The first paper really stings. Look only at resolve rate and a memory system seems like decoration. Break it down, and the problem is that most of what gets delivered is off target. That's the same idea as RAGFlow telling "didn't find it" from "found it but didn't use it": evals have to see the delivery layer, because scores alone will fool you. The second paper reminds us that compression has a cost. A summary saves tokens, but it may drop the exact sentence that held the answer. I'll say it again: accurate information matters more than the few tokens you save. So in <strong>semantic storage</strong>, the original text can't go. Compiled output is a shortcut for the agent, and it can't replace the original. At Cortrix, we'd weigh it the same way: original text first, token savings second.</p>
+<hr>
+<h2 id="other-semantic-tech-news-from-around-the-world">Other semantic tech news from around the world</h2>
+<ul>
+<li>On November 3, Snowflake previewed Business Ontology (public preview coming soon): every business term has an owner, a scope and an approval status. When a definition inferred by AI conflicts with an approved one, agents use the approved one. In its words, "accountable owners decide what becomes official." [7]</li>
+<li>On November 5, MongoDB open sourced its memory integration for the Vercel AI SDK (software development kit), generally available under Apache 2.0. It has five kinds of memory: episodic memory expires after a year of inactivity by default, and scratchpad memory after an hour. It also gives a fair warning: by default the model decides when to save, and it can occasionally skip a turn, so for production it recommends saving every turn from application code. The day before, MongoDB released a memory integration for Google ADK (Agent Development Kit). [8]</li>
+<li>On November 4, Redis added MemoryETL (extract, transform, load) to Iris: it builds memories from documents and knowledge bases, organizes them in hierarchies, traces each memory to its source, and can forget personally identifiable information. [9]</li>
+<li>On November 3, Hindsight (from Vectorize) released three small models. One of them, a decision model with 0.8B parameters, handles the small judgments in the memory flow, like whether an item is new or whether the evidence is enough. By its own evaluation, on some configurations it cuts cost by 2.5x. [10]</li>
+<li>On November 2, LangChain founder Harrison Chase went through the new problems in context engineering, and said the hardest part of memory is "figuring out what to remember." On October 28, LangChain also used its own OpenWiki as a memory layer and reports about 5x the accuracy of grep alone on questions that span sources. Adding an evidence graph, with edges like <code>supersedes</code> and <code>amends</code> to record which document replaces which, gave a further 27% over the wiki alone. [11]</li>
+<li>A Microsoft Foundry blog post on October 26 split memory into four capabilities: Remember, Retrieve, Revalidate and Forget, and quoted the company's own guidance: "memory is useful context, not automatic authority." A second post on October 29 covered how to put governance around memory. [12]</li>
+<li>On November 2, Qdrant explained the performance of 1.20: two new vector datatypes, turbo8 and turbo16, which take a quarter and a half of the storage of float32. In Qdrant's own tests (the latency chart uses three 1536-dimension datasets), latency stayed within 10% of float32, and the float32 originals are no longer kept. [13]</li>
+</ul>
+<h2 id="my-read-on-this-week">My read on this week</h2>
+<p><strong>My overall take:</strong> Lately everyone has noticed that digging through raw material for every question is slow and expensive, so they've started compiling ahead of time: wikis, evidence chains, context sets, Skills. But the lessons from this week's vendors are fairly consistent. Remembering accurately beats remembering a lot. What's compiled has to trace back to the original, and someone has to run an eval to confirm it. And after it's written, you need to check whether it was used. So what <strong>Semantic Storage</strong> has to manage goes beyond just storing things: for every compiled layer, where it came from, who approved it, when it needs a refresh, and what it was used for this time. That's what lets <strong>knowledge compilation</strong> actually work.</p>
+<blockquote><p><strong>A question for readers</strong></p><p>How much of your agent's memory has never been used? If you deleted all of it, would the answers get worse, or better? Let me know in the comments.</p></blockquote>
+<h2 id="references">References</h2>
+<ul>
+<li>[1] Lance Martin, The components of agent memory (Anthropic, 2026-11-06): <a href="https://www.anthropic.com/research/components-of-agent-memory">https://www.anthropic.com/research/components-of-agent-memory</a></li>
+<li>[2] Google Cloud, New capabilities to power agents at scale with Google's Agentic Data Cloud (2026-11-05): <a href="https://cloud.google.com/blog/products/databases/whats-new-across-googles-agentic-data-cloud/">https://cloud.google.com/blog/products/databases/whats-new-across-googles-agentic-data-cloud/</a></li>
+<li>[3] InfiniFlow, RAGFlow 1.0.0 release notes (2026-11-06): <a href="https://ragflow.io/docs/release_notes">https://ragflow.io/docs/release_notes</a>, <a href="https://github.com/infiniflow/ragflow/releases/tag/v1.0.0">https://github.com/infiniflow/ragflow/releases/tag/v1.0.0</a>; RAGFlow blog, Context as Infrastructure: Knowledge Compilation for the Retrieval Harness at the RAG Crossroads (2026-11-05): <a href="https://ragflow.io/blog/context-as-infrastructure-knowledge-compilation-for-retrieval-harness-at-the-rag-crossroads">https://ragflow.io/blog/context-as-infrastructure-knowledge-compilation-for-retrieval-harness-at-the-rag-crossroads</a></li>
+<li>[4] Daniel Chalef, Announcing Zep Agent Skills (Zep, 2026-11-05): <a href="https://www.getzep.com/blog/introducing-zep-agent-skills/">https://www.getzep.com/blog/introducing-zep-agent-skills/</a></li>
+<li>[5] OceanBase, PowerContext v1.5.0 release notes (2026-11-03): <a href="https://github.com/oceanbase/powercontext/releases/tag/powercontext-v1.5.0">https://github.com/oceanbase/powercontext/releases/tag/powercontext-v1.5.0</a></li>
+<li>[6] Changran Xu, Zeju Li and Qiang Xu, Delivered, Not Used: Evaluating Agent Memory at Its Point of Use (arXiv:2611.01718, 2026-11-01): <a href="https://arxiv.org/abs/2611.01718">https://arxiv.org/abs/2611.01718</a>; Chih-Hsuan Yang et al., What Is This Memory Useful For? Measuring Task-Conditioned Utility in Long-Term Agent Memory (arXiv:2611.03930, 2026-11-02): <a href="https://arxiv.org/abs/2611.03930">https://arxiv.org/abs/2611.03930</a></li>
+<li>[7] Snowflake, Business Ontology: Governed Context for AI (2026-11-03): <a href="https://www.snowflake.com/content/snowflake-site/global/en/blog/business-ontology-context">https://www.snowflake.com/content/snowflake-site/global/en/blog/business-ontology-context</a></li>
+<li>[8] Ajay Tandon, Nasir Qureshi and Pavel Duchovny, Introducing the MongoDB Vercel AI SDK Integration: Persistent Memory for AI Applications (2026-11-05): <a href="https://www.mongodb.com/company/blog/product-release-announcements/introducing-mongodb-vercel-ai-sdk-integration-persistent-memory-applications">https://www.mongodb.com/company/blog/product-release-announcements/introducing-mongodb-vercel-ai-sdk-integration-persistent-memory-applications</a>; Introducing the MongoDB Google ADK Integration (2026-11-04): <a href="https://www.mongodb.com/company/blog/product-release-announcements/introducing-mongodb-google-adk-integration-durable-memory-agent-state">https://www.mongodb.com/company/blog/product-release-announcements/introducing-mongodb-google-adk-integration-durable-memory-agent-state</a></li>
+<li>[9] Simba Khadder, The next chapter of Redis Iris: what agents need to work in the real world (Redis, 2026-11-04): <a href="https://redis.io/blog/the-next-chapter-of-redis-iris-what-agents-need-to-work-in-the-real-world/">https://redis.io/blog/the-next-chapter-of-redis-iris-what-agents-need-to-work-in-the-real-world/</a></li>
+<li>[10] Hindsight, Introducing Hindsight Models (2026-11-03): <a href="https://hindsight.vectorize.io/blog/2026/11/03/hindsight-models">https://hindsight.vectorize.io/blog/2026/11/03/hindsight-models</a></li>
+<li>[11] Harrison Chase, New context engineering challenges in late 2026 (LangChain, 2026-11-02): <a href="https://www.langchain.com/blog/context-engineering-challenges-late-2026">https://www.langchain.com/blog/context-engineering-challenges-late-2026</a>; Eugene Liu, Building Evidence-Grounded Agent Memory with OpenWiki and Graphs (LangChain, 2026-10-28): <a href="https://www.langchain.com/blog/building-agent-memory-openwiki-graphs">https://www.langchain.com/blog/building-agent-memory-openwiki-graphs</a></li>
+<li>[12] Microsoft Foundry Blog, Remember, Retrieve, Revalidate-or Forget? Architecting Memory for Production AI Agents (2026-10-26): <a href="https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/remember-retrieve-revalidate-or-forget-architecting-memory-for/ba-p/4564392">https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/remember-retrieve-revalidate-or-forget-architecting-memory-for/ba-p/4564392</a>; Abhishek Kumar, Architecting Governed Memory State for Production AI Agents with Microsoft Foundry (2026-10-29): <a href="https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/architecting-governed-memory-state-for-production-ai-agents-with/ba-p/4566999">https://techcommunity.microsoft.com/t5/microsoft-foundry-blog/architecting-governed-memory-state-for-production-ai-agents-with/ba-p/4566999</a></li>
+<li>[13] Clelia Bertelli, Faster and Cheaper Search With Qdrant 1.20 (Qdrant, 2026-11-02): <a href="https://qdrant.tech/blog/qdrant-1.20-performance/">https://qdrant.tech/blog/qdrant-1.20-performance/</a></li>
+</ul>
+</article>
+      </div>
+      <section class="article-author" aria-labelledby="about-author"><div class="author-mark" aria-hidden="true">S</div><div><p class="blog-kicker">About the author</p><h2 id="about-author">Scott</h2><p>Scott writes from an engineering perspective on retrieval, evidence, and the conditions that let an application adopt a result.</p></div></section>
+      <section class="article-series article-related" aria-labelledby="related-title"><div class="blog-section-heading"><div><p class="blog-kicker">Related reading</p><h2 id="related-title">Explore the research notes</h2></div><a class="blog-rss-link" href="/blog/rss.xml">RSS feed <span aria-hidden="true">↗</span></a></div><ol><li><span>01</span><a href="/blog/dbpedia-linked-data-explained/">DBpedia explained: why linked data still matters</a><small>Knowledge graphs · 6 min</small></li><li><span>02</span><a href="/blog/transe-knowledge-graph-embeddings/">TransE explained: relationships beyond vector similarity</a><small>Knowledge graphs · 5 min</small></li><li><span>03</span><a href="/blog/rag-external-memory-data-governance/">RAG explained: external memory brings data governance back</a><small>Retrieval · 5 min</small></li><li><span>04</span><a href="/blog/reflexion-agent-memory-without-weight-updates/">Reflexion explained: agent memory without weight updates</a><small>Agent memory · 5 min</small></li><li><span>05</span><a href="/blog/hipporag-knowledge-graphs-for-rag/">HippoRAG explained: why RAG comes back to knowledge graphs</a><small>Retrieval · 5 min</small></li></ol></section>
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <div class="container blog-footer-inner">
+      <div><a class="blog-footer-brand" href="/">Cortrix</a><p>Product updates and research notes for builders working with semantic data, retrieval, and agent memory.</p></div>
+      <div class="blog-footer-links"><a href="/semantic-storage/">Semantic Storage</a><a href="/#architecture">Architecture</a><a href="/blog/rss.xml">RSS</a><a href="https://github.com/cortrix/cortrix">GitHub</a><a href="/community/">Community</a></div>
+    </div>
+  </footer>
+  <script src="/script.js"></script>
+  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0545af22e4f4479aa9be3ea3d7c750d3"}'></script><!-- End Cloudflare Web Analytics -->
+  <script src="/assets/blog/image-dialog.js"></script>
+</body>
+</html>
