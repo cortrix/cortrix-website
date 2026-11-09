@@ -205,7 +205,11 @@ for file in (ROOT / "assets/blog").rglob("*.svg"):
 require((ROOT / "assets/blog/social-card.png").read_bytes().startswith(b"\x89PNG"), "Missing PNG share image")
 robots = (ROOT / "robots.txt").read_text()
 require("User-agent: OAI-SearchBot\nAllow: /" in robots, "Search crawler policy changed")
-require("User-agent: GPTBot\nDisallow: /" in robots, "Training crawler policy changed")
+for bot in ("GPTBot", "ClaudeBot", "Google-Extended"):
+    require(f"User-agent: {bot}\nAllow: /" in robots, f"Training crawler policy changed: {bot} must be Allow: /")
+vercel_routes = json.loads((ROOT / "vercel.json").read_text())["routes"]
+www = vercel_routes[0]
+require(www.get("has") == [{"type": "host", "value": "www.cortrix.ai"}] and www.get("status") == 301 and www.get("headers", {}).get("Location") == "https://cortrix.ai/$1", "vercel.json must start with a 301 route from www.cortrix.ai to cortrix.ai")
 home = (ROOT / "index.html").read_text().lower()
 for term in ("semantic storage", "agent storage", "context storage", "memory storage"):
     require(term in home, f"Missing visible storage term: {term}")

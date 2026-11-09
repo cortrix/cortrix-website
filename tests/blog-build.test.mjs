@@ -190,3 +190,19 @@ test('published articles can describe a non-scenario source accurately', async (
     assert.match(llms, /primary source: Public scenario/);
   });
 });
+
+test('llms.txt version line is set to the build date and ignored by check', async () => {
+  await fixture(async ({ dir, build }) => {
+    const llmsPath = path.join(dir, 'llms.txt');
+    await writeFile(llmsPath, '# Cortrix\nDocument version: 2020-01-01\nOther: kept\n');
+    build();
+    const today = new Date().toISOString().slice(0, 10);
+    const built = await readFile(llmsPath, 'utf8');
+    assert.match(built, new RegExp(`^Document version: ${today}$`, 'm'));
+    assert.match(built, /^Other: kept$/m);
+    assert.match(build('--check'), /current/);
+    await writeFile(llmsPath, built.replace(`Document version: ${today}`, 'Document version: 2020-01-01'));
+    assert.match(build('--check'), /current/);
+    assert.match(await readFile(llmsPath, 'utf8'), /Document version: 2020-01-01/);
+  });
+});

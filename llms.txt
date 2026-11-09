@@ -4,7 +4,7 @@
 
 Website: https://cortrix.ai/
 Primary language: English
-Document version: 2026-09-06
+Document version: 2026-11-09
 Generated from public website content and commit-pinned source evidence
 Current Core release tag: https://github.com/cortrix/cortrix/tree/v1.0.0-rc.2
 Current Core release commit: https://github.com/cortrix/cortrix/commit/d298d6b7e64c67551f567e7cddd514bae1adb57b

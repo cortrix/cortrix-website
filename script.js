@@ -136,7 +136,7 @@
           }
         })
         .catch(() => {
-          // Keep the rendered snapshot if neither source is available.
+          // Leave the count empty if neither source is available.
         });
     }
   }

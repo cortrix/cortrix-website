@@ -10,7 +10,7 @@ const end = source.indexOf('// --- Copy Buttons ---');
 assert.ok(start >= 0 && end > start, 'The production stats block must exist');
 
 async function render(cache, { legacy = false, live = null, badge = undefined, badgeField = 'value' } = {}) {
-  const node = { textContent: '76' };
+  const node = { textContent: '' };
   const storage = new Map();
   if (cache) storage.set(legacy ? 'cortrix-github-repo-stats' : 'cortrix-github-repo-stats-v2', JSON.stringify(cache));
   let requests = 0;
@@ -37,19 +37,19 @@ async function render(cache, { legacy = false, live = null, badge = undefined, b
   return { displayed: node.textContent, requests, ...(badge !== undefined ? { label: attributes['aria-label'] ?? null } : {}) };
 }
 
-test('expired cache cannot replace the snapshot when GitHub is unavailable', async () => {
-  assert.deepEqual(await render({ stars: 9, updatedAt: Date.now() - 3600000 }), { displayed: '76', requests: 1 });
+test('expired cache is not shown when GitHub is unavailable', async () => {
+  assert.deepEqual(await render({ stars: 9, updatedAt: Date.now() - 3600000 }), { displayed: '', requests: 1 });
 });
 test('legacy cache is ignored even when its timestamp is fresh', async () => {
-  assert.deepEqual(await render({ stars: 9, updatedAt: Date.now() }, { legacy: true }), { displayed: '76', requests: 1 });
+  assert.deepEqual(await render({ stars: 9, updatedAt: Date.now() }, { legacy: true }), { displayed: '', requests: 1 });
 });
 test('fresh valid cache is reused without an unnecessary request', async () => {
   assert.deepEqual(await render({ stars: 62, updatedAt: Date.now() }), { displayed: '62', requests: 0 });
 });
 test('future timestamps are not accepted as fresh', async () => {
-  assert.deepEqual(await render({ stars: 9, updatedAt: Date.now() + 3600000 }), { displayed: '76', requests: 1 });
+  assert.deepEqual(await render({ stars: 9, updatedAt: Date.now() + 3600000 }), { displayed: '', requests: 1 });
 });
-test('successful live results replace the snapshot', async () => {
+test('successful live results fill the empty count', async () => {
   assert.deepEqual(await render(null, { live: 63 }), { displayed: '63', requests: 1 });
 });
 test('a rate-limited GitHub API falls back to the badge endpoint', async () => {
@@ -61,11 +61,11 @@ test('a compact badge value is shown as an approximate count', async () => {
 test('the live GitHub count wins and the fallback is not requested', async () => {
   assert.deepEqual(await render(null, { live: 80, badge: '79' }), { displayed: '80', requests: 1, label: 'Cortrix on GitHub, 80 stars' });
 });
-test('the snapshot stays when both sources fail', async () => {
-  assert.deepEqual(await render(null, { badge: null }), { displayed: '76', requests: 2, label: null });
+test('the count stays empty when both sources fail', async () => {
+  assert.deepEqual(await render(null, { badge: null }), { displayed: '', requests: 2, label: null });
 });
-test('an unreadable badge value keeps the snapshot', async () => {
-  assert.deepEqual(await render(null, { badge: 'invalid' }), { displayed: '76', requests: 2, label: null });
+test('an unreadable badge value leaves the count empty', async () => {
+  assert.deepEqual(await render(null, { badge: 'invalid' }), { displayed: '', requests: 2, label: null });
 });
 test('the fallback count is read from the message field when present', async () => {
   assert.deepEqual(await render(null, { badge: '82', badgeField: 'message' }), { displayed: '82', requests: 2, label: 'Cortrix on GitHub, 82 stars' });
@@ -74,4 +74,10 @@ test('the page never requests the badge service directly', () => {
   assert.ok(!source.includes('img.shields.io'), 'script.js must use the same-origin fallback path');
   const header = fs.readFileSync(path.join(__dirname, '../components/site-header.html'), 'utf8');
   assert.match(header, /data-github-stars-fallback="\/github-stars\.json"/);
+});
+test('the header carries no hard coded star count', () => {
+  const header = fs.readFileSync(path.join(__dirname, '../components/site-header.html'), 'utf8');
+  assert.match(header, /aria-label="Cortrix on GitHub"/);
+  assert.match(header, /<span id="github-star-count"><\/span>/);
+  assert.doesNotMatch(header, /\d+ stars|snapshot/);
 });

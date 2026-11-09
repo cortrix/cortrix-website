@@ -654,7 +654,17 @@ await writeOrCheck(path.join(blogDirectory, 'rss.xml'), renderRss(postsWithBodie
 const sitemap = await readFile(sitemapPath, 'utf8');
 await writeOrCheck(sitemapPath, replaceGeneratedSection(sitemap, renderSitemapSection(posts), 'sitemap.xml'), staleFiles);
 const llms = await readFile(llmsPath, 'utf8');
-await writeOrCheck(llmsPath, replaceGeneratedSection(llms, renderLlmsSection(posts), 'llms.txt'), staleFiles);
+const versionLine = /^Document version: .*$/m;
+const today = new Date().toISOString().slice(0, 10);
+let llmsContent = replaceGeneratedSection(llms, renderLlmsSection(posts), 'llms.txt');
+if (checkOnly) {
+  // The version line changes daily; compare as if the existing date were current.
+  const existingDate = versionLine.exec(llms)?.[0];
+  if (existingDate) llmsContent = llmsContent.replace(versionLine, existingDate);
+} else {
+  llmsContent = llmsContent.replace(versionLine, `Document version: ${today}`);
+}
+await writeOrCheck(llmsPath, llmsContent, staleFiles);
 
 
 if (checkOnly && staleFiles.length > 0) {
