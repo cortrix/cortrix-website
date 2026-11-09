@@ -15,6 +15,15 @@
       <category>Product updates</category>
     </item>
     <item>
+      <title>Agent First Design: When a Call Fails, the Error Should Tell the Agent What to Do Next | Semantic Tech</title>
+      <link>https://cortrix.ai/blog/agent-first-error-next-step/</link>
+      <guid isPermaLink="true">https://cortrix.ai/blog/agent-first-error-next-step/</guid>
+      <description>Cortrix errors carry a code, a retry flag, a category and structured data, so an agent can pick its next step from fields alone. We tested it on 15 failing requests.</description>
+      <dc:creator>Scott</dc:creator>
+      <category>Inside Cortrix</category>
+      <pubDate>Wed, 11 Nov 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Anthropic Breaks Down Claude&#39;s Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9</title>
       <link>https://cortrix.ai/blog/semantic-tech-insights-2026-w45/</link>
       <guid isPermaLink="true">https://cortrix.ai/blog/semantic-tech-insights-2026-w45/</guid>

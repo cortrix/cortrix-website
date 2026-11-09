@@ -1,0 +1,94 @@
+<blockquote><p>Summary: Cortrix is open source semantic storage for AI agents. When a call fails, Cortrix returns an error with a fixed structure: an error code, whether it's worth retrying, an error category, and structured data for the fix. An agent doesn't have to understand the error text to decide whether to add a parameter and retry, switch to a key with more permission, hand the problem to a person, or give up. We wrote an agent that reads only those fields and ran it against 15 requests that fail. It got 9 right from the fields alone, and we walk through the other 6 below. We also checked each one by hand: not one needed the error text. This is part 4 of the Agent First Design series.</p></blockquote>
+<p>A parameter is missing. The key doesn't have enough permission. The request body is malformed. A feature isn't turned on. An agent calling storage can run into errors like these on any given day.</p>
+<p>A person reads the error text and works out what to change. If all the agent gets back is plain text, it might retry the request exactly as it was, spinning on something that will never succeed. Or it might give up and hand a problem back to a person that one added parameter would have fixed. If the model is strong enough, it may well think its way to the right fix, but then the outcome depends on the model.</p>
+<h2>Errors from Cortrix: let the fields decide the next step</h2>
+<p>Cortrix error responses have a fixed structure. The API spec requires four fields: <code>code</code>, <code>message</code>, <code>retryable</code>, and <code>category</code>.</p>
+<ul>
+<li><code>code</code>: the error code. The agent branches on it.</li>
+<li><code>retryable</code>: whether sending the same request again can help.</li>
+<li><code>category</code>: the kind of error, with only five values: <code>auth</code> (permission), <code>quota</code>, <code>transient</code> (a temporary fault), <code>permanent</code> (it won't clear up on its own), and <code>timeout</code>.</li>
+<li><code>structured_data</code>: the data needed to fix the request, such as which parameter is missing.</li>
+<li><code>message</code>: an explanation for people. The spec says agents shouldn't parse it with regular expressions. Anything structured goes in <code>structured_data</code>.</li>
+</ul>
+<p>This isn't only the main path. An uncaught exception comes back as JSON in the same structure, not as a plain-text 500.</p>
+<h2>What we measured: an agent that reads the fields and never the text</h2>
+<p>To check whether an agent can decide from these fields alone, we wrote one that follows fixed rules. It reads only <code>code</code>, <code>retryable</code>, <code>category</code>, <code>retry_after_ms</code>, and <code>structured_data</code>. It never reads <code>message</code>. From those it picks one of five actions: fix what's missing and retry, switch to a key with more permission, hand it to a person, give up, or retry as is. We ran it against a Cortrix server with authentication on and no large language model (LLM) configured, and we set up 15 requests that would fail.</p>
+<p>Start with a common one: deleting a document and forgetting the namespace.</p>
+<pre><code>DELETE /documents/01M6NGQR5K4NHNW14AFZ5YP7KN
+  400  CX_ERR_MISSING_PARAM  category=permanent  retryable=false
+       structured_data={"missing_param": "namespace"}
+agent: add query param namespace and retry -&gt; 204</code></pre>
+<p><code>retryable=false</code> tells the agent that sending the same request again is pointless, and <code>structured_data</code> names the missing parameter, <code>namespace</code>. The agent adds it, the retry works, and the agent never reads the error sentence.</p>
+<p>Now two cases that need a different kind of handling:</p>
+<pre><code>POST /gc/restore  (agent key)
+  403  FORBIDDEN  category=auth  retryable=false
+agent: repeat with the admin key -&gt; 200
+
+POST /gc/purge  (no X-Ops-Confirm header)
+  400  CX_ERR_OPS_CONFIRM_REQUIRED  category=permanent  retryable=false
+agent: nothing sent, handed to a human</code></pre>
+<p>In the first, the key doesn't have enough permission. <code>category=auth</code> is the signal. The agent repeats the call with the admin key, and it works. The second is a destructive operation that needs an explicit confirmation. The error code already says "this needs confirmation," and the agent doesn't make that call for a person, so it hands the request over.</p>
+<p>A request body that isn't valid JSON, creating a namespace that already exists, and calling memory extraction on a server with no LLM configured all return <code>category=permanent</code> and <code>retryable=false</code>. The agent gives up and reports, and doesn't spin on them.</p>
+<figure><a href="/assets/blog/agent-first-error-next-step/fig-af4-main-v01-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-error-next-step/fig-af4-main-v01-en.png" width="960" height="1280" alt="15 errors grouped by the agent's decision: fix and retry 1, switch keys 5, ask a human 1, give up 6, all from fields alone; 4 wrong decisions on missing namespaces, 2 batch restore calls with too few fields to decide, 0 that needed the message" loading="lazy"></a><figcaption>Figure 1: 15 errors, grouped by what the agent decided. ✓ decided right, ✗ decided wrong, ? not enough fields to decide.</figcaption></figure>
+<p>Of the 15 failing requests that needed a decision, here's how it came out:</p>
+<table tabindex="0" aria-label="Table"><thead><tr><th scope="col">Result</th><th scope="col">Count</th></tr></thead><tbody>
+<tr><th scope="row">Decided correctly from the fields</th><td>9</td></tr>
+<tr><th scope="row">Decided wrongly from the fields</th><td>4</td></tr>
+<tr><th scope="row">Fields not enough to decide</th><td>2</td></tr>
+<tr><th scope="row">Needed to read the <code>message</code> text</th><td>0</td></tr>
+</tbody></table>
+<p>All 4 wrong decisions were requests to a namespace that doesn't exist. On the three endpoints we tested (reading a namespace, listing its documents, and querying), Cortrix returns the same 403, <code>CX_ERR_NS_UNAUTHORIZED</code>, for "doesn't exist" and "no permission," and the two errors look exactly the same. Our agent saw <code>auth</code> and reached for the admin key, but the name doesn't exist, so a different key can't help.</p>
+<p>The 2 it couldn't decide were calls to the batch restore endpoint. It returns results per document with HTTP status 200, and the documents that failed sit in a <code>failed</code> list. An agent has to read that as a partial success and can't just check whether the outer response is an error. We cover how to handle both cases in the recommendations below.</p>
+<p>The 0 in the last row of the table comes from checking each response by hand. Of the 15 responses, 13 had a <code>message</code>, and reading it wouldn't have turned a single decision into a right one. Of the 4 wrong calls, 3 had a <code>message</code> that was just the error code, and the fourth only said in general terms that some namespace wasn't authorized, while the name itself was already in <code>structured_data</code>. The 2 undecidable calls had no <code>message</code> in their failed entries at all.</p>
+<h2>Errors from vector databases: how Milvus, Qdrant, Pinecone, and Weaviate tell the caller</h2>
+<p>In Cortrix, whether to retry, what kind of error it is, and what data fixes it are all fields in the response, so an agent doesn't have to understand any text. We read the official docs, API specs, and server source for a few vector databases. Whether a retry makes sense mostly has to be read from the docs or the error text; structured signals show up only here and there:</p>
+<ul>
+<li>Milvus: the gRPC (a remote procedure call framework) status message has a <code>retriable</code> boolean. Of what we read this time, it's the only field where the server hands back a yes-or-no answer on retrying. We didn't verify whether the REST API carries this field.</li>
+<li>Qdrant: in the server source, a rate-limited response can carry a <code>Retry-After</code> header, but the official docs don't mention it.</li>
+<li>Pinecone: which errors to retry and how to back off is written in prose in the docs. Retry 5xx and 429, don't retry other 4xx.</li>
+<li>Weaviate: the HTTP API's general error body is a list of <code>message</code> entries; only a few errors, such as the 429 for a usage limit, carry a stable <code>errorCode</code>. The Model Context Protocol (MCP) server returns HTTP 200 with <code>isError: true</code> and a sentence of text when permissions or parameters are wrong.</li>
+</ul>
+<figure><a href="/assets/blog/agent-first-error-next-step/af4-milvus-status-retriable-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-error-next-step/af4-milvus-status-retriable-en.png" width="960" height="720" alt="The Status message in milvus-proto common.proto, with an orange line under bool retriable = 4" loading="lazy"></a><figcaption>Figure 2: The <code>retriable</code> field of the <code>Status</code> message in <code>proto/common.proto</code>, milvus-proto <code>v3.0.5</code>, captured 2026-11-09. See reference [2]. The orange lines in the screenshots are ours.</figcaption></figure>
+<figure><a href="/assets/blog/agent-first-error-next-step/af4-qdrant-retry-after-header-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-error-next-step/af4-qdrant-retry-after-header-en.png" width="960" height="720" alt="Qdrant helpers.rs setting the Retry-After header on a rate-limited response, with an orange line under header::RETRY_AFTER" loading="lazy"></a><figcaption>Figure 3: Qdrant <code>v1.20.0</code>, <code>src/actix/helpers.rs</code>, setting the <code>Retry-After</code> header when a request is rate limited, captured 2026-11-09. See reference [3].</figcaption></figure>
+<figure><a href="/assets/blog/agent-first-error-next-step/af4-pinecone-retry-guidance-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-error-next-step/af4-pinecone-retry-guidance-en.png" width="960" height="720" alt="The Implement retry logic section of the Pinecone docs, with an orange line under the sentence about retrying 5xx and 429" loading="lazy"></a><figcaption>Figure 4: Retry guidance on the Pinecone "Error handling" page, captured 2026-11-09. See reference [4]. The marked sentence covers retrying 5xx and 429; "don't retry other 4xx" is in the retry best practices on the same page.</figcaption></figure>
+<figure><a href="/assets/blog/agent-first-error-next-step/af4-weaviate-mcp-iserror-en.png" aria-label="Open image at full size"><img src="/assets/blog/agent-first-error-next-step/af4-weaviate-mcp-iserror-en.png" width="960" height="960" alt="The Errors and limits section of the Weaviate MCP server docs, with an orange line under the sentence about HTTP 200 with isError: true" loading="lazy"></a><figcaption>Figure 5: The "Errors and limits" section of the Weaviate MCP server docs, captured 2026-11-09. See reference [5].</figcaption></figure>
+<p>That's only what we saw in the material we read. If we didn't see something, that doesn't mean the product doesn't have it. The materials we read are listed in the references at the end.</p>
+<h2>Advice for agents: category and retryable first, then structured data</h2>
+<ul>
+<li>Start with <code>category</code> and <code>retryable</code> to pick a direction. Don't retry a <code>permanent</code> error as is. For <code>auth</code>, check permissions first. For <code>transient</code> and <code>timeout</code>, wait a bit and try again when <code>retryable=true</code>.</li>
+<li>When you need to fix the request, take the data from <code>structured_data</code>, such as the name of the missing parameter or the list of namespaces you have no permission for. Write <code>message</code> to the log and leave it for people.</li>
+<li>On <code>CX_ERR_NS_UNAUTHORIZED</code>, first check that the namespace name is spelled right and the namespace exists, and only then try another key. On the endpoints we tested, "doesn't exist" and "no permission" are the same 403, and the admin key won't fix a misspelled name.</li>
+<li>When you call batch restore (<code>POST /gc/restore</code>), don't stop at HTTP 200. Read <code>coverage_ratio</code> and <code>failed</code>. Every entry carries <code>error_code</code>, <code>retryable</code>, and <code>category</code>, so handle each one with the same rules above. It's the same partial success convention as in part 1 of this series.</li>
+<li>For operations that need an explicit confirmation, like a purge, hand them to a person. Don't let the agent add the confirmation header itself.</li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>What fields does a Cortrix error response have?</h3>
+<p>Four are required: <code>code</code>, <code>message</code>, <code>retryable</code>, and <code>category</code>. On top of that, <code>structured_data</code> holds the data for the fix and <code>retry_after_ms</code> holds a suggested wait time (when it's missing, back off on your own schedule). Most errors also carry a <code>request_id</code>. <code>category</code> has only five values: <code>auth</code>, <code>quota</code>, <code>transient</code>, <code>permanent</code>, and <code>timeout</code>.</p>
+<h3>Does an agent need to parse the error message text?</h3>
+<p>No. Our agent reads only the fields, and across 15 failing requests it never needed the text. The API spec also says <code>message</code> is for people and agents shouldn't parse it with regular expressions.</p>
+<h3>Why do I get a 403 when the namespace name is wrong?</h3>
+<p>The three endpoints we ran (<code>GET /namespaces/{name}</code>, <code>GET /namespaces/{name}/documents</code>, and the query endpoint <code>POST /query</code>) return the same 403, <code>CX_ERR_NS_UNAUTHORIZED</code>, for both "doesn't exist" and "no permission." When an agent gets it, it should check the namespace name first and only then try another key.</p>
+<h3>How do I know which items failed when a batch restore partly fails?</h3>
+<p>Look at the <code>failed</code> list and <code>coverage_ratio</code> in the response. The HTTP status is 200, and every failed item carries <code>error_code</code>, <code>retryable</code>, and <code>category</code>.</p>
+<h2>Series navigation</h2>
+<ul>
+<li>Part 1: <a href="https://cortrix.ai/blog/agent-first-partial-success/">HTTP 200 Doesn't Mean You Got Everything</a>. When a query only covers part of the data, the storage has to say what's missing.</li>
+<li>Part 2: <a href="https://cortrix.ai/blog/agent-first-namespace-recovery/">kill -9 Halfway Through a Write, and the Data Lines Up Again After Restart</a>. If a crash interrupts a write, the storage cleans up the half-written data on its own.</li>
+<li>Part 3: <a href="https://cortrix.ai/blog/agent-first-delete-restore/">Getting a Deleted Doc Back Is as Easy as "Ctrl+Z"</a>. An agent deleted a document, and you can get it back by ID within 30 days.</li>
+<li>Part 4 is this post: when a call fails, the error should tell the agent what to do next.</li>
+</ul>
+<p>We turned the decide-from-fields rules into an example in the Cortrix repo, at <a href="https://github.com/cortrix/cortrix/tree/main/examples/error-handling">examples/error-handling</a>. <code>decide.py</code> is about 70 lines you can copy into your own agent. <code>demo.py</code> sends six requests that fail on purpose and prints the fields, the decision, and the next step for each. Build and start Cortrix from <code>main</code> by following the instructions in that directory, and you can run it yourself. The runs in this post used <code>v1.0.0-rc.2</code>; on <code>main</code>, failed entries from batch restore carry more detail, so your output will differ a little:</p>
+<pre><code>python examples/error-handling/demo.py</code></pre>
+<p>If these errors save you a layer of error handling, we'd love it if you gave Cortrix a star on <a href="https://github.com/cortrix/cortrix">GitHub</a>.</p>
+<h2>References</h2>
+<ul>
+<li>[1] Cortrix API spec, error responses: <a href="https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/api/components/errors.yaml">https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/api/components/errors.yaml</a></li>
+<li>[2] Milvus, milvus-proto <code>v3.0.5</code>, <code>proto/common.proto</code>: <a href="https://github.com/milvus-io/milvus-proto/blob/2f00c7cf17db3ab3bb7b93ea8f2a7261bcc264da/proto/common.proto#L116-L123">https://github.com/milvus-io/milvus-proto/blob/2f00c7cf17db3ab3bb7b93ea8f2a7261bcc264da/proto/common.proto#L116-L123</a></li>
+<li>[3] Qdrant <code>v1.20.0</code>, <code>src/actix/helpers.rs</code>: <a href="https://github.com/qdrant/qdrant/blob/222b2e44ab1c3f17e8246396ead6558e45041df7/src/actix/helpers.rs#L207-L224">https://github.com/qdrant/qdrant/blob/222b2e44ab1c3f17e8246396ead6558e45041df7/src/actix/helpers.rs#L207-L224</a></li>
+<li>[4] Pinecone Docs, Error handling (accessed 2026-11-09, page undated): <a href="https://docs.pinecone.io/guides/production/error-handling">https://docs.pinecone.io/guides/production/error-handling</a></li>
+<li>[5] Weaviate Docs, MCP server (accessed 2026-11-09, page undated): <a href="https://docs.weaviate.io/weaviate/configuration/mcp-server">https://docs.weaviate.io/weaviate/configuration/mcp-server</a></li>
+<li>[6] Weaviate <code>v1.40.4</code>, <code>openapi-specs/schema.json</code>: <a href="https://github.com/weaviate/weaviate/blob/aa98b24f66096f916bbe79bd7923f7af13d5611d/openapi-specs/schema.json#L634-L650">https://github.com/weaviate/weaviate/blob/aa98b24f66096f916bbe79bd7923f7af13d5611d/openapi-specs/schema.json#L634-L650</a>, <a href="https://github.com/weaviate/weaviate/blob/aa98b24f66096f916bbe79bd7923f7af13d5611d/openapi-specs/schema.json#L765-L796">https://github.com/weaviate/weaviate/blob/aa98b24f66096f916bbe79bd7923f7af13d5611d/openapi-specs/schema.json#L765-L796</a></li>
+<li>[7] Cortrix on GitHub: <a href="https://github.com/cortrix/cortrix">https://github.com/cortrix/cortrix</a></li>
+<li>[8] Example code for this post, examples/error-handling: <a href="https://github.com/cortrix/cortrix/tree/main/examples/error-handling">https://github.com/cortrix/cortrix/tree/main/examples/error-handling</a></li>
+</ul>
+<p>The commands and output in this post come from a build of Cortrix <code>v1.0.0-rc.2</code> with authentication on and no LLM configured.</p>
