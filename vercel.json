@@ -4,6 +4,14 @@
   "outputDirectory": ".",
   "routes": [
     {
+      "src": "/(.*)",
+      "has": [{ "type": "host", "value": "www.cortrix.ai" }],
+      "status": 301,
+      "headers": {
+        "Location": "https://cortrix.ai/$1"
+      }
+    },
+    {
       "src": "/(?:content|components|scripts|tests)(?:/.*)?",
       "status": 404
     },

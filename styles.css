@@ -175,6 +175,7 @@ code {
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
+.github-repo-stat:has(#github-star-count:empty) { display: none; }
 .github-repo-stat-icon {
   color: #fff;
   font-size: 11px;
