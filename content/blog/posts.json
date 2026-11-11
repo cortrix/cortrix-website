@@ -2,6 +2,23 @@
   {
     "kind": "article",
     "visibility": "published",
+    "publishedAt": "2026-11-11",
+    "slug": "agent-first-error-next-step",
+    "title": "Agent First Design: When a Call Fails, the Error Should Tell the Agent What to Do Next | Semantic Tech",
+    "description": "Cortrix errors carry a code, a retry flag, a category and structured data, so an agent can pick its next step from fields alone. We tested it on 15 failing requests.",
+    "topic": "Inside Cortrix",
+    "bodyFile": "agent-first-error-next-step.html",
+    "readMinutes": 8,
+    "image": "/assets/blog/agent-first-error-next-step/fig-af4-cover-v01-en.png",
+    "imageAlt": "Article cover: errors should tell the agent what to do next; an error response with code, retryable, category and structured_data ticked, and message struck through",
+    "sourceKind": "Public documentation",
+    "sourceLabel": "Cortrix API spec: error responses",
+    "sourceDescription": "The error response fields in this post are defined in the public Cortrix API spec, so you can check them against the code.",
+    "sourceUrl": "https://github.com/cortrix/cortrix/blob/v1.0.0-rc.2/api/components/errors.yaml"
+  },
+  {
+    "kind": "article",
+    "visibility": "published",
     "publishedAt": "2026-11-07",
     "slug": "semantic-tech-insights-2026-w45",
     "title": "Anthropic Breaks Down Claude's Memory, Google Adds Human Review to Agent Context, RAGFlow 1.0 Compiles Knowledge Ahead of Time | Semantic Tech Insights, Nov 9",
