@@ -5,6 +5,7 @@
     <link>https://cortrix.ai/blog/</link>
     <description>Cortrix product updates and practical readings on semantic systems, retrieval, and agent memory.</description>
     <language>en-us</language>
+    <lastBuildDate>Wed, 11 Nov 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://cortrix.ai/blog/rss.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cortrix RC2: 24.4% higher FiQA recall, with Apache 2.0</title>
@@ -13,6 +14,7 @@
       <description>Cortrix RC2 brings 24.4% higher FiQA Recall@10 in the published comparison, Apache 2.0 licensing, and practical ingestion and agent integration fixes.</description>
       <dc:creator>Scott</dc:creator>
       <category>Product updates</category>
+      <pubDate>Mon, 07 Sep 2026 04:30:15 GMT</pubDate>
     </item>
     <item>
       <title>Agent First Design: When a Call Fails, the Error Should Tell the Agent What to Do Next | Semantic Tech</title>
@@ -111,6 +113,7 @@
       <description>A small retrieval demo separates similarity, ranking, lifecycle checks, and the application rule that decides whether a result is usable.</description>
       <dc:creator>Scott</dc:creator>
       <category>Inside Cortrix</category>
+      <pubDate>Thu, 10 Sep 2026 02:59:30 GMT</pubDate>
     </item>
     <item>
       <title>Jev and Laya are getting hyped. We&#39;re passing for now.</title>
@@ -128,6 +131,7 @@
       <description>Why stable identities and linked data still matter when your agents retrieve knowledge from different systems.</description>
       <dc:creator>Scott</dc:creator>
       <category>Knowledge graphs</category>
+      <pubDate>Mon, 07 Sep 2026 04:30:15 GMT</pubDate>
     </item>
     <item>
       <title>TransE explained: relationships beyond vector similarity</title>
@@ -136,6 +140,7 @@
       <description>What the simple h + r ≈ t formula tells us about relationships in a knowledge graph, and what a similarity score leaves out.</description>
       <dc:creator>Scott</dc:creator>
       <category>Knowledge graphs</category>
+      <pubDate>Mon, 07 Sep 2026 04:30:15 GMT</pubDate>
     </item>
     <item>
       <title>RAG explained: external memory brings data governance back</title>
@@ -144,6 +149,7 @@
       <description>RAG lets a model use external knowledge. The original paper also helps explain why sources, updates, and data governance still matter.</description>
       <dc:creator>Scott</dc:creator>
       <category>Retrieval</category>
+      <pubDate>Mon, 07 Sep 2026 04:30:15 GMT</pubDate>
     </item>
     <item>
       <title>Reflexion explained: agent memory without weight updates</title>
@@ -152,6 +158,7 @@
       <description>Reflexion turns feedback into memory without changing model weights. Its most useful lesson may be about the evaluator.</description>
       <dc:creator>Scott</dc:creator>
       <category>Agent memory</category>
+      <pubDate>Mon, 07 Sep 2026 04:30:15 GMT</pubDate>
     </item>
     <item>
       <title>HippoRAG explained: why RAG comes back to knowledge graphs</title>
@@ -160,6 +167,7 @@
       <description>HippoRAG connects clues across documents with a knowledge graph. Here is how it works, and where the graph can go wrong.</description>
       <dc:creator>Scott</dc:creator>
       <category>Retrieval</category>
+      <pubDate>Mon, 07 Sep 2026 04:30:15 GMT</pubDate>
     </item>
   </channel>
 </rss>

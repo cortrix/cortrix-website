@@ -182,7 +182,7 @@
     "imageAlt": "Comparison of relevance scores and lifecycle status for an old integration guide and a current migration notice",
     "sourceLabel": "Order API Field Migration scenario",
     "sourceUrl": "https://github.com/cortrix/cortrix-demos/tree/c3835a80026d22a8ed707511e9cbca6874c95e71/scenarios/order-api-field-migration",
-    "updatedAt": "2026-09-09T16:00:00Z"
+    "publishedAt": "2026-09-10T02:59:30Z"
   },
   {
     "kind": "article",
@@ -220,7 +220,8 @@
     "topic": "Knowledge graphs",
     "seriesOrder": 1,
     "bodyFile": "dbpedia.html",
-    "readMinutes": 6
+    "readMinutes": 6,
+    "publishedAt": "2026-09-07T04:30:15Z"
   },
   {
     "slug": "transe-knowledge-graph-embeddings",
@@ -239,7 +240,8 @@
     "topic": "Knowledge graphs",
     "seriesOrder": 2,
     "bodyFile": "transe.html",
-    "readMinutes": 5
+    "readMinutes": 5,
+    "publishedAt": "2026-09-07T04:30:15Z"
   },
   {
     "slug": "rag-external-memory-data-governance",
@@ -265,7 +267,8 @@
     "topic": "Retrieval",
     "seriesOrder": 3,
     "bodyFile": "rag.html",
-    "readMinutes": 5
+    "readMinutes": 5,
+    "publishedAt": "2026-09-07T04:30:15Z"
   },
   {
     "slug": "reflexion-agent-memory-without-weight-updates",
@@ -284,7 +287,8 @@
     "topic": "Agent memory",
     "seriesOrder": 4,
     "bodyFile": "reflexion.html",
-    "readMinutes": 5
+    "readMinutes": 5,
+    "publishedAt": "2026-09-07T04:30:15Z"
   },
   {
     "slug": "hipporag-knowledge-graphs-for-rag",
@@ -303,7 +307,8 @@
     "topic": "Retrieval",
     "seriesOrder": 5,
     "bodyFile": "hipporag.html",
-    "readMinutes": 5
+    "readMinutes": 5,
+    "publishedAt": "2026-09-07T04:30:15Z"
   },
   {
     "kind": "release",
@@ -319,6 +324,7 @@
     "releaseUrl": "https://github.com/cortrix/cortrix/releases/tag/v1.0.0-rc.2",
     "evidenceUrl": "https://github.com/cortrix/cortrix-benchmarks/releases/tag/cortrix-v1.0.0-rc.2-evidence-v1",
     "image": "/assets/blog/rc2/rc2-retrieval.png",
-    "imageAlt": "Cross-encoder retrieval scores in the July and August benchmark rounds"
+    "imageAlt": "Cross-encoder retrieval scores in the July and August benchmark rounds",
+    "publishedAt": "2026-09-07T04:30:15Z"
   }
 ]

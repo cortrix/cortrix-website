@@ -18,6 +18,7 @@ const release = {
   featured: true,
   releaseTag: 'v1.0.0-rc.2',
   releaseDate: '2026-09-05T10:29:50Z',
+  publishedAt: '2026-09-07T04:30:15Z',
   releaseUrl: 'https://github.com/cortrix/cortrix/releases/tag/v1.0.0-rc.2',
   evidenceUrl: 'https://github.com/cortrix/cortrix-benchmarks/releases/tag/cortrix-v1.0.0-rc.2-evidence-v1',
   image: '/assets/blog/rc2/rc2-retrieval.png',
@@ -141,14 +142,49 @@ test('release metadata stays separate from the five-note paper series', async ()
   }, { paperCount: 5 });
 });
 
-test('release entries do not require paper metadata or a Blog publication date', async () => {
+test('published posts require publication dates', async () => {
+  await fixture(async ({ dir, posts, build }) => {
+    delete posts[0].publishedAt;
+    await writeFile(path.join(dir, 'content/blog/posts.json'), JSON.stringify(posts));
+    assert.throws(() => build(), /publishedAt is required/);
+  });
+});
+
+test('release entries keep the release date separate from the Blog publication date', async () => {
   await fixture(async ({ dir, posts, build }) => {
     await addRelease(dir, posts);
     build();
     const article = await readFile(path.join(dir, 'blog', release.slug, 'index.html'), 'utf8');
-    assert.doesNotMatch(article, /article:published_time|"datePublished"/);
+    assert.match(article, /Released Sept 5, 2026/);
+    assert.ok(article.includes('<time datetime="2026-09-07T04:30:15Z">Published September 7, 2026</time>'));
+    assert.match(article, /"datePublished": "2026-09-07T04:30:15Z"/);
+    assert.ok(!article.includes(`"datePublished": "${release.releaseDate}"`));
+    const rss = await readFile(path.join(dir, 'blog/rss.xml'), 'utf8');
+    assert.match(rss, /<pubDate>Mon, 07 Sep 2026 04:30:15 GMT<\/pubDate>/);
     assert.match(article, new RegExp(release.releaseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
     assert.match(article, new RegExp(release.evidenceUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  });
+});
+
+test('RSS dates cover every item and the latest content event', async () => {
+  await fixture(async ({ dir, posts, build }) => {
+    posts[0].publishedAt = '2026-09-10T02:59:30Z';
+    for (const updatedAt of [undefined, '2026-09-12T10:00:00Z']) {
+      posts[0].updatedAt = updatedAt;
+      const withRelease = await addRelease(dir, posts);
+      build();
+      const rss = await readFile(path.join(dir, 'blog/rss.xml'), 'utf8');
+      const items = [...rss.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+      assert.equal(items.length, withRelease.length);
+      for (const [, item] of items) {
+        assert.equal((item.match(/<pubDate>/g) ?? []).length, 1);
+      }
+      const latest = Math.max(...withRelease.map(post => Date.parse(post.updatedAt ?? post.publishedAt)));
+      assert.ok(rss.includes(`<lastBuildDate>${new Date(latest).toUTCString()}</lastBuildDate>`));
+      const paper = await readFile(path.join(dir, 'blog', posts[0].slug, 'index.html'), 'utf8');
+      assert.ok(paper.includes('<time datetime="2026-09-10T02:59:30Z">Published September 10, 2026</time>'));
+      if (updatedAt) assert.ok(paper.includes(`<time datetime="${updatedAt}">Updated September 12, 2026</time>`));
+    }
   });
 });
 
@@ -172,6 +208,7 @@ test('published articles can describe a non-scenario source accurately', async (
     const article = {
       ...reviewCandidate,
       visibility: 'published',
+      publishedAt: '2026-09-21T13:31:51Z',
       slug: 'published-article',
       title: 'Published article',
       bodyFile: 'published-article.html',
