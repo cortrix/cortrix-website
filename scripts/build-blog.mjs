@@ -168,6 +168,9 @@ function validatePosts(rawPosts) {
       throw new Error(`posts.json[${index}].bodyFile must be a safe relative .html path`);
     }
     validateDate(rawPost.publishedAt, 'publishedAt', index);
+    if (visibility === 'published' && !rawPost.publishedAt) {
+      throw new Error(`posts.json[${index}].publishedAt is required for published posts`);
+    }
     validateDate(rawPost.updatedAt, 'updatedAt', index);
     if (rawPost.updatedAt && rawPost.publishedAt
         && Date.parse(rawPost.updatedAt) < Date.parse(rawPost.publishedAt)) {
@@ -451,10 +454,10 @@ function renderArticle(post, posts, body, header) {
       },
     ],
   };
-  const dateLine = [
-    post.publishedAt ? `Published ${formatDate(post.publishedAt)}` : '',
-    post.updatedAt ? `Updated ${formatDate(post.updatedAt)}` : '',
-  ].filter(Boolean).join(' · ');
+  const dateSpans = [
+    post.publishedAt ? `<span><time datetime="${escapeHtml(post.publishedAt)}">Published ${formatDate(post.publishedAt)}</time></span>` : '',
+    post.updatedAt ? `<span><time datetime="${escapeHtml(post.updatedAt)}">Updated ${formatDate(post.updatedAt)}</time></span>` : '',
+  ].join('');
   const isRelease = post.kind === 'release';
   const isArticle = post.kind === 'article';
   const isReview = post.visibility === 'review';
@@ -469,12 +472,12 @@ function renderArticle(post, posts, body, header) {
         ? escapeHtml(post.topic)
       : `Research Note ${String(post.seriesOrder).padStart(2, '0')} · ${escapeHtml(post.topic)}`;
   const byline = isRelease
-    ? `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Released ${escapeHtml(formatShortDate(post.releaseDate))}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`
+    ? `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Released ${escapeHtml(formatShortDate(post.releaseDate))}</span>${dateSpans}`
     : isReview
       ? `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Awaiting editorial review</span>`
       : isArticle
         ? `<span>By Scott</span><span>${post.readMinutes} min read</span>`
-      : `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Paper published ${post.paperYear}</span>${dateLine ? `<span>${escapeHtml(dateLine)}</span>` : ''}`;
+      : `<span>By Scott</span><span>${post.readMinutes} min read</span><span>Paper published ${post.paperYear}</span>${dateSpans}`;
   const sourceCard = isRelease
     ? `<div class="article-paper-card article-release-card"><div><p class="blog-kicker">Release sources</p><h2>${escapeHtml(post.releaseTag)}</h2><p>Published release details and benchmark evidence</p></div><div class="article-source-links"><a href="${escapeHtml(post.releaseUrl)}" target="_blank" rel="noopener noreferrer">Source release <span aria-hidden="true">↗</span></a><a href="${escapeHtml(post.evidenceUrl)}" target="_blank" rel="noopener noreferrer">Benchmark evidence <span aria-hidden="true">↗</span></a></div></div>`
     : isReview
@@ -527,6 +530,10 @@ function renderArticle(post, posts, body, header) {
 }
 
 function renderRss(posts) {
+  const lastBuildDate = posts.reduce((latest, post) => {
+    const date = post.updatedAt ?? post.publishedAt;
+    return date && (!latest || Date.parse(date) > Date.parse(latest)) ? date : latest;
+  }, null);
   const items = posts.map(post => {
     const url = `${siteUrl}/blog/${post.slug}/`;
     return `    <item>
@@ -544,7 +551,7 @@ function renderRss(posts) {
     <title>Cortrix Blog</title>
     <link>${siteUrl}/blog/</link>
     <description>Cortrix product updates and practical readings on semantic systems, retrieval, and agent memory.</description>
-    <language>en-us</language>
+    <language>en-us</language>${lastBuildDate ? `\n    <lastBuildDate>${new Date(lastBuildDate).toUTCString()}</lastBuildDate>` : ''}
     <atom:link href="${siteUrl}/blog/rss.xml" rel="self" type="application/rss+xml" />
 ${items}
   </channel>

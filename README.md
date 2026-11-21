@@ -45,9 +45,11 @@ Vercel runs the Blog generator followed by the shared-component renderer, then s
 
 ## Writing a Blog article
 
-The Blog uses small source files and no third party dependencies or CMS. Add an HTML body fragment under `content/blog/`, then add its metadata to `content/blog/posts.json`. Every entry needs `slug`, `title`, `description`, `topic`, `bodyFile`, and `readMinutes`. Set `kind` to `release` for product updates; omitted `kind` values remain compatible with the existing research notes and are treated as `paper`. Optional `publishedAt` and `updatedAt` values must use an ISO date or timestamp; leave them out until the Blog publication dates are confirmed.
+The Blog uses small source files and no third party dependencies or CMS. Add an HTML body fragment under `content/blog/`, then add its metadata to `content/blog/posts.json`. Every entry needs `slug`, `title`, `description`, `topic`, `bodyFile`, and `readMinutes`. Set `kind` to `release` for product updates; omitted `kind` values remain compatible with the existing research notes and are treated as `paper`.
 
 Research notes additionally require `paperTitle`, `paperYear`, `paperUrl`, `paperAuthors`, and `seriesOrder`. Release updates instead require `releaseTag`, `releaseDate`, `releaseUrl`, `evidenceUrl`, `image`, and `imageAlt`; `featured` may select one release for the Latest release section. `releaseDate` records when the software release was published and does not become the Blog article’s `datePublished`.
+
+Published posts must set `publishedAt` to the date they first became publicly available on cortrix.ai, using an ISO date or date-time; `updatedAt` is optional, uses the same format, and cannot precede `publishedAt`. The RSS feed uses `publishedAt` for each item's `pubDate` and the latest publication or update date for the channel's `lastBuildDate`.
 
 The HTML fragment should begin with the article introduction and use `h2` headings for the table of contents. Keep original mechanism diagrams under `/assets/blog/figures/` and reference them with paths starting at the site root. Use a `figure` with `figcaption` whenever an image needs context or attribution.
 
